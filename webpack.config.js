@@ -1,7 +1,7 @@
 var webpack   = require('webpack');
 var path      = require('path');
-var HtmlWebpackPlugin = require("html-webpack-plugin");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
@@ -29,6 +29,9 @@ var config = {
     new webpack.WatchIgnorePlugin([
       /(css|sass)\.d\.ts$/
     ]),
+    new HtmlWebpackPlugin({
+      template: APP_DIR + '/index.html',
+    }),
     new ExtractTextPlugin("styles.css")
   ],
   module : {
@@ -48,6 +51,10 @@ var config = {
       {
         test: /\.(css|scss)$$/,
         loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport!postcss-loader!sass-loader',
+      },
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
       },
       /*
        {
@@ -80,4 +87,12 @@ var config = {
   },
 };
 
-module.exports = config;
+module.exports = process.env.NODE_ENV == 'production' ?
+  merge({
+    customizeArray: merge.unique(
+      'plugins',
+      ['HtmlWebpackPlugin'],
+      plugin => plugin.constructor && plugin.constructor.name
+    )
+  })(prodConfig, config)
+  : config;
