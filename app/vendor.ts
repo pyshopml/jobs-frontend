@@ -5,3 +5,4 @@ import 'react-router';
 import 'react-router-redux';
 import 'redux';
 import 'redux-thunk';
+import 'react-fontawesome';

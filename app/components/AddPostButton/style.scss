@@ -1,0 +1,21 @@
+.addButton {
+   box-shadow: rgba(0,0,0,0.156863) 0px 3px 10px, rgba(0,0,0,0.227451) 0px 3px 10px;
+   border-radius: 50%;
+   display: inline-block;
+   position: fixed;
+   right: 30px;
+   bottom: 30px;
+   background-color: #ff4081;
+   padding: 20px;
+   padding-left: 25px;
+   padding-right: 25px;
+
+   &:hover {
+     background-color: #f9578e;
+     cursor: pointer;
+   }
+ }
+
+.icon {
+  color: #fff;
+}
