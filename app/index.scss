@@ -1,12 +1,17 @@
-html, body, div, span, applet, object, 
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+@import url('https://fonts.googleapis.com/css?family=Russo+One');
+
+
+html, body, div, span, applet, object,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, img, small, strike, strong, sub, sup, tt, var,
 b, u, i, center, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-nav,section {
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+nav {
   margin: 0;
   padding: 0;
   border: 0;
