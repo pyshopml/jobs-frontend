@@ -1,17 +1,25 @@
 import React, { Component } from 'react'
-import Header from '../Header';
+import { Link } from 'react-router';
 
-import css from './style.css';
+import css from './style.scss';
 
-interface Props{}
-interface State{}
+interface Props{};
+interface State{};
+
 
 class Navigation extends Component<Props, State> {
   render() {
     return (
-      <section className={css.navigation}>
-        <Header />
-      </section>
+      <nav className={css.navigation}>
+        <ul>
+          <li>
+            <Link to='/login'>Войти</Link>
+          </li>
+          <li>
+            <Link to='/singup'>Зарегистрироваться</Link>
+          </li>
+        </ul>
+      </nav>
     );
   }
 }

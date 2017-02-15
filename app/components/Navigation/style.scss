@@ -1,0 +1,19 @@
+.navigation {
+  ul {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  li {
+    line-height: 42px;
+    margin-left: 10px;
+  }
+
+  a {
+    color: DimGrey;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
