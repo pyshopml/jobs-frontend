@@ -4,12 +4,12 @@ var path      = require('path');
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
 
-// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry : {
-    main: ['webpack-hot-middleware/client', APP_DIR +'/index.js'],
-    vendor: APP_DIR + '/vendor.js'
+    main: ['webpack-hot-middleware/client', APP_DIR +'/index.tsx'],
+    vendor: APP_DIR + '/vendor.ts'
   },
   output : {
     path : BUILD_DIR,
@@ -24,12 +24,16 @@ var config = {
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['main', 'vendor']
-    })
+    }),
+    new webpack.WatchIgnorePlugin([
+      /(css|sass)\.d\.ts$/
+    ]),
+    new ExtractTextPlugin("styles.css")
   ],
   module : {
     loaders : [
       {
-        test : /\.jsx?$/,
+        test : /(\.js|\.jsx|\.ts|\.tsx|)$/,
         include : APP_DIR,
         loader : 'babel-loader',
         query : {
@@ -37,9 +41,22 @@ var config = {
         }
       },
       {
+        test: /(\.ts|\.tsx)$/,
+        loader: 'awesome-typescript-loader'
+      },
+      {
         test: /(\.css|\.scss)$/,
-        loader: 'style-loader!css-loader?modules&localIdentName=[local]---[hash:base64:5]!postcss-loader!sass-loader'
-      }
+        include: APP_DIR + '/*',
+        loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport!postcss-loader!sass-loader'
+      },
+      {
+        test: /\.(css|scss)$/,
+        exclude: APP_DIR + '/*',
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader!postcss-loader!sass-loader'
+        }),
+      },
       /*      
        {
        test: /\.css/,
@@ -56,7 +73,7 @@ var config = {
    },
    */
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
   },
 };
 

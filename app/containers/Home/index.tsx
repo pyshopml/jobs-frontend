@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
- 
-class Home extends Component {
+
+interface Props{};
+interface State{};
+
+class Home extends Component<Props, State> {
   render() {
     return (
       <section>

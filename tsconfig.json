@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "target": "es6",
+    "moduleResolution": "node",
+    "baseUrl": "app",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "outDir": "dist",
+    "jsx": "preserve",
+    "allowJs": true,
+    "allowUnreachableCode": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

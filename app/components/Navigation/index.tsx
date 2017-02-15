@@ -3,7 +3,10 @@ import Header from '../Header';
 
 import css from './style.css';
 
-class Navigation extends Component {
+interface Props{}
+interface State{}
+
+class Navigation extends Component<Props, State> {
   render() {
     return (
       <section className={css.navigation}>

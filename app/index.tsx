@@ -13,7 +13,9 @@ import { Provider } from 'react-redux';
 import createRoutes from './routes';
 import configStore from './store';
 
-const store = configStore();
+import './index.scss';
+
+const store = configStore({});
 const history = syncHistoryWithStore(hashHistory, store);
 const routes = createRoutes(store);
 

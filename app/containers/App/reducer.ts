@@ -9,7 +9,7 @@
 ------------------------------------------------------------------------------- */
 import homeReducer from '../Home/reducer';
 
-const appReducer = (state = {}, action) => {
+const appReducer = (state: any = {}, action) => {
   switch(action.type) {
 
     default:
@@ -17,7 +17,7 @@ const appReducer = (state = {}, action) => {
   }
 };
 
-export default (state = {}, action) => ({
+export default (state: any = {}, action) => ({
   app: appReducer(state.app, action),
   home: homeReducer(state.home, action)
 });

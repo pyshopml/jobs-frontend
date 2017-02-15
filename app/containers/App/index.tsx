@@ -1,15 +1,18 @@
+
 import React, { Component } from 'react'
 import Navigation from '../../components/Navigation';
 
-import base from './base.css';
 import css from './style.css';
 
-class App extends Component {
+interface Props{}
+interface State{}
+
+class App extends Component<Props, State> {
   render() {
     return (
       <section className={css.app}>
         <Navigation />
-        { this.props.children }
+        { this.props.children}
       </section>
     );
   }

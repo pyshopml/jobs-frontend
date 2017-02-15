@@ -24,7 +24,7 @@ export default (store) => {
 
 
   return (
-    <Route name="app" path="/" component={ App } >
+    <Route path="/" component={ App } >
       <IndexRoute component={ Home } />
     </Route>
   );
