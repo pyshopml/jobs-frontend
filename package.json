@@ -67,8 +67,10 @@
     "typed-css-modules": "^0.2.0",
     "typescript": "^2.1.6",
     "typings-for-css-modules-loader": "^1.4.0",
+    "uglify-js-plugin": "0.0.6",
     "webpack": "^2.1.0-beta.21",
     "webpack-dev-middleware": "^1.10.0",
-    "webpack-hot-middleware": "^2.16.1"
+    "webpack-hot-middleware": "^2.16.1",
+    "webpack-merge": "^2.6.1"
   }
 }

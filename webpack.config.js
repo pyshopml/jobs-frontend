@@ -1,7 +1,10 @@
 var webpack   = require('webpack');
 var path      = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var merge = require('webpack-merge')
+
+var prodConfig = require('./webpack.prod')
 
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
@@ -9,13 +12,13 @@ var APP_DIR   = path.join(__dirname, '/app');
 
 var config = {
   entry : {
-    main: ['webpack-hot-middleware/client', APP_DIR +'/index.tsx'],
+    whm: 'webpack-hot-middleware/client',
+    main: APP_DIR +'/index.tsx',
     vendor: APP_DIR + '/vendor.ts'
   },
   output : {
     path : BUILD_DIR,
     filename : '[name].bundle.js',
-    publicPath: '/static/'
   },
   devServer:{
     contentBase: BUILD_DIR
