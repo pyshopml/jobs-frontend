@@ -1,5 +1,13 @@
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
 @import url('https://fonts.googleapis.com/css?family=PT+Sans');
 
 .app {
   font-family: 'PT Sans', sans-serif;
+  position: relative;
+}
+
+.container {
+  width: 960px;
+  margin: 0 auto;
+  padding-top: 30px;
 }
