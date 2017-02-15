@@ -1,10 +1,11 @@
 var webpack   = require('webpack');
 var path      = require('path');
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var config = {
   entry : {
@@ -45,19 +46,21 @@ var config = {
         loader: 'awesome-typescript-loader'
       },
       {
-        test: /(\.css|\.scss)$/,
-        include: APP_DIR + '/*',
-        loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport!postcss-loader!sass-loader'
+        test: /\.(css|scss)$$/,
+        loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport!postcss-loader!sass-loader',
       },
-      {
-        test: /\.(css|scss)$/,
-        exclude: APP_DIR + '/*',
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader!postcss-loader!sass-loader'
-        }),
-      },
-      /*      
+      /*
+       {
+       test: /\.(css|scss)$/,
+       exclude: [
+       APP_DIR + '/components/',
+       APP_DIR + '/containers/'
+       ],
+       loader: ExtractTextPlugin.extract({
+       fallback: 'style-loader',
+       use: 'css-loader!postcss-loader!sass-loader'
+       }),
+       },
        {
        test: /\.css/,
        test: /\.jsx?$/,
