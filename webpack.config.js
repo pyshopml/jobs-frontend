@@ -53,7 +53,7 @@ var config = {
       },
       {
         test: /\.(css|scss)$$/,
-        loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport!postcss-loader!sass-loader',
+        loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport&camelCase!postcss-loader!sass-loader',
       },
       {
         test: /\.html$/,
