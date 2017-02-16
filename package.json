@@ -4,8 +4,8 @@
   "description": "'moikrug' clone that will beat it eventually.",
   "scripts": {
     "tcm": "tcm -c -p app/**/*.*css",
-    "build": "npm run tcm & webpack",
-    "start": "npm run tcm & node dev-server.js",
+    "build": "webpack",
+    "start": "node dev-server.js",
     "lint": "./node_modules/eslint/bin/eslint.js ./app"
   },
   "repository": {

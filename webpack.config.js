@@ -29,9 +29,6 @@ var config = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['main', 'vendor']
     }),
-    new webpack.WatchIgnorePlugin([
-      /(css|sass)\.d\.ts$/
-    ]),
     new HtmlWebpackPlugin({
       template: APP_DIR + '/index.html',
     }),
@@ -53,7 +50,7 @@ var config = {
       },
       {
         test: /\.(css|scss)$$/,
-        loader: 'style-loader!typings-for-css-modules-loader?modules&namedExport&camelCase!postcss-loader!sass-loader',
+        loader: 'style-loader!css-loader?modules&camelCase!postcss-loader!sass-loader',
       },
       {
         test: /\.html$/,
