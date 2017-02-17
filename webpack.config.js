@@ -39,10 +39,7 @@ var config = {
       {
         test : /(\.js|\.jsx|\.ts|\.tsx|)$/,
         include : APP_DIR,
-        loader : 'babel-loader',
-        query : {
-          presets : ['es2015', 'react']
-        }
+        loader : 'babel-loader'
       },
       {
         test: /(\.ts|\.tsx)$/,
