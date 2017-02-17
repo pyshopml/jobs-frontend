@@ -12,6 +12,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import createRoutes from './routes';
 import configStore from './store';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+require('./tap.plugin');
 
 import './index.scss';
 
@@ -21,9 +23,11 @@ const routes = createRoutes(store);
 
 const Main = () => (
   <Provider store={store}>
-    <Router history={history}>
-      {routes}
-    </Router>
+    <MuiThemeProvider>
+      <Router history={history}>
+        {routes}
+      </Router>
+    </MuiThemeProvider>
   </Provider>
 );
 

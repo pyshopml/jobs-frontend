@@ -6,3 +6,5 @@ import 'react-router-redux';
 import 'redux';
 import 'redux-thunk';
 import 'react-fontawesome';
+import 'material-ui';
+import 'react-tap-event-plugin';
