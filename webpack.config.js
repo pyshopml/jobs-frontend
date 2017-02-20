@@ -32,7 +32,7 @@ var config = {
     new HtmlWebpackPlugin({
       template: APP_DIR + '/index.html',
     }),
-    new ExtractTextPlugin("styles.css")
+    new ExtractTextPlugin("styles.css"),
   ],
   module : {
     loaders : [
@@ -46,8 +46,17 @@ var config = {
         loader: 'awesome-typescript-loader'
       },
       {
-        test: /\.(css|scss)$$/,
+        test: /\.(css|scss)$/,
+        include: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components')],
         loader: 'style-loader!css-loader?modules&camelCase!postcss-loader!sass-loader',
+      },
+      {
+        test: /\.(css|scss)$/,
+        include: APP_DIR,
+        exclude: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components')],
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader', use: 'css-loader?sourceMap!postcss-loader!sass-loader'
+        })
       },
       {
         test: /\.html$/,
