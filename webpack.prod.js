@@ -12,6 +12,11 @@ var APP_DIR   = path.join(__dirname, '/app');
 
 var config = {
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
     new HtmlWebpackPlugin({
       template: APP_DIR + '/index.html',
       excludeChunks: ['whm']
