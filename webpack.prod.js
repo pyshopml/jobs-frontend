@@ -2,6 +2,9 @@ var webpack   = require('webpack');
 var path      = require('path');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var UglifyJsPlugin = require('uglify-js-plugin');
+var merge = require('webpack-merge')
+
+var commonConfig = require('./webpack.config')
 
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
@@ -38,4 +41,10 @@ var config = {
   ],
 };
 
-module.exports = config;
+module.exports = merge({
+  customizeArray: merge.unique(
+    'plugins',
+    ['HtmlWebpackPlugin'],
+    plugin => plugin.constructor && plugin.constructor.name
+  )
+})(config, commonConfig)

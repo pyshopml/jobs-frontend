@@ -2,9 +2,7 @@ var webpack   = require('webpack');
 var path      = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var merge = require('webpack-merge')
 
-var prodConfig = require('./webpack.prod')
 
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
@@ -93,12 +91,4 @@ var config = {
   },
 };
 
-module.exports = process.env.NODE_ENV == 'production' ?
-  merge({
-    customizeArray: merge.unique(
-      'plugins',
-      ['HtmlWebpackPlugin'],
-      plugin => plugin.constructor && plugin.constructor.name
-    )
-  })(prodConfig, config)
-  : config;
+module.exports = config;

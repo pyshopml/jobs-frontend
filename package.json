@@ -5,6 +5,7 @@
   "scripts": {
     "tcm": "tcm -c -p app/**/*.*css",
     "build": "webpack",
+    "build:prod": "webpack --config webpack.prod.js",
     "start": "node dev-server.js",
     "lint": "./node_modules/eslint/bin/eslint.js ./app"
   },
