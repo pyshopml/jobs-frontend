@@ -1,0 +1,126 @@
+$border-color: #e0e0e0;
+
+.editor{
+  padding-bottom: 5px;
+  margin-top: 10px;
+  line-height: 20px;
+  color: #464646;
+  border: 1px solid $border-color;
+  border-bottom: none;
+  h1 {
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .text-field{
+    padding: 0 10px;
+  }
+  &.read-only{
+    border: none;
+    .editor-tools{
+      display: none !important;
+    }
+    .footer{
+      display: none !important;
+    }
+    :global{
+      .public-DraftEditorPlaceholder-root{
+        display: none !important;
+      }
+    }
+  }
+  &.focused{
+    .footer{
+      .line-blue{
+        transform: scaleX(1);
+      }
+    }
+  }
+  &.hide-description-placeholder{
+    :global{
+      .public-DraftEditorPlaceholder-root {
+        display: none;
+      }
+    }
+  }
+  :global{
+    .RichEditor-blockquote {
+      border-left: 5px solid #eee;
+      color: #666;
+      font-family: 'Hoefler Text', 'Georgia', serif;
+      font-style: italic;
+      margin: 16px 0;
+      padding: 10px 20px;
+    }
+    .public-DraftEditor-content {
+      min-height: 200px;
+      overflow: auto;
+    }
+    .public-DraftStyleDefault-unorderedListItem{
+      margin-top: 10px;
+      &:nth-child(1){
+        margin-top: 0;
+      }
+    }
+    .public-DraftEditorPlaceholder-root{
+      color: rgba(0, 0, 0, 0.3)!important;
+    }
+  }
+}
+
+.editor-tools{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 25px;
+  border-bottom: 1px solid $border-color;
+  .styles-buttons{
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}
+
+.footer{
+  position: relative;
+
+  .line, .line-blue{
+    position: absolute;
+    top: -4px;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    width: 100%;
+  }
+
+  .line{
+    border-width: medium medium 1px;
+    border-style: none none solid;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .line-blue{
+    border-width: medium medium 2px;
+    border-style: none none solid;
+    transform: scaleX(0);
+    border-bottom: 2px solid rgb(0, 188, 212);
+  }
+}
