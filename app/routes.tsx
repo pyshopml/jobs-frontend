@@ -10,6 +10,8 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import Posts from './containers/PostsListContainer';
+import NewPost from './containers/NewPost';
+
 
 export default (store) => {
   
@@ -27,6 +29,7 @@ export default (store) => {
   return (
     <Route path="/" component={ App } >
       <IndexRoute component={ Posts } />
+      <Route path="add_post" component={ NewPost }/>
     </Route>
   );
 };
