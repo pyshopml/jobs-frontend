@@ -1,0 +1,16 @@
+.toggle-icon{
+  user-select: none;
+  text-align: center;
+  color: #757575;
+  cursor: pointer;
+  &:hover{
+    color: #9a9a9a;
+  }
+  &.active{
+    color: rgb(0, 190, 212)
+  }
+  &.disabled{
+    color: #bcbcbc !important;
+    cursor: default !important;
+  }
+}
