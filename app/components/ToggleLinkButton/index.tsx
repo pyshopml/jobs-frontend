@@ -120,6 +120,7 @@ class ToggleLinkButton extends React.Component<Props, State>{
 
   render() {
     const isTextSelected = !this.props.editorState.getSelection().isCollapsed()
+    const isUrlEmpty = this.state.urlValue.trim() == '';
     return (
       <div style={this.props.style}
            className={css.toggleLinkButton}
@@ -151,7 +152,7 @@ class ToggleLinkButton extends React.Component<Props, State>{
             <ToggleIcon onMouseDown={this.confirmLink}
                         style={{marginLeft: '10px'}}
                         toggled={false}
-                        disabled={this.state.urlValue == ''}>
+                        disabled={ isUrlEmpty }>
               <FontAwesome name="check"/>
             </ToggleIcon>
             <ToggleIcon onMouseDown={this.closeLinkInput}
