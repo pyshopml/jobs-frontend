@@ -8,4 +8,5 @@ import 'redux-thunk';
 import 'react-fontawesome';
 import 'material-ui';
 import 'react-tap-event-plugin';
+import 'classnames';
 import 'reselect';
