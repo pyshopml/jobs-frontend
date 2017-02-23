@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Editor, EditorState, RichUtils, CompositeDecorator, ContentBlock } from 'draft-js';
 
@@ -12,10 +12,11 @@ import css from './style.scss';
 
 interface Props{
   readOnly?: boolean;
+  editorState: any;
+  onChange: any;
 };
 
 interface State{
-  editorState: any;
   editorFocused: boolean;
 };
 
@@ -39,41 +40,25 @@ function getBlockStyle(block) {
   }
 }
 
-class DescriptionEditor extends React.Component<Props, State>{
+class DescriptionEditor extends Component<Props, State>{
+  defaultProps: {
+    readOnly: false
+  }
+
   constructor(props){
     super(props)
 
-    const decorator = new CompositeDecorator([
-      {
-        strategy: findLinkEntities,
-        component: DescriptionLink,
-      },
-    ]);
-
-    this.state = {
-      editorState: EditorState.createEmpty(decorator),
-      editorFocused: false
-    }
+    this.state = { editorFocused: false }
   }
-
-  public static defaultProps: Props = {
-    readOnly: false
-  };
 
   refs: {
     editor:any
   }
 
-  onChange = (editorState, callback?) => {
-    this.setState({
-      editorState
-    }, callback)
-  }
-
   onToggleStyle = (style: string, type: string)  => {
-    this.onChange(
+    this.props.onChange(
       RichUtils[type](
-        this.state.editorState,
+        this.props.editorState,
         style
       ),
       this.focus
@@ -81,7 +66,7 @@ class DescriptionEditor extends React.Component<Props, State>{
   };
 
   onToggleLink = (editorState, selection, entityKey) => {
-    this.onChange(RichUtils.toggleLink(
+    this.props.onChange(RichUtils.toggleLink(
       editorState,
       selection,
       entityKey
@@ -90,7 +75,7 @@ class DescriptionEditor extends React.Component<Props, State>{
 
   onTab = e => {
     const maxDepth = 4;
-    this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
+    this.props.onChange(RichUtils.onTab(e, this.props.editorState, maxDepth));
   };
 
   focus = () => {
@@ -102,21 +87,21 @@ class DescriptionEditor extends React.Component<Props, State>{
       <section className={ css.editorTools }>
         <section className={ css.stylesButtons }>
 
-          <InlineStylesBar editorState={this.state.editorState}
+          <InlineStylesBar editorState={this.props.editorState}
                            onToggle={ style => this.onToggleStyle(style, 'toggleInlineStyle') }
                            style={ {marginRight: '20px'} } />
 
-          <BlockStylesBar editorState={this.state.editorState}
+          <BlockStylesBar editorState={this.props.editorState}
                           onToggle={ style => this.onToggleStyle(style, 'toggleBlockType') }
                           style={{marginRight: '20px'}}/>
 
-          <ToggleLinkButton editorState={this.state.editorState}
+          <ToggleLinkButton editorState={this.props.editorState}
                             onToggleLink={this.onToggleLink}
                             editorFocus={this.focus}/>
         </section>
 
         <DropdownStyles 
-          editorState={this.state.editorState} 
+          editorState={this.props.editorState} 
           onToggle={ style => this.onToggleStyle(style, 'toggleBlockType') }
          />
 
@@ -126,7 +111,7 @@ class DescriptionEditor extends React.Component<Props, State>{
 
   isPlaceholderHidden() {
     let hideDescriptionPlaceholder = false;
-    const contentState = this.state.editorState.getCurrentContent();
+    const contentState = this.props.editorState.getCurrentContent();
 
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== 'unstyled') {
@@ -153,17 +138,17 @@ class DescriptionEditor extends React.Component<Props, State>{
         { this.editorTools() }
 
         <section className={css.textField}>
-          <Editor editorState={this.state.editorState}
-                  onChange={this.onChange}
+          <Editor editorState={this.props.editorState}
+                  onChange={this.props.onChange}
                   customStyleMap={styleMap}
                   blockStyleFn={getBlockStyle}
                   ref="editor"
                   spellCheck={true}
                   onTab={this.onTab}
-                  onFocus={()=>{this.setState({editorFocused: true})}}
-                  onBlur={()=>{this.setState({editorFocused: false})}}
+                  onFocus={ ()=>{ this.setState({editorFocused: true}) } }
+                  onBlur={ ()=>{ this.setState({editorFocused: false}) } }
                   placeholder="Описание.."
-                  readOnly={this.props.readOnly}
+                  readOnly={ this.props.readOnly }
           />
         </section>
 
@@ -174,7 +159,6 @@ class DescriptionEditor extends React.Component<Props, State>{
 
       </section>
     );
-
   }
 }
 

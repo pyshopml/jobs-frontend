@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { TextField, RaisedButton } from 'material-ui';
-import { EditorState } from 'draft-js';
+import { EditorState, CompositeDecorator, ContentBlock } from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
 import IPost from '../../interfaces/ipost';
+import DescriptionLink from '../DescriptionLink'
 
 import css from './style.scss';
 
@@ -16,21 +17,51 @@ interface State {
   editorState: any,
 };
 
+
+function findLinkEntities(block: ContentBlock,
+                          callback:(start: number, end: number) => void,
+                          contentState?: any): void {
+  block.findEntityRanges(
+    (character) => {
+      const entityKey = character.getEntity();
+      return (
+        entityKey !== null &&
+        contentState.getEntity(entityKey).getType() === 'LINK'
+      );
+    },
+    callback
+  );
+}
+
+const decorator = new CompositeDecorator([
+    {
+      strategy: findLinkEntities,
+      component: DescriptionLink,
+    },
+  ]);
+
 class NewPostForm extends Component<Props, State> {
   constructor(props) {
     super(props)
 
     this.state = {
       title: '',
-      editorState: EditorState.createEmpty(),
+      editorState: EditorState.createEmpty(decorator),
     }
 
     this.hanldeSubmit = this.hanldeSubmit.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
   }
 
+  onChange = (editorState, callback?) => {
+    this.setState({
+      editorState
+    }, callback)
+  }
+
   hanldeSubmit(evt) {
     evt.preventDefault();
+    // console.log(this.state.editorState);
   }
 
   updateTitle(evt) {
@@ -54,7 +85,7 @@ class NewPostForm extends Component<Props, State> {
                    inputStyle={{padding: '0 10px'}}
                    hintStyle={{left: '10px', transition: 'none'}} />
 
-        <DescriptionEditor />
+        <DescriptionEditor onChange={ this.onChange } editorState={ this.state.editorState }  />
         
         <div className={ css.controls }>
           <RaisedButton href="#" label="Очистить" />
