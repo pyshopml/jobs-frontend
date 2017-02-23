@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextField, RaisedButton } from 'material-ui';
-import { EditorState, CompositeDecorator, ContentBlock } from 'draft-js';
+import { EditorState, CompositeDecorator, ContentBlock, convertToRaw } from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
 import IPost from '../../interfaces/ipost';
 import DescriptionLink from '../DescriptionLink'
@@ -61,7 +61,9 @@ class NewPostForm extends Component<Props, State> {
 
   hanldeSubmit(evt) {
     evt.preventDefault();
+    const { editorState } = this.state;
     // console.log(this.state.editorState);
+    console.log(convertToRaw(editorState.getCurrentContent()));
   }
 
   updateTitle(evt) {
