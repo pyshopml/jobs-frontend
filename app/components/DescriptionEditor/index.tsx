@@ -70,28 +70,6 @@ class DescriptionEditor extends React.Component<Props, State>{
     }, callback)
   }
 
-  /*
-  onToggleInlineStyle = (style:string) => {
-    this.onChange(
-      RichUtils.toggleInlineStyle(
-        this.state.editorState,
-        style
-      ),
-      this.focus
-    );
-  };
-
-  onToggleBlockStyle = (style: string)  => {
-    this.onChange(
-      RichUtils.toggleBlockType(
-        this.state.editorState,
-        style
-      ),
-      this.focus
-    );
-  };
-  */
-
   onToggleStyle = (style: string, type: string)  => {
     this.onChange(
       RichUtils[type](
@@ -121,8 +99,8 @@ class DescriptionEditor extends React.Component<Props, State>{
 
   editorTools() {
     return (
-      <section className={css.editorTools}>
-        <div className={css.stylesButtons}>
+      <section className={ css.editorTools }>
+        <section className={ css.stylesButtons }>
 
           <InlineStylesBar editorState={this.state.editorState}
                            onToggle={ style => this.onToggleStyle(style, 'toggleInlineStyle') }
@@ -135,11 +113,13 @@ class DescriptionEditor extends React.Component<Props, State>{
           <ToggleLinkButton editorState={this.state.editorState}
                             onToggleLink={this.onToggleLink}
                             editorFocus={this.focus}/>
-        </div>
+        </section>
+
         <DropdownStyles 
           editorState={this.state.editorState} 
           onToggle={ style => this.onToggleStyle(style, 'toggleBlockType') }
          />
+
       </section>
     );
   }
