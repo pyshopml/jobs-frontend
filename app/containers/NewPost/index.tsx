@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import IPost from '../../interfaces/ipost';
 import NewPostForm from '../../components/NewPostForm';
 import { createPost, handleCancel } from './actions';
-import { getCreatedPost } from './selectors';
+import selectors from './selectors';
 
 import css from './style.scss';
 
@@ -14,6 +14,7 @@ interface Props{
   createPost(post: IPost),
   handleCancel(),
 };
+
 interface State{};
 
 class NewPost extends Component<Props, State> {
@@ -26,9 +27,7 @@ class NewPost extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state) => ({
-  createdPost: getCreatedPost(state)
-});
+const mapStateToProps = (state) => selectors(state);
 
 const mapDispatchToProps = (dispatch) => ({
   createPost: (post: IPost) => dispatch(createPost(post)),
