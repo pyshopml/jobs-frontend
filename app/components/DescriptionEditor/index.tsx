@@ -70,6 +70,7 @@ class DescriptionEditor extends React.Component<Props, State>{
     }, callback)
   }
 
+  /*
   onToggleInlineStyle = (style:string) => {
     this.onChange(
       RichUtils.toggleInlineStyle(
@@ -83,6 +84,17 @@ class DescriptionEditor extends React.Component<Props, State>{
   onToggleBlockStyle = (style: string)  => {
     this.onChange(
       RichUtils.toggleBlockType(
+        this.state.editorState,
+        style
+      ),
+      this.focus
+    );
+  };
+  */
+
+  onToggleStyle = (style: string, type: string)  => {
+    this.onChange(
+      RichUtils[type](
         this.state.editorState,
         style
       ),
@@ -113,18 +125,21 @@ class DescriptionEditor extends React.Component<Props, State>{
         <div className={css.stylesButtons}>
 
           <InlineStylesBar editorState={this.state.editorState}
-                           onToggle={this.onToggleInlineStyle}
-                           style={{marginRight: '20px'}}/>
+                           onToggle={ style => this.onToggleStyle(style, 'toggleInlineStyle') }
+                           style={ {marginRight: '20px'} } />
 
           <BlockStylesBar editorState={this.state.editorState}
-                          onToggle={this.onToggleBlockStyle}
+                          onToggle={ style => this.onToggleStyle(style, 'toggleBlockType') }
                           style={{marginRight: '20px'}}/>
 
           <ToggleLinkButton editorState={this.state.editorState}
                             onToggleLink={this.onToggleLink}
                             editorFocus={this.focus}/>
         </div>
-        <DropdownStyles editorState={this.state.editorState} onToggle={this.onToggleBlockStyle}/>
+        <DropdownStyles 
+          editorState={this.state.editorState} 
+          onToggle={ style => this.onToggleStyle(style, 'toggleBlockType') }
+         />
       </section>
     );
   }
