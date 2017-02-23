@@ -1,11 +1,10 @@
-
+import { goBack } from 'react-router-redux';
+import IPost from '../../interfaces/ipost'
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,
   UPLOAD_POST_FAILURE
 } from './constants';
-
-import IPost from '../../interfaces/ipost'
 
 const uploadimgPostSucceeded = (createdPost: IPost) => ({
   type: UPLOAD_POST_SUCCEEDED,
@@ -30,5 +29,10 @@ async function uploadPostToServer(dispatch, post: IPost) {
 export const createPost = (post: IPost) =>
   (dispatch) => {
     dispatch({ type: UPLOAD_POST });
-    uploadPostToServer(dispatch, post);
+    // uploadPostToServer(dispatch, post);
+    console.log(post);
   }
+
+export const handleCancel = () => dispatch => {
+  dispatch(goBack());
+}
