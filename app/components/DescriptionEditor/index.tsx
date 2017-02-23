@@ -8,12 +8,12 @@ import DropdownStyles from '../DropdownStyles';
 import ToggleLinkButton from '../ToggleLinkButton';
 import DescriptionLink from '../DescriptionLink'
 
-
 import css from './style.scss';
 
 interface Props{
   readOnly?: boolean;
 };
+
 interface State{
   editorState: any;
   editorFocused: boolean;
@@ -28,16 +28,21 @@ const styleMap = {
     padding: 2,
   },
 };
+
 function getBlockStyle(block) {
   switch (block.getType()) {
-    case 'blockquote': return 'RichEditor-blockquote';
-    default: return null;
+    case 'blockquote': 
+      return 'RichEditor-blockquote';
+
+    default:
+      return null;
   }
 }
 
 class DescriptionEditor extends React.Component<Props, State>{
   constructor(props){
     super(props)
+
     const decorator = new CompositeDecorator([
       {
         strategy: findLinkEntities,
@@ -50,17 +55,21 @@ class DescriptionEditor extends React.Component<Props, State>{
       editorFocused: false
     }
   }
+
   public static defaultProps: Props = {
     readOnly: false
   };
+
   refs: {
     editor:any
   }
+
   onChange = (editorState, callback?) => {
     this.setState({
       editorState
     }, callback)
   }
+
   onToggleInlineStyle = (style:string) => {
     this.onChange(
       RichUtils.toggleInlineStyle(
@@ -70,6 +79,7 @@ class DescriptionEditor extends React.Component<Props, State>{
       this.focus
     );
   };
+
   onToggleBlockStyle = (style: string)  => {
     this.onChange(
       RichUtils.toggleBlockType(
@@ -79,6 +89,7 @@ class DescriptionEditor extends React.Component<Props, State>{
       this.focus
     );
   };
+
   onToggleLink = (editorState, selection, entityKey) => {
     this.onChange(RichUtils.toggleLink(
       editorState,
@@ -86,44 +97,67 @@ class DescriptionEditor extends React.Component<Props, State>{
       entityKey
     ))
   }
+
   onTab = e => {
     const maxDepth = 4;
     this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
   };
+
   focus = () => {
     this.refs.editor.focus();
   }
-  render(){
+
+  editorTools() {
+    return (
+      <section className={css.editorTools}>
+        <div className={css.stylesButtons}>
+
+          <InlineStylesBar editorState={this.state.editorState}
+                           onToggle={this.onToggleInlineStyle}
+                           style={{marginRight: '20px'}}/>
+
+          <BlockStylesBar editorState={this.state.editorState}
+                          onToggle={this.onToggleBlockStyle}
+                          style={{marginRight: '20px'}}/>
+
+          <ToggleLinkButton editorState={this.state.editorState}
+                            onToggleLink={this.onToggleLink}
+                            editorFocus={this.focus}/>
+        </div>
+        <DropdownStyles editorState={this.state.editorState} onToggle={this.onToggleBlockStyle}/>
+      </section>
+    );
+  }
+
+  isPlaceholderHidden() {
     let hideDescriptionPlaceholder = false;
     const contentState = this.state.editorState.getCurrentContent();
+
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-        hideDescriptionPlaceholder = true;
+        return true;
       }
     }
-    const rootClassName = classNames({
+
+    return false;
+  }
+
+  rootClassName() {
+    return classNames({
       [css.editor]: true,
       [css.focused]: this.state.editorFocused,
-      [css.hideDescriptionPlaceholder]: hideDescriptionPlaceholder,
+      [css.hideDescriptionPlaceholder]: this.isPlaceholderHidden(),
       [css.readOnly]: this.props.readOnly
-    })
+    });
+  }
+
+  render() {
     return(
-      <div className={rootClassName}>
-        <div className={css.editorTools}>
-          <div className={css.stylesButtons}>
-            <InlineStylesBar editorState={this.state.editorState}
-                             onToggle={this.onToggleInlineStyle}
-                             style={{marginRight: '20px'}}/>
-            <BlockStylesBar editorState={this.state.editorState}
-                            onToggle={this.onToggleBlockStyle}
-                            style={{marginRight: '20px'}}/>
-            <ToggleLinkButton editorState={this.state.editorState}
-                              onToggleLink={this.onToggleLink}
-                              editorFocus={this.focus}/>
-          </div>
-          <DropdownStyles editorState={this.state.editorState} onToggle={this.onToggleBlockStyle}/>
-        </div>
-        <div className={css.textField}>
+      <section className={ this.rootClassName() }>
+
+        { this.editorTools() }
+
+        <section className={css.textField}>
           <Editor editorState={this.state.editorState}
                   onChange={this.onChange}
                   customStyleMap={styleMap}
@@ -136,13 +170,16 @@ class DescriptionEditor extends React.Component<Props, State>{
                   placeholder="Описание.."
                   readOnly={this.props.readOnly}
           />
-        </div>
+        </section>
+
         <div className={css.footer}>
           <hr className={css.line}/>
           <hr className={css.lineBlue}/>
         </div>
-      </div>
-    )
+
+      </section>
+    );
+
   }
 }
 
@@ -160,6 +197,5 @@ function findLinkEntities(block: ContentBlock,
     callback
   );
 }
-
 
 export default DescriptionEditor;

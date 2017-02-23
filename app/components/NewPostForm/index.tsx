@@ -1,6 +1,6 @@
-import React from 'react';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from 'react';
+import { TextField, RaisedButton } from 'material-ui';
+import { EditorState } from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
 import IPost from '../../interfaces/ipost';
 
@@ -13,16 +13,16 @@ interface Props {
 
 interface State { 
   title: string,
+  editorState: any,
 };
 
-
-class NewPostForm extends React.Component<Props, State> {
+class NewPostForm extends Component<Props, State> {
   constructor(props) {
     super(props)
 
     this.state = {
       title: '',
-
+      editorState: EditorState.createEmpty(),
     }
 
     this.hanldeSubmit = this.hanldeSubmit.bind(this);
@@ -31,7 +31,6 @@ class NewPostForm extends React.Component<Props, State> {
 
   hanldeSubmit(evt) {
     evt.preventDefault();
-    console.log(this.state);
   }
 
   updateTitle(evt) {
@@ -41,16 +40,11 @@ class NewPostForm extends React.Component<Props, State> {
 
   render() {
     const { title } = this.state;
+    const { handleCancel } = this.props;
 
     return(
       <form action="">
-        <RaisedButton 
-          href="#" 
-          secondary={true} 
-          label="Назад" 
-          className={ css.backButton }
-          onClick={ this.props.handleCancel }
-        />
+        <RaisedButton secondary={true} label="Назад" className={ css.backButton } onClick={ handleCancel } />
 
         <TextField hintText="Заголовок.."
                    name="title"
