@@ -6,6 +6,7 @@ import {
 
 import IPost from '../../interfaces/ipost'
 
+/*
 class InitialModel{
   public createdPost: IPost;
   constructor(options: { createdPost: IPost }){
@@ -16,6 +17,11 @@ class InitialModel{
 const initialModel = new InitialModel({
   createdPost: null
 })
+*/
+
+const initialModel = {
+  createdPost: null,
+};
 
 export default (state = initialModel, action) => {
   switch (action.type) {

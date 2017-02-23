@@ -9,13 +9,13 @@ import selectors from './selectors';
 
 import css from './style.scss';
 
-interface Props{
+interface Props {
   createdPost: IPost,
   createPost(post: IPost),
   handleCancel(),
 };
 
-interface State{};
+interface State { };
 
 class NewPost extends Component<Props, State> {
   render() {
@@ -25,11 +25,11 @@ class NewPost extends Component<Props, State> {
       </Paper>
     );
   }
-}
+};
 
-const mapStateToProps = (state) => selectors(state);
+const mapStateToProps = state => selectors(state)
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   createPost: (post: IPost) => dispatch(createPost(post)),
   handleCancel: () => dispatch(handleCancel()),
 });
