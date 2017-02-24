@@ -9,16 +9,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import rootReducer from './reducers';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const routing = routerMiddleware(hashHistory);
+const composeEnhancers =  compose;
+const routing = routerMiddleware(browserHistory);
+
+import createLogger from 'redux-logger';
+const logger = createLogger();
 
 export default function (initialState) {
   return createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(routing, thunk)),
+    composeEnhancers(applyMiddleware(routing, thunk, logger))
   );
 }

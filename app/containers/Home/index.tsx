@@ -7,7 +7,7 @@ class Home extends Component<Props, State> {
   render() {
     return (
       <section>
-        <h2>Home page is home page</h2>
+        <h2>Home page is home page dfgdfg gdf</h2>
       </section>
     );
   }
