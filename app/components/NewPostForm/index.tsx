@@ -75,6 +75,11 @@ class NewPostForm extends Component<Props, State> {
     this.setState({ [name]: value });
   }
 
+  isButtonSubmitDisabled = () => {
+    const isDescriptionEmpty = !this.state.editorState.getCurrentContent().hasText();
+    if( this.state.title.trim() == '' || isDescriptionEmpty) return true;
+    return false;
+  }
   render() {
     const { title } = this.state;
     const { handleCancel } = this.props;
@@ -95,7 +100,11 @@ class NewPostForm extends Component<Props, State> {
         
         <div className={ css.controls }>
           <RaisedButton href="#" label="Очистить" />
-          <RaisedButton type="submit" label="Создать" primary={true} onClick={ this.hanldeSubmit } />
+          <RaisedButton type="submit"
+                        label="Создать"
+                        primary={true}
+                        disabled={ this.isButtonSubmitDisabled() }
+                        onClick={ this.hanldeSubmit } />
         </div>
       </form>
     )
