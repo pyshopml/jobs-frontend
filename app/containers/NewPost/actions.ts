@@ -1,5 +1,6 @@
 import { goBack } from 'react-router-redux';
-import IPost from '../../interfaces/ipost'
+import IPost from '../../interfaces/ipost';
+import INewPost from '../../interfaces/inewpost';
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,
@@ -16,17 +17,22 @@ const uploadimgPostFailed = (message: string) => ({
   message
 });
 
-async function uploadPostToServer(dispatch, post: IPost) {
+async function uploadPostToServer(dispatch, post: INewPost) {
   try {
-    const res = await fetch('');
-    const createdPost = await res.json()
+    const headers = new Headers({"Content-Type": "application/json"});
+    const res = await fetch("http://jobs.pyshop.ru/api/vacancies", {
+      method: "POST",
+      headers: headers,
+      body: { ...post }
+    });
+    const createdPost = await res.json();
     dispatch(uploadimgPostSucceeded(createdPost));
   } catch (e) {
     dispatch(uploadimgPostFailed(e.message));
   }
 }
 
-export const createPost = (post: IPost) =>
+export const createPost = (post: INewPost) =>
   (dispatch) => {
     dispatch({ type: UPLOAD_POST });
     // uploadPostToServer(dispatch, post);
