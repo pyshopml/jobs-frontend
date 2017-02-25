@@ -41,14 +41,13 @@ function getBlockStyle(block) {
 }
 
 class DescriptionEditor extends Component<Props, State>{
-  defaultProps: {
-    readOnly: false
-  }
-
   constructor(props){
     super(props)
 
     this.state = { editorFocused: false }
+  }
+  public static defaultProps = {
+    readOnly: false
   }
 
   refs: {
