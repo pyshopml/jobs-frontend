@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router';
 import css from './style.scss';
 
 import FlatButton from 'material-ui/FlatButton';

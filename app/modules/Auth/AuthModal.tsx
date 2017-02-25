@@ -4,6 +4,22 @@ import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
 import css from './style.scss';
 
+const styleModal={
+	style:{
+		maxWidth:'600px',
+		margin: '0 auto',
+		right: 0
+	},
+	actionsContainer:{
+		height:'52px'
+	}
+
+}
+
+const styleInput={
+ width:'100%'
+}
+
 
 
 interface Props{
@@ -17,23 +33,25 @@ interface Props{
 interface State{}
 
 class AuthModal extends Component<Props, State> {
+
   render() {
 	  const {authState, title, actions, state,close, onChange} = this.props,
 		      {isSignUp,isFetching, result:{email,password,name, non_field_errors}} = authState,
 
-		      loading = isFetching ? <div className="loading">Loading</div> : null,
+		      status: any = isFetching ? <div className="loading">Loading</div> : actions,
 
 		      nameField = state.signUp ? <TextField  hintText="Ваше имя"
 		                                              name='name'
 		                                              value={state.name}
 		                                              onChange={onChange}
 		                                              type='text'
-		                                              errorText={null}/>
+		                                              errorText={null}
+		                                              style={styleInput}
+		                                  />
 			                             : null,
 
 		      content = !isSignUp ? <div>
 															      {nameField}
-															      {loading}
 															      <TextField
 																      hintText="Email"
 																      errorText={email || non_field_errors ? email || non_field_errors : null}
@@ -41,6 +59,7 @@ class AuthModal extends Component<Props, State> {
 																      type='email'
 																      name='login'
 																      onChange={onChange}
+																      style={styleInput}
 															      />
 															      <TextField
 																      hintText="Пароль"
@@ -49,6 +68,7 @@ class AuthModal extends Component<Props, State> {
 																      type='text'
 																      name='pass'
 																      onChange={onChange}
+																      style={styleInput}
 															      />
 												        </div>
 												      : <div>{`${name}, вы зарегистрированы, проверьте свою почту!`}</div>
@@ -57,9 +77,12 @@ class AuthModal extends Component<Props, State> {
     return (
 	    <Dialog
 		    title={title}
-		    actions={actions}
+		    actions={status}
 		    open={state.open}
 		    onRequestClose={close}
+		    style={styleModal.style}
+		    actionsContainerStyle={styleModal.actionsContainer}
+		    actionsContainerClassName={'actions-container'}
 	    >
 		    {content}
 	    </Dialog>
