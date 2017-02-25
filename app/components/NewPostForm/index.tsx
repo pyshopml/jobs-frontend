@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { TextField, RaisedButton } from 'material-ui';
 import { EditorState, CompositeDecorator, ContentBlock, convertToRaw } from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
-import IPost from '../../interfaces/ipost';
+import INewPost from '../../interfaces/inewpost';
 import DescriptionLink from '../DescriptionLink'
 
 import css from './style.scss';
 
 interface Props {
-  createPost(post: IPost),
+  createPost(post: INewPost),
   handleCancel(),
+  onSubmit(post: INewPost)
 };
 
 interface State { 
@@ -62,8 +63,11 @@ class NewPostForm extends Component<Props, State> {
   hanldeSubmit(evt) {
     evt.preventDefault();
     const { editorState } = this.state;
-    // console.log(this.state.editorState);
-    console.log(convertToRaw(editorState.getCurrentContent()));
+    this.props.onSubmit({
+      title: this.state.title,
+      description: convertToRaw(editorState.getCurrentContent()),
+      keywords: []
+    })
   }
 
   updateTitle(evt) {
