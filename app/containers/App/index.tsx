@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Header from '../../components/Header';
 import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
-import { addNotification, removeFirstNotification } from './actions'
+import { addNotification, removeFirstNotification } from './actions';
+import selectors from './selectors';
 
 import AddButton from '../../components/AddPostButton';
 
@@ -58,9 +59,7 @@ class App extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = state =>({
-  notifications: state.global.app.notifications
-})
+const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
   removeFirstNotification: () => dispatch(removeFirstNotification()),
