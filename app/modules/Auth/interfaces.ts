@@ -12,4 +12,5 @@ export interface SignupCredentials {
 export interface Action {
   type: string;
   payload?: any;
+  errorMessage?: string;
 }

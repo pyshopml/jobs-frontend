@@ -1,74 +1,52 @@
 import cookie from 'react-cookie'
 import { LoginCredentials, SignupCredentials, Action } from './interfaces';
-
+import { authSignUp, authenticate } from './api';
 import {
 	AUTH_FETCHING,
 	AUTH_SUCCESS,
+	AUTH_FAILED,
 	SIGN_UP,
 	LOGOUT
 } from './constants';
 
+const signUpSucceeded = (payload: any): Action => ({
+	type: SIGN_UP,
+	payload,
+});
 
- async function authenticate(data : LoginCredentials, dispatch) {
-	 try {
-		 const res = await fetch('http://jobs.pyshop.ru/api/account/login/', {
-			 headers: {
-				 'Accept': 'application/json',
-				 'Content-Type': 'application/json'
-			 },
-			 method: 'POST',
-			 body: JSON.stringify(data)
-		 });
-		 let result = await res.json()
-		 /*if(result.auth_token){
-			 cookie.save('token', result.auth_token)
-		 }*/
-		 dispatch({
-			 type:AUTH_SUCCESS,
-			 payload:result
-		 })
+const signUpFailed = (errorMessage: string): Action => ({
+	type: AUTH_FAILED,
+	errorMessage,
+});
 
+const authSucceeded = (payload: any) : Action => ({
+	type: AUTH_SUCCESS,
+	payload,
+});
 
-	 } catch(e) {
-		 console.log(e.message)
-	 }
-
-}
-
-async function authSignUp(data : SignupCredentials, dispatch) {
-	try {
-		const res = await fetch('http://jobs.pyshop.ru/api/users/', {
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			method: 'POST',
-			body: JSON.stringify(data)
-		});
-
-		let result = await res.json()
-		if(result.id){
-			dispatch({
-				type:SIGN_UP,
-				payload:result
-			})
-		}
-
-	} catch(e) {
-		console.log(e.message)
-	}
-}
+const authFailed = (errorMessage: string) : Action => ({
+	type: AUTH_SUCCESS,
+	errorMessage,
+});
 
 export const logout = () : Action => ({
 	type: LOGOUT
 });
 
-export const signUp = (data : SignupCredentials) => dispatch => {
+export const signUp = (data : SignupCredentials) => (dispatch: (action: Action) => void) => {
 	dispatch({ type: AUTH_FETCHING });
-	authSignUp(data, dispatch)
+	authSignUp(
+		data, 
+		(data) => dispatch(signUpSucceeded(data)),
+		(msg: string) => dispatch(signUpFailed(msg))
+	);
 };
 
-export const auth = (data : LoginCredentials) => dispatch => {
+export const auth = (data : LoginCredentials) => (dispatch: (action: Action) => void) => {
 	dispatch({ type: AUTH_FETCHING });
-	authenticate(data, dispatch);
+	authenticate(
+		data, 
+		(data) => dispatch(authSucceeded(data)),
+		(msg: string) => dispatch(authFailed(msg)),
+	);
 }

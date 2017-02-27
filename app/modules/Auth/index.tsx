@@ -18,8 +18,8 @@ interface Nav {
 }
 
 interface Props {
-	auth(): any;
-	signUp(): any;
+	auth(LoginCredentials): any;
+	signUp(SignupCredentials): any;
 	logout(): void;
 	isSignUp: boolean;
 	isAuth: boolean;
@@ -206,8 +206,8 @@ const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
 	auth: (data : LoginCredentials) => dispatch(auth(data)),
-	logout: () => dispatch(logout()),
 	signUp: (data : SignupCredentials) => dispatch(signUp(data)),
+	logout: () => dispatch(logout()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
