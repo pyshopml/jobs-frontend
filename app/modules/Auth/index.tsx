@@ -54,142 +54,142 @@ class Auth extends Component<Props, State> {
 		this.onChange = this.onChange.bind(this);
 	}
 
- handleOpen (type:string) {
- 	const newState = {
-		open: true,
-		login:'',
-		pass:'',
-		name:''
-	};
+	handleOpen (type:string) {
+	 	const newState = {
+			open: true,
+			login:'',
+			pass:'',
+			name:''
+		};
 
-	if (type === 'signIn') {
-		Object.assign(newState, {
-			signIn: true,
-			signUp: false
+		if (type === 'signIn') {
+			Object.assign(newState, {
+				signIn: true,
+				signUp: false
+			});
+		}
+
+		if (type === 'signUp') {
+			Object.assign(newState,{
+				signIn: false,
+				signUp:true
+			});
+		}
+
+		this.setState(newState);
+	}
+
+	handleClose() {
+		this.setState({ open: false });
+
+		if(!this.props.authState.isSignUp)
+		  this.props.logout()
+	 }
+
+	componentWillReceiveProps({ authState }) {
+
+		if(!authState.isFetching && authState.isAuth){
+			this.setState({open: false})
+		}
+	}
+
+	submitHandler() {
+		const { signIn, login, pass, name } = this.state;
+
+		if(signIn) {
+			this.props.auth({ email: login, password: pass });
+			return;
+		}
+
+		this.props.signUp({
+			email:login,
+			password:pass,
+			name:name
 		});
 	}
 
-	if (type === 'signUp') {
-		Object.assign(newState,{
-			signIn: false,
-			signUp:true
+	onChange(event: any, newValue: string) {
+		this.setState({
+			[event.target.name]: newValue.trim()
 		});
 	}
 
-	this.setState(newState);
-}
-
-handleClose() {
-	this.setState({ open: false });
-
-	if(!this.props.authState.isSignUp)
-	  this.props.logout()
- }
-
-componentWillReceiveProps({ authState }) {
-
-	if(!authState.isFetching && authState.isAuth){
-		this.setState({open: false})
-	}
-}
-
-submitHandler() {
-	const { signIn, login, pass, name } = this.state;
-
-	if(signIn) {
-		this.props.auth({ email: login, password: pass });
-		return;
+	logout() {
+	  this.props.logout();
+		this.setState({ open: false });
 	}
 
-	this.props.signUp({
-		email:login,
-		password:pass,
-		name:name
-	});
-}
+	renderSignUpActions() {
+		const submitBtn = this.state.signUp ? 'Зарегистрироваться' : 'Войти';
 
-onChange(event: any, newValue: string) {
-	this.setState({
-		[event.target.name]: newValue.trim()
-	});
-}
-
-logout() {
-  this.props.logout();
-	this.setState({ open: false });
-}
-
-renderSignUpActions() {
-	const submitBtn = this.state.signUp ? 'Зарегистрироваться' : 'Войти';
-
-	return (
-		[
-		<FlatButton
-		  label={submitBtn}
-		  primary={true}
-		  onTouchTap={this.submitHandler.bind(this)}
-	  />,
-	  <FlatButton
-		  label='Отмена'
-		  primary={true}
-		  keyboardFocused={true}
-		  onTouchTap={this.handleClose}
-	  />
-	 	]
-	);
-}
-
-renderLoginActions() {
-	return (
-		[
+		return (
+			[
 			<FlatButton
-	      label='Продолжить'
-	      primary={true}
-	      keyboardFocused={true}
-	      onTouchTap={this.handleClose}
-	    />
-	  ]
-	);
-}
+			  label={submitBtn}
+			  primary={true}
+			  onTouchTap={this.submitHandler.bind(this)}
+		  />,
+		  <FlatButton
+			  label='Отмена'
+			  primary={true}
+			  keyboardFocused={true}
+			  onTouchTap={this.handleClose}
+		  />
+		 	]
+		);
+	}
 
-renderActions() {
-	const { authState: { isSignUp } } = this.props;
-	return !isSignUp ? this.renderSignUpActions() : this.renderLoginActions();
-}
+	renderLoginActions() {
+		return (
+			[
+				<FlatButton
+		      label='Продолжить'
+		      primary={true}
+		      keyboardFocused={true}
+		      onTouchTap={this.handleClose}
+		    />
+		  ]
+		);
+	}
 
-isSignedUp() {
-	return this.state.signUp;
-}
+	renderActions() {
+		const { authState: { isSignUp } } = this.props;
+		return !isSignUp ? this.renderSignUpActions() : this.renderLoginActions();
+	}
 
-renderTitle() {
-	const { authState: { isSignUp } } = this.props;
-	if (!isSignUp && this.isSignedUp())
-		return 'Регистрация';
+	isSignedUp() {
+		return this.state.signUp;
+	}
 
-	return 'Авторизация';
-}
+	renderTitle() {
+		const { authState: { isSignUp } } = this.props;
+		if (!isSignUp && this.isSignedUp())
+			return 'Регистрация';
 
-render() {
-  const { authState: { isSignUp, isAuth } } = this.props;
-  // const title = !isSignUp ? (this.state.signUp ? 'Регистрация' : 'Авторизация') : null;
-  
-  return (
-	    <section>
-		   <AuthBtns openModal={ this.handleOpen }
-		             logout ={ this.logout }
-		             isSignUp={ isSignUp }
-		             isAuth={ isAuth }
-		   />
+		return 'Авторизация';
+	}
 
-		    <AuthModal title={ this.renderTitle() }
-		               actions={ this.renderActions() }
-		               state={ this.state }
-		               close={ this.handleClose }
-		               authState={ this.props.authState }
-		               onChange={ this.onChange.bind(this) } />
-	    </section>
-  	);
-  }
+	render() {
+	  const { authState: { isSignUp, isAuth } } = this.props;
+	  // const title = !isSignUp ? (this.state.signUp ? 'Регистрация' : 'Авторизация') : null;
+
+	  return (
+		  <section>
+			   <AuthBtns openModal={ this.handleOpen }
+			             logout ={ this.logout }
+			             isSignUp={ isSignUp }
+			             isAuth={ isAuth }
+			   />
+
+			    <AuthModal title={ this.renderTitle() }
+			               actions={ this.renderActions() }
+			               state={ this.state }
+			               close={ this.handleClose }
+			               authState={ this.props.authState }
+			               onChange={ this.onChange.bind(this) } />
+		  </section>
+	  );
+	}
 }
 
 
