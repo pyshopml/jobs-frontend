@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Logo from '../Logo';
-import Navigation from '../Navigation';
+
+import Auth from '../../modules/Auth';
 
 import css from './style.scss';
 
@@ -10,13 +11,13 @@ interface State{};
 class Header extends Component<Props, State> {
   render() {
     return (
-      <section className={css.header}>
-        <section className={css.container}>
-          <Logo />
-          <Navigation />
-        </section>
-      </section>
-    );
+	    <section className={css.header}>
+		    <section className={css.container}>
+			    <Logo />
+			    <Auth />
+		    </section>
+	    </section>
+    )
   }
 }
 
