@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import AuthBtns from './components/AuthBtns';
 import AuthModal from './components/AuthModal';
 import { auth, logout, signUp } from './actions';
+import selectors from './selectors';
+import { LoginCredentials, SignupCredentials } from './interfaces';
 
 import css from './style.scss';
 
@@ -16,10 +18,13 @@ interface Nav {
 }
 
 interface Props {
-	auth,
-	authState,
-	signUp,
-	logout():void
+	auth(): any;
+	signUp(): any;
+	logout(): void;
+	isSignUp: boolean;
+	isAuth: boolean;
+	isFetching: boolean;
+	result: any;
 }
 
 interface State {
@@ -39,13 +44,13 @@ class Auth extends Component<Props, State> {
 
 		this.state = {
 			open: false,
-			signIn:false,
-			signUp:false,
-			login:'',
-			pass:'',
-			name:'',
-			password:null,
-			email:null
+			signIn: false,
+			signUp: false,
+			login: '',
+			pass: '',
+			name: '',
+			password: null,
+			email: null,
 		};
 
 		this.handleOpen = this.handleOpen.bind(this);
@@ -83,30 +88,34 @@ class Auth extends Component<Props, State> {
 	handleClose() {
 		this.setState({ open: false });
 
-		if(!this.props.authState.isSignUp)
-		  this.props.logout()
-	 }
+		if(!this.props.isSignUp)
+			this.props.logout()
+	}
 
-	componentWillReceiveProps({ authState }) {
+	componentWillReceiveProps({ isAuth, isFetching }) {
+		if(!isFetching && isAuth)
+			this.setState({ open: false })
+	}
 
-		if(!authState.isFetching && authState.isAuth){
-			this.setState({open: false})
-		}
+	signUpUser() {
+		const { login, pass, name } = this.state;
+		const credentials : SignupCredentials = { email: login, password: pass, name: name };
+		this.props.signUp(credentials);
+	}
+
+	loginUser() {
+		const { login, pass, name } = this.state;
+		const credentials : LoginCredentials = { email: login, password: pass };
+		this.props.auth(credentials);
 	}
 
 	submitHandler() {
-		const { signIn, login, pass, name } = this.state;
-
-		if(signIn) {
-			this.props.auth({ email: login, password: pass });
+		if(this.state.signIn) {
+			this.loginUser();
 			return;
 		}
-
-		this.props.signUp({
-			email:login,
-			password:pass,
-			name:name
-		});
+		
+		this.signUpUser();
 	}
 
 	onChange(event: any, newValue: string) {
@@ -154,7 +163,7 @@ class Auth extends Component<Props, State> {
 	}
 
 	renderActions() {
-		const { authState: { isSignUp } } = this.props;
+		const { isSignUp } = this.props;
 		return !isSignUp ? this.renderSignUpActions() : this.renderLoginActions();
 	}
 
@@ -163,7 +172,7 @@ class Auth extends Component<Props, State> {
 	}
 
 	renderTitle() {
-		const { authState: { isSignUp } } = this.props;
+		const { isSignUp } = this.props;
 		if (!isSignUp && this.isSignedUp())
 			return 'Регистрация';
 
@@ -171,7 +180,7 @@ class Auth extends Component<Props, State> {
 	}
 
 	render() {
-	  const { authState: { isSignUp, isAuth } } = this.props;
+	  const { isSignUp, isAuth } = this.props;
 	  // const title = !isSignUp ? (this.state.signUp ? 'Регистрация' : 'Авторизация') : null;
 
 	  return (
@@ -186,15 +195,19 @@ class Auth extends Component<Props, State> {
 			               actions={ this.renderActions() }
 			               state={ this.state }
 			               close={ this.handleClose }
-			               authState={ this.props.authState }
-			               onChange={ this.onChange.bind(this) } />
+			               onChange={ this.onChange.bind(this) }
+			               { ...this.props } />
 		  </section>
 	  );
 	}
 }
 
+const mapStateToProps = state => selectors(state);
 
-export default connect(state =>{
-	const authState = state.global.auth
-	return {authState }
-},{auth, logout, signUp})(Auth)
+const mapDispatchToProps = dispatch => ({
+	auth: (data : LoginCredentials) => dispatch(auth(data)),
+	logout: () => dispatch(logout()),
+	signUp: (data : SignupCredentials) => dispatch(signUp(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

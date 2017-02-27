@@ -9,14 +9,14 @@ import {
 
 
 const initialState = {
-  isFetching:false,
-  isSuccess:false,
-  isError:false,
-	result:{},
-	isAuth:false,
-	isSignUp:false,
-	error:''
-}
+  isFetching: false,
+  isSuccess: false,
+  isError: false,
+	result: {},
+	isAuth: false,
+	isSignUp: false,
+	error: ''
+};
 
 export default(state = initialState, action) =>{
 

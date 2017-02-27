@@ -1,4 +1,5 @@
 import cookie from 'react-cookie'
+import { LoginCredentials, SignupCredentials, Action } from './interfaces';
 
 import {
 	AUTH_FETCHING,
@@ -8,13 +9,7 @@ import {
 } from './constants';
 
 
-
- async function authenticate(data, dispatch){
-
-	 dispatch({
-		 type:AUTH_FETCHING
-	 })
-
+ async function authenticate(data : LoginCredentials, dispatch) {
 	 try {
 		 const res = await fetch('http://jobs.pyshop.ru/api/account/login/', {
 			 headers: {
@@ -40,12 +35,7 @@ import {
 
 }
 
-async function authSignUp(data, dispatch){
-
-	dispatch({
-		type:AUTH_FETCHING
-	})
-
+async function authSignUp(data : SignupCredentials, dispatch) {
 	try {
 		const res = await fetch('http://jobs.pyshop.ru/api/users/', {
 			headers: {
@@ -55,6 +45,7 @@ async function authSignUp(data, dispatch){
 			method: 'POST',
 			body: JSON.stringify(data)
 		});
+
 		let result = await res.json()
 		if(result.id){
 			dispatch({
@@ -66,25 +57,18 @@ async function authSignUp(data, dispatch){
 	} catch(e) {
 		console.log(e.message)
 	}
-
 }
 
-export const logout = ():any =>{
-	return {
-		type:LOGOUT
-	}
+export const logout = () : Action => ({
+	type: LOGOUT
+});
 
+export const signUp = (data : SignupCredentials) => dispatch => {
+	dispatch({ type: AUTH_FETCHING });
+	authSignUp(data, dispatch)
+};
 
-}
-export const signUp = (data):any =>{
-	return (dispatch) =>{
-		authSignUp(data, dispatch)
-	}
-}
-
-
-export const auth = (data):any =>{
-	return (dispatch) =>{
-		authenticate(data, dispatch)
-	}
+export const auth = (data : LoginCredentials) => dispatch => {
+	dispatch({ type: AUTH_FETCHING });
+	authenticate(data, dispatch);
 }
