@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import css from './style.scss';
 
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 
-import AuthBtns from './AuthBtns';
-import AuthModal from './AuthModal';
+import AuthBtns from './components/AuthBtns';
+import AuthModal from './components/AuthModal';
 import { auth, logout, signUp } from './actions';
+
+import css from './style.scss';
 
 interface Nav {
 	onClick()
