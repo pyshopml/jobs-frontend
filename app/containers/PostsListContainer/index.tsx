@@ -13,6 +13,10 @@ interface Props{
 interface State{};
 
 class PostsListContainer extends Component<Props, State> {
+  componentDidMount() {
+    this.props.loadStories();
+  }
+
   render() {
     return (
       <div>
