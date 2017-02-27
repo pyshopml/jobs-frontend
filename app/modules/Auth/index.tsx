@@ -119,52 +119,74 @@ logout() {
 	this.setState({ open: false });
 }
 
+renderSignUpActions() {
+	const submitBtn = this.state.signUp ? 'Зарегистрироваться' : 'Войти';
+
+	return (
+		[
+		<FlatButton
+		  label={submitBtn}
+		  primary={true}
+		  onTouchTap={this.submitHandler.bind(this)}
+	  />,
+	  <FlatButton
+		  label='Отмена'
+		  primary={true}
+		  keyboardFocused={true}
+		  onTouchTap={this.handleClose}
+	  />
+	 	]
+	);
+}
+
+renderLoginActions() {
+	return (
+		[
+			<FlatButton
+	      label='Продолжить'
+	      primary={true}
+	      keyboardFocused={true}
+	      onTouchTap={this.handleClose}
+	    />
+	  ]
+	);
+}
+
+renderActions() {
+	const { authState: { isSignUp } } = this.props;
+	return !isSignUp ? this.renderSignUpActions() : this.renderLoginActions();
+}
+
+isSignedUp() {
+	return this.state.signUp;
+}
+
+renderTitle() {
+	const { authState: { isSignUp } } = this.props;
+	if (!isSignUp && this.isSignedUp())
+		return 'Регистрация';
+
+	return 'Авторизация';
+}
+
 render() {
   const { authState: { isSignUp, isAuth } } = this.props;
-
-  const submitBtn = this.state.signUp ? 'Зарегистрироваться' : 'Войти';
-
-  const title = !isSignUp ? (this.state.signUp ? 'Регистрация' : 'Авторизация') : null;
-
-  const actions = !isSignUp ? [
-											  <FlatButton
-												  label={submitBtn}
-												  primary={true}
-												  onTouchTap={this.submitHandler.bind(this)}
-											  />,
-											  <FlatButton
-												  label='Отмена'
-												  primary={true}
-												  keyboardFocused={true}
-												  onTouchTap={this.handleClose}
-											  />
-										    ]
-                      :
-                        [<FlatButton
-									        label='Продолжить'
-									        primary={true}
-									        keyboardFocused={true}
-									        onTouchTap={this.handleClose}
-								        />]
-
+  // const title = !isSignUp ? (this.state.signUp ? 'Регистрация' : 'Авторизация') : null;
+  
   return (
 	    <section>
-
-		   <AuthBtns openModal={this.handleOpen.bind(this)}
-		             logout ={this.logout.bind(this)}
-		             isSignUp={isSignUp}
-		             isAuth={isAuth}
+		   <AuthBtns openModal={ this.handleOpen }
+		             logout ={ this.logout }
+		             isSignUp={ isSignUp }
+		             isAuth={ isAuth }
 		   />
 
-		    <AuthModal title={title}
-		               actions={actions}
-		               state={this.state}
-		               close={this.handleClose}
-		               authState={this.props.authState}
-		               onChange={this.onChange.bind(this)}
-
-		    />
-
+		    <AuthModal title={ this.renderTitle() }
+		               actions={ this.renderActions() }
+		               state={ this.state }
+		               close={ this.handleClose }
+		               authState={ this.props.authState }
+		               onChange={ this.onChange.bind(this) } />
 	    </section>
   	);
   }
