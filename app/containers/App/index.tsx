@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { addNotification, removeFirstNotification } from './actions';
 import selectors from './selectors';
 
-import AddButton from '../../components/AddPostButton';
 
 import css from './style.css';
 
@@ -53,7 +52,6 @@ class App extends Component<Props, State> {
                   message={ notificationMessage }
                   autoHideDuration={this.state.autoSnackbarHideDuration}
                   onRequestClose={this.onSnackbarClose} />
-        <AddButton />
       </section>
     );
   }

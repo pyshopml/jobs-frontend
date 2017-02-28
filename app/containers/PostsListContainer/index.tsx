@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import AddButton from '../../components/AddPostButton';
 import { getPosts } from './selectors';
 import { loadStories } from './actions';
 
@@ -17,6 +18,7 @@ class PostsListContainer extends Component<Props, State> {
     return (
       <div>
         <PostsList posts={this.props.posts}/>
+        <AddButton />
       </div>
     );
   }
