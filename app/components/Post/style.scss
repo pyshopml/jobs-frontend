@@ -6,10 +6,10 @@
   box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 }
 
-.title{
-  margin-bottom: 5px;
+.title {
+  margin-bottom: 8px;
   color: #07c;
-  font-size: 1.3em;
+  font-size: 1.1em;
   font-weight: bold;
   & a{
     &:hover{
@@ -21,9 +21,10 @@
   }
 }
 
-.employer{
+.description {
   font-size: 0.9em;
   margin-right: 20px;
+  line-height: 1.5em;
 }
 
 

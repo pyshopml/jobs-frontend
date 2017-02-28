@@ -1,3 +1,4 @@
+import { Action } from '../../interfaces/action';
 
 import {
   LOAD_POSTS,
@@ -5,61 +6,43 @@ import {
   LOAD_POSTS_FAILURE
 } from './constants';
 
-const loadingSucceeded = (posts) => ({
-  type: LOAD_POSTS_SUCCEEDED,
-  posts
+const loadingStarted = () : Action => ({
+  type: LOAD_POSTS
 });
 
-const loadingFailed = (message: string) => ({
+const loadingSucceeded = (data) : Action => ({
+  type: LOAD_POSTS_SUCCEEDED,
+  data
+});
+
+const loadingFailed = (errorMessage: string) : Action => ({
   type: LOAD_POSTS_FAILURE,
-  message
+  errorMessage
 });
 
 function retrieveData() {
-  const headers = new Headers({
-    'Accept': 'application/json',
-    'Origin': 'http://localhost:3000/',
-    // 'Access-Control-Request-Method': '*'
-    // 'Access-Control-Allow-Origin': 'http://jobs.pyshop.ru',
-    'Access-Control-Request-Method': 'GET',
-   });
-
   const options = {
     method: 'GET',
-    headers: headers,
-    mode: 'no-cors'
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
   };
 
-  return fetch('http://jobs.pyshop.ru/api/vacancies/', JSON.stringify(options)).then(res => res.json());
-  // return fetch('http://jobs.pyshop.ru/api/vacancies/', { mode: 'no-cors' }).then(res => res.json());
+  return fetch('http://jobs.pyshop.ru/api/vacancies/', options).then(res => res.json());
 }
 
-async function loadPostsFromServer() {
+async function loadPostsFromServer(dispatch: (action : Action) => void) {
   try {
     const res = await retrieveData();
-    console.log(res);
-  } catch (e) {
-
-  }
-}
-
-/*
-async function loadStoriesFromServer(dispatch) {
-  try {
-    const res = await fetch('http://d8d2a038.ngrok.io/vacancies/?format=json');
-    let posts = await res.json()
-    posts = posts.map(post => {
-      post.created_on = new Date(post.created_on);
-      return post
-    });
-    dispatch(loadingSucceeded(posts));
+    
+    dispatch(loadingSucceeded(res));
   } catch (e) {
     dispatch(loadingFailed(e.message));
   }
 }
-*/
 
 export const loadStories = () => dispatch => {
   dispatch({ type: LOAD_POSTS });
-  loadPostsFromServer();
+  loadPostsFromServer(dispatch);
 }

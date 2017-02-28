@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getPosts } from './selectors';
+import selectors from './selectors';
 import { loadStories } from './actions';
 
 import PostsList from '../../components/PostsList';
 
-interface Props{
-  posts: any[],
-  loadStories(): void
+interface Props {
+  allPosts: any[],
+  loadStories(): void,
 };
-interface State{};
+
+interface State {};
 
 class PostsListContainer extends Component<Props, State> {
   componentDidMount() {
@@ -18,19 +19,13 @@ class PostsListContainer extends Component<Props, State> {
   }
 
   render() {
-    return (
-      <div>
-        <PostsList posts={this.props.posts}/>
-      </div>
-    );
+    return (<PostsList { ...this.props } />);
   }
 }
 
-const mapStateToProps = (state) => ({
-  posts: getPosts(state)
-});
+const mapStateToProps = state => selectors(state);
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   loadStories: () => dispatch(loadStories())
 });
 

@@ -1,4 +1,4 @@
-interface IPost{
+ interface IPost {
   id?: number;
   url?: string;
   user?: string;
@@ -6,6 +6,7 @@ interface IPost{
   description: string;
   created_on?: Date;
   modified_on?: Date;
-  keywords: string[];
+  keywords?: string[];
 }
+
 export default IPost;

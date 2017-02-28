@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-const postsSelectors = state => state.global.posts.allPosts;
+const postsSelectors = state => state.global.posts;
 
-export const getPosts = createSelector(
+export default createSelector(
   postsSelectors,
-  (posts) => {return posts}
+  (substate) => substate
 );

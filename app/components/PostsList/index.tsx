@@ -6,27 +6,25 @@ import PostsListSearchBar from '../PostsListSearchBar';
 import PostsListHeader from '../PostsListHeader';
 import Post from '../Post';
 
-
-interface Props{
-  posts: IPost[]
+interface Props {
+  allPosts: Array<IPost>
 };
-interface State{};
+
+interface State {};
 
 class Home extends Component<Props, State> {
-  allPosts = () => {
-    return this.props.posts.map((post, index)=> {
-      return <Post key={post.id} post={post}/>
-    })
-  };
+
+  renderPosts() {
+    return this.props.allPosts.map(post => <Post key={post.id} post={post} />);
+  }
+
   render() {
     return (
-      <div>
-        <PostsListSearchBar/>
-        <PostsListHeader resultLength={this.props.posts.length}/>
-        {
-          this.allPosts()
-        }
-      </div>
+      <section>
+        <PostsListSearchBar />
+        <PostsListHeader resultLength={this.props.allPosts.length}/>
+        { this.renderPosts() }
+      </section>
     );
   }
 }
