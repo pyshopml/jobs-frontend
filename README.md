@@ -11,7 +11,7 @@ Run `npm start` for a dev server. Navigate to `http://localhost:3000/`. The app 
 
 ## Build
 
-Run `npm build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm build:prod` for a production build.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm run build:prod` for a production build.
 
 ## License
 
