@@ -11,8 +11,7 @@ interface State{};
 
 const BLOCK_TYPES_DROPDOWN: any = [
   {label: 'Обычный', style: 'normal'},
-  {label: 'Большой Заголовок', style: 'header-one'},
-  {label: 'Средний Заголовок', style: 'header-two'},
+  {label: 'Большой Заголовок', style: 'header-two'},
   {label: 'Малый Заголовок', style: 'header-three'},
 ];
 

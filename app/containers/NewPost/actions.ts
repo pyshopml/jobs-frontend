@@ -1,38 +1,48 @@
 import { goBack } from 'react-router-redux';
-import IPost from '../../interfaces/ipost'
+import IPost from '../../interfaces/ipost';
+import INewPost from '../../interfaces/inewpost';
+import { uploadPostToServer } from './api';
+
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,
-  UPLOAD_POST_FAILURE
+  UPLOAD_POST_FAILURE,
 } from './constants';
+import { ADD_NOTIFICATION } from "../App/constants";
 
 const uploadimgPostSucceeded = (createdPost: IPost) => ({
   type: UPLOAD_POST_SUCCEEDED,
   createdPost
 });
 
-const uploadimgPostFailed = (message: string) => ({
-  type: UPLOAD_POST_FAILURE,
-  message
-});
+const uploadimgPostFailed = (message: string) =>
+  (dispatch) => {
+    dispatch({
+      type: UPLOAD_POST_FAILURE,
+      message
+    })
+  };
 
-async function uploadPostToServer(dispatch, post: IPost) {
-  try {
-    const res = await fetch('');
-    const createdPost = await res.json()
-    dispatch(uploadimgPostSucceeded(createdPost));
-  } catch (e) {
-    dispatch(uploadimgPostFailed(e.message));
-  }
-}
-
-export const createPost = (post: IPost) =>
+export const createPost = (post: INewPost) =>
   (dispatch) => {
     dispatch({ type: UPLOAD_POST });
-    // uploadPostToServer(dispatch, post);
-    console.log(post);
+    uploadPostToServer(
+      post,
+      (post) => dispatch(uploadimgPostSucceeded(post)),
+      (msg) => {
+        dispatch(addNotification(msg));
+        dispatch(uploadimgPostFailed(msg))
+      },
+    )
   }
 
+export const addNotification = (message) =>
+  (dispatch) => {
+    dispatch({
+      type: ADD_NOTIFICATION,
+      message
+    });
+  };
 export const handleCancel = () => dispatch => {
   dispatch(goBack());
 }

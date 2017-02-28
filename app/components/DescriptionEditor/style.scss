@@ -4,7 +4,6 @@ $border-color: #e0e0e0;
   padding-bottom: 5px;
   margin-top: 10px;
   line-height: 20px;
-  color: #464646;
   border: 1px solid $border-color;
   border-bottom: none;
   h1 {
@@ -36,6 +35,9 @@ $border-color: #e0e0e0;
   }
   &.read-only{
     border: none;
+    .text-field{
+      padding: 0;
+    }
     .editor-tools{
       display: none !important;
     }

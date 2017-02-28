@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 import selectors from './selectors';
 import { loadPosts, loadMorePosts } from './actions';
+import AddButton from '../../components/AddPostButton';
 
 import PostsList from '../../components/PostsList';
 

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 
+
 import IPost from '../../interfaces/ipost';
+import INewPost from '../../interfaces/inewpost';
 import NewPostForm from '../../components/NewPostForm';
 import { createPost, handleCancel } from './actions';
 import selectors from './selectors';
@@ -10,27 +12,30 @@ import selectors from './selectors';
 import css from './style.scss';
 
 interface Props {
-  createdPost: IPost,
-  createPost(post: IPost),
-  handleCancel(),
+  createdPost: IPost;
+  createPost(post: INewPost);
+  handleCancel();
 };
 
-interface State { };
+interface State {};
 
 class NewPost extends Component<Props, State> {
+  onFormSubmit = (post: INewPost) => {
+    this.props.createPost(post)
+  };
   render() {
     return (
       <Paper className={css.newPost}>
-        <NewPostForm { ...this.props } />
+        <NewPostForm onSubmit={this.onFormSubmit} { ...this.props } />
       </Paper>
     );
   }
 };
 
-const mapStateToProps = state => selectors(state)
+const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  createPost: (post: IPost) => dispatch(createPost(post)),
+  createPost: (post: INewPost) => dispatch(createPost(post)),
   handleCancel: () => dispatch(handleCancel()),
 });
 
