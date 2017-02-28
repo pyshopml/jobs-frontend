@@ -64,6 +64,17 @@ export default(state = initialState, action) =>{
 			  error:''
 		  }
 
+	  case 'SIGN_UP_ERROR':
+		  return {
+			  isFetching:false,
+			  isSuccess:false,
+			  isError:false,
+			  isAuth:false,
+			  isSignUp:false,
+			  result:action.payload,
+			  error:''
+		  }
+
     default:
       return state;
   }

@@ -12,7 +12,7 @@ import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 import rootReducer from './reducers';
 
-const composeEnhancers =  compose;
+const composeEnhancers  = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const routing = routerMiddleware(browserHistory);
 
 import createLogger from 'redux-logger';

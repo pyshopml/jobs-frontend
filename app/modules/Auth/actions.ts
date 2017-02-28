@@ -24,6 +24,9 @@ import {
 			 method: 'POST',
 			 body: JSON.stringify(data)
 		 });
+		 console.log('resssssssssssssssssssssssssssssss')
+		 console.log(res)
+		 console.log(res.status)
 		 let result = await res.json()
 		 /*if(result.auth_token){
 			 cookie.save('token', result.auth_token)
@@ -55,10 +58,21 @@ async function authSignUp(data, dispatch){
 			method: 'POST',
 			body: JSON.stringify(data)
 		});
+		console.log('resssssssssssssssssssssssssssssss')
+		console.log(res)
+
 		let result = await res.json()
-		if(result.id){
+		console.log(result)
+		console.log(typeof res.status)
+		console.log()
+		if(parseInt(String(res.status)[0]) === 2){
 			dispatch({
 				type:SIGN_UP,
+				payload:result
+			})
+		} else {
+			dispatch({
+				type:'SIGN_UP_ERROR',
 				payload:result
 			})
 		}

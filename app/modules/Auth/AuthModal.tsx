@@ -82,7 +82,6 @@ class AuthModal extends Component<Props, State> {
 		    onRequestClose={close}
 		    style={styleModal.style}
 		    actionsContainerStyle={styleModal.actionsContainer}
-		    actionsContainerClassName={'actions-container'}
 	    >
 		    {content}
 	    </Dialog>
