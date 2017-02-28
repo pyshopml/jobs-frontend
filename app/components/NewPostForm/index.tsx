@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextField, RaisedButton } from 'material-ui';
-import { EditorState, CompositeDecorator, ContentBlock, convertToRaw } from 'draft-js';
+import { ContentState, EditorState, CompositeDecorator, ContentBlock, convertToRaw } from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
 import INewPost from '../../interfaces/inewpost';
 import DescriptionLink from '../DescriptionLink'
@@ -74,7 +74,14 @@ class NewPostForm extends Component<Props, State> {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
   }
-
+  clearFields = () => {
+    const editorState = EditorState.push(
+      this.state.editorState,
+      ContentState.createFromText(''),
+      "adjust-depth"
+    );
+    this.setState({ title: '', editorState });
+  }
   isButtonSubmitDisabled = () => {
     const isDescriptionEmpty = !this.state.editorState.getCurrentContent().hasText();
     if( this.state.title.trim() == '' || isDescriptionEmpty) return true;
@@ -86,8 +93,6 @@ class NewPostForm extends Component<Props, State> {
 
     return(
       <form action="">
-        <RaisedButton secondary={true} label="Назад" className={ css.backButton } onClick={ handleCancel } />
-
         <TextField hintText="Заголовок.."
                    name="title"
                    value={ title }
@@ -99,7 +104,7 @@ class NewPostForm extends Component<Props, State> {
         <DescriptionEditor onChange={ this.onChange } editorState={ this.state.editorState }  />
         
         <div className={ css.controls }>
-          <RaisedButton href="#" label="Очистить" />
+          <RaisedButton label="Очистить" onClick={this.clearFields}/>
           <RaisedButton type="submit"
                         label="Создать"
                         primary={true}
