@@ -12,9 +12,9 @@ import selectors from './selectors';
 import css from './style.scss';
 
 interface Props {
-  createdPost: IPost,
-  createPost(post: INewPost),
-  handleCancel(),
+  createdPost: IPost;
+  createPost(post: INewPost);
+  handleCancel();
 };
 
 interface State {};
@@ -32,7 +32,7 @@ class NewPost extends Component<Props, State> {
   }
 };
 
-const mapStateToProps = state => selectors(state)
+const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
   createPost: (post: INewPost) => dispatch(createPost(post)),
