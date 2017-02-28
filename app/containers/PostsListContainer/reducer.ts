@@ -1,7 +1,8 @@
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
-  LOAD_POSTS_FAILURE
+  LOAD_MORE_POSTS_SUCCEEDED,
+  LOAD_FAILED,
 } from './constants';
 
 import IPost from '../../interfaces/ipost'
@@ -23,6 +24,16 @@ export default (state = initialModel, action) => {
         state,
         { allPosts: action.data.results, nextPage: action.data.next }
       );
+
+    case LOAD_MORE_POSTS_SUCCEEDED:
+      return Object.assign(
+        {},
+        state,
+        { allPosts: state.allPosts.concat(action.data.results), nextPage: action.data.next }
+      );
+
+    case LOAD_FAILED:
+      return Object.assign({}, state, { errorMessage: action.errorMessage });
 
     default:
       return state;
