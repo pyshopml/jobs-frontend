@@ -1,4 +1,5 @@
 import { Action } from '../../interfaces/action';
+import { loadPostsFromServer } from './api';
 
 import {
   LOAD_POSTS,
@@ -20,33 +21,14 @@ const loadingFailed = (errorMessage: string) : Action => ({
   errorMessage
 });
 
-function retrieveData() {
-  const options = {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  };
-
-  return fetch('http://jobs.pyshop.ru/api/vacancies/', options).then(res => res.json());
-}
-
-async function loadPostsFromServer(dispatch: (action : Action) => void) {
-  try {
-    const res = await retrieveData();
-    
-    dispatch(loadingSucceeded(res));
-  } catch (e) {
-    dispatch(loadingFailed(e.message));
-  }
-}
-
 export const loadPosts = () => dispatch => {
   dispatch({ type: LOAD_POSTS });
-  loadPostsFromServer(dispatch);
+  loadPostsFromServer(
+    (data) => dispatch(loadingSucceeded(data)),
+    (msg : string) => dispatch(loadingFailed(msg)),
+  );
 }
 
 export const loadMorePosts = () => dispatch => {
-  
+  console.log('LOAD MORE !!! YARGHHH');
 }
