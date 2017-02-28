@@ -1,21 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
 import selectors from './selectors';
-import { loadStories } from './actions';
+import { loadPosts, loadMorePosts } from './actions';
 
 import PostsList from '../../components/PostsList';
 
 interface Props {
-  allPosts: any[],
-  loadStories(): void,
+  allPosts: any[];
+  loadPosts(): void;
+  loadMorePosts(): void;
 };
 
 interface State {};
 
 class PostsListContainer extends Component<Props, State> {
+  constructor(props) {
+    super(props);
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
   componentDidMount() {
-    this.props.loadStories();
+    this.props.loadPosts();
+    $(window).bind('scroll', this.loadMore);
+  }
+
+  componentWillUnmount() {
+    $(window).unbind('scroll');
+  }
+
+  loadMore() {
+    if ( $(window).scrollTop() === $(document).height() - $(window).height() ) {
+      this.props.loadMorePosts();
+    }
   }
 
   render() {
@@ -26,7 +45,8 @@ class PostsListContainer extends Component<Props, State> {
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  loadStories: () => dispatch(loadStories())
+  loadPosts: () => dispatch(loadPosts()),
+  loadMorePosts: () => dispatch(loadMorePosts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

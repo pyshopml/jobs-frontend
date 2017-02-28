@@ -42,7 +42,11 @@ async function loadPostsFromServer(dispatch: (action : Action) => void) {
   }
 }
 
-export const loadStories = () => dispatch => {
+export const loadPosts = () => dispatch => {
   dispatch({ type: LOAD_POSTS });
   loadPostsFromServer(dispatch);
+}
+
+export const loadMorePosts = () => dispatch => {
+  
 }

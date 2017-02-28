@@ -9,6 +9,7 @@ import IPost from '../../interfaces/ipost'
 const initialModel = {
   allPosts: new Array<IPost>(),
   errorMessage: '',
+  nextPage: '',
 };
 
 export default (state = initialModel, action) => {
@@ -17,7 +18,11 @@ export default (state = initialModel, action) => {
       return state;
 
     case LOAD_POSTS_SUCCEEDED:
-      return Object.assign({}, state, { allPosts: action.data.results });
+      return Object.assign(
+        {},
+        state,
+        { allPosts: action.data.results, nextPage: action.data.next }
+      );
 
     default:
       return state;

@@ -22,7 +22,7 @@ class Home extends Component<Props, State> {
     return (
       <section>
         <PostsListSearchBar />
-        <PostsListHeader resultLength={this.props.allPosts.length}/>
+        { /* <PostsListHeader resultLength={this.props.allPosts.length}/> */ }
         { this.renderPosts() }
       </section>
     );
