@@ -32,10 +32,12 @@ class PostsListContainer extends Component<Props, State> {
     $(window).unbind('scroll');
   }
 
+  isBottom() {
+    return ($(window).scrollTop() === $(document).height() - $(window).height());
+  }
+
   loadMore() {
-    if ( $(window).scrollTop() === $(document).height() - $(window).height() ) {
-      this.props.loadMorePosts();
-    }
+    if (this.isBottom()) this.props.loadMorePosts()
   }
 
   render() {
