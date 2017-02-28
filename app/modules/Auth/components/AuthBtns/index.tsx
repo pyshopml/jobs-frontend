@@ -3,45 +3,53 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import css from './style.scss';
 
-
-
-interface Props{
-  isAuth:boolean,
-  isSignUp:boolean,
-  openModal
-  logout():void
+interface Props {
+  isAuth: boolean;
+  isSignUp: boolean;
+  openModal(val: string): any;
+  logout(): void;
 }
-interface State{}
+
+interface State {}
 
 class AuthBtns extends Component<Props, State> {
-  render() {
-    const {isAuth, isSignUp, openModal, logout} = this.props,
 
-           signBtn = !isSignUp ?
-                                <RaisedButton label="Зарегистрироваться"
-                                              onTouchTap={()=> openModal('signUp')}
-                                />
-                              : null,
+  renderSignUp() {
+    const { isSignUp, openModal } = this.props;
+    return (!isSignUp ? <RaisedButton label="Зарегистрироваться" onTouchTap={()=> openModal('signUp')} /> : null);
+  }
 
-           btns = isAuth ? <div>
-                            <div>Вы зарегистрированы!</div>
-                            <RaisedButton label="Выйти" onTouchTap={()=> logout()}/>
-                          </div>
-                        :
-                          <nav className={css.navigation}>
-                            <div>
-                              <div>
-                                <RaisedButton label="Войти" onTouchTap={()=> openModal('signIn')} />
-                              </div>
-                              {signBtn}
-                            </div>
-                          </nav>
+  loginBox() {
+    const { openModal } = this.props;
+
     return (
-      <div>
-          {btns}
-      </div>
+      <nav className={css.navigation}>
+        <div>
+          <div>
+            <RaisedButton label="Войти" onTouchTap={ ()=> openModal('signIn') } />
+          </div>
+          { this.renderSignUp() }
+        </div>
+      </nav>
+    );
+  }
 
-    )
+  authBox() {
+    return (
+      <section>
+        <div>Вы зарегистрированы!</div>
+        <RaisedButton label="Выйти" onTouchTap={ ()=> this.props.logout() }/>
+      </section>
+    );
+  }
+
+  renderContent() {
+    const { isAuth } = this.props;
+    return (isAuth ? this.authBox() : this.loginBox());
+  }
+
+  render() {
+    return this.renderContent();
   }
 }
 
