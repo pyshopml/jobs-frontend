@@ -13,7 +13,7 @@ import css from './style.scss';
 interface Props{
   readOnly?: boolean;
   editorState: any;
-  onChange: any;
+  onChange?: any;
 };
 
 interface State{
