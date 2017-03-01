@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/pyshopml/jobs-team-frontend#readme",
   "dependencies": {
+    "classnames": "^2.2.5",
+    "draft-js": "^0.10.0",
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
     "react-cookie": "^1.0.4",
@@ -41,6 +43,8 @@
     "reselect": "^2.5.4"
   },
   "devDependencies": {
+    "@types/classnames": "0.0.32",
+    "@types/draft-js": "^0.9.1",
     "@types/material-ui": "^0.16.51",
     "@types/react": "^15.0.9",
     "@types/react-dom": "^0.14.23",
@@ -50,7 +54,6 @@
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/reselect": "^2.0.27",
-    "@types/whatwg-fetch": "0.0.33",
     "autoprefixer": "^6.7.2",
     "awesome-typescript-loader": "^3.0.4-rc.2",
     "babel-core": "^6.22.1",

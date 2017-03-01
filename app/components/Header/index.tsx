@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Logo from '../Logo';
 
-import Auth from '../../modules/Auth';
+import Auth from '../../containers/Auth';
 
 import css from './style.scss';
 

@@ -9,8 +9,8 @@
 ------------------------------------------------------------------------------- */
 import homeReducer from '../Home/reducer';
 import postsReducer from '../PostsListContainer/reducer';
-import authReducer from '../../modules/Auth/reducer';
-
+import newPostReducer from '../NewPost/reducer';
+import authReducer from '../Auth/reducer';
 
 const appReducer = (state: any = {}, action) => {
   switch(action.type) {
@@ -24,5 +24,6 @@ export default (state: any = {}, action) => ({
   app: appReducer(state.app, action),
   home: homeReducer(state.home, action),
   posts: postsReducer(state.posts, action),
+  newPost: newPostReducer(state.newPost, action),
 	auth:authReducer(state.auth, action)
 });

@@ -1,0 +1,16 @@
+.controls {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.title-wrap{
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.backButton {
+  margin-bottom: 24px;
+}
