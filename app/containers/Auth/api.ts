@@ -1,6 +1,6 @@
 import { SignupCredentials, LoginCredentials } from './interfaces';
 
-function authSignUpOnServer(data: SignupCredentials) {
+function authSignUpOnServer(data: SignupCredentials): Promise<Response> {
   const options = {
     headers: {
       'Accept': 'application/json',
@@ -16,18 +16,20 @@ function authSignUpOnServer(data: SignupCredentials) {
 export async function authSignUp(data : SignupCredentials, done, doneFail, error) {
   try {
     const res = await authSignUpOnServer(data);
-	  const result = await res.json();
-	  if(res.ok){
+
+	  if(res.ok) {
+	    const result = await res.json();
 		  done(result);
+
 	  } else {
-		  doneFail(result)
+		  doneFail(res.statusText);
 	  }
   } catch(e) {
     error(e.message);
   }
 }
 
-function authenticateOnServer(data : LoginCredentials) {
+function authenticateOnServer(data : LoginCredentials): Promise<Response> {
   const options = {
     headers: {
        'Accept': 'application/json',

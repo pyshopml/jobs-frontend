@@ -20,8 +20,6 @@ const styleInput={
  width:'100%'
 }
 
-
-
 interface Props{
 	title:string,
 	actions:any,
