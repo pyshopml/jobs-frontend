@@ -6,8 +6,6 @@ import {
 	SIGN_UP_ERROR
 } from './constants';
 
-
-
 const initialState = {
   isFetching: false,
   isSuccess: false,
