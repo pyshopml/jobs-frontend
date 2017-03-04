@@ -41,7 +41,12 @@ class PostsListContainer extends Component<Props, State> {
   }
 
   render() {
-    return (<PostsList { ...this.props } />);
+    return (
+      <div>
+        <PostsList { ...this.props } />
+        <AddButton/>
+      </div>
+    );
   }
 }
 
