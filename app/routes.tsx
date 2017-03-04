@@ -11,6 +11,8 @@ import App from './containers/App';
 import Home from './containers/Home';
 import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
+import NotFound from './containers/NotFound';
+
 
 
 export default (store) => {
@@ -30,6 +32,8 @@ export default (store) => {
     <Route path="/" component={ App } >
       <IndexRoute component={ Posts } />
       <Route path="add_post" component={ NewPost }/>
+      <Route path="404" component={ NotFound }/>
+      <Route path="*" component={ NotFound }/>
     </Route>
   );
 };
