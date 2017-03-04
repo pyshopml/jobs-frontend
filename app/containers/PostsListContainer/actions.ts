@@ -48,6 +48,7 @@ export const loadPosts = () => dispatch => {
 
 export const loadMorePosts = () => (dispatch, getState) => {
   const state = selectors(getState());
+  dispatch(loadingMorePosts())
   fetchMorePosts(
     state.nextPage,
     (data) => dispatch(loadingMorePostsSucceeded(data)),
