@@ -53,7 +53,6 @@ class NewPostForm extends Component<Props, State> {
     this.hanldeSubmit = this.hanldeSubmit.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
   }
-
   onChange = (editorState, callback?) => {
     this.setState({
       editorState
@@ -65,7 +64,8 @@ class NewPostForm extends Component<Props, State> {
     const { editorState } = this.state;
     this.props.onSubmit({
       title: this.state.title,
-      description: convertToRaw(editorState.getCurrentContent()),
+      //description: convertToRaw(editorState.getCurrentContent()),
+      description: editorState.getCurrentContent().getPlainText(),
       keywords: []
     })
   }
