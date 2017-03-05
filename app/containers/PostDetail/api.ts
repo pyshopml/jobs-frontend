@@ -19,15 +19,15 @@ export async function fetchPost(id: number,
                                 notFound: () => any){
   try {
     const res = await fetchPostFromServer(id);
-    if(!res.ok)
+    if (res.status == 404){
+      notFound();
+      return;
+    }
+    if (!res.ok)
       throw new Error(res.statusText);
     const post: IPost = await res.json();
     done(post);
   } catch (e) {
-    if(e.message == 'Not Found'){
-      notFound();
-      return;
-    }
     error(e.message);
   }
 }
