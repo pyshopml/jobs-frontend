@@ -6,7 +6,7 @@
 * Nick Luparev nikita.luparev@gmail.com
 ------------------------------------------------------------------------------- */
 import React from 'react';
-import { Route, IndexRoute } from 'react-router';
+import { Route, IndexRoute, IndexRedirect, Redirect } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import Posts from './containers/PostsListContainer';
@@ -31,8 +31,9 @@ export default (store) => {
 
   return (
     <Route path="/" component={ App } >
-      <IndexRoute component={ Posts } />
-      <Route path="add_post" component={ NewPost }/>
+      <IndexRedirect to="/vacancies" />
+      <Route path="vacancies" component={ Posts }/>
+      <Route path="vacancies/new" component={ NewPost }/>
       <Route path="vacancies/:id" component={ PostDetail }/>
       <Route path="404" component={ NotFound }/>
       <Route path="*" component={ NotFound }/>
