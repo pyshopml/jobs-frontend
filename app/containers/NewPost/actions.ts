@@ -1,7 +1,7 @@
 import { goBack } from 'react-router-redux';
 import IPost from '../../interfaces/ipost';
 import INewPost from '../../interfaces/inewpost';
-import { uploadPostToServer } from './api';
+import { uploadPost } from './api';
 
 import {
   UPLOAD_POST,
@@ -26,7 +26,7 @@ const uploadimgPostFailed = (message: string) =>
 export const createPost = (post: INewPost) =>
   (dispatch) => {
     dispatch({ type: UPLOAD_POST });
-    uploadPostToServer(
+    uploadPost(
       post,
       (post) => dispatch(uploadimgPostSucceeded(post)),
       (msg) => {

@@ -1,7 +1,7 @@
 import INewPost from '../../interfaces/inewpost';
 import IPost from '../../interfaces/ipost';
 
-function submitPost(post: INewPost) {
+function uploadPostToServer(post: INewPost) {
   const options = {
     method: 'POST',
     headers: {
@@ -12,14 +12,16 @@ function submitPost(post: INewPost) {
   };
 
   return fetch('http://jobs.pyshop.ru/api/vacancies/', options)
-    .then((res: any) => res.json())
 }
 
-export async function uploadPostToServer(post: INewPost,
+export async function uploadPost(post: INewPost,
                                          done: (post: IPost) => any,
                                          error: (msg: string) => any) {
   try {
-    const createdPost: IPost = await submitPost(post);
+    const res = await uploadPostToServer(post);
+    if (!res.ok)
+      throw new Error(res.statusText);
+    const createdPost: IPost = await res.json();
     done(createdPost);
   } catch (e) {
     error(e.message);

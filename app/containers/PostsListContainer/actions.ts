@@ -1,5 +1,5 @@
 import { Action } from '../../interfaces/action';
-import { loadPostsFromServer, fetchMorePosts } from './api';
+import { fetchPosts, fetchMorePosts } from './api';
 import selectors from './selectors';
 
 import {
@@ -40,7 +40,7 @@ const loadingMorePostsFailed = (errorMessage) : Action => ({
 
 export const loadPosts = () => dispatch => {
   dispatch({ type: LOAD_POSTS });
-  loadPostsFromServer(
+  fetchPosts(
     (data) => dispatch(loadingSucceeded(data)),
     (msg : string) => dispatch(loadingFailed(msg)),
   );
