@@ -1,0 +1,21 @@
+.post{
+  padding: 20px;
+}
+.header{
+  padding: 20px;
+  margin-bottom: 20px;
+  .title {
+    display: block;
+    font-size: 1.3em;
+    margin-bottom: 8px;
+  }
+  .employer{
+    font-size: 0.9em;
+    margin-right: 20px;
+  }
+  .date{
+    float: right;
+    color: #848d95;
+    font-size: 13px;
+  }
+}

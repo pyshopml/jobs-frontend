@@ -10,6 +10,7 @@
 import homeReducer from '../Home/reducer';
 import postsReducer from '../PostsListContainer/reducer';
 import newPostReducer from '../NewPost/reducer';
+import postDetail from '../PostDetail/reducer';
 
 import  { ADD_NOTIFICATION, REMOVE_FIRST_NOTIFICATION } from './constants';
 
@@ -37,6 +38,7 @@ const appReducer = (state = initialModel, action) => {
 
 export default (state: any = {}, action) => ({
   app: appReducer(state.app, action),
+  postDetail: postDetail(state.postDetail, action),
   home: homeReducer(state.home, action),
   posts: postsReducer(state.posts, action),
   newPost: newPostReducer(state.newPost, action)
