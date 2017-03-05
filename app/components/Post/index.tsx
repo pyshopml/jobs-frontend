@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import IPost from '../../interfaces/ipost';
+import { Link } from 'react-router';
 
 import css from './style.scss';
 
@@ -17,7 +18,9 @@ class Post extends Component<Props, State> {
     return (
       <section className={css.post}>
         <h3 className={css.title}>
-          <a href="#">{ post.title }</a>
+          <Link to={"vacancies/" + this.props.post.id}>
+            { post.title }
+          </Link>
         </h3>
         <span className={ css.description }>
           { post.description }
