@@ -10,6 +10,7 @@ import PostsList from '../../components/PostsList';
 
 interface Props {
   allPosts: any[];
+  isAuth: boolean;
   loadPosts(): void;
   loadMorePosts(): void;
 };
@@ -44,7 +45,7 @@ class PostsListContainer extends Component<Props, State> {
     return (
       <div>
         <PostsList { ...this.props } />
-        <AddButton/>
+        {this.props.isAuth ? <AddButton/> : null}
       </div>
     );
   }
