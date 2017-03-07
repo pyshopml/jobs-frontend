@@ -2,6 +2,8 @@ import { goBack } from 'react-router-redux';
 import IPost from '../../interfaces/ipost';
 import INewPost from '../../interfaces/inewpost';
 import { uploadPost } from './api';
+import selectors from './selectors';
+
 
 import {
   UPLOAD_POST,
@@ -24,10 +26,12 @@ const uploadimgPostFailed = (message: string) =>
   };
 
 export const createPost = (post: INewPost) =>
-  (dispatch) => {
+  (dispatch, getState) => {
     dispatch({ type: UPLOAD_POST });
+    const state = selectors(getState())
     uploadPost(
       post,
+      state.auth_token,
       (post) => dispatch(uploadimgPostSucceeded(post)),
       (msg) => {
         dispatch(addNotification(msg));

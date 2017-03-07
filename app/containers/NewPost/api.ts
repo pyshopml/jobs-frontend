@@ -1,12 +1,13 @@
 import INewPost from '../../interfaces/inewpost';
 import IPost from '../../interfaces/ipost';
 
-function uploadPostToServer(post: INewPost) {
+function uploadPostToServer(post: INewPost, token: string) {
   const options = {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
     },
     body: JSON.stringify(post)
   };
@@ -15,10 +16,11 @@ function uploadPostToServer(post: INewPost) {
 }
 
 export async function uploadPost(post: INewPost,
-                                         done: (post: IPost) => any,
-                                         error: (msg: string) => any) {
+                                 token: string,
+                                 done: (post: IPost) => any,
+                                 error: (msg: string) => any) {
   try {
-    const res = await uploadPostToServer(post);
+    const res = await uploadPostToServer(post, token);
     if (!res.ok)
       throw new Error(res.statusText);
     const createdPost: IPost = await res.json();
