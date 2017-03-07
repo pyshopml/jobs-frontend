@@ -1,6 +1,6 @@
 import { SignupCredentials, LoginCredentials,iValidateToken } from './interfaces';
 
-function authSignUpOnServer(data: SignupCredentials) {
+function authSignUpOnServer(data: SignupCredentials): Promise<Response> {
   const options = {
     headers: {
       'Accept': 'application/json',
@@ -42,17 +42,17 @@ export async function authSignUp(data : SignupCredentials, done, doneFail, error
   try {
     const res = await authSignUpOnServer(data);
 	  const result = await res.json();
-	  if(res.ok){
+	  if(res.ok) {
 		  done(result);
 	  } else {
-		  doneFail(result)
+		  doneFail(result);
 	  }
   } catch(e) {
     error(e.message);
   }
 }
 
-function authenticateOnServer(data : LoginCredentials) {
+function authenticateOnServer(data : LoginCredentials): Promise<Response> {
   const options = {
     headers: {
        'Accept': 'application/json',

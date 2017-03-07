@@ -7,7 +7,6 @@ import {
 	VALIDATE_ERROR
 } from './constants';
 
-
 const initialState = {
   isFetching: false,
   isSuccess: false,
