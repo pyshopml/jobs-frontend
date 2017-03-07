@@ -24,12 +24,6 @@ class App extends Component<Props, State> {
       autoSnackbarHideDuration: 2000,
     };
   }
-  public static childContextTypes = {
-    addNotification: React.PropTypes.func
-  };
-  getChildContext() {
-    return { addNotification: this.props.addNotification };
-  }
   onSnackbarClose = (reason: string) => {
     if(reason == "clickaway") return;
     this.props.removeFirstNotification();
