@@ -11,7 +11,7 @@ const initialModel = {
 export default (state = initialModel, action) => {
   switch (action.type) {
     case LOAD_POST_SUCCEEDED:
-      return Object.assign({}, state, {openedPost: action.data});
+      return Object.assign({}, state, {openedPost: action.data.post});
     case LOAD_POST:
       return Object.assign({}, state, {openedPost: null});
     default:

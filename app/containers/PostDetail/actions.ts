@@ -8,9 +8,9 @@ import {
   LOAD_POST_FAILURE
 } from './constants';
 
-const loadingPostSucceeded = (data: IPost): Action => ({
+const loadingPostSucceeded = (post: IPost): Action => ({
   type: LOAD_POST_SUCCEEDED,
-  data
+  data: { post }
 });
 
 const loadingPostFailed = (errorMessage: string): Action => ({
@@ -23,7 +23,7 @@ export const loadPost = (id: number) =>
     dispatch({ type: LOAD_POST });
     fetchPost(
       id,
-      (data) => dispatch(loadingPostSucceeded(data)),
+      (post) => dispatch(loadingPostSucceeded(post)),
       (msg) => dispatch(loadingPostFailed(msg)),
       () => dispatch(replace('404'))
     )

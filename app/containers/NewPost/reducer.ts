@@ -29,7 +29,7 @@ export default (state = initialModel, action) => {
       return state;
 
     case UPLOAD_POST_SUCCEEDED:
-      return Object.assign({}, state, { createdPost: action.createdPost });
+      return Object.assign({}, state, { createdPost: action.data.createdPost });
 
     default:
       return state;

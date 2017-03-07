@@ -14,7 +14,7 @@ import { ADD_NOTIFICATION } from "../App/constants";
 
 const uploadimgPostSucceeded = (createdPost: IPost) => ({
   type: UPLOAD_POST_SUCCEEDED,
-  createdPost
+  data: {createdPost}
 });
 
 const uploadimgPostFailed = (message: string) =>

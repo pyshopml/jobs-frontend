@@ -15,6 +15,12 @@ function uploadPostToServer(post: INewPost, token: string) {
   return fetch('http://jobs.pyshop.ru/api/vacancies/', options)
 }
 
+function postDateToObject(post){
+  post.created_on = new Date(post.created_on);
+  post.modified_on = new Date(post.modified_on);
+  return post;
+}
+
 export async function uploadPost(post: INewPost,
                                  token: string,
                                  done: (post: IPost) => any,
@@ -23,7 +29,7 @@ export async function uploadPost(post: INewPost,
     const res = await uploadPostToServer(post, token);
     if (!res.ok)
       throw new Error(res.statusText);
-    const createdPost: IPost = await res.json();
+    const createdPost: IPost = await res.json().then((post) => postDateToObject(post));
     done(createdPost);
   } catch (e) {
     error(e.message);

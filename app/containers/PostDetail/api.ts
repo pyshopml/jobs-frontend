@@ -13,6 +13,12 @@ function fetchPostFromServer(id: number) {
   return fetch(url, options)
 }
 
+function postDateToObject(post){
+  post.created_on = new Date(post.created_on);
+  post.modified_on = new Date(post.modified_on);
+  return post;
+}
+
 export async function fetchPost(id: number,
                                 done: (post: IPost) => any,
                                 error: (msg: string) => any,
@@ -25,7 +31,7 @@ export async function fetchPost(id: number,
     }
     if (!res.ok)
       throw new Error(res.statusText);
-    const post: IPost = await res.json();
+    const post: IPost = await res.json().then( (post) => postDateToObject(post) )
     done(post);
   } catch (e) {
     error(e.message);
