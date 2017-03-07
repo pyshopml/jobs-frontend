@@ -179,12 +179,18 @@ class Auth extends Component<Props, State> {
 		return 'Авторизация';
 	}
 
+	loading(){
+		if(this.props.isFetching && !this.state.open){
+			return <div className={css.overlay}>Loading</div>;
+		}
+	}
+
 	render() {
 	  const { isSignUp, isAuth } = this.props;
-	  // const title = !isSignUp ? (this.state.signUp ? 'Регистрация' : 'Авторизация') : null;
 
 	  return (
 		  <section>
+			  {this.loading()}
 			   <AuthBtns openModal={ this.handleOpen }
 			             logout ={ this.logout }
 			             isSignUp={ isSignUp }

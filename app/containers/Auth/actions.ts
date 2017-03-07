@@ -1,12 +1,13 @@
 import cookie from 'react-cookie'
 import { LoginCredentials, SignupCredentials, Action } from './interfaces';
-import { authSignUp, authenticate } from './api';
+import { authSignUp, authenticate, validate } from './api';
 import {
 	AUTH_FETCHING,
 	AUTH_SUCCESS,
 	AUTH_FAILED,
 	SIGN_UP,
 	SIGN_UP_ERROR,
+	VALIDATE_ERROR,
 	LOGOUT
 } from './constants';
 
@@ -37,11 +38,30 @@ const authFailed = (errorMessage: string) : Action => ({
 	errorMessage,
 });
 
-export const logout = () : Action => ({
-	type: LOGOUT
+export const logout = () : Action => {
+	cookie.remove('token')
+	return {type: LOGOUT}
+};
+
+const validateError = (payload: any) : Action => ({
+	type: VALIDATE_ERROR,
+	payload
 });
 
-export  const signUp = (data : SignupCredentials) => (dispatch: (action: Action) => void) => {
+
+export const validateToken =(dispatch) => () => {
+	dispatch({ type: AUTH_FETCHING });
+	const data = {
+		auth_token:cookie.load('token')
+	}
+	validate(data,
+		(data) => dispatch(authSucceeded(data)),
+		(data) => dispatch(validateError(data)),
+		(msg: string) => console.log('vvv3')
+	)
+}
+
+export const signUp = (data : SignupCredentials) => (dispatch: (action: Action) => void) => {
 	dispatch({ type: AUTH_FETCHING });
 	authSignUp(
 		data, 
@@ -52,10 +72,15 @@ export  const signUp = (data : SignupCredentials) => (dispatch: (action: Action)
 };
 
 export const auth = (data : LoginCredentials) => (dispatch: (action: Action) => void) => {
+	console.log('dispatch')
+	console.log(dispatch)
 	dispatch({ type: AUTH_FETCHING });
 	authenticate(
 		data, 
-		(data) => dispatch(authSucceeded(data)),
+		(data) => {
+			cookie.save('token', data.auth_token)
+			return dispatch(authSucceeded(data))
+		},
 		(msg: string) => dispatch(authFailed(msg))
-	);
+	)
 }

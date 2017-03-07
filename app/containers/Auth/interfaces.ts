@@ -14,3 +14,7 @@ export interface Action {
   payload?: any;
   errorMessage?: string;
 }
+
+export interface iValidateToken {
+  auth_token: string;
+}

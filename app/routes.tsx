@@ -1,18 +1,12 @@
-/* ------------------------------------------------------------------------------
-* routes.jsx
-*
-* main routing config file
-*
-* Nick Luparev nikita.luparev@gmail.com
-------------------------------------------------------------------------------- */
+
 import React from 'react';
+import cookie from 'react-cookie'
 import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
-
-
+import { validateToken } from './containers/Auth/actions';
 
 
 export default (store) => {
@@ -27,9 +21,8 @@ export default (store) => {
     }
   };
 
-
   return (
-    <Route path="/" component={ App } >
+    <Route path="/" component={ App } onEnter={validateToken(store.dispatch)}>
       <IndexRoute component={ Posts } />
       <Route path="add_post" component={ NewPost }/>
     </Route>

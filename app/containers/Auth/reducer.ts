@@ -3,9 +3,9 @@ import {
 	AUTH_SUCCESS,
 	LOGOUT,
 	SIGN_UP,
-	SIGN_UP_ERROR
+	SIGN_UP_ERROR,
+	VALIDATE_ERROR
 } from './constants';
-
 
 
 const initialState = {
@@ -45,6 +45,14 @@ export default (state = initialState, action) => {
 		  return Object.assign({}, state,  {
 			  isFetching:false,
 			  isSignUp:false,
+			  result:action.payload,
+		  })
+
+	  case VALIDATE_ERROR :
+		  return Object.assign({}, state,  {
+			  isFetching:false,
+			  isSignUp:false,
+			  isAuth: false,
 			  result:action.payload,
 		  })
 
