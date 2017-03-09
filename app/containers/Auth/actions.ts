@@ -48,6 +48,7 @@ const readFromCookie = (key: string): string => cookie.load(key);
 
 const removeFromCookie = (key: string): void => cookie.remove(key);
 
+const saveToCookie = (key: string, data: any): void => cookie.save(key, data);
 
 export const logout = () => dispatch => {
 	removeFromCookie('token');
@@ -86,13 +87,13 @@ export const signUp = (data : SignupCredentials) => (dispatch: (action: Action) 
 
 export const auth = (data : LoginCredentials) => (dispatch: (action: Action) => void) => {
 	console.log('dispatch') // ???
-	console.log(dispatch)
+	console.log(dispatch) // ???
 	
 	dispatch(authStarted());
 	authenticate(
 		data, 
 		(data) => {
-			cookie.save('token', data.auth_token)
+			saveToCookie('token', data.auth_token);
 			return dispatch(authSucceeded(data))
 		},
 		(msg: string) => dispatch(authFailed(msg))
