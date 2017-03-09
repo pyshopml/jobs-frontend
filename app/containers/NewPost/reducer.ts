@@ -6,30 +6,22 @@ import {
 
 import IPost from '../../interfaces/ipost'
 
-/*
-class InitialModel{
-  public createdPost: IPost;
-  constructor(options: { createdPost: IPost }){
-    this.createdPost = options.createdPost
-  }
+interface NewPostModel {
+  createdPost: any;
 }
 
-const initialModel = new InitialModel({
-  createdPost: null
-})
-*/
-
-const initialModel = {
+const initialModel: NewPostModel = {
   createdPost: null,
 };
 
-export default (state = initialModel, action) => {
+export default (state = initialModel, action):NewPostModel => {
   switch (action.type) {
+
     case UPLOAD_POST:
       return state;
 
     case UPLOAD_POST_SUCCEEDED:
-      return Object.assign({}, state, { createdPost: action.data.createdPost });
+      return Object.assign({}, state, { createdPost: action.data });
 
     default:
       return state;
