@@ -11,8 +11,6 @@ import {
 	LOGOUT
 } from './constants';
 
-
-
 const signUpError = (payload: any): Action => ({
 	type: SIGN_UP_ERROR,
 	payload,
@@ -28,6 +26,10 @@ const signUpFailed = (errorMessage: string): Action => ({
 	errorMessage,
 });
 
+const authStarted = (): Action => ({
+	type: AUTH_FETCHING,
+});
+
 const authSucceeded = (payload: any) : Action => ({
 	type: AUTH_SUCCESS,
 	payload,
@@ -38,9 +40,18 @@ const authFailed = (errorMessage: string) : Action => ({
 	errorMessage,
 });
 
-export const logout = () : Action => {
-	cookie.remove('token')
-	return {type: LOGOUT}
+const logoutUser = () => ({
+	type: LOGOUT
+});
+
+const readFromCookie = (key: string): string => cookie.load(key);
+
+const removeFromCookie = (key: string): void => cookie.remove(key);
+
+
+export const logout = () => dispatch => {
+	removeFromCookie('token');
+	dispatch(logoutUser());
 };
 
 const validateError = (payload: any) : Action => ({
@@ -48,21 +59,23 @@ const validateError = (payload: any) : Action => ({
 	payload
 });
 
+export const validateToken = dispatch => () => {
+	dispatch(authStarted());
 
-export const validateToken =(dispatch) => () => {
-	dispatch({ type: AUTH_FETCHING });
 	const data = {
-		auth_token:cookie.load('token')
+		auth_token: readFromCookie('token'),
 	}
-	validate(data,
-		(data) => dispatch(authSucceeded(data)),
-		(data) => dispatch(validateError(data)),
-		(msg: string) => console.log('vvv3')
+
+	validate(
+		data,
+		(data: any) => dispatch(authSucceeded(data)),
+		(data: any) => dispatch(validateError(data)),
+		(msg: string) => console.log('vvv3')  // ???
 	)
 }
 
 export const signUp = (data : SignupCredentials) => (dispatch: (action: Action) => void) => {
-	dispatch({ type: AUTH_FETCHING });
+	dispatch(authStarted());
 	authSignUp(
 		data, 
 		(data) => dispatch(signUpSucceeded(data)),
@@ -72,9 +85,10 @@ export const signUp = (data : SignupCredentials) => (dispatch: (action: Action) 
 };
 
 export const auth = (data : LoginCredentials) => (dispatch: (action: Action) => void) => {
-	console.log('dispatch')
+	console.log('dispatch') // ???
 	console.log(dispatch)
-	dispatch({ type: AUTH_FETCHING });
+	
+	dispatch(authStarted());
 	authenticate(
 		data, 
 		(data) => {
