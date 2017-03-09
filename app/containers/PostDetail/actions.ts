@@ -8,6 +8,10 @@ import {
   LOAD_POST_FAILURE
 } from './constants';
 
+const loadingPost = (): Action => ({
+  type: LOAD_POST,
+});
+
 const loadingPostSucceeded = (post: IPost): Action => ({
   type: LOAD_POST_SUCCEEDED,
   data: { post }
@@ -20,7 +24,7 @@ const loadingPostFailed = (errorMessage: string): Action => ({
 
 export const loadPost = (id: number) =>
   (dispatch) => {
-    dispatch({ type: LOAD_POST });
+    dispatch(loadingPost());
     fetchPost(
       id,
       (post) => dispatch(loadingPostSucceeded(post)),
