@@ -7,13 +7,19 @@ import {
 
 import IPost from '../../interfaces/ipost'
 
-const initialModel = {
+interface PostListState {
+  allPosts: Array<IPost>;
+  errorMessage: string;
+  nextPage: string;
+}
+
+const initialModel: PostListState = {
   allPosts: new Array<IPost>(),
   errorMessage: '',
   nextPage: '',
 };
 
-export default (state = initialModel, action) => {
+export default (state = initialModel, action): PostListState => {
   switch (action.type) {
     case LOAD_POSTS:
       return state;
