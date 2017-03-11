@@ -21,7 +21,8 @@ export default (state: NewPostModel = initialModel, action):NewPostModel => {
       return state;
 
     case UPLOAD_POST_SUCCEEDED:
-      return Object.assign({}, state, { createdPost: action.data });
+      const createdPost = new PostClass(action.data.createdPost);
+      return Object.assign({}, state, { createdPost: createdPost });
 
     default:
       return state;

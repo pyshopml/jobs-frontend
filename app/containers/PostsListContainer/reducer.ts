@@ -25,10 +25,11 @@ export default (state = initialModel, action): PostListState => {
       return state;
 
     case LOAD_POSTS_SUCCEEDED:
+      const posts = action.data.results.map(result => new PostClass(result));
       return Object.assign(
         {},
         state,
-        { allPosts: action.data.results, nextPage: action.data.next }
+        { allPosts: posts, nextPage: action.data.next }
       );
 
     case LOAD_MORE_POSTS_SUCCEEDED:
