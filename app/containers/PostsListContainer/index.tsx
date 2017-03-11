@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
+import PostClass from '../../models/Post.class';
 import selectors from './selectors';
 import { loadPosts, loadMorePosts } from './actions';
 import AddButton from '../../components/AddPostButton';
@@ -9,7 +10,7 @@ import AddButton from '../../components/AddPostButton';
 import PostsList from '../../components/PostsList';
 
 interface Props {
-  allPosts: any[];
+  allPosts: PostClass[];
   isAuth: boolean;
   loadPosts(): void;
   loadMorePosts(): void;

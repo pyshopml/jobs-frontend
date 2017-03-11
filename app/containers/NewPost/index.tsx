@@ -3,7 +3,7 @@ import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 
 
-import IPost from '../../interfaces/ipost';
+import PostClass from '../../models/Post.class';
 import INewPost from '../../interfaces/inewpost';
 import NewPostForm from '../../components/NewPostForm';
 import { createPost, handleCancel } from './actions';
@@ -12,7 +12,7 @@ import selectors from './selectors';
 import css from './style.scss';
 
 interface Props {
-  createdPost: IPost;
+  createdPost: PostClass;
   createPost(post: INewPost);
   handleCancel();
 };

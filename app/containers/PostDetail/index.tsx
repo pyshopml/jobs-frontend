@@ -5,14 +5,14 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 import DescriptionStatic from '../../components/DescriptionStatic';
 import { loadPost } from './actions';
-import IPost from '../../interfaces/ipost';
+import PostClass from '../../models/Post.class'
 
 import selectors from './selectors';
 
 import css from './style.scss';
 
 interface Props {
-  openedPost: IPost;
+  openedPost: PostClass;
   loadPost(id: number);
   params: {
     id: string
@@ -42,7 +42,7 @@ class PostDetail extends Component<Props, State> {
     return (
       <div>
         <Paper className={css.header}>
-          <span className={css.date}> 11.11.11</span>
+          <span className={css.date}>{this.props.openedPost.created_on}</span>
           <h1 className={css.title}>{this.props.openedPost.title}</h1>
           <span className={css.employer}>Employer</span>
         </Paper>

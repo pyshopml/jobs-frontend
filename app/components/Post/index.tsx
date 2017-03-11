@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import IPost from '../../interfaces/ipost';
+import PostClass from '../../models/Post.class';
 import { Link } from 'react-router';
 
 import css from './style.scss';
 
 interface Props{
-  post: IPost
+  post: PostClass
 };
 
 interface State {};

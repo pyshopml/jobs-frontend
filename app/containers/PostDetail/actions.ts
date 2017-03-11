@@ -1,4 +1,3 @@
-import IPost from '../../interfaces/ipost';
 import { Action } from '../../interfaces/action';
 import { replace } from 'react-router-redux'
 import { fetchPost } from './api';
@@ -12,7 +11,7 @@ const loadingPost = (): Action => ({
   type: LOAD_POST,
 });
 
-const loadingPostSucceeded = (post: IPost): Action => ({
+const loadingPostSucceeded = (post): Action => ({
   type: LOAD_POST_SUCCEEDED,
   data: { post }
 });

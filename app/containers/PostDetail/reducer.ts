@@ -1,3 +1,5 @@
+import PostClass from '../../models/Post.class';
+
 import {
   LOAD_POST,
   LOAD_POST_SUCCEEDED,

@@ -1,20 +1,20 @@
+import PostClass from '../../models/Post.class';
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,
   UPLOAD_POST_FAILURE
 } from './constants';
 
-import IPost from '../../interfaces/ipost'
 
 interface NewPostModel {
-  createdPost: any;
+  createdPost: PostClass;
 }
 
 const initialModel: NewPostModel = {
   createdPost: null,
 };
 
-export default (state = initialModel, action):NewPostModel => {
+export default (state: NewPostModel = initialModel, action):NewPostModel => {
   switch (action.type) {
 
     case UPLOAD_POST:

@@ -10,12 +10,6 @@ function fetchPostsFromServer(url: string) {
   return fetch(url, options)
 }
 
-function postDateToObject(post){
-  post.created_on = new Date(post.created_on);
-  post.modified_on = new Date(post.modified_on);
-  return post;
-}
-
 export async function fetchPosts(done: (data) => any,
                                  error: (msg: string) => any) {
   try {
@@ -25,7 +19,6 @@ export async function fetchPosts(done: (data) => any,
     if (!res.ok)
       throw new Error(res.statusText);
     const data = await res.json();
-    data.results = data.results.map(postDateToObject)
     done(data);
   } catch (e) {
     error(e.message);
@@ -42,7 +35,6 @@ export async function fetchMorePosts(url: string,
     if (!res.ok)
       throw new Error(res.statusText);
     const data = await res.json();
-    data.results = data.results.map(postDateToObject)
     done(data);
   } catch (e) {
     error(e.message);

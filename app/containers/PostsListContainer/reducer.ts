@@ -1,3 +1,4 @@
+import PostClass from '../../models/Post.class';
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
@@ -5,16 +6,15 @@ import {
   LOAD_FAILED,
 } from './constants';
 
-import IPost from '../../interfaces/ipost'
 
 interface PostListState {
-  allPosts: Array<IPost>;
+  allPosts: Array<PostClass>;
   errorMessage: string;
   nextPage: string;
 }
 
 const initialModel: PostListState = {
-  allPosts: new Array<IPost>(),
+  allPosts: new Array<PostClass>(),
   errorMessage: '',
   nextPage: '',
 };

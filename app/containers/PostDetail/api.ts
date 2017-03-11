@@ -1,5 +1,3 @@
-import IPost from '../../interfaces/ipost';
-
 function fetchPostFromServer(id: number) {
   const url = `http://jobs.pyshop.ru/api/vacancies/${id}/`
   const options = {
@@ -13,14 +11,8 @@ function fetchPostFromServer(id: number) {
   return fetch(url, options)
 }
 
-function postDateToObject(post){
-  post.created_on = new Date(post.created_on);
-  post.modified_on = new Date(post.modified_on);
-  return post;
-}
-
 export async function fetchPost(id: number,
-                                done: (post: IPost) => any,
+                                done: (post) => any,
                                 error: (msg: string) => any,
                                 notFound: () => any){
   try {
@@ -31,7 +23,7 @@ export async function fetchPost(id: number,
     }
     if (!res.ok)
       throw new Error(res.statusText);
-    const post: IPost = await res.json().then( (post) => postDateToObject(post) )
+    const post = await res.json()
     done(post);
   } catch (e) {
     error(e.message);

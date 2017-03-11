@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import IPost from '../../interfaces/ipost';
+import PostClass from '../../models/Post.class';
 
 import PostsListSearchBar from '../PostsListSearchBar';
 import PostsListHeader from '../PostsListHeader';
 import Post from '../Post';
 
 interface Props {
-  allPosts: Array<IPost>
+  allPosts: Array<PostClass>
 };
 
 interface State {};

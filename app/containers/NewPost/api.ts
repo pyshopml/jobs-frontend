@@ -1,5 +1,4 @@
 import INewPost from '../../interfaces/inewpost';
-import IPost from '../../interfaces/ipost';
 
 function uploadPostToServer(post: INewPost, token: string) {
   const options = {
@@ -15,21 +14,16 @@ function uploadPostToServer(post: INewPost, token: string) {
   return fetch('http://jobs.pyshop.ru/api/vacancies/', options)
 }
 
-function postDateToObject(post){
-  post.created_on = new Date(post.created_on);
-  post.modified_on = new Date(post.modified_on);
-  return post;
-}
 
 export async function uploadPost(post: INewPost,
                                  token: string,
-                                 done: (post: IPost) => any,
+                                 done: (post) => any,
                                  error: (msg: string) => any) {
   try {
     const res = await uploadPostToServer(post, token);
     if (!res.ok)
       throw new Error(res.statusText);
-    const createdPost: IPost = await res.json().then((post) => postDateToObject(post));
+    const createdPost = await res.json()
     done(createdPost);
   } catch (e) {
     error(e.message);

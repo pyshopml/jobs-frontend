@@ -1,6 +1,4 @@
 import { goBack } from 'react-router-redux';
-import IPost from '../../interfaces/ipost';
-import INewPost from '../../interfaces/inewpost';
 import {
   ADD_NOTIFICATION,
   REMOVE_FIRST_NOTIFICATION

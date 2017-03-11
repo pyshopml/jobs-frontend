@@ -1,6 +1,6 @@
 import { goBack } from 'react-router-redux';
-import IPost from '../../interfaces/ipost';
 import INewPost from '../../interfaces/inewpost';
+import PostClass from '../../models/Post.class'
 import { uploadPost } from './api';
 import selectors from './selectors';
 import { ADD_NOTIFICATION } from "../App/constants";
@@ -15,9 +15,9 @@ const submitPost = (): Action => ({
   type: UPLOAD_POST,
 });
 
-const submitPostSucceeded = (data: IPost): Action => ({
+const submitPostSucceeded = (post): Action => ({
   type: UPLOAD_POST_SUCCEEDED,
-  data,
+  data: {post},
 });
 
 const submitPostFailed = (message: string): Action => ({
