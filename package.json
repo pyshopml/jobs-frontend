@@ -28,6 +28,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "draft-js": "^0.10.0",
+    "jquery": "^3.1.1",
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
     "react-cookie": "^1.0.4",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@types/classnames": "0.0.32",
     "@types/draft-js": "^0.9.1",
+    "@types/jquery": "^2.0.40",
     "@types/material-ui": "^0.16.51",
     "@types/react": "^15.0.9",
     "@types/react-dom": "^0.14.23",

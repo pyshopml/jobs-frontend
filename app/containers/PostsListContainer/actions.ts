@@ -1,65 +1,57 @@
+import { Action } from '../../interfaces/action';
+import { fetchPosts, fetchMorePosts } from './api';
+import selectors from './selectors';
 
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
-  LOAD_POSTS_FAILURE
+  LOAD_MORE_POSTS,
+  LOAD_MORE_POSTS_SUCCEEDED,
+  LOAD_FAILED,
 } from './constants';
 
-const loadingSucceeded = (posts) => ({
+const loadingStarted = () : Action => ({
+  type: LOAD_POSTS
+});
+
+const loadingSucceeded = (data) : Action => ({
   type: LOAD_POSTS_SUCCEEDED,
-  posts
+  data
 });
 
-const loadingFailed = (message: string) => ({
-  type: LOAD_POSTS_FAILURE,
-  message
+const loadingFailed = (errorMessage: string) : Action => ({
+  type: LOAD_FAILED,
+  errorMessage
 });
 
-function retrieveData() {
-  const headers = new Headers({
-    'Accept': 'application/json',
-    'Origin': 'http://localhost:3000/',
-    // 'Access-Control-Request-Method': '*'
-    // 'Access-Control-Allow-Origin': 'http://jobs.pyshop.ru',
-    'Access-Control-Request-Method': 'GET',
-   });
+const loadingMorePosts = () : Action => ({
+  type: LOAD_MORE_POSTS,
+});
 
-  const options = {
-    method: 'GET',
-    headers: headers,
-    mode: 'no-cors'
-  };
+const loadingMorePostsSucceeded = (data) : Action => ({
+  type: LOAD_MORE_POSTS_SUCCEEDED,
+  data,
+});
 
-  return fetch('http://jobs.pyshop.ru/api/vacancies/', JSON.stringify(options)).then(res => res.json());
-  // return fetch('http://jobs.pyshop.ru/api/vacancies/', { mode: 'no-cors' }).then(res => res.json());
-}
+const loadingMorePostsFailed = (errorMessage) : Action => ({
+  type: LOAD_FAILED,
+  errorMessage,
+});
 
-async function loadPostsFromServer() {
-  try {
-    const res = await retrieveData();
-    console.log(res);
-  } catch (e) {
-
-  }
-}
-
-/*
-async function loadStoriesFromServer(dispatch) {
-  try {
-    const res = await fetch('http://d8d2a038.ngrok.io/vacancies/?format=json');
-    let posts = await res.json()
-    posts = posts.map(post => {
-      post.created_on = new Date(post.created_on);
-      return post
-    });
-    dispatch(loadingSucceeded(posts));
-  } catch (e) {
-    dispatch(loadingFailed(e.message));
-  }
-}
-*/
-
-export const loadStories = () => dispatch => {
+export const loadPosts = () => dispatch => {
   dispatch({ type: LOAD_POSTS });
-  loadPostsFromServer();
+  fetchPosts(
+    (data) => dispatch(loadingSucceeded(data)),
+    (msg : string) => dispatch(loadingFailed(msg)),
+  );
+}
+
+export const loadMorePosts = () => (dispatch, getState) => {
+  const state = selectors(getState());
+  dispatch(loadingMorePosts())
+  fetchMorePosts(
+    state.nextPage,
+    (data) => dispatch(loadingMorePostsSucceeded(data)),
+    (msg: string) => dispatch(loadingMorePostsFailed(msg)),
+  );
 }

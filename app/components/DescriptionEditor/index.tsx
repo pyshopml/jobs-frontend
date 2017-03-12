@@ -13,7 +13,7 @@ import css from './style.scss';
 interface Props{
   readOnly?: boolean;
   editorState: any;
-  onChange: any;
+  onChange?: any;
 };
 
 interface State{
@@ -41,14 +41,13 @@ function getBlockStyle(block) {
 }
 
 class DescriptionEditor extends Component<Props, State>{
-  defaultProps: {
-    readOnly: false
-  }
-
   constructor(props){
     super(props)
 
     this.state = { editorFocused: false }
+  }
+  public static defaultProps = {
+    readOnly: false
   }
 
   refs: {

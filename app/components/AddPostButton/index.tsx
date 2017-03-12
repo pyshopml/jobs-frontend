@@ -6,7 +6,7 @@ import css from './style.scss';
 
 const AddPostButton = () => {
   return (
-    <Link to='/add_post'>
+    <Link to='/vacancies/new'>
       <section className={css.addButton}>
         <FontAwesome name="plus" className={css.icon} />
       </section>

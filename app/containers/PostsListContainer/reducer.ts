@@ -1,38 +1,46 @@
+import PostClass from '../../models/Post.class';
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
-  LOAD_POSTS_FAILURE
+  LOAD_MORE_POSTS_SUCCEEDED,
+  LOAD_FAILED,
 } from './constants';
 
-import IPost from '../../interfaces/ipost'
 
-class InitialModel{
-  public allPosts: IPost[];
-  constructor(options: { allPosts: IPost[] }){
-    this.allPosts = options.allPosts
-  }
+interface PostListState {
+  allPosts: Array<PostClass>;
+  errorMessage: string;
+  nextPage: string;
 }
 
-const initialModel = new InitialModel({
-  allPosts: [{
-    id: 1,
-    url: "http://d8d2a038.ngrok.io/vacancies/1/",
-    user: "none",
-    title: "Python/Django backend developer",
-    description: "We need you!!",
-    created_on: new Date(),
-    modified_on: new Date(),
-    keywords: []
-  }]
-})
+const initialModel: PostListState = {
+  allPosts: new Array<PostClass>(),
+  errorMessage: '',
+  nextPage: '',
+};
 
-export default (state = initialModel, action) => {
+export default (state = initialModel, action): PostListState => {
   switch (action.type) {
     case LOAD_POSTS:
       return state;
 
     case LOAD_POSTS_SUCCEEDED:
-      return Object.assign({}, state, { allPosts: action.posts });
+      const posts = action.data.results.map(result => new PostClass(result));
+      return Object.assign(
+        {},
+        state,
+        { allPosts: posts, nextPage: action.data.next }
+      );
+
+    case LOAD_MORE_POSTS_SUCCEEDED:
+      return Object.assign(
+        {},
+        state,
+        { allPosts: state.allPosts.concat(action.data.results), nextPage: action.data.next }
+      );
+
+    case LOAD_FAILED:
+      return Object.assign({}, state, { errorMessage: action.errorMessage });
 
     default:
       return state;

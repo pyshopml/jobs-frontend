@@ -36,7 +36,7 @@ class ToggleLinkButton extends React.Component<Props, State>{
   refs: {
     linkInput: any
   }
-  onURLChange = e => this.setState({urlValue: e.target.value});
+  onURLChange = e => this.setState({urlValue: e.target.value.trim()});
 
   promptForLink = (e) => {
     e.preventDefault();

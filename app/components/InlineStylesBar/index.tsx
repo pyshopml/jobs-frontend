@@ -14,7 +14,7 @@ interface Props{
 interface State{};
 
 const INLINE_STYLES: any[] = [
-  {label: 'Жирный Текст',icon: 'bold', style: 'BOLD'},
+  {label: 'Жирный',icon: 'bold', style: 'BOLD'},
   {label: 'Курсив',icon: 'italic', style: 'ITALIC'},
   //{label: 'Подчеркивание',icon: 'underline', style: 'UNDERLINE'},
   //{label: 'Код',icon: 'code', style: 'CODE', iconSize: 19},

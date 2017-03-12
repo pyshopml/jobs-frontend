@@ -1,37 +1,62 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import $ from 'jquery';
 
-import { getPosts } from './selectors';
-import { loadStories } from './actions';
+import PostClass from '../../models/Post.class';
+import selectors from './selectors';
+import { loadPosts, loadMorePosts } from './actions';
+import AddButton from '../../components/AddPostButton';
 
 import PostsList from '../../components/PostsList';
 
-interface Props{
-  posts: any[],
-  loadStories(): void
+interface Props {
+  allPosts: PostClass[];
+  isAuth: boolean;
+  loadPosts(): void;
+  loadMorePosts(): void;
 };
-interface State{};
+
+interface State {};
 
 class PostsListContainer extends Component<Props, State> {
+  constructor(props) {
+    super(props);
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
   componentDidMount() {
-    this.props.loadStories();
+    this.props.loadPosts();
+    $(window).bind('scroll', this.loadMore);
+  }
+
+  componentWillUnmount() {
+    $(window).unbind('scroll');
+  }
+
+  isBottom() {
+    return ($(window).scrollTop() === $(document).height() - $(window).height());
+  }
+
+  loadMore() {
+    if (this.isBottom()) this.props.loadMorePosts()
   }
 
   render() {
     return (
       <div>
-        <PostsList posts={this.props.posts}/>
+        <PostsList { ...this.props } />
+        {this.props.isAuth ? <AddButton/> : null}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  posts: getPosts(state)
-});
+const mapStateToProps = state => selectors(state);
 
-const mapDispatchToProps = (dispatch) => ({
-  loadStories: () => dispatch(loadStories())
+const mapDispatchToProps = dispatch => ({
+  loadPosts: () => dispatch(loadPosts()),
+  loadMorePosts: () => dispatch(loadMorePosts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

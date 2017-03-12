@@ -1,8 +1,11 @@
 import { createSelector } from 'reselect';
 
-const postsSelectors = state => state.global.posts.allPosts;
+const postsSelectors = state => state.global.posts;
+const selectIsAuth = state => state.global.auth.isAuth;
 
-export const getPosts = createSelector(
+
+export default createSelector(
   postsSelectors,
-  (posts) => {return posts}
+  selectIsAuth,
+  (substate, isAuth) => ({...substate, isAuth})
 );

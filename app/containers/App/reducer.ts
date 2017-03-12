@@ -11,9 +11,25 @@ import homeReducer from '../Home/reducer';
 import postsReducer from '../PostsListContainer/reducer';
 import newPostReducer from '../NewPost/reducer';
 import authReducer from '../Auth/reducer';
+import postDetail from '../PostDetail/reducer';
+import  { ADD_NOTIFICATION, REMOVE_FIRST_NOTIFICATION } from './constants';
 
-const appReducer = (state: any = {}, action) => {
+const initialModel = {
+  notifications: []
+};
+
+const appReducer = (state = initialModel, action) => {
   switch(action.type) {
+
+    case ADD_NOTIFICATION:
+      const notifications = state.notifications.slice();
+      notifications.push([action.message]);
+      return Object.assign({}, state, {notifications});
+
+    case REMOVE_FIRST_NOTIFICATION:
+      return Object.assign({}, state, {
+        notifications: state.notifications.slice(1)
+      });
 
     default:
       return state;
@@ -22,6 +38,7 @@ const appReducer = (state: any = {}, action) => {
 
 export default (state: any = {}, action) => ({
   app: appReducer(state.app, action),
+  postDetail: postDetail(state.postDetail, action),
   home: homeReducer(state.home, action),
   posts: postsReducer(state.posts, action),
   newPost: newPostReducer(state.newPost, action),

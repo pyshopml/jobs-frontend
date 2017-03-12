@@ -1,14 +1,38 @@
 import React, { Component } from 'react'
 import Header from '../../components/Header';
-import AddButton from '../../components/AddPostButton';
+import Snackbar from 'material-ui/Snackbar';
+import { connect } from 'react-redux';
+import { addNotification, removeFirstNotification } from './actions';
+import selectors from './selectors';
+
 
 import css from './style.css';
 
-interface Props{};
-interface State{};
+interface Props{
+  notifications: any;
+  removeFirstNotification();
+  addNotification(message: string)
+};
+interface State{
+  autoSnackbarHideDuration: number
+};
 
 class App extends Component<Props, State> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      autoSnackbarHideDuration: 2000,
+    };
+  }
+  onSnackbarClose = (reason: string) => {
+    if(reason == "clickaway") return;
+    this.props.removeFirstNotification();
+  };
+  onSnackbarCloseClick = () => {
+    this.onSnackbarClose("actionTap")
+  }
   render() {
+    const notificationMessage = this.props.notifications[0] || '';
     return (
       <section className={css.app}>
         <Header />
@@ -16,10 +40,22 @@ class App extends Component<Props, State> {
           { this.props.children }
         </section>
 
-        <AddButton />
+        <Snackbar open={ !!notificationMessage }
+                  action="close"
+                  onActionTouchTap={this.onSnackbarCloseClick}
+                  message={ notificationMessage }
+                  autoHideDuration={this.state.autoSnackbarHideDuration}
+                  onRequestClose={this.onSnackbarClose} />
       </section>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => selectors(state);
+
+const mapDispatchToProps = dispatch => ({
+  removeFirstNotification: () => dispatch(removeFirstNotification()),
+  addNotification: (message: string) => dispatch(addNotification(message))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
