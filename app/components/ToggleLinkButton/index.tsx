@@ -11,8 +11,7 @@ import css from './style.scss';
 
 interface Props{
   editorState: any;
-  editorFocus();
-  onToggleLink(editorState: any, selection: any, entityKey: any);
+  onToggle(editorState: EditorState, selection: any, entityKey: any);
   style?: any;
 };
 interface State{
@@ -75,7 +74,7 @@ class ToggleLinkButton extends React.Component<Props, State>{
     const newEditorState = EditorState.set(
       this.props.editorState, { currentContent: contentStateWithEntity }
     );
-    this.props.onToggleLink(
+    this.props.onToggle(
       newEditorState,
       newEditorState.getSelection(),
       entityKey
@@ -83,8 +82,6 @@ class ToggleLinkButton extends React.Component<Props, State>{
     this.setState({
       showURLInput: false,
       urlValue: '',
-    }, () => {
-      setTimeout(() => this.props.editorFocus(), 0);
     });
   }
 
@@ -97,9 +94,7 @@ class ToggleLinkButton extends React.Component<Props, State>{
     }
   }
   closeLinkInput = () => {
-    this.setState({showURLInput: false}, () => {
-      setTimeout(() => this.props.editorFocus(), 0);
-    })
+    this.setState({showURLInput: false})
   }
   showTooltip = () => {
     this.setState({showTooltip: true})
@@ -111,7 +106,7 @@ class ToggleLinkButton extends React.Component<Props, State>{
     e.preventDefault();
     const selection = this.props.editorState.getSelection();
     if (!selection.isCollapsed()) {
-      this.props.onToggleLink(
+      this.props.onToggle(
         this.props.editorState,
         selection,
         null)

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { TextField, RaisedButton } from 'material-ui';
-import { ContentState, EditorState, CompositeDecorator, ContentBlock, convertToRaw } from 'draft-js';
+import { ContentState, EditorState} from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
 import INewPost from '../../interfaces/inewpost';
-import DescriptionLink from '../DescriptionLink'
+
+import createEditorState from '../../tools/createEditorState';
 
 import css from './style.scss';
 
 interface Props {
   createPost(post: INewPost),
-  handleCancel(),
   onSubmit(post: INewPost)
 };
 
@@ -18,36 +18,13 @@ interface State {
   editorState: any,
 };
 
-
-function findLinkEntities(block: ContentBlock,
-                          callback:(start: number, end: number) => void,
-                          contentState?: any): void {
-  block.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        contentState.getEntity(entityKey).getType() === 'LINK'
-      );
-    },
-    callback
-  );
-}
-
-const decorator = new CompositeDecorator([
-    {
-      strategy: findLinkEntities,
-      component: DescriptionLink,
-    },
-  ]);
-
 class NewPostForm extends Component<Props, State> {
   constructor(props) {
     super(props)
 
     this.state = {
       title: '',
-      editorState: EditorState.createEmpty(decorator),
+      editorState: createEditorState()
     }
 
     this.hanldeSubmit = this.hanldeSubmit.bind(this);
@@ -89,7 +66,6 @@ class NewPostForm extends Component<Props, State> {
   }
   render() {
     const { title } = this.state;
-    const { handleCancel } = this.props;
 
     return(
       <form action="">
