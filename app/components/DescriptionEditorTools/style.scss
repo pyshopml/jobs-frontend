@@ -1,0 +1,13 @@
+.editor-tools{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0 25px;
+  border-bottom: 1px solid #e0e0e0;
+  .styles-buttons{
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}

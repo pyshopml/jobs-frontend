@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { ContentState, EditorState } from 'draft-js';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 
-import DescriptionStatic from '../../components/DescriptionStatic';
+import createEditorState from '../../tools/createEditorState';
+import TextEditor from '../../components/TextEditor';
 import { loadPost } from './actions';
 import PostClass from '../../models/Post.class'
 
@@ -19,9 +21,7 @@ interface Props {
   }
 }
 
-interface State {
-  description: any;
-};
+interface State {};
 
 class PostDetail extends Component<Props, State> {
   componentDidMount(){
@@ -36,6 +36,15 @@ class PostDetail extends Component<Props, State> {
       <CircularProgress/>
     )
   }
+  getEditorState = () => {
+    if(!this.editorState){
+      this.editorState = createEditorState(
+        ContentState.createFromText(this.props.openedPost.description)
+      )
+    }
+    return this.editorState
+  }
+  editorState: EditorState = null;
   render() {
     if(!this.props.openedPost)
       return this.renderLoading();
@@ -47,7 +56,10 @@ class PostDetail extends Component<Props, State> {
           <span className={css.employer}>Employer</span>
         </Paper>
         <Paper className={css.post}>
-          <DescriptionStatic text={this.props.openedPost.description}/>
+          <TextEditor editorState={this.getEditorState()}
+                      onChange={null}
+                      readOnly
+          />
         </Paper>
       </div>
     );
