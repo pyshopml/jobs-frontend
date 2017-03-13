@@ -18,7 +18,7 @@ class Post extends Component<Props, State> {
     return (
       <section className={css.post}>
         <h3 className={css.title}>
-          <Link to={`vacancies/ ${this.props.post.id}`}>
+          <Link to={`vacancies/${this.props.post.id}`}>
             { post.title }
           </Link>
         </h3>
