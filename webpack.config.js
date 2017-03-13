@@ -17,6 +17,7 @@ var config = {
   output : {
     path : BUILD_DIR,
     filename : '[name].bundle.js',
+    publicPath: '/'
   },
   devServer:{
     contentBase: BUILD_DIR

@@ -11,16 +11,19 @@ var compiler = webpack(config)
 var APP_DIR = path.join(__dirname, 'app');
 var DIST_DIR = path.join(__dirname, 'dist');
 
-app.use(require('webpack-dev-middleware')(compiler, {
+var devMiddleware = require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
-}))
+})
 
+app.use(devMiddleware)
+app.use(this.middleware = devMiddleware);
 app.use(require('webpack-hot-middleware')(compiler))
 
 app.get('*', function(req, res) {
-  res.sendFile(path.join(APP_DIR, 'index.html'))
-})
+  var index = this.middleware.fileSystem.readFileSync(path.join(config.output.path, 'index.html'));
+  res.end(index);
+}.bind(this));
 
 app.listen(3000, 'localhost', function(err) {
   if (err) {
