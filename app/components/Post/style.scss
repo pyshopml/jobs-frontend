@@ -11,12 +11,12 @@
   color: #07c;
   font-size: 1.1em;
   font-weight: bold;
-  & a{
-    &:hover{
+
+  a {
+    color: #005494;
+
+    &:hover {
       text-decoration: underline;
-    }
-    &:visited{
-      color: #005494;
     }
   }
 }
