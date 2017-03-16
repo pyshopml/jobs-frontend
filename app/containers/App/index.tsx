@@ -1,38 +1,15 @@
 import React, { Component } from 'react'
+
 import Header from '../../components/Header';
-import Snackbar from 'material-ui/Snackbar';
+import Alert from '../Alert';
 import { connect } from 'react-redux';
-import { addNotification, removeFirstNotification } from './actions';
 import selectors from './selectors';
 
 
 import css from './style.css';
 
-interface Props{
-  notifications: any;
-  removeFirstNotification();
-  addNotification(message: string)
-};
-interface State{
-  autoSnackbarHideDuration: number
-};
-
-class App extends Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      autoSnackbarHideDuration: 2000,
-    };
-  }
-  onSnackbarClose = (reason: string) => {
-    if(reason == "clickaway") return;
-    this.props.removeFirstNotification();
-  };
-  onSnackbarCloseClick = () => {
-    this.onSnackbarClose("actionTap")
-  }
+class App extends Component<null, null> {
   render() {
-    const notificationMessage = this.props.notifications[0] || '';
     return (
       <section className={css.app}>
         <Header />
@@ -40,12 +17,7 @@ class App extends Component<Props, State> {
           { this.props.children }
         </section>
 
-        <Snackbar open={ !!notificationMessage }
-                  action="close"
-                  onActionTouchTap={this.onSnackbarCloseClick}
-                  message={ notificationMessage }
-                  autoHideDuration={this.state.autoSnackbarHideDuration}
-                  onRequestClose={this.onSnackbarClose} />
+        <Alert/>
       </section>
     );
   }
@@ -53,9 +25,4 @@ class App extends Component<Props, State> {
 
 const mapStateToProps = state => selectors(state);
 
-const mapDispatchToProps = dispatch => ({
-  removeFirstNotification: () => dispatch(removeFirstNotification()),
-  addNotification: (message: string) => dispatch(addNotification(message))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
