@@ -1,9 +1,9 @@
 import { goBack } from 'react-router-redux';
 import INewPost from '../../interfaces/inewpost';
-import PostClass from '../../models/Post.class'
 import { uploadPost } from './api';
 import selectors from './selectors';
-import { ADD_NOTIFICATION } from "../App/constants";
+import { push } from 'react-router-redux';
+import { addNotification } from "../Alert/actions";
 import { Action } from '../../interfaces/action';
 import {
   UPLOAD_POST,
@@ -25,10 +25,6 @@ const submitPostFailed = (message: string): Action => ({
   message
 });
 
-export const addNotification = (message: string): Action => ({
-  type: ADD_NOTIFICATION,
-  message
-});
 
 export const createPost = (post: INewPost) => (dispatch, getState) => {
   dispatch(submitPost());
@@ -38,9 +34,25 @@ export const createPost = (post: INewPost) => (dispatch, getState) => {
   uploadPost(
     post,
     state.auth_token,
-    (post: any) => dispatch(submitPostSucceeded(post)),
+    (post: any) => {
+      dispatch(addNotification({
+        message: 'Вакансия создана',
+        type: 'normal',
+        hideDuration: 5000,
+        action: {
+          label: 'Открыть',
+          onClick: () => {
+            dispatch(push(`/vacancies/${post.id}`))
+          }
+        }
+      }));
+      dispatch(submitPostSucceeded(post))
+    },
     (msg: string) => {
-      dispatch(addNotification(msg));
+      dispatch(addNotification({
+        message: msg,
+        type: 'warning'
+      }));
       dispatch(submitPostFailed(msg))
     },
   )
