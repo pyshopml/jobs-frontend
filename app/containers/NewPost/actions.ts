@@ -58,6 +58,4 @@ export const createPost = (post: INewPost) => (dispatch, getState) => {
   )
 }
 
-export const handleCancel = () => dispatch => {
-  dispatch(goBack());
-}
+export const handleCancel = () => dispatch => dispatch(goBack());
