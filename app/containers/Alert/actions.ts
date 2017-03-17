@@ -12,11 +12,11 @@ const formNotification = (notification: INotification) => ({
 
 const clearFirstNotification = (): Action => ({
   type: REMOVE_CURRENT_NOTIFICATION
-}); 
+});
 
 
-export const addNotification = (notification: INotification) => dispatch => 
+export const addNotification = (notification: INotification) => dispatch =>
   dispatch(formNotification(notification));
 
-export const removeFirstNotification = () => dispatch => 
-  dispatch(clearFirstNotification);
+export const removeFirstNotification = () => dispatch =>
+  dispatch(clearFirstNotification());
