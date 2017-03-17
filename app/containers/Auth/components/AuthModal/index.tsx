@@ -73,7 +73,7 @@ class AuthModal extends Component<Props, State> {
             hintText="Пароль"
             errorText={password || non_field_errors ? password || non_field_errors : null}
             value={pass}
-            type='text'
+            type='password'
             name='pass'
             onChange={ onChange }
             style={ styleInput }
