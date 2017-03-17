@@ -59,12 +59,11 @@ class Alert extends Component<Props, null> {
   }
 
   render() {
-    const action = this.notificationAction();
 
     return (
       <Snackbar open={ !!this.currentNotification() }
                 action={ this.actionLabel() }
-                onActionTouchTap={ this.actionClickHandler }
+                onActionTouchTap={ this.actionClickHandler() }
                 message={ this.notificationMessage() }
                 autoHideDuration={ this.notificationDuration() }
                 onRequestClose={ this.onSnackbarClose } />
