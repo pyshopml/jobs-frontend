@@ -17,13 +17,16 @@ export default (state = initialModel, action): AlertState => {
 
     case ADD_NOTIFICATION:
       console.log(action)
-      const notifications = state.notifications.slice();
+
+      // const notifications = state.notifications.slice();
+
       const newNotification = {
         ...action.notification,
         message: new String(action.notification.message)
       };
-      notifications.push(newNotification);
-      return Object.assign({}, state, {notifications});
+
+      // notifications.push(newNotification);
+      return Object.assign({}, state, { notifications: [...state.notifications, newNotification] });
 
     case REMOVE_CURRENT_NOTIFICATION:
       return Object.assign({}, state, {
