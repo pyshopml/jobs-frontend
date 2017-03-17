@@ -1,10 +1,18 @@
-import  { ADD_NOTIFICATION, REMOVE_CURRENT_NOTIFICATION } from './constants';
+import INotification from '../../interfaces/inotification';
+import {
+  ADD_NOTIFICATION,
+  REMOVE_CURRENT_NOTIFICATION
+} from './constants';
 
-const initialModel = {
-  notifications: []
+interface AlertState {
+  notifications: Array<INotification>;
+}
+
+const initialModel: AlertState = {
+  notifications: new Array<INotification>(),
 };
 
-export default (state = initialModel, action) => {
+export default (state = initialModel, action): AlertState => {
   switch(action.type) {
 
     case ADD_NOTIFICATION:

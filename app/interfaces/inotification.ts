@@ -7,4 +7,5 @@ interface INotification{
     onClick: () => void;
   }
 }
+
 export default INotification;
