@@ -3,18 +3,20 @@ import {
   REMOVE_CURRENT_NOTIFICATION
 } from './constants';
 import INotification from "../../interfaces/inotification";
+import { Action } from '../../interfaces/action';
 
-export const addNotification = (notification: INotification) => (
-  (dispatch) => {
-    dispatch({
-      type: ADD_NOTIFICATION,
-      notification
-    })
-  }
-);
+const formNotification = (notification: INotification) => ({
+  type: ADD_NOTIFICATION,
+  notification,
+});
 
-export const removeFirstNotification = () => dispatch => {
-  dispatch({
-    type: REMOVE_CURRENT_NOTIFICATION
-  })
-};
+const clearFirstNotification = (): Action => ({
+  type: REMOVE_CURRENT_NOTIFICATION
+}); 
+
+
+export const addNotification = (notification: INotification) => dispatch => 
+  dispatch(formNotification(notification));
+
+export const removeFirstNotification = () => dispatch => 
+  dispatch(clearFirstNotification);
