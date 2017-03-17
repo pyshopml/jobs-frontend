@@ -12,28 +12,59 @@ interface Props{
 };
 
 class Alert extends Component<Props, null> {
+
   onSnackbarClose = (reason: string) => {
     if(reason == "clickaway") return;
     this.props.removeFirstNotification();
   };
+
   onSnackbarCloseClick = () => {
     this.onSnackbarClose("actionTap")
   }
-  render() {
+
+  currentNotification = (): INotification => {
     const { notifications } = this.props;
-    const currentNotification: INotification = notifications[0];
-    const action = currentNotification ? currentNotification.action : null;
-    const hideDuration = currentNotification ? currentNotification.hideDuration : null;
+    return notifications[0];
+  }
+
+  notificationAction = () => {
+    return this.currentNotification() ? this.currentNotification().action : null
+  }
+
+  notificationDuration = () => {
+    return this.currentNotification() ? this.currentNotification().hideDuration : 3000
+  }
+
+  notificationMessage = () => {
+    return this.currentNotification() ? this.currentNotification().message : ''
+  }
+
+  actionClickHandler = () => {
+    let action = this.notificationAction();
+
+    const actionClick = () => {
+      action.onClick()
+      this.onSnackbarCloseClick() 
+    };
+
+    return action ? actionClick : this.onSnackbarCloseClick;
+  }
+
+  actionLabel = () => {
+    let action = this.notificationAction();
+    return action ? action.label : 'Закрыть';
+  }
+
+  render() {
+    const action = this.notificationAction();
+
     return (
-      <Snackbar open={ !!currentNotification }
-                action={action ? action.label : 'Закрыть'}
-                onActionTouchTap={action ?
-                 () => {action.onClick(); this.onSnackbarCloseClick()}  :
-                 this.onSnackbarCloseClick
-                }
-                message={ currentNotification ? currentNotification.message : ''}
-                autoHideDuration={hideDuration ? hideDuration : 3000}
-                onRequestClose={this.onSnackbarClose} />
+      <Snackbar open={ !!this.currentNotification() }
+                action={ this.actionLabel() }
+                onActionTouchTap={ this.actionClickHandler }
+                message={ this.notificationMessage() }
+                autoHideDuration={ this.notificationDuration() }
+                onRequestClose={ this.onSnackbarClose } />
     );
   }
 }
