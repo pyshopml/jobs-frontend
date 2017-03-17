@@ -28,15 +28,18 @@ class Alert extends Component<Props, null> {
   }
 
   notificationAction = () => {
-    return this.currentNotification() ? this.currentNotification().action : null
+    let notification = this.currentNotification();
+    return notification ? notification.action : null
   }
 
   notificationDuration = () => {
-    return this.currentNotification() ? this.currentNotification().hideDuration : 3000
+    let notification = this.currentNotification();
+    return notification ? notification.hideDuration : 3000
   }
 
   notificationMessage = () => {
-    return this.currentNotification() ? this.currentNotification().message : ''
+    let notification = this.currentNotification();
+    return notification ? notification.message : ''
   }
 
   actionClickHandler = () => {
