@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Header from '../../components/Header';
+import Header from '../Header';
 import Alert from '../Alert';
 import { connect } from 'react-redux';
 import selectors from './selectors';

@@ -3,8 +3,6 @@ import { Button } from 'elemental';
 import { Link } from 'react-router';
 import Logo from './components/Logo';
 
-// import Auth from '../../containers/Auth';
-
 import css from './style.scss';
 
 interface Props{};
