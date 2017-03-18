@@ -12,7 +12,7 @@ interface Props {
 
 interface State {};
 
-class Home extends Component<Props, State> {
+class PostList extends Component<Props, State> {
 
   renderPosts() {
     return this.props.allPosts.map(post => <Post key={post.id} post={post} />);
@@ -29,4 +29,4 @@ class Home extends Component<Props, State> {
   }
 }
 
-export default Home;
+export default PostList;

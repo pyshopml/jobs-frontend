@@ -2,12 +2,12 @@ import React from 'react';
 import cookie from 'react-cookie'
 import { Route, IndexRedirect } from 'react-router';
 import App from './containers/App';
-import Home from './containers/Home';
 import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
 import { validateToken } from './containers/Auth/actions';
 import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
+import LoginPage from './containers/LoginPageContainer';
 
 export default (store) => {
   
@@ -27,6 +27,7 @@ export default (store) => {
       <Route path="vacancies" component={ Posts }/>
       <Route path="vacancies/new" component={ NewPost }/>
       <Route path="vacancies/:id" component={ PostDetail }/>
+      <Route path="login" component={ LoginPage } />
       <Route path="404" component={ NotFound }/>
       <Route path="*" component={ NotFound }/>
     </Route>

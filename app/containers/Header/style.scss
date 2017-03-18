@@ -12,3 +12,17 @@ $bg-color: #E5E3D9;
   display: flex;
   justify-content: space-between;
 }
+
+.authControls {
+  float: right;
+  line-height: 43px;
+
+  button:first-of-type {
+    margin-right: 10px;
+  } 
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

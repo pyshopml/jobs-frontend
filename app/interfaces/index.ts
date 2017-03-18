@@ -11,3 +11,4 @@ export interface Action {
   data?: any
   message?: string
 }
+
