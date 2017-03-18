@@ -1,0 +1,1 @@
+export const SAVE_AUTH_CREDENTIALS = '/app/containers/App/SAVE_AUTH_CREDENTIALS';

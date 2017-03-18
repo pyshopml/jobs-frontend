@@ -6,3 +6,10 @@ export interface Event {
   label?: string;
   action?: () => void;
 }
+
+export interface Action {
+  type: string
+  data?: any
+  message?: string
+}
+

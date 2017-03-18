@@ -7,17 +7,37 @@
 *
 * Nick Luparev nikita.luparev@gmail.com
 ------------------------------------------------------------------------------- */
-import homeReducer from '../Home/reducer';
 import postsReducer from '../PostsListContainer/reducer';
 import newPostReducer from '../NewPost/reducer';
 import authReducer from '../Auth/reducer';
 import postDetail from '../PostDetail/reducer';
 import alertReducer from '../Alert/reducer';
+import LoginPageReducer from '../LoginPageContainer/reducer';
+import { Action } from '../../interfaces';
 
-const initialModel = {};
+import {
+  SAVE_AUTH_CREDENTIALS,
+} from './constants';
 
-const appReducer = (state = initialModel, action) => {
+interface AppState {
+  isLoggedIn: boolean;
+  auth_token: string;
+}
+
+const initialModel = {
+  isLoggedIn: false,
+  auth_token: '',
+};
+
+const appReducer = (state:AppState = initialModel, action: Action): AppState => {
   switch(action.type) {
+
+    case SAVE_AUTH_CREDENTIALS:
+      return Object.assign(
+        {},
+        state,
+        { auth_token: action.data.auth_token, isLoggedIn: true }
+      );
 
     default:
       return state;
@@ -27,9 +47,9 @@ const appReducer = (state = initialModel, action) => {
 export default (state: any = {}, action) => ({
   app: appReducer(state.app, action),
   postDetail: postDetail(state.postDetail, action),
-  home: homeReducer(state.home, action),
   posts: postsReducer(state.posts, action),
   newPost: newPostReducer(state.newPost, action),
-	auth:authReducer(state.auth, action),
-  alert:alertReducer(state.alert, action)
+	auth: authReducer(state.auth, action),
+  alert: alertReducer(state.alert, action),
+  loginPage: LoginPageReducer(state.loginPage, action),
 });
