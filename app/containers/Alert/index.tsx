@@ -12,7 +12,6 @@ interface Props {
 };
 
 class Alert extends Component<Props, null> {
-
   onSnackbarClose = (reason: string) => {
     if(reason == "clickaway") return;
     this.props.removeFirstNotification();
@@ -22,23 +21,22 @@ class Alert extends Component<Props, null> {
     this.onSnackbarClose("actionTap")
   }
 
-  currentNotification = (): Notification => {
-    const { notifications } = this.props;
-    return notifications[0];
+  getNotification (): Notification {
+    return this.props.notifications[0];
   }
 
   notificationDuration = () => {
-    let notification = this.currentNotification();
+    let notification = this.getNotification();
     return notification.getDuration();
   }
 
   notificationMessage = () => {
-    let notification = this.currentNotification();
+    let notification = this.getNotification();
     return notification.getMessage();
   }
 
   actionClickHandler = () => {
-    let notification = this.currentNotification();
+    let notification = this.getNotification();
 
     return () => {
       notification.triggerAction();
@@ -47,13 +45,13 @@ class Alert extends Component<Props, null> {
   }
 
   actionLabel = () => {
-    let notification = this.currentNotification()
+    let notification = this.getNotification()
     return notification.getLabel();
   }
 
   renderAlert() {
     return (
-      <Snackbar open={ !!this.currentNotification() }
+      <Snackbar open={ true }
                 action={ this.actionLabel() }
                 onActionTouchTap={ this.actionClickHandler() }
                 message={ this.notificationMessage() }
@@ -63,7 +61,7 @@ class Alert extends Component<Props, null> {
   }
 
   render() {
-    let notification = this.currentNotification();
+    let notification = this.getNotification();
     return notification ? this.renderAlert() : <div />;
   }
 }
