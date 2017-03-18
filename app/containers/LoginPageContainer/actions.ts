@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import { Action } from '../../interfaces';
-// import { SAVE_AUTH_CREDENTIALS } from '../App/constants';  FIX THIS 
+import { saveAuthCredentials } from '../App/actions';
 import { submitData } from './api';
 import {
   LOGIN_USER,
@@ -18,7 +18,7 @@ const loginSubmit = (): Action => ({
 
 const loginSubmitSucceeded = (data: AuthCredentials) => dispatch => {
   dispatch({ type: LOGIN_USER_SUCCEEDED });
-  // dispatch({ type: SAVE_AUTH_CREDENTIALS, data: data.auth_token });  !!!!!
+  dispatch(saveAuthCredentials(data));
   dispatch(push('/'));
 };
 
