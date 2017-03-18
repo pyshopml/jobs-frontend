@@ -1,6 +1,6 @@
 export type MsgType = 'warning' | 'normal';
 
-export interface Event {
+export interface IEvent {
   message: string;
   label?: string;
   action?: () => void;

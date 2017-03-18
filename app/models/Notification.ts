@@ -1,13 +1,23 @@
-import { MsgType, Event } from '../interfaces';
+import { MsgType, IEvent } from '../interfaces';
+
+interface NotificationData {
+  message: string;
+  duration: number;
+  type: string;
+  label?: string;
+}
 
 export abstract class Notification {
   _message: string;
-  _type: MsgType;
+  _type: string;
   _duration: number;
   _label: string;
 
-  constructor(vals: Event) {
+  constructor(vals: NotificationData) {
     this._message = vals.message;
+    this._type = vals.type;
+    this._duration = vals.duration;
+    this._label = vals.label || 'Действие выполнено успешно!';
   }
 
   get type(): string {
@@ -18,6 +28,14 @@ export abstract class Notification {
     return this._message;
   }
 
+  get duration(): number {
+    return this._duration;
+  }
+
+  get label(): string {
+    return this._label;
+  }
+
   abstract triggerAction()
 }
 
@@ -25,22 +43,10 @@ export class SuccessNotification extends Notification {
   
   action: () => void;
 
-  constructor(vals: Event) {
-    super(vals);
+  constructor(vals: IEvent) {
+    super(Object.assign(vals, { type: 'normal', duration: 5000 }));
 
-    this._type = 'normal';
-    this._duration = 5000;
-    this._label = vals.label;
     this.action = vals.action;
-
-  }
-
-  get duration() {
-    return this._duration;
-  }
-
-  get label() {
-    return this._label;
   }
 
   triggerAction() {
@@ -50,20 +56,8 @@ export class SuccessNotification extends Notification {
 
 export class WarningNotification extends Notification {
 
-  constructor(vals: Event) {
-    super(vals);
-
-    this._type = 'warning';
-    this._duration = 3000;
-    this._label = 'Закрыть';
-  }
-
-  get duration(): number {
-    return this._duration;
-  }
-
-  get label(): string {
-    return this._label;
+  constructor(vals: IEvent) {
+    super(Object.assign(vals, { type: 'warning', duration: 3000, label: 'Закрыть' }));
   }
 
   triggerAction() {

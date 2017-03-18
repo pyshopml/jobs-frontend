@@ -27,7 +27,7 @@ class Alert extends Component<Props, null> {
 
   notificationDuration = () => {
     let notification = this.getNotification();
-    return notification.getDuration();
+    return notification.duration;
   }
 
   notificationMessage = () => {
@@ -46,7 +46,7 @@ class Alert extends Component<Props, null> {
 
   actionLabel = () => {
     let notification = this.getNotification()
-    return notification.getLabel();
+    return notification.label;
   }
 
   renderAlert() {
