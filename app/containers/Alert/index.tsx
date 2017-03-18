@@ -4,15 +4,14 @@ import { connect } from 'react-redux';
 import { addNotification, removeFirstNotification } from './actions';
 import selectors from './selectors';
 import INotification from "../../interfaces/inotification";
+import { Notification } from '../../models/Notification';
 
-interface Props{
-  notifications: INotification[];
+interface Props {
+  notifications: Notification[];
   removeFirstNotification();
-  addNotification(notification: INotification)
 };
 
 class Alert extends Component<Props, null> {
-
   onSnackbarClose = (reason: string) => {
     if(reason == "clickaway") return;
     this.props.removeFirstNotification();
@@ -22,46 +21,37 @@ class Alert extends Component<Props, null> {
     this.onSnackbarClose("actionTap")
   }
 
-  currentNotification = (): INotification => {
-    const { notifications } = this.props;
-    return notifications[0];
-  }
-
-  notificationAction = () => {
-    let notification = this.currentNotification();
-    return notification ? notification.action : null
+  getNotification (): Notification {
+    return this.props.notifications[0];
   }
 
   notificationDuration = () => {
-    let notification = this.currentNotification();
-    return notification ? notification.hideDuration : 3000
+    let notification = this.getNotification();
+    return notification.duration;
   }
 
   notificationMessage = () => {
-    let notification = this.currentNotification();
-    return notification ? notification.message : ''
+    let notification = this.getNotification();
+    return notification.message;
   }
 
   actionClickHandler = () => {
-    let action = this.notificationAction();
+    let notification = this.getNotification();
 
-    const actionClick = () => {
-      action.onClick()
-      this.onSnackbarCloseClick() 
-    };
-
-    return action ? actionClick : this.onSnackbarCloseClick;
+    return () => {
+      notification.triggerAction();
+      this.onSnackbarCloseClick();
+    }
   }
 
   actionLabel = () => {
-    let action = this.notificationAction();
-    return action ? action.label : 'Закрыть';
+    let notification = this.getNotification()
+    return notification.label;
   }
 
-  render() {
-
+  renderAlert() {
     return (
-      <Snackbar open={ !!this.currentNotification() }
+      <Snackbar open={ true }
                 action={ this.actionLabel() }
                 onActionTouchTap={ this.actionClickHandler() }
                 message={ this.notificationMessage() }
@@ -69,13 +59,17 @@ class Alert extends Component<Props, null> {
                 onRequestClose={ this.onSnackbarClose } />
     );
   }
+
+  render() {
+    let notification = this.getNotification();
+    return notification ? this.renderAlert() : <div />;
+  }
 }
 
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
   removeFirstNotification: () => dispatch(removeFirstNotification()),
-  addNotification: (notification: INotification) => dispatch(addNotification(notification))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Alert);
