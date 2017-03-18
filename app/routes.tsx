@@ -2,7 +2,6 @@ import React from 'react';
 import cookie from 'react-cookie'
 import { Route, IndexRedirect } from 'react-router';
 import App from './containers/App';
-import Home from './containers/Home';
 import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
 import { validateToken } from './containers/Auth/actions';

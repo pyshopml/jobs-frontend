@@ -7,7 +7,6 @@
 *
 * Nick Luparev nikita.luparev@gmail.com
 ------------------------------------------------------------------------------- */
-import homeReducer from '../Home/reducer';
 import postsReducer from '../PostsListContainer/reducer';
 import newPostReducer from '../NewPost/reducer';
 import authReducer from '../Auth/reducer';
@@ -48,7 +47,6 @@ const appReducer = (state:AppState = initialModel, action: Action): AppState => 
 export default (state: any = {}, action) => ({
   app: appReducer(state.app, action),
   postDetail: postDetail(state.postDetail, action),
-  home: homeReducer(state.home, action),
   posts: postsReducer(state.posts, action),
   newPost: newPostReducer(state.newPost, action),
 	auth: authReducer(state.auth, action),
