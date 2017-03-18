@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import LoginPage from '../../components/LoginPage';
+import LoginPage from './components/Form';
 import selectors from './selectors';
 import { loginUser } from './actions';
-import { LoginCredentials } from '../../interfaces';
+import { LoginCredentials } from './interfaces';
 
 interface Props { 
   handleSubmit: (data: LoginCredentials) => void;
