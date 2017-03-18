@@ -16,8 +16,12 @@ const loginSubmit = (): Action => ({
   type: LOGIN_USER,
 });
 
+const loginSucceeded = (): Action => ({
+  type: LOGIN_USER_SUCCEEDED,
+});
+
 const loginSubmitSucceeded = (data: AuthCredentials) => dispatch => {
-  dispatch({ type: LOGIN_USER_SUCCEEDED });
+  dispatch(loginSucceeded());
   dispatch(saveAuthCredentials(data));
   dispatch(push('/'));
 };
