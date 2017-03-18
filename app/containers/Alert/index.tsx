@@ -32,7 +32,7 @@ class Alert extends Component<Props, null> {
 
   notificationMessage = () => {
     let notification = this.getNotification();
-    return notification.getMessage();
+    return notification.message;
   }
 
   actionClickHandler = () => {

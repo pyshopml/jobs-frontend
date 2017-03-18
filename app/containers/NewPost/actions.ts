@@ -40,7 +40,6 @@ export const createPost = (post: INewPost) => (dispatch, getState) => {
 
       let notification = new SuccessNotification({
         message: 'Вакансия создана',
-        type: 'normal',
         label: 'Открыть',
         action: () => dispatch(push(`/vacancies/${post.id}`)),
        });
@@ -51,7 +50,6 @@ export const createPost = (post: INewPost) => (dispatch, getState) => {
     (msg: string) => {
       let notification = new WarningNotification({
         message: msg,
-        type: 'warning'
       });
 
       dispatch(addNotification(notification));

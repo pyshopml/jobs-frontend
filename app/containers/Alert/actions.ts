@@ -15,7 +15,6 @@ const clearFirstNotification = (): Action => ({
   type: REMOVE_CURRENT_NOTIFICATION
 });
 
-
 export const addNotification = (notification: Notification) => dispatch =>
   dispatch(formNotification(notification));
 
