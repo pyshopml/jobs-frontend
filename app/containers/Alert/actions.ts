@@ -1,11 +1,12 @@
+import INotification from "../../interfaces/inotification";
+import { Action } from '../../interfaces/action';
+import { Notification } from '../../models/Notification';
 import {
   ADD_NOTIFICATION,
   REMOVE_CURRENT_NOTIFICATION
 } from './constants';
-import INotification from "../../interfaces/inotification";
-import { Action } from '../../interfaces/action';
 
-const formNotification = (notification: INotification) => ({
+const formNotification = (notification: Notification) => ({
   type: ADD_NOTIFICATION,
   notification,
 });
@@ -15,7 +16,7 @@ const clearFirstNotification = (): Action => ({
 });
 
 
-export const addNotification = (notification: INotification) => dispatch =>
+export const addNotification = (notification: Notification) => dispatch =>
   dispatch(formNotification(notification));
 
 export const removeFirstNotification = () => dispatch =>

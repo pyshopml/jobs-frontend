@@ -5,6 +5,8 @@ import selectors from './selectors';
 import { push } from 'react-router-redux';
 import { addNotification } from "../Alert/actions";
 import { Action } from '../../interfaces/action';
+import { SuccessNotification, WarningNotification } from '../../models/Notification';
+
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,
@@ -35,24 +37,24 @@ export const createPost = (post: INewPost) => (dispatch, getState) => {
     post,
     state.auth_token,
     (post: any) => {
-      dispatch(addNotification({
+
+      let notification = new SuccessNotification({
         message: 'Вакансия создана',
         type: 'normal',
-        hideDuration: 5000,
-        action: {
-          label: 'Открыть',
-          onClick: () => {
-            dispatch(push(`/vacancies/${post.id}`))
-          }
-        }
-      }));
+        label: 'Открыть',
+        action: () => dispatch(push(`/vacancies/${post.id}`)),
+       });
+
+      dispatch(addNotification(notification));
       dispatch(submitPostSucceeded(post))
     },
     (msg: string) => {
-      dispatch(addNotification({
+      let notification = new WarningNotification({
         message: msg,
         type: 'warning'
-      }));
+      });
+
+      dispatch(addNotification(notification));
       dispatch(submitPostFailed(msg))
     },
   )

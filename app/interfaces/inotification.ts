@@ -1,6 +1,8 @@
+import { MsgType } from './index';
+
 interface INotification{
   message: string;
-  type: 'warning' | 'normal';
+  type: MsgType;
   hideDuration?: number;
   action?: {
     label: string,
