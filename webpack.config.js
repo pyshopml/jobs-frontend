@@ -61,33 +61,11 @@ var config = {
         test: /\.html$/,
         loader: 'html-loader'
       },
-      /*
-       {
-       test: /\.(css|scss)$/,
-       exclude: [
-       APP_DIR + '/components/',
-       APP_DIR + '/containers/'
-       ],
-       loader: ExtractTextPlugin.extract({
-       fallback: 'style-loader',
-       use: 'css-loader!postcss-loader!sass-loader'
-       }),
-       },
-       {
-       test: /\.css/,
-       test: /\.jsx?$/,
-       exclude: /node_modules/,
-       loaders: ['babel-loader', 'eslint-loader']
-       }
-       */
+  
     ]
   },
-  /*
-   eslint: {
-   configFile: './.eslintrc'
-   },
-   */
   resolve: {
+    modules: ["node_modules"],
     extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
   },
 };
