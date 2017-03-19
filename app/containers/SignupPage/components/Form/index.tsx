@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Link } from 'react-router';
 import { isEmpty } from 'ramda';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import { Spinner } from 'elemental';
 import { SignupCredentials } from '../../interfaces';
 
-import css from './style.scss';
+import * as css from './style.scss';
 
 interface Props {
   handleSubmit(data: SignupCredentials): void;
@@ -20,7 +20,7 @@ interface State {
   passwordConfirmation: string;
 };
 
-class SignuPage extends Component<Props, State> {
+class SignuPage extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 

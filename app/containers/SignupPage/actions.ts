@@ -1,19 +1,35 @@
 import { push } from 'react-router-redux';
-import { SignupCredentials, Action } from '../../interfaces';
+import { Action } from '../../interfaces';
+import { SignupCredentials } from './interfaces';
 import { SAVE_USER_CREDENTIALS } from '../App/constants';
+import { submitData } from './api';
 import {
   SUBMIT_CREDENTIALS,
   SUBMIT_CREDENTIALS_SUCCEEDED,
   SUBMIT_CREDENTIALS_FAILED,
 } from './constants';
 
-const submitCredentials = (): Action => ({
+const signupUser = (): Action => ({
   type: SUBMIT_CREDENTIALS,
 });
 
+const signupSucceeded = (): Action => ({
+  type: SUBMIT_CREDENTIALS_SUCCEEDED,
+});
+
+const saveCredentials = (data: any): Action => ({
+  type: SAVE_USER_CREDENTIALS,
+  data,
+});
+
+interface UserCredentials {
+  username: string
+  email: string
+}
+
 const submitCredentialsSucceeded = (data: UserCredentials) => dispatch => {
-  dispatch({ type: SUBMIT_CREDENTIALS_SUCCEEDED });
-  dispatch({ type: SAVE_USER_CREDENTIALS, data: { username: data.username, email: data.email } });
+  dispatch(signupSucceeded());
+  saveCredentials({ username: data.username, email: data.email });
   dispatch(push('/info_page'));
 };
 
@@ -22,40 +38,11 @@ const submitCredentialsFailed = (message: string): Action => ({
   message,
 });
 
-function submitDataToServer(data: SignupCredentials): Promise<Response> {
-  const options = {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  };
-
-  return fetch('http://jobs.pyshop.ru/api/users/', options)
-}
-
-interface UserCredentials {
-  username: string
-  email: string
-}
-
-async function submitData(data: SignupCredentials, dispatch): Promise<void> {
-  try {
-    const res = await submitDataToServer(data);
-    
-    if (res.ok) {
-      dispatch(submitCredentialsSucceeded(data));
-      return;
-    }
-
-    dispatch(submitCredentialsFailed(res.statusText));
-  } catch (e) {
-    dispatch(submitCredentialsFailed(e.message))
-  }
-}
-
 export const submitUserCredentials = (data: SignupCredentials) => dispatch => {
-  dispatch(submitCredentials());
-  submitData(data, dispatch);
+  dispatch(signupUser());
+  submitData(
+    data,
+    (data: any) => dispatch(submitCredentialsSucceeded(data)),
+    (msg: string) => dispatch(submitCredentialsFailed(msg)),
+  );
 }

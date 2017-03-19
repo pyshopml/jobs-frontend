@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { connect } from 'react-redux';
-import SignupPage from './components/Form';
+import Form from './components/Form';
 import { SignupCredentials } from './interfaces';
 import { submitUserCredentials } from './actions';
 import selectors from './selectors';
@@ -13,14 +13,14 @@ interface Props {
 
 interface State {};
 
-class SignupPageContainer extends Component<Props, State> {
+class SignupPageContainer extends React.Component<Props, State> {
   
   handleSubmit = (credentials: SignupCredentials) => {
     this.props.submitUserCredentials(credentials);
   }
 
   render() {
-    return <SignupPage {...this.props} handleSubmit={this.handleSubmit} /> 
+    return <Form {...this.props} handleSubmit={this.handleSubmit} /> 
   }
 }
 
