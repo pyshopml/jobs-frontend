@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react';
 
 import PostClass from '../../models/Post.class';
 import { Link } from 'react-router';
@@ -11,7 +11,7 @@ interface Props{
 
 interface State {};
 
-class Post extends Component<Props, State> {
+class Post extends React.Component<Props, State> {
   render() {
     const { post } = this.props;
 

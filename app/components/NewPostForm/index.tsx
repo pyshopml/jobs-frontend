@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { TextField, RaisedButton } from 'material-ui';
 import { ContentState, EditorState} from 'draft-js';
 import DescriptionEditor from '../DescriptionEditor';
@@ -18,7 +18,7 @@ interface State {
   editorState: any,
 };
 
-class NewPostForm extends Component<Props, State> {
+class NewPostForm extends React.Component<Props, State> {
   constructor(props) {
     super(props)
 
