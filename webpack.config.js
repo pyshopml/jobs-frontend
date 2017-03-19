@@ -37,11 +37,19 @@ var config = {
     loaders : [
       {
         test : /(\.js|\.jsx|\.ts|\.tsx|)$/,
+        exclude: [
+          /(node_modules|dist|tests)/,
+            path.resolve(__dirname, '*.test.tsx'),
+        ],
         include : APP_DIR,
         loader : 'babel-loader'
       },
       {
         test: /(\.ts|\.tsx)$/,
+        exclude: [
+          /(node_modules|dist|tests)/,
+            path.resolve(__dirname, '*.test.tsx'),
+        ],
         loader: 'awesome-typescript-loader'
       },
       {
