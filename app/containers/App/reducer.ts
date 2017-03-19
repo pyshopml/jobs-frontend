@@ -13,6 +13,8 @@ import authReducer from '../Auth/reducer';
 import postDetail from '../PostDetail/reducer';
 import alertReducer from '../Alert/reducer';
 import LoginPageReducer from '../LoginPageContainer/reducer';
+import SignupPageReducer from '../SignupPage/reducer';
+
 import { Action } from '../../interfaces';
 
 import {
@@ -52,4 +54,5 @@ export default (state: any = {}, action) => ({
 	auth: authReducer(state.auth, action),
   alert: alertReducer(state.alert, action),
   loginPage: LoginPageReducer(state.loginPage, action),
+  signupPage: SignupPageReducer(state.signupPage, action),
 });
