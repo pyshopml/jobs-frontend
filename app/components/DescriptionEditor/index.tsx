@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { EditorState, RichUtils } from 'draft-js';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 
 import TextEditor from '../TextEditor';
 import DescriptionEditorTools from '../DescriptionEditorTools';
@@ -16,7 +16,7 @@ interface State{
   editorFocused: boolean
 };
 
-class DescriptionEditor extends Component<Props, State>{
+class DescriptionEditor extends React.Component<Props, State>{
   constructor(props){
     super(props);
     this.state = {

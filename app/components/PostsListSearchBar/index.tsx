@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import css from './style.scss'
 
 interface Props{};
 interface State{};
 
-class PostsListSearchBar extends Component<Props, State> {
+class PostsListSearchBar extends React.Component<Props, State> {
   render() {
     return (
        <div className={css.searchBar}>

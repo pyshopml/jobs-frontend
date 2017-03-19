@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import * as React from 'react';
+import * as classNames from 'classnames';
 import { Editor, RichUtils, EditorState } from 'draft-js';
 
 import css from './style.scss';
@@ -24,7 +24,7 @@ function getBlockStyle(block) {
   }
 }
 
-class TextEditor extends Component<Props, State>{
+class TextEditor extends React.Component<Props, State>{
   refs: {
     editor: any;
   }

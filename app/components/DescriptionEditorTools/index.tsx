@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { EditorState } from 'draft-js';
 
 import InlineStylesBar from '../InlineStylesBar';
@@ -16,7 +16,7 @@ interface Props{
 
 interface State{};
 
-class DescriptionEditorTools extends Component<Props, State>{
+class DescriptionEditorTools extends React.Component<Props, State>{
   render() {
     return(
       <section className={ css.editorTools }>
