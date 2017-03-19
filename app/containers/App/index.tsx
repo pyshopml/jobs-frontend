@@ -5,7 +5,7 @@ import Alert from '../Alert';
 import { connect } from 'react-redux';
 import selectors from './selectors';
 
-import css from './style.css';
+import * as css from './style.css';
 
 const authPaths = ['login'];
 

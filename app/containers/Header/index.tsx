@@ -3,7 +3,7 @@ import { Button } from 'elemental';
 import { Link } from 'react-router';
 import Logo from './components/Logo';
 
-import css from './style.scss';
+import * as css from './style.scss';
 
 interface Props{};
 interface State{};
