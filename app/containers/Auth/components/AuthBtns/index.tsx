@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 
 import css from './style.scss';
@@ -12,7 +12,7 @@ interface Props {
 
 interface State {}
 
-class AuthBtns extends Component<Props, State> {
+class AuthBtns extends React.Component<Props, State> {
 
   renderSignUp() {
     const { isSignUp, openModal } = this.props;

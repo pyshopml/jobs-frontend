@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Button } from 'elemental';
 import { Link } from 'react-router';
 import Logo from './components/Logo';

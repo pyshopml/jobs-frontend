@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
@@ -32,7 +32,7 @@ interface Props {
 
 interface State {}
 
-class AuthModal extends Component<Props, State> {
+class AuthModal extends React.Component<Props, State> {
 
   nameField() {
     const { state: { signUp, name } } = this.props;
