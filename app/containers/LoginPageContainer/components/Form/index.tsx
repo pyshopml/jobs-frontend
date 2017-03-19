@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Link } from 'react-router';
 import { isEmpty } from 'ramda';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import { Spinner } from 'elemental';
 import { LoginCredentials } from '../../interfaces';
 
@@ -18,7 +18,7 @@ interface State {
   password: string;
 };
 
-class LoginPage extends Component<Props, State> {
+class LoginPage extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
