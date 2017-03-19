@@ -59,8 +59,7 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "reselect": "^2.5.4",
-    "ts-jest": "^19.0.2"
+    "reselect": "^2.5.4"
   },
   "devDependencies": {
     "@types/classnames": "0.0.32",
@@ -77,6 +76,7 @@
     "@types/redux-thunk": "^2.1.0",
     "@types/reselect": "^2.0.27",
     "autoprefixer": "^6.7.2",
+    "ts-jest": "^19.0.2",
     "awesome-typescript-loader": "^3.0.4-rc.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
