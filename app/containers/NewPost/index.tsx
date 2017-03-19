@@ -9,7 +9,7 @@ import NewPostForm from '../../components/NewPostForm';
 import { createPost, handleCancel } from './actions';
 import selectors from './selectors';
 
-import css from './style.scss';
+import * as css from './style.scss';
 
 interface Props {
   createdPost: PostClass;

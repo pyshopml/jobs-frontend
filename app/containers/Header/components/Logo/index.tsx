@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import css from './style.scss';
+import * as css from './style.scss';
 
 interface Props{};
 interface State{};
