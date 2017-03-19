@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import $ from 'jquery';
+import * as $ from 'jquery';
 
 import PostClass from '../../models/Post.class';
 import selectors from './selectors';
