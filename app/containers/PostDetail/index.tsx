@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ContentState, EditorState } from 'draft-js';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
@@ -23,7 +23,7 @@ interface Props {
 
 interface State {};
 
-class PostDetail extends Component<Props, State> {
+class PostDetail extends React.Component<Props, State> {
   componentDidMount(){
     this.props.loadPost(+this.props.params.id);
   }

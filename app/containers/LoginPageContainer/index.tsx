@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react';
 import { connect } from 'react-redux';
 import LoginPage from './components/Form';
 import selectors from './selectors';
@@ -13,7 +13,7 @@ interface Props {
 
 interface State {};
 
-class LoginPageContainer extends Component<Props, State> {
+class LoginPageContainer extends React.Component<Props, State> {
   render() {
     return <LoginPage {...this.props} /> 
   }

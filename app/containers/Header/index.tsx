@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Button } from 'elemental';
 import { Link } from 'react-router';
 import Logo from './components/Logo';
@@ -12,7 +12,7 @@ const style = {
   margin: 12,
 };
 
-class Header extends Component<Props, State> {
+class Header extends React.Component<Props, State> {
 	LoginBar() {
     return (
       <section className={css.authControls}>

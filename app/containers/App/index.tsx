@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 
 import Header from '../Header';
 import Alert from '../Alert';
@@ -13,7 +13,7 @@ interface Props {
   pathname: string;
 }
 
-class App extends Component<Props, null> {
+class App extends React.Component<Props, null> {
 
   isAuthPath() {
     const { pathname } = this.props;

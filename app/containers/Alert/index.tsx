@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
 import { addNotification, removeFirstNotification } from './actions';
@@ -11,7 +11,7 @@ interface Props {
   removeFirstNotification();
 };
 
-class Alert extends Component<Props, null> {
+class Alert extends React.Component<Props, null> {
   onSnackbarClose = (reason: string) => {
     if(reason == "clickaway") return;
     this.props.removeFirstNotification();

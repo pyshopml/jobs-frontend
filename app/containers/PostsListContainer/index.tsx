@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import $ from 'jquery';
 
@@ -18,7 +18,7 @@ interface Props {
 
 interface State {};
 
-class PostsListContainer extends Component<Props, State> {
+class PostsListContainer extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 

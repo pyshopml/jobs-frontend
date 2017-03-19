@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -38,7 +38,7 @@ interface State {
 	email: any
 }
 
-class Auth extends Component<Props, State> {
+class Auth extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 

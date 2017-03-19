@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 
@@ -19,7 +19,7 @@ interface Props {
 
 interface State {};
 
-class NewPost extends Component<Props, State> {
+class NewPost extends React.Component<Props, State> {
   onFormSubmit = (post: INewPost) => {
     this.props.createPost(post)
   };

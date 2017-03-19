@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 //import css from './style.scss';
 
 interface Props {}
 interface State {};
 
-class NotFound extends Component<Props, State> {
+class NotFound extends React.Component<Props, State> {
   render() {
     return(
       <div>
