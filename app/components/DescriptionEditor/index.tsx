@@ -5,7 +5,7 @@ import * as classNames from 'classnames';
 import TextEditor from '../TextEditor';
 import DescriptionEditorTools from '../DescriptionEditorTools';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   editorState: EditorState;

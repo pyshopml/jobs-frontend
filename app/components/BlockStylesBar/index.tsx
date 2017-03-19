@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import AddStyleButton from '../AddStyleButton';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   editorState: any;

@@ -7,7 +7,7 @@ import TextField from 'material-ui/TextField';
 import { EditorState } from 'draft-js';
 
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   editorState: any;

@@ -4,7 +4,7 @@ import ToggleIcon from '../ToggleIcon';
 import Tooltip from 'material-ui/internal/Tooltip';
 
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   icon: string,

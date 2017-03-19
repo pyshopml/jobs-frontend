@@ -6,7 +6,7 @@ import INewPost from '../../interfaces/inewpost';
 
 import createEditorState from '../../tools/createEditorState';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props {
   createPost(post: INewPost),

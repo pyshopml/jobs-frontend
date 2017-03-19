@@ -3,7 +3,7 @@ import * as React from 'react';
 import PostClass from '../../models/Post.class';
 import { Link } from 'react-router';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   post: PostClass

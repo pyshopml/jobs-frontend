@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { Editor, RichUtils, EditorState } from 'draft-js';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   readOnly?: boolean;

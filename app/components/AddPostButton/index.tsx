@@ -2,7 +2,7 @@ import * as React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Link } from 'react-router';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 const AddPostButton = () => {
   return (

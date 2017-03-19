@@ -6,7 +6,7 @@ import BlockStylesBar from '../BlockStylesBar';
 import DropdownStyles from '../DropdownStyles';
 import ToggleLinkButton from '../ToggleLinkButton';
 
-import css from './style.scss';
+import * as css from './style.scss';;
 
 interface Props{
   editorState: EditorState,
