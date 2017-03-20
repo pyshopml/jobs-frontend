@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import { Action } from '../../interfaces';
-import { SignupCredentials } from './interfaces';
+import { SignupCredentials, UserCredentials } from './interfaces';
 import { SAVE_USER_CREDENTIALS } from '../App/constants';
 import { submitData } from './api';
 import {
@@ -21,11 +21,6 @@ const saveCredentials = (data: any): Action => ({
   type: SAVE_USER_CREDENTIALS,
   data,
 });
-
-interface UserCredentials {
-  username: string
-  email: string
-}
 
 const submitCredentialsSucceeded = (data: UserCredentials) => dispatch => {
   dispatch(signupSucceeded());
