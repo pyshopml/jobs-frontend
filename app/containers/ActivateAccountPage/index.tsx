@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { Link } from 'react-router';
 import { Spinner } from 'elemental';
 import { connect } from 'react-redux';
 import selectors from './selectors';
 import { activateAccount } from './actions';
 
-import css from './style.scss';
+import * as css from './style.scss';
 
 interface Props {
   uid: string;
@@ -17,7 +17,7 @@ interface Props {
 
 interface State {};
 
-class ActivateAccountPage extends Component<Props, State> {
+class ActivateAccountPage extends React.Component<Props, State> {
   componentDidMount() {
     const { uid, token } = this.props;
     this.props.activateAccount({ uid, token });

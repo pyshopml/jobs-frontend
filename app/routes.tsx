@@ -13,6 +13,7 @@ import InfoPage from './containers/InfoPage';
 import PasswordRestorePage from './containers/RestorePasswordContainer';
 import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
+import ActivateAccountPage from './containers/ActivateAccountPage';
 
 export default (store) => {
   
@@ -38,6 +39,7 @@ export default (store) => {
       <Route path="restore_password" component={ PasswordRestorePage } />
       <Route path="/confirm_email" component={ ConfirmEmailPage } />
       <Route path="/account/:uid/password-reset/:token/" component={ PasswordChangePage } />
+      <Route path="/account/:uid/activate/:token/" component={ ActivateAccountPage } />
       <Route path="404" component={ NotFound }/>
       <Route path="*" component={ NotFound }/>
     </Route>

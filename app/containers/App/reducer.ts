@@ -16,6 +16,7 @@ import LoginPageReducer from '../LoginPageContainer/reducer';
 import SignupPageReducer from '../SignupPage/reducer';
 import RestorePasswordPageReducer from '../RestorePasswordContainer/reducer';
 import PasswordChangePage from '../PasswordChangePage/reducer';
+import AccountActivationReducer from '../ActivateAccountPage/reducer';
 
 import { Action } from '../../interfaces';
 
@@ -73,4 +74,5 @@ export default (state: any = {}, action) => ({
   signupPage: SignupPageReducer(state.signupPage, action),
   restorePassword: RestorePasswordPageReducer(state.restorePassword, action),
   passwordChange: PasswordChangePage(state.passwordChange, action),
+  accountActivation: AccountActivationReducer(state.accountActivation, action),
 });
