@@ -24,7 +24,7 @@ const saveCredentials = (data: any): Action => ({
 
 const submitCredentialsSucceeded = (data: UserCredentials) => dispatch => {
   dispatch(signupSucceeded());
-  saveCredentials({ username: data.username, email: data.email });
+  dispatch(saveCredentials({ username: data.username, email: data.email }));
   dispatch(push('/info_page'));
 };
 
