@@ -14,6 +14,7 @@ import postDetail from '../PostDetail/reducer';
 import alertReducer from '../Alert/reducer';
 import LoginPageReducer from '../LoginPageContainer/reducer';
 import SignupPageReducer from '../SignupPage/reducer';
+import RestorePasswordPageReducer from '../RestorePasswordContainer/reducer';
 
 import { Action } from '../../interfaces';
 
@@ -69,4 +70,5 @@ export default (state: any = {}, action) => ({
   alert: alertReducer(state.alert, action),
   loginPage: LoginPageReducer(state.loginPage, action),
   signupPage: SignupPageReducer(state.signupPage, action),
+  restorePassword: RestorePasswordPageReducer(state.restorePassword, action),
 });
