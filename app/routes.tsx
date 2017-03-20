@@ -9,6 +9,7 @@ import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
 import LoginPage from './containers/LoginPageContainer';
 import SignupPage from './containers/SignupPage';
+import InfoPage from './containers/InfoPage';
 
 export default (store) => {
   
@@ -30,6 +31,7 @@ export default (store) => {
       <Route path="vacancies/:id" component={ PostDetail }/>
       <Route path="login" component={ LoginPage } />
       <Route path="signup" component={ SignupPage } />
+      <Route path="info_page" component={ InfoPage } />
       <Route path="404" component={ NotFound }/>
       <Route path="*" component={ NotFound }/>
     </Route>
