@@ -7,7 +7,7 @@ import selectors from './selectors';
 
 import * as css from './style.css';
 
-const authPaths = [ 'login', 'signup', 'info_page' ];
+const authPaths = [ 'login', 'signup', 'info_page', 'restore_password' ];
 
 interface Props {
   pathname: string;
@@ -15,9 +15,18 @@ interface Props {
 
 class App extends React.Component<Props, null> {
 
-  isAuthPath() {
+  isServiceLink() {
+    const { pathname } = this.props;
+    return pathname.includes('password-reset') || pathname.includes('activate');
+  }
+
+  isSpecialPath() {
     const { pathname } = this.props;
     return authPaths.find(p => p === pathname)
+  }
+
+  isAuthPath() {
+    return this.isSpecialPath() || this.isServiceLink();
   }
 
   render() {

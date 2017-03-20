@@ -11,6 +11,7 @@ import LoginPage from './containers/LoginPageContainer';
 import SignupPage from './containers/SignupPage';
 import InfoPage from './containers/InfoPage';
 import PasswordRestorePage from './containers/RestorePasswordContainer';
+import PasswordChangePage from './containers/PasswordChangePage';
 
 export default (store) => {
   
@@ -34,6 +35,7 @@ export default (store) => {
       <Route path="signup" component={ SignupPage } />
       <Route path="info_page" component={ InfoPage } />
       <Route path="restore_password" component={ PasswordRestorePage } />
+      <Route path="/account/:uid/password-reset/:token/" component={ PasswordChangePage } />
       <Route path="404" component={ NotFound }/>
       <Route path="*" component={ NotFound }/>
     </Route>
