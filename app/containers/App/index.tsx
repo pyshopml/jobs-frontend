@@ -7,7 +7,7 @@ import selectors from './selectors';
 
 import * as css from './style.css';
 
-const authPaths = ['login'];
+const authPaths = [ 'login', 'signup' ];
 
 interface Props {
   pathname: string;
