@@ -22,7 +22,11 @@ export async function submitData(data: SignupCredentials, done, error: (msg: str
       return;
     }
 
-    error(res.statusText);
+    if (res.status === 400) {
+      let result = await res.json();
+      error(result.email[0]);
+    }
+    
   } catch (e) {
     error(e.message);
   }
