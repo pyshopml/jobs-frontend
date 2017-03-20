@@ -1,11 +1,11 @@
 import * as React from 'react';
-import FontAwesome from 'react-fontawesome';
+import * as FontAwesome from 'react-fontawesome';
 import ToggleIcon from '../ToggleIcon';
-import Tooltip from 'material-ui/internal/Tooltip';
 import Popover from 'material-ui/Popover';
 import TextField from 'material-ui/TextField';
 import { EditorState } from 'draft-js';
 
+import TooltipWrapper from '../TooltipWrapper';
 
 import * as css from './style.scss';;
 
@@ -15,7 +15,6 @@ interface Props{
   style?: any;
 };
 interface State{
-  showTooltip: boolean
   showURLInput: boolean
   urlValue: string;
   anchorEl: any;
@@ -26,7 +25,6 @@ class ToggleLinkButton extends React.Component<Props, State>{
   constructor(props) {
     super(props);
     this.state = {
-      showTooltip: false,
       showURLInput: false,
       urlValue: '',
       anchorEl: null
@@ -96,12 +94,6 @@ class ToggleLinkButton extends React.Component<Props, State>{
   closeLinkInput = () => {
     this.setState({showURLInput: false})
   }
-  showTooltip = () => {
-    this.setState({showTooltip: true})
-  }
-  hideTooltip = () => {
-    this.setState({showTooltip: false})
-  }
   removeLink = e => {
     e.preventDefault();
     const selection = this.props.editorState.getSelection();
@@ -111,55 +103,56 @@ class ToggleLinkButton extends React.Component<Props, State>{
         selection,
         null)
     }
+  };
+  renderPopover = () => {
+    return(
+      <Popover
+        open={this.state.showURLInput}
+        anchorEl={this.state.anchorEl}
+        onRequestClose={ this.closeLinkInput }
+        anchorOrigin={{horizontal: 'right', vertical: 'center'}}
+        targetOrigin={{horizontal: 'left', vertical: 'center'}}
+        style={{padding: '0 15px'}}
+      >
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <TextField onKeyDown={this.onLinkInputKeyDown}
+                     name="link"
+                     onChange={this.onURLChange}
+                     value={this.state.urlValue}
+                     ref="linkInput"
+                     hintText="https://example.com"/>
+          <ToggleIcon onMouseDown={this.confirmLink}
+                      style={{marginLeft: '10px'}}
+                      toggled={false}
+                      disabled={this.isUrlEmpty()}>
+            <FontAwesome name="check"/>
+          </ToggleIcon>
+          <ToggleIcon onMouseDown={this.closeLinkInput}
+                      style={{marginLeft: '10px'}}
+                      toggled={false}>
+            <FontAwesome  name="close"/>
+          </ToggleIcon>
+        </div>
+      </Popover>
+    )
   }
+  isUrlEmpty = () => this.state.urlValue.trim() == '';
+  isTextSelected = () => !this.props.editorState.getSelection().isCollapsed();
+  getTooltipLabel = () => this.isTextSelected() ? "Ссылка" : "Выделите текст, чтобы вставить ссылку"
 
   render() {
-    const isTextSelected = !this.props.editorState.getSelection().isCollapsed()
-    const isUrlEmpty = this.state.urlValue.trim() == '';
     return (
-      <div style={this.props.style}
-           className={css.toggleLinkButton}
-           onMouseEnter={this.showTooltip}
-           onMouseLeave={this.hideTooltip}>
-        <Tooltip label={isTextSelected ? "Ссылка" : "Выделите текст чтобы вставить ссылку"}
-                 show={this.state.showTooltip}
-                 horizontalPosition="right"/>
+      <TooltipWrapper label={this.getTooltipLabel()}
+                      style={this.props.style}
+                      className={css.toggleLinkButton}>
         <ToggleIcon onMouseDown={this.promptForLink}
-                    toggled={ this.state.showURLInput }
-                    disabled={ !isTextSelected }>
+                    toggled={this.state.showURLInput}
+                    disabled={!this.isTextSelected()}>
           <FontAwesome name="link"/>
         </ToggleIcon>
-        <Popover
-          open={this.state.showURLInput}
-          anchorEl={this.state.anchorEl}
-          onRequestClose={ this.closeLinkInput }
-          anchorOrigin={{horizontal: 'right', vertical: 'center'}}
-          targetOrigin={{horizontal: 'left', vertical: 'center'}}
-          style={{padding: '0 15px'}}
-        >
-          <div style={{display: 'flex', alignItems: 'center'}}>
-            <TextField onKeyDown={this.onLinkInputKeyDown}
-                       name="link"
-                       onChange={this.onURLChange}
-                       value={this.state.urlValue}
-                       ref="linkInput"
-                       hintText="https://example.com"/>
-            <ToggleIcon onMouseDown={this.confirmLink}
-                        style={{marginLeft: '10px'}}
-                        toggled={false}
-                        disabled={ isUrlEmpty }>
-              <FontAwesome name="check"/>
-            </ToggleIcon>
-            <ToggleIcon onMouseDown={this.closeLinkInput}
-                        style={{marginLeft: '10px'}}
-                        toggled={false}>
-              <FontAwesome  name="close"/>
-            </ToggleIcon>
-          </div>
-        </Popover>
-      </div>
+        {this.renderPopover()}
+      </TooltipWrapper>
     );
   }
 }
-
 export default ToggleLinkButton;

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import FontAwesome from 'react-fontawesome';
+import * as FontAwesome from 'react-fontawesome';
 import ToggleIcon from '../ToggleIcon';
-import Tooltip from 'material-ui/internal/Tooltip';
 
+import TooltipWrapper from '../TooltipWrapper';
 
 import * as css from './style.scss';;
 
@@ -15,43 +15,26 @@ interface Props{
   label: string;
   onToggle(style: string)
 };
-interface State{
-  showTooltip: boolean
-};
 
-
-class AddStyleButton extends React.Component<Props, State>{
-  constructor(props){
-    super(props)
-    this.state = {
-      showTooltip: false
-    }
-  }
+class AddStyleButton extends React.Component<Props, null>{
   onMouseDown = e =>{
     e.preventDefault();
     this.props.onToggle(this.props.styleType);
-  }
-  showTooltip = () => {
-    this.setState({showTooltip: true})
-  }
-  hideTooltip = () => {
-    this.setState({showTooltip: false})
-  }
+  };
   render(){
     return(
-      <div className={css.addStyleButton}
-           onMouseDown={this.onMouseDown}
-           onMouseEnter={this.showTooltip}
-           onMouseLeave={this.hideTooltip}
-           style={this.props.style}>
-        <ToggleIcon size={this.props.size} toggled={this.props.active}>
-          <Tooltip label={this.props.label}
-                   show={this.state.showTooltip}
-                   horizontalPosition="right"/>
+      <TooltipWrapper label={this.props.label}
+                      style={this.props.style}
+      >
+        <ToggleIcon size={this.props.size}
+                    toggled={this.props.active}
+                    onMouseDown={this.onMouseDown}
+        >
           <FontAwesome name={this.props.icon}
-                       className={css.icon}/>
+                       className={css.icon}
+          />
         </ToggleIcon>
-      </div>
+      </TooltipWrapper>
     )
   }
 }
