@@ -39,23 +39,36 @@ class SignuPage extends React.Component<Props, State> {
     });
   }
 
-  handleSubmit = (evt) => {
-    evt.preventDefault();
-    this.props.handleSubmit(this.state);
+  clearState = () => {
+    this.setState({
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirmation: '',
+    });
   }
 
-  isPasswordsEqual = () => {
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if(this.isDataValid()) {
+      this.props.handleSubmit(this.state);
+      this.clearState();
+    }
+  }
+
+  arePasswordsEqual = () => {
     const { password, passwordConfirmation } = this.state;
     return password === passwordConfirmation;
   }
 
-  isFieldsFilled = () => {
-    const { username, email, password, passwordConfirmation } = this.state;
-    return !(isEmpty(username) || isEmpty(email) || isEmpty(password) || isEmpty(passwordConfirmation));
+  areFieldsFilled = () => {
+    const { username, email, password } = this.state;
+    return !(isEmpty(username) || isEmpty(email) || isEmpty(password));
   }
 
   isDataValid = () => {
-    return this.isPasswordsEqual() && this.isFieldsFilled();
+    return (this.areFieldsFilled() && this.arePasswordsEqual());
   }
 
   isErrorMsgAvailable = () => {
