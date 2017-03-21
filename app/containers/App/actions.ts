@@ -13,6 +13,8 @@ const TOKEN = 'pyjobs/token';
 const readFromCookie = (key: string): string => cookie.load(key);
 
 const saveToCookie = (key: string, data: any): void => cookie.save(key, data);
+
+const removeFromCookie = (key: string): void => cookie.remove(key);
 // ----- working with cookies -----
 
 
@@ -32,6 +34,7 @@ const logout = (): Action => ({
 });
 
 export const logoutUser = () => dispatch => {
+  removeFromCookie(TOKEN);
   dispatch(logout());
   dispatch(push('/'));
 };
