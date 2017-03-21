@@ -4,7 +4,6 @@ import { Route, IndexRedirect } from 'react-router';
 import App from './containers/App';
 import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
-import { validateToken } from './containers/Auth/actions';
 import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
 import LoginPage from './containers/LoginPageContainer';
@@ -28,7 +27,7 @@ export default (store) => {
   };
 
   return (
-    <Route path="/" component={ App } onEnter={validateToken(store.dispatch)}>
+    <Route path="/" component={ App }>
       <IndexRedirect to="/vacancies" />
       <Route path="vacancies" component={ Posts }/>
       <Route path="vacancies/new" component={ NewPost }/>
