@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import { Action } from '../../interfaces';
 import {
   SAVE_AUTH_CREDENTIALS,
@@ -9,6 +10,11 @@ export const saveAuthCredentials = (data: any): Action => ({
   data,
 });
 
-export const logoutUser = (): Action => ({
-  type: LOGOUT_USER,
+const logout = (): Action => ({
+  type: LOGOUT_USER
 });
+
+export const logoutUser = () => dispatch => {
+  dispatch(logout());
+  dispatch(push('/'));
+};
