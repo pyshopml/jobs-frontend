@@ -1,19 +1,23 @@
 import * as React from 'react'
 import { Button } from 'elemental';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 import Logo from './components/Logo';
+import selectors from './selectors';
 
 import * as css from './style.scss';
 
-interface Props{};
-interface State{};
+interface Props {
+  isLoggedIn: boolean;
+};
+interface State {};
 
 const style = {
   margin: 12,
 };
 
 class Header extends React.Component<Props, State> {
-	LoginBar() {
+	loginBar() {
     return (
       <section className={css.authControls}>
         <Button type="link-primary" size="xs">
@@ -26,16 +30,30 @@ class Header extends React.Component<Props, State> {
     );
   }
 
+  userAuthBar() {
+    return (
+      <section className={css.authControls}>
+        <Button type="warning" size="xs">
+          Выйти
+        </Button>
+      </section>
+    );
+  }
+
   render() {
+    const { isLoggedIn } = this.props;
+
     return (
 	    <header className={css.header}>
 		    <div className={css.container}>
 			    <Logo />
-					{ this.LoginBar() }
+					{ isLoggedIn ? this.userAuthBar() : this.loginBar() }
 		    </div>
 	    </header>
     )
   }
 }
 
-export default Header;
+const mapStateToProps = state => selectors(state);
+
+export default connect(mapStateToProps)(Header);
