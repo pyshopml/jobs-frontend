@@ -5,13 +5,13 @@ import * as $ from 'jquery';
 import PostClass from '../../models/Post.class';
 import selectors from './selectors';
 import { loadPosts, loadMorePosts } from './actions';
-import AddButton from '../../components/AddPostButton';
+import AddButton from './components/AddPostButton';
 
 import PostsList from '../../components/PostsList';
 
 interface Props {
   allPosts: PostClass[];
-  isAuth: boolean;
+  isLoggedIn: boolean;
   loadPosts(): void;
   loadMorePosts(): void;
 };
@@ -44,10 +44,10 @@ class PostsListContainer extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <article>
         <PostsList { ...this.props } />
-        {this.props.isAuth ? <AddButton/> : null}
-      </div>
+        { this.props.isLoggedIn ? <AddButton/> : null }
+      </article>
     );
   }
 }
