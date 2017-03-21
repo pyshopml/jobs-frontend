@@ -9,7 +9,6 @@
 ------------------------------------------------------------------------------- */
 import postsReducer from '../PostsListContainer/reducer';
 import newPostReducer from '../NewPost/reducer';
-import authReducer from '../Auth/reducer';
 import postDetail from '../PostDetail/reducer';
 import alertReducer from '../Alert/reducer';
 import LoginPageReducer from '../LoginPageContainer/reducer';
@@ -72,7 +71,6 @@ export default (state: any = {}, action) => ({
   postDetail: postDetail(state.postDetail, action),
   posts: postsReducer(state.posts, action),
   newPost: newPostReducer(state.newPost, action),
-	auth: authReducer(state.auth, action),
   alert: alertReducer(state.alert, action),
   loginPage: LoginPageReducer(state.loginPage, action),
   signupPage: SignupPageReducer(state.signupPage, action),
