@@ -46,7 +46,7 @@ class PostsListContainer extends React.Component<Props, State> {
     return (
       <article>
         <PostsList { ...this.props } />
-        { this.props.isLoggedIn ? <AddButton/> : null }
+        { this.props.isLoggedIn ? <AddButton/> : '' }
       </article>
     );
   }
