@@ -16,9 +16,19 @@ import ActivateAccountPage from './containers/ActivateAccountPage';
 
 export default (store) => {
   
+  const isLogout = (nextState, replace) => {
+    const { global: { app: { isLoggedIn } } } = store.getState();
+    if (isLoggedIn) {
+      replace({
+        pathname: '/',
+        state: { nextPathname: nextState.location.pathname },
+      });
+    }
+  };
+
   const MatchWhenAuthed = (nextState, replace) => {
-    const { global: { login: { authed } } } = store.getState();
-    if (!authed) {
+    const { global: { app: { isLoggedIn } } } = store.getState();
+    if (!isLoggedIn) {
       replace({
         pathname: '/login',
         state: { nextPathname: nextState.location.pathname },
@@ -30,15 +40,15 @@ export default (store) => {
     <Route path="/" component={ App }>
       <IndexRedirect to="/vacancies" />
       <Route path="vacancies" component={ Posts }/>
-      <Route path="vacancies/new" component={ NewPost }/>
+      <Route path="vacancies/new" component={ NewPost } onEnter={ MatchWhenAuthed } />
       <Route path="vacancies/:id" component={ PostDetail }/>
-      <Route path="login" component={ LoginPage } />
-      <Route path="signup" component={ SignupPage } />
-      <Route path="info_page" component={ InfoPage } />
-      <Route path="restore_password" component={ PasswordRestorePage } />
-      <Route path="/confirm_email" component={ ConfirmEmailPage } />
-      <Route path="/account/:uid/password-reset/:token/" component={ PasswordChangePage } />
-      <Route path="/account/:uid/activate/:token/" component={ ActivateAccountPage } />
+      <Route path="login" component={ LoginPage } onEnter={ isLogout } />
+      <Route path="signup" component={ SignupPage } onEnter={ isLogout } />
+      <Route path="info_page" component={ InfoPage } onEnter={ isLogout } />
+      <Route path="restore_password" component={ PasswordRestorePage } onEnter={ isLogout } />
+      <Route path="/confirm_email" component={ ConfirmEmailPage } onEnter={ isLogout } />
+      <Route path="/account/:uid/password-reset/:token/" component={ PasswordChangePage } onEnter={ isLogout } />
+      <Route path="/account/:uid/activate/:token/" component={ ActivateAccountPage } onEnter={ isLogout } />
       <Route path="404" component={ NotFound }/>
       <Route path="*" component={ NotFound }/>
     </Route>
