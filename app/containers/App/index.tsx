@@ -4,6 +4,7 @@ import Header from '../Header';
 import Alert from '../Alert';
 import { connect } from 'react-redux';
 import selectors from './selectors';
+import { restoreAuthState } from './actions';
 
 import * as css from './style.css';
 
@@ -11,9 +12,14 @@ const authPaths = [ 'login', 'signup', 'info_page', 'restore_password', 'confirm
 
 interface Props {
   pathname: string;
+  restoreAuthState: () => void;
 }
 
 class App extends React.Component<Props, null> {
+
+  componentDidMount() {
+    this.props.restoreAuthState();
+  }
 
   isServiceLink() {
     const { pathname } = this.props;
@@ -45,4 +51,8 @@ class App extends React.Component<Props, null> {
 
 const mapStateToProps = (state, props) => selectors(state, props);
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  restoreAuthState: () => dispatch(restoreAuthState()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
