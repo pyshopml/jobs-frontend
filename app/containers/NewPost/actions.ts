@@ -19,7 +19,7 @@ const submitPost = (): Action => ({
 
 const submitPostSucceeded = (createdPost): Action => ({
   type: UPLOAD_POST_SUCCEEDED,
-  data: {createdPost},
+  data: { createdPost },
 });
 
 const submitPostFailed = (message: string): Action => ({
