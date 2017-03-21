@@ -23,6 +23,7 @@ import { Action } from '../../interfaces';
 import {
   SAVE_AUTH_CREDENTIALS,
   SAVE_USER_CREDENTIALS,
+  LOGOUT_USER,
 } from './constants';
 
 interface AppState {
@@ -57,6 +58,9 @@ const appReducer = (state:AppState = initialModel, action: Action): AppState => 
         state,
         { username: action.data.username, email: action.data.email }
       );
+
+    case LOGOUT_USER:
+      return Object.assign({}, state, { isLoggedIn: false, auth_token: '' });
 
     default:
       return state;

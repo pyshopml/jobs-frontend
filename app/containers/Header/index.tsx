@@ -4,12 +4,15 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Logo from './components/Logo';
 import selectors from './selectors';
+import { logoutUser } from '../App/actions';
 
 import * as css from './style.scss';
 
 interface Props {
   isLoggedIn: boolean;
+  logoutUser: () => void;
 };
+
 interface State {};
 
 const style = {
@@ -33,7 +36,7 @@ class Header extends React.Component<Props, State> {
   userAuthBar() {
     return (
       <section className={css.authControls}>
-        <Button type="warning" size="xs">
+        <Button type="warning" size="xs" onClick={ this.props.logoutUser }>
           Выйти
         </Button>
       </section>
@@ -56,4 +59,8 @@ class Header extends React.Component<Props, State> {
 
 const mapStateToProps = state => selectors(state);
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  logoutUser: () => dispatch(logoutUser()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
