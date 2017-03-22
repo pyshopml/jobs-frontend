@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.global.app;
+const selectSubstate = state => state.app;
 
 export default createSelector(
   selectSubstate,
