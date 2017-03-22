@@ -15,6 +15,8 @@ import {
   LOGOUT_USER,
   SAVE_INTENDED_PATH,
   CLEAR_INTENDED_PATH,
+  RESTORING_AUTH_STATE,
+  RESTORING_AUTH_STATE_COMPLETE
 } from './constants';
 
 interface AppState {
@@ -24,6 +26,7 @@ interface AppState {
   email: string;
   isEmailConfirmed: boolean;
   intendedPath: string;
+  isAuthStateRestoring: boolean;
 }
 
 const initialModel = {
@@ -33,6 +36,7 @@ const initialModel = {
   email: '',
   isEmailConfirmed: false,
   intendedPath: '',
+  isAuthStateRestoring: false
 };
 
 export default (state:AppState = initialModel, action: Action): AppState => {
@@ -50,6 +54,18 @@ export default (state:AppState = initialModel, action: Action): AppState => {
         {},
         state,
         { username: action.data.username, email: action.data.email }
+      );
+    case RESTORING_AUTH_STATE:
+      return Object.assign(
+        {},
+        state,
+        { isAuthStateRestoring: true }
+      );
+    case RESTORING_AUTH_STATE_COMPLETE:
+      return Object.assign(
+        {},
+        state,
+        { isAuthStateRestoring: false }
       );
 
     case LOGOUT_USER:

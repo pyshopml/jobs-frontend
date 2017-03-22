@@ -15,6 +15,8 @@ import { configureStore } from './store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { restoreAuthState } from './containers/App/actions';
 
+import PreRunLoading from './containers/PreRunLoading';
+
 require('./tap.plugin');
 
 import './index.scss';
@@ -27,18 +29,21 @@ const loadAuthState = () => {
   store.dispatch(restoreAuthState());
 }
 
+loadAuthState();
+
 const Main = () => (
   <Provider store={store}>
     <MuiThemeProvider>
-      <Router history={history}>
-        {routes}
-      </Router>
+      <PreRunLoading>
+        <Router history={history}>
+          {routes}
+        </Router>
+      </PreRunLoading>
     </MuiThemeProvider>
   </Provider>
 );
 
 render(<Main />, document.getElementById('main'));
-loadAuthState();
 
 if(module.hot) {
   module.hot.accept();

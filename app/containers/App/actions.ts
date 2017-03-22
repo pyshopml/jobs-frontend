@@ -8,6 +8,8 @@ import {
   SAVE_INTENDED_PATH,
   LOGOUT_USER,
   CLEAR_INTENDED_PATH,
+  RESTORING_AUTH_STATE,
+  RESTORING_AUTH_STATE_COMPLETE
 } from './constants';
 
 const TOKEN = 'pyjobs/token';
@@ -55,16 +57,28 @@ export const logoutUser = () => dispatch => {
   dispatch(push('/'));
 };
 
+const restoringAuthStateComplete = (): Action => ({
+  type: RESTORING_AUTH_STATE_COMPLETE
+});
+
+const restoringAuthState = (): Action => ({
+  type: RESTORING_AUTH_STATE
+});
+
 export const restoreAuthState = () => dispatch => {
   // retrieve token from cookies and verify it on server
   // if it's valid update state & login user
 
+  dispatch(restoringAuthState());
   let auth_token = readFromCookie(TOKEN);
 
   if (auth_token) {
     verifyToken(
       auth_token,
-      () => dispatch(saveAuthCredentials({ auth_token }))
+      () => {
+        dispatch(restoringAuthStateComplete());
+        dispatch(saveAuthCredentials({ auth_token }));
+      }
     );
   }
 };
