@@ -6,6 +6,7 @@ import {
   SAVE_AUTH_CREDENTIALS,
   SAVE_INTENDED_PATH,
   LOGOUT_USER,
+  CLEAR_INTENDED_PATH,
 } from './constants';
 
 const TOKEN = 'pyjobs/token';
@@ -57,4 +58,8 @@ export const restoreAuthState = () => dispatch => {
 export const storeIntendedPath = (path: string): Action => ({
   type: SAVE_INTENDED_PATH,
   data: { path },
+});
+
+export const clearIntendedPath = (): Action => ({
+  type: CLEAR_INTENDED_PATH,
 });

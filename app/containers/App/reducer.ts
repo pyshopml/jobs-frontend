@@ -14,6 +14,7 @@ import {
   SAVE_USER_CREDENTIALS,
   LOGOUT_USER,
   SAVE_INTENDED_PATH,
+  CLEAR_INTENDED_PATH,
 } from './constants';
 
 interface AppState {
@@ -56,6 +57,9 @@ export default (state:AppState = initialModel, action: Action): AppState => {
 
     case SAVE_INTENDED_PATH:
       return Object.assign({}, state, { intendedPath: action.data.path });
+
+    case CLEAR_INTENDED_PATH:
+      return Object.assign({}, state, { intendedPath: '' });
 
     default:
       return state;
