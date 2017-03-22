@@ -1,5 +1,6 @@
 import * as cookie from 'react-cookie'
 import { push } from 'react-router-redux';
+import { isEmpty } from 'ramda';
 import { Action } from '../../interfaces';
 import { verifyToken } from './api';
 import {
@@ -25,10 +26,26 @@ export const saveCredentials = (data: any): Action => ({
   data,
 });
 
-export const saveAuthCredentials = (data: any) => dispatch => {
+
+const redirectUser = (dispatch, getState) => {
+  let { app: { intendedPath } } = getState();
+
+  console.log(`inteded: ${intendedPath}`);
+
+  if (isEmpty(intendedPath)) {
+    dispatch(push('/'));
+  } else {
+    dispatch(push(`/${intendedPath}`));
+    dispatch(clearIntendedPath());
+  }
+  // dispatch(clearIntendedPath());
+}
+
+export const saveAuthCredentials = (data: any) => (dispatch, getState) => {
   const { auth_token } = data;
   saveToCookie(TOKEN, auth_token);
   dispatch(saveCredentials(data));
+  redirectUser(dispatch, getState);
 };
 
 const logout = (): Action => ({

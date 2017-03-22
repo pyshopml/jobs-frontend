@@ -9,14 +9,17 @@ interface Props {
   handleSubmit: (data: LoginCredentials) => void;
   message: string;
   isLoading: boolean;
+  isLoggedIn: boolean;
 };
 
 interface State {};
 
 class LoginPageContainer extends React.Component<Props, State> {
+
   render() {
     return <LoginPage {...this.props} /> 
   }
+  
 }
 
 const mapStateToProps = state => selectors(state);
