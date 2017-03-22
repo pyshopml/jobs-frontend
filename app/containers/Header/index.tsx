@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import Logo from './components/Logo';
 import selectors from './selectors';
 import { logoutUser } from '../App/actions';
+import { redirectToSignup } from './actions';
 
 import * as css from './style.scss';
 
 interface Props {
   isLoggedIn: boolean;
   logoutUser: () => void;
+  redirectToSignup: (path: string) => void;
 };
 
 interface State {};
@@ -20,14 +22,19 @@ const style = {
 };
 
 class Header extends React.Component<Props, State> {
+
+  signupClickHandler = (path: string) => {
+    this.props.redirectToSignup(path);
+  }
+
 	loginBar() {
     return (
       <section className={css.authControls}>
-        <Button type="link-primary" size="xs">
-          <Link to="/login">Вход</Link>
+        <Button type="link-primary" size="xs" onClick={ () => this.signupClickHandler('/login') }>
+          Вход
         </Button>
-        <Button type="success" size="xs">
-          <Link to="/signup">Регистрация</Link>
+        <Button type="success" size="xs" onClick={ () => this.signupClickHandler('/signup') }>
+          Регистрация
         </Button>
       </section>
     );
@@ -61,6 +68,7 @@ const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
   logoutUser: () => dispatch(logoutUser()),
+  redirectToSignup: (path) => dispatch(redirectToSignup(path)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
