@@ -12,15 +12,10 @@ const authPaths = [ 'login', 'signup', 'info_page', 'restore_password', 'confirm
 
 interface Props {
   pathname: string;
-  restoreAuthState: () => void;
 }
 
 class App extends React.Component<Props, null> {
-
-  componentDidMount() {
-    this.props.restoreAuthState();
-  }
-
+  
   isServiceLink() {
     const { pathname } = this.props;
     return pathname.includes('password-reset') || pathname.includes('activate');
@@ -52,7 +47,6 @@ class App extends React.Component<Props, null> {
 const mapStateToProps = (state, props) => selectors(state, props);
 
 const mapDispatchToProps = dispatch => ({
-  restoreAuthState: () => dispatch(restoreAuthState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

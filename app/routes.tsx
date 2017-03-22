@@ -13,9 +13,15 @@ import PasswordRestorePage from './containers/RestorePasswordContainer';
 import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
+import { restoreAuthState } from './containers/App/actions';
 
 export default (store) => {
-  
+
+  const loadAuthState = () => {
+    const { dispatch } = store;
+    dispatch(restoreAuthState());
+  }
+
   const isLogout = (nextState, replace) => {
     const { app: { isLoggedIn } } = store.getState();
     if (isLoggedIn) {
@@ -37,7 +43,7 @@ export default (store) => {
   };
 
   return (
-    <Route path="/" component={ App }>
+    <Route path="/" component={ App } onEnter={ loadAuthState }>
       <IndexRedirect to="/vacancies" />
       <Route path="vacancies" component={ Posts }/>
       <Route path="vacancies/new" component={ NewPost } onEnter={ MatchWhenAuthed } />
