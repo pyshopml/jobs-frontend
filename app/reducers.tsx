@@ -7,9 +7,27 @@
 ------------------------------------------------------------------------------- */
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import globalReducer from './containers/App/reducer';
+import appReducer from './containers/App/reducer';
+import postsReducer from './containers/PostsListContainer/reducer';
+import newPostReducer from './containers/NewPost/reducer';
+import postDetail from './containers/PostDetail/reducer';
+import alertReducer from './containers/Alert/reducer';
+import LoginPageReducer from './containers/LoginPageContainer/reducer';
+import SignupPageReducer from './containers/SignupPage/reducer';
+import RestorePasswordPageReducer from './containers/RestorePasswordContainer/reducer';
+import PasswordChangePage from './containers/PasswordChangePage/reducer';
+import AccountActivationReducer from './containers/ActivateAccountPage/reducer';
 
 export default combineReducers({
   routing: routerReducer,
-  global: globalReducer,
+  app: appReducer,
+  postDetail: postDetail,
+  posts: postsReducer,
+  newPost: newPostReducer,
+  alert: alertReducer,
+  loginPage: LoginPageReducer,
+  signupPage: SignupPageReducer,
+  restorePassword: RestorePasswordPageReducer,
+  passwordChange: PasswordChangePage,
+  accountActivation: AccountActivationReducer,
 });

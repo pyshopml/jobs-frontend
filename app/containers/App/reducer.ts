@@ -7,16 +7,6 @@
 *
 * Nick Luparev nikita.luparev@gmail.com
 ------------------------------------------------------------------------------- */
-import postsReducer from '../PostsListContainer/reducer';
-import newPostReducer from '../NewPost/reducer';
-import postDetail from '../PostDetail/reducer';
-import alertReducer from '../Alert/reducer';
-import LoginPageReducer from '../LoginPageContainer/reducer';
-import SignupPageReducer from '../SignupPage/reducer';
-import RestorePasswordPageReducer from '../RestorePasswordContainer/reducer';
-import PasswordChangePage from '../PasswordChangePage/reducer';
-import AccountActivationReducer from '../ActivateAccountPage/reducer';
-
 import { Action } from '../../interfaces';
 
 import {
@@ -41,7 +31,7 @@ const initialModel = {
   isEmailConfirmed: false,
 };
 
-const appReducer = (state:AppState = initialModel, action: Action): AppState => {
+export default (state:AppState = initialModel, action: Action): AppState => {
   switch(action.type) {
 
     case SAVE_AUTH_CREDENTIALS:
@@ -65,16 +55,3 @@ const appReducer = (state:AppState = initialModel, action: Action): AppState => 
       return state;
   }
 };
-
-export default (state: any = {}, action) => ({
-  app: appReducer(state.app, action),
-  postDetail: postDetail(state.postDetail, action),
-  posts: postsReducer(state.posts, action),
-  newPost: newPostReducer(state.newPost, action),
-  alert: alertReducer(state.alert, action),
-  loginPage: LoginPageReducer(state.loginPage, action),
-  signupPage: SignupPageReducer(state.signupPage, action),
-  restorePassword: RestorePasswordPageReducer(state.restorePassword, action),
-  passwordChange: PasswordChangePage(state.passwordChange, action),
-  accountActivation: AccountActivationReducer(state.accountActivation, action),
-});

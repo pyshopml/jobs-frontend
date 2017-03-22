@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.global.accountActivation;
+const selectSubstate = state => state.accountActivation;
 
 const selectUid = (state, props) => props.params.uid;
 
