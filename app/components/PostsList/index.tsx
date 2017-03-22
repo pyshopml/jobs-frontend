@@ -21,7 +21,7 @@ class PostList extends React.Component<Props, State> {
   render() {
     return (
       <section>
-        <PostsListSearchBar />
+        { /* <PostsListSearchBar /> */ }
         { /* <PostsListHeader resultLength={this.props.allPosts.length}/> */ }
         { this.renderPosts() }
       </section>
