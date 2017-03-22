@@ -28,6 +28,6 @@ export const loadPost = (id: number) =>
       id,
       (post) => dispatch(loadingPostSucceeded(post)),
       (msg) => dispatch(loadingPostFailed(msg)),
-      () => dispatch(replace('404'))
+      () => dispatch(replace('/404'))
     )
   };
