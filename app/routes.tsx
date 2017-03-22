@@ -14,17 +14,12 @@ import PasswordRestorePage from './containers/RestorePasswordContainer';
 import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
-import { restoreAuthState, storeIntendedPath } from './containers/App/actions';
+import { storeIntendedPath } from './containers/App/actions';
 
 export default (store) => {
 
   const saveIntendedPath = (path: string) => {
     store.dispatch(storeIntendedPath(path));
-  }
-
-  const loadAuthState = () => {
-    const { dispatch } = store;
-    dispatch(restoreAuthState());
   }
 
   const isLogout = (nextState, replace) => {
@@ -53,7 +48,7 @@ export default (store) => {
   };
 
   return (
-    <Route path="/" component={ App } onEnter={ loadAuthState }>
+    <Route path="/" component={ App }>
       <IndexRedirect to="/vacancies" />
       <Route path="vacancies" component={ Posts }/>
       <Route path="vacancies/new" component={ NewPost } onEnter={ MatchWhenAuthed } />
