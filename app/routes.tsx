@@ -7,7 +7,7 @@ import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
 import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
-import LoginPage from './containers/LoginPageContainer';
+import LoginPage from './containers/LoginPage';
 import SignupPage from './containers/SignupPage';
 import InfoPage from './containers/InfoPage';
 import PasswordRestorePage from './containers/RestorePasswordContainer';

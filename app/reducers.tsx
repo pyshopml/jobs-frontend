@@ -12,7 +12,7 @@ import postsReducer from './containers/PostsListContainer/reducer';
 import newPostReducer from './containers/NewPost/reducer';
 import postDetail from './containers/PostDetail/reducer';
 import alertReducer from './containers/Alert/reducer';
-import LoginPageReducer from './containers/LoginPageContainer/reducer';
+import LoginPageReducer from './containers/LoginPage/reducer';
 import SignupPageReducer from './containers/SignupPage/reducer';
 import RestorePasswordPageReducer from './containers/RestorePasswordContainer/reducer';
 import PasswordChangePage from './containers/PasswordChangePage/reducer';
