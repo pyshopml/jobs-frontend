@@ -17,7 +17,7 @@ import ActivateAccountPage from './containers/ActivateAccountPage';
 export default (store) => {
   
   const isLogout = (nextState, replace) => {
-    const { global: { app: { isLoggedIn } } } = store.getState();
+    const { app: { isLoggedIn } } = store.getState();
     if (isLoggedIn) {
       replace({
         pathname: '/',
@@ -27,7 +27,7 @@ export default (store) => {
   };
 
   const MatchWhenAuthed = (nextState, replace) => {
-    const { global: { app: { isLoggedIn } } } = store.getState();
+    const { app: { isLoggedIn } } = store.getState();
     if (!isLoggedIn) {
       replace({
         pathname: '/login',

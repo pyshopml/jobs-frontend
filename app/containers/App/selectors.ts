@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.global.app;
+const selectSubstate = state => state.app;
 
 const selectPath = (state, props) => props.location.pathname.slice(1)
 

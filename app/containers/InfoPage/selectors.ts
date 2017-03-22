@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectUserCredentials = state => state.global.app;
+const selectUserCredentials = state => state.app;
 
 export default createSelector(
   selectUserCredentials,

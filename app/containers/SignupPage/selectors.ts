@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.global.signupPage;
+const selectSubstate = state => state.signupPage;
 
 export default createSelector(
   selectSubstate,
