@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const postsSelectors = state => state.global.posts;
-const loginSubstate = state => state.global.app.isLoggedIn;
+const postsSelectors = state => state.posts;
+const loginSubstate = state => state.app.isLoggedIn;
 
 export default createSelector(
   postsSelectors,

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.global.newPost;
-const selectToken = state => state.global.app.auth_token;
+const selectSubstate = state => state.newPost;
+const selectToken = state => state.app.auth_token;
 
 export default createSelector(
   selectSubstate,

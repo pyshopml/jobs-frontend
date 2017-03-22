@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.global.passwordChange;
+const selectSubstate = state => state.passwordChange;
 
 const selectUid = (state, props) => props.params.uid;
 
