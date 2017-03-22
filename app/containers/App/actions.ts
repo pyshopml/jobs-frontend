@@ -4,6 +4,7 @@ import { Action } from '../../interfaces';
 import { verifyToken } from './api';
 import {
   SAVE_AUTH_CREDENTIALS,
+  SAVE_INTENDED_PATH,
   LOGOUT_USER,
 } from './constants';
 
@@ -52,3 +53,8 @@ export const restoreAuthState = () => dispatch => {
     );
   }
 };
+
+export const storeIntendedPath = (path: string): Action => ({
+  type: SAVE_INTENDED_PATH,
+  data: { path },
+});

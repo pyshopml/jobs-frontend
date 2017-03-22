@@ -1,6 +1,7 @@
 import * as React from 'react';
 import cookie from 'react-cookie'
 import { Route, IndexRedirect } from 'react-router';
+import { last } from 'ramda';
 import App from './containers/App';
 import Posts from './containers/PostsListContainer';
 import NewPost from './containers/NewPost';
@@ -13,9 +14,13 @@ import PasswordRestorePage from './containers/RestorePasswordContainer';
 import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
-import { restoreAuthState } from './containers/App/actions';
+import { restoreAuthState, storeIntendedPath } from './containers/App/actions';
 
 export default (store) => {
+
+  const saveIntendedPath = (path: string) => {
+    store.dispatch(storeIntendedPath(path));
+  }
 
   const loadAuthState = () => {
     const { dispatch } = store;
@@ -33,6 +38,11 @@ export default (store) => {
   };
 
   const MatchWhenAuthed = (nextState, replace) => {
+
+    const { routes } = nextState;
+    let intendedPath = last(routes).path;
+    saveIntendedPath(intendedPath);
+
     const { app: { isLoggedIn } } = store.getState();
     if (!isLoggedIn) {
       replace({

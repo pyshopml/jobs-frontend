@@ -13,6 +13,7 @@ import {
   SAVE_AUTH_CREDENTIALS,
   SAVE_USER_CREDENTIALS,
   LOGOUT_USER,
+  SAVE_INTENDED_PATH,
 } from './constants';
 
 interface AppState {
@@ -21,6 +22,7 @@ interface AppState {
   username: string;
   email: string;
   isEmailConfirmed: boolean;
+  intendedPath: string;
 }
 
 const initialModel = {
@@ -29,6 +31,7 @@ const initialModel = {
   username: '',
   email: '',
   isEmailConfirmed: false,
+  intendedPath: '',
 };
 
 export default (state:AppState = initialModel, action: Action): AppState => {
@@ -50,6 +53,9 @@ export default (state:AppState = initialModel, action: Action): AppState => {
 
     case LOGOUT_USER:
       return Object.assign({}, state, { isLoggedIn: false, auth_token: '' });
+
+    case SAVE_INTENDED_PATH:
+      return Object.assign({}, state, { intendedPath: action.data.path });
 
     default:
       return state;
