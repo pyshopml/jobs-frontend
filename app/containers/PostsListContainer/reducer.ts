@@ -2,7 +2,6 @@ import PostClass from '../../models/Post.class';
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
-  LOAD_MORE_POSTS_SUCCEEDED,
   LOAD_FAILED,
 } from './constants';
 
@@ -11,12 +10,22 @@ interface PostListState {
   allPosts: Array<PostClass>;
   errorMessage: string;
   nextPage: string;
+  count: number;
+  currentPage: number;
+  next: string;
+  previous: string;
+  pageSize: number;
 }
 
 const initialModel: PostListState = {
   allPosts: new Array<PostClass>(),
   errorMessage: '',
   nextPage: '',
+  count: 0,
+  currentPage: 1,
+  next: '',
+  previous: '',
+  pageSize: 20,
 };
 
 export default (state = initialModel, action): PostListState => {
@@ -30,13 +39,6 @@ export default (state = initialModel, action): PostListState => {
         {},
         state,
         { allPosts: posts, nextPage: action.data.next }
-      );
-
-    case LOAD_MORE_POSTS_SUCCEEDED:
-      return Object.assign(
-        {},
-        state,
-        { allPosts: state.allPosts.concat(action.data.results), nextPage: action.data.next }
       );
 
     case LOAD_FAILED:

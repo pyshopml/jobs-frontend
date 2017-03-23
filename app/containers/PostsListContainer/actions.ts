@@ -5,8 +5,6 @@ import selectors from './selectors';
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
-  LOAD_MORE_POSTS,
-  LOAD_MORE_POSTS_SUCCEEDED,
   LOAD_FAILED,
 } from './constants';
 
@@ -24,34 +22,10 @@ const loadingFailed = (errorMessage: string) : Action => ({
   errorMessage
 });
 
-const loadingMorePosts = () : Action => ({
-  type: LOAD_MORE_POSTS,
-});
-
-const loadingMorePostsSucceeded = (data) : Action => ({
-  type: LOAD_MORE_POSTS_SUCCEEDED,
-  data,
-});
-
-const loadingMorePostsFailed = (errorMessage) : Action => ({
-  type: LOAD_FAILED,
-  errorMessage,
-});
-
 export const loadPosts = () => dispatch => {
   dispatch({ type: LOAD_POSTS });
   fetchPosts(
     (data) => dispatch(loadingSucceeded(data)),
     (msg : string) => dispatch(loadingFailed(msg)),
   );
-}
-
-export const loadMorePosts = () => (dispatch, getState) => {
-  const state = selectors(getState());
-  dispatch(loadingMorePosts())
-  fetchMorePosts(
-    state.nextPage,
-    (data) => dispatch(loadingMorePostsSucceeded(data)),
-    (msg: string) => dispatch(loadingMorePostsFailed(msg)),
-  );
-}
+};
