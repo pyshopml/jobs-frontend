@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as FontAwesome from 'react-fontawesome';
-import { Avatar, FlatButton, Popover, Menu, MenuItem } from 'material-ui';
+import { Avatar, Divider, FlatButton, Popover, Menu, MenuItem } from 'material-ui';
 
 import * as css from './style.scss';
 
@@ -77,10 +77,10 @@ class AuthBar extends React.Component<Props, State> {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem primaryText="Refresh" />
-            <MenuItem primaryText="Help &amp; feedback" />
-            <MenuItem primaryText="Settings" />
-            <MenuItem primaryText="Sign out" />
+            <MenuItem primaryText="Ваш профиль" />
+            <MenuItem primaryText="Панель управления" />
+            <Divider />
+            <MenuItem primaryText="Выйти" />
           </Menu>
         </Popover>
       </section>
