@@ -1,12 +1,32 @@
 import * as React from 'react'
 import * as FontAwesome from 'react-fontawesome';
-import { FlatButton, Popover, Menu, MenuItem } from 'material-ui';
+import { Avatar, FlatButton, Popover, Menu, MenuItem } from 'material-ui';
+
+import * as css from './style.scss';
 
 interface Props {};
 
 interface State {
   open: boolean;
   anchorEl: any;
+};
+
+const styles = {
+  uploadButton: {
+    verticalAlign: 'middle',
+  },
+  avatar: {
+    marginRight: -6,
+  },
+  authButton: {
+    paddingTop: 4,
+    paddingBottom: 10,
+    paddingLeft: 14,
+    paddingRight: 14,
+    fontSize: 12,
+    marginTop: 4,
+    height: 40,
+  }
 };
 
 class AuthBar extends React.Component<Props, State> {
@@ -39,10 +59,15 @@ class AuthBar extends React.Component<Props, State> {
     return (
       <section>
         <FlatButton
+          style={styles.authButton}
           onTouchTap={this.handleTouchTap}
-          label="John Gold"
-          icon={ <FontAwesome name="user" /> }
-        />
+          label="John Gold">
+           <Avatar
+            icon={<FontAwesome name="user" />}
+            style={styles.avatar}
+            size={30}
+          />
+        </FlatButton>
 
         <Popover
           open={this.state.open}
