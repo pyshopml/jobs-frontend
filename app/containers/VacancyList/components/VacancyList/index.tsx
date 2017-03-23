@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import PostClass from '../../../../models/Post.class';
-import Post from '../PostItem';
+import VacancyItem from '../VacancyItem';
 
 import * as css from './style.scss';
 
@@ -14,7 +14,7 @@ interface State {};
 class PostList extends React.Component<Props, State> {
 
   renderPosts() {
-    return this.props.allPosts.map(post => <Post key={post.id} post={post} />);
+    return this.props.allPosts.map(post => <VacancyItem key={post.id} post={post} />);
   }
 
   render() {

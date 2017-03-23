@@ -6,7 +6,7 @@ import selectors from './selectors';
 import { loadPosts } from './actions';
 
 import AddButton from './components/AddPostButton';
-import PostsList from './components/PostsList';
+import Vacancies from './components/VacancyList';
 import Pagination from './components/Footer';
 
 interface Props {
@@ -33,7 +33,7 @@ class VacancyList extends React.Component<Props, State> {
   render() {
     return (
       <article>
-        <PostsList { ...this.props } />
+        <Vacancies { ...this.props } />
         <Pagination {...this.props} changePage={ this.handlePageChange }  />
         { this.props.isLoggedIn ? <AddButton/> : '' }
       </article>
