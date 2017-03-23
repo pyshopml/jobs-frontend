@@ -13,14 +13,15 @@ interface State {};
 
 class VacancyList extends React.Component<Props, State> {
 
-  renderPosts() {
-    return this.props.vacancies.map(post => <VacancyItem key={post.id} post={post} />);
+  renderVacancies() {
+    return this.props.vacancies.map(item => 
+      <VacancyItem key={item.id} vacancy={item} />);
   }
 
   render() {
     return (
       <section className={css.container}>
-        { this.renderPosts() }
+        { this.renderVacancies() }
       </section>
     );
   }
