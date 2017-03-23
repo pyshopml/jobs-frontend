@@ -26,6 +26,9 @@ const styles = {
     fontSize: 12,
     marginTop: 4,
     height: 40,
+  },
+  menuItem: {
+    fontSize: 15,
   }
 };
 
@@ -77,10 +80,10 @@ class AuthBar extends React.Component<Props, State> {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem primaryText="Ваш профиль" />
-            <MenuItem primaryText="Панель управления" />
+            <MenuItem primaryText="Ваш профиль" style={ styles.menuItem }/>
+            <MenuItem primaryText="Панель управления" style={ styles.menuItem } />
             <Divider />
-            <MenuItem primaryText="Выйти" />
+            <MenuItem primaryText="Выйти" style={ styles.menuItem } />
           </Menu>
         </Popover>
       </section>
