@@ -1,5 +1,5 @@
 import { Action } from '../../interfaces/action';
-import { fetchPosts, fetchMorePosts } from './api';
+import { fetchPosts } from './api';
 import selectors from './selectors';
 
 import {

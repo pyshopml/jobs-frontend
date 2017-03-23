@@ -1,3 +1,4 @@
+import { pick } from 'ramda';
 import PostClass from '../../models/Post.class';
 import {
   LOAD_POSTS,
@@ -9,7 +10,6 @@ import {
 interface PostListState {
   allPosts: Array<PostClass>;
   errorMessage: string;
-  nextPage: string;
   count: number;
   currentPage: number;
   next: string;
@@ -20,7 +20,6 @@ interface PostListState {
 const initialModel: PostListState = {
   allPosts: new Array<PostClass>(),
   errorMessage: '',
-  nextPage: '',
   count: 0,
   currentPage: 1,
   next: '',
@@ -34,11 +33,13 @@ export default (state = initialModel, action): PostListState => {
       return state;
 
     case LOAD_POSTS_SUCCEEDED:
-      const posts = action.data.results.map(result => new PostClass(result));
+      let posts = action.data.results.map(result => new PostClass(result));
+
       return Object.assign(
         {},
         state,
-        { allPosts: posts, nextPage: action.data.next }
+        pick(['count', 'next', 'previous'], action.data),
+        { allPosts: posts }
       );
 
     case LOAD_FAILED:

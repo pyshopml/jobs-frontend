@@ -26,7 +26,7 @@ class PostsListContainer extends React.Component<Props, State> {
   }
 
   handlePageChange = (pageNum: number) => {
-
+    console.log(pageNum);
   }
 
   render() {
