@@ -1,10 +1,7 @@
 import * as React from 'react';
 
-import PostClass from '../../models/Post.class';
-
-import PostsListSearchBar from '../PostsListSearchBar';
-import PostsListHeader from '../PostsListHeader';
-import Post from '../Post';
+import PostClass from '../../../../models/Post.class';
+import Post from '../PostItem';
 
 interface Props {
   allPosts: Array<PostClass>
@@ -21,8 +18,6 @@ class PostList extends React.Component<Props, State> {
   render() {
     return (
       <section>
-        { /* <PostsListSearchBar /> */ }
-        { /* <PostsListHeader resultLength={this.props.allPosts.length}/> */ }
         { this.renderPosts() }
       </section>
     );

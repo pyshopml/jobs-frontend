@@ -5,9 +5,9 @@ import * as $ from 'jquery';
 import PostClass from '../../models/Post.class';
 import selectors from './selectors';
 import { loadPosts, loadMorePosts } from './actions';
-import AddButton from './components/AddPostButton';
 
-import PostsList from '../../components/PostsList';
+import AddButton from './components/AddPostButton';
+import PostsList from './components/PostsList';
 
 interface Props {
   allPosts: PostClass[];
