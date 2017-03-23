@@ -3,7 +3,7 @@ import cookie from 'react-cookie'
 import { Route, IndexRedirect } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
-import Posts from './containers/PostsListContainer';
+import Vacancies from './containers/VacancyList';
 import NewPost from './containers/NewPost';
 import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
@@ -50,7 +50,7 @@ export default (store) => {
   return (
     <Route path="/" component={ App }>
       <IndexRedirect to="/vacancies" />
-      <Route path="vacancies" component={ Posts }/>
+      <Route path="vacancies" component={ Vacancies }/>
       <Route path="vacancies/new" component={ NewPost } onEnter={ MatchWhenAuthed } />
       <Route path="vacancies/:id" component={ PostDetail }/>
       <Route path="login" component={ LoginPage } onEnter={ isLogout } />

@@ -8,7 +8,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 import appReducer from './containers/App/reducer';
-import postsReducer from './containers/PostsListContainer/reducer';
+import postsReducer from './containers/VacancyList/reducer';
 import newPostReducer from './containers/NewPost/reducer';
 import postDetail from './containers/PostDetail/reducer';
 import alertReducer from './containers/Alert/reducer';

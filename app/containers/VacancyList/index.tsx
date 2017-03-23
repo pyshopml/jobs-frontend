@@ -20,7 +20,7 @@ interface Props {
 
 interface State {};
 
-class PostsListContainer extends React.Component<Props, State> {
+class VacancyList extends React.Component<Props, State> {
   componentDidMount() {
     this.props.loadPosts(1);
   }
@@ -47,4 +47,4 @@ const mapDispatchToProps = dispatch => ({
   loadPosts: (pageNum: number) => dispatch(loadPosts(pageNum)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(VacancyList);
