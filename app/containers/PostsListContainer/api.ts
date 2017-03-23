@@ -10,9 +10,9 @@ function fetchPostsFromServer(url: string) {
   return fetch(url, options)
 }
 
-export async function fetchPosts(done: (data) => any, error: (msg: string) => any) {
+export async function fetchPosts(pageNum: number, done: (data) => any, error: (msg: string) => any) {
   try {
-    const url = 'http://jobs.pyshop.ru/api/vacancies/';
+    const url = `http://jobs.pyshop.ru/api/vacancies/?page=${pageNum}`;
     const res = await fetchPostsFromServer(url);
 
     if (res.ok) {

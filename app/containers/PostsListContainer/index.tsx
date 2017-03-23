@@ -12,7 +12,7 @@ import Pagination from './components/Footer';
 interface Props {
   allPosts: PostClass[];
   isLoggedIn: boolean;
-  loadPosts(): void;
+  loadPosts(pageNum: number): void;
   count: number;
   pageSize: number;
   currentPage: number;
@@ -22,11 +22,12 @@ interface State {};
 
 class PostsListContainer extends React.Component<Props, State> {
   componentDidMount() {
-    this.props.loadPosts();
+    this.props.loadPosts(1);
   }
 
   handlePageChange = (pageNum: number) => {
-    console.log(pageNum);
+    window.scrollTo(0, 0);
+    this.props.loadPosts(pageNum);
   }
 
   render() {
@@ -43,7 +44,7 @@ class PostsListContainer extends React.Component<Props, State> {
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  loadPosts: () => dispatch(loadPosts()),
+  loadPosts: (pageNum: number) => dispatch(loadPosts(pageNum)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsListContainer);

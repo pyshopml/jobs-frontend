@@ -22,10 +22,11 @@ const loadingFailed = (errorMessage: string) : Action => ({
   errorMessage
 });
 
-export const loadPosts = () => dispatch => {
+export const loadPosts = (pageNum: number) => dispatch => {
   dispatch({ type: LOAD_POSTS });
   fetchPosts(
-    (data) => dispatch(loadingSucceeded(data)),
+    pageNum,
+    (data) => dispatch(loadingSucceeded(Object.assign(data, { currentPage: pageNum }))),
     (msg : string) => dispatch(loadingFailed(msg)),
   );
 };

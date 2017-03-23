@@ -38,7 +38,7 @@ export default (state = initialModel, action): PostListState => {
       return Object.assign(
         {},
         state,
-        pick(['count', 'next', 'previous'], action.data),
+        pick(['count', 'next', 'previous', 'currentPage'], action.data),
         { allPosts: posts }
       );
 
