@@ -10,7 +10,7 @@ import Vacancies from './components/VacancyList';
 import Pagination from './components/Footer';
 
 interface Props {
-  allPosts: PostClass[];
+  vacancies: PostClass[];
   isLoggedIn: boolean;
   loadPosts(pageNum: number): void;
   count: number;

@@ -8,7 +8,7 @@ import {
 
 
 interface PostListState {
-  allPosts: Array<PostClass>;
+  vacancies: Array<PostClass>;
   errorMessage: string;
   count: number;
   currentPage: number;
@@ -18,7 +18,7 @@ interface PostListState {
 }
 
 const initialModel: PostListState = {
-  allPosts: new Array<PostClass>(),
+  vacancies: new Array<PostClass>(),
   errorMessage: '',
   count: 0,
   currentPage: 1,
@@ -39,7 +39,7 @@ export default (state = initialModel, action): PostListState => {
         {},
         state,
         pick(['count', 'next', 'previous', 'currentPage'], action.data),
-        { allPosts: posts }
+        { vacancies: posts }
       );
 
     case LOAD_FAILED:

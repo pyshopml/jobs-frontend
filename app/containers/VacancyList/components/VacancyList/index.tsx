@@ -6,15 +6,15 @@ import VacancyItem from '../VacancyItem';
 import * as css from './style.scss';
 
 interface Props {
-  allPosts: Array<PostClass>
+  vacancies: Array<PostClass>
 };
 
 interface State {};
 
-class PostList extends React.Component<Props, State> {
+class VacancyList extends React.Component<Props, State> {
 
   renderPosts() {
-    return this.props.allPosts.map(post => <VacancyItem key={post.id} post={post} />);
+    return this.props.vacancies.map(post => <VacancyItem key={post.id} post={post} />);
   }
 
   render() {
@@ -26,4 +26,4 @@ class PostList extends React.Component<Props, State> {
   }
 }
 
-export default PostList;
+export default VacancyList;
