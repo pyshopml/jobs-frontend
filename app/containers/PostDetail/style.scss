@@ -1,21 +1,27 @@
-.post{
-  padding: 20px;
+.container {
+  width: 960px;
+  background-color: #fff;
+  padding: 16px;
+  box-shadow: 0px 3px 5px 0 rgba(174,174,174,0.5);
+  color: #464646;
+  margin-bottom: 12px;
 }
-.header{
-  padding: 20px;
-  margin-bottom: 20px;
-  .title {
-    display: block;
-    font-size: 1.3em;
-    margin-bottom: 8px;
-  }
-  .employer{
-    font-size: 0.9em;
-    margin-right: 20px;
-  }
-  .date{
-    float: right;
-    color: #848d95;
-    font-size: 13px;
-  }
+
+.mainTitle {
+  font-size: 1em;
+  font-weight: bold;
+  color: #464646;
+}
+
+.title {
+  color: #464646;
+  font-weight: bold;
+  border-bottom: 1px solid gainsboro;
+  padding-bottom: 12px;
+  margin-bottom: 22px;
+}
+
+.text {
+  line-height: 1.3em;
+  font-size: 16px;
 }

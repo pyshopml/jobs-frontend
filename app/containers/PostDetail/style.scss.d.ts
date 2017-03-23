@@ -1,6 +1,4 @@
-export const post: string;
+export const container: string;
+export const mainTitle: string;
 export const title: string;
-export const employer: string;
-export const header: string;
-export const date: string;
-
+export const text: string;

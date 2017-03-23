@@ -24,44 +24,50 @@ interface Props {
 interface State {};
 
 class PostDetail extends React.Component<Props, State> {
+  editorState: EditorState = null;    
+
   componentDidMount(){
     this.props.loadPost(+this.props.params.id);
   }
+
   componentWillReceiveProps(nextProps){
     if(this.props.params.id != nextProps.params.id)
       this.props.loadPost(+nextProps.params.id);
   }
+
   renderLoading(){
     return(
-      <CircularProgress/>
+      <CircularProgress />
     )
   }
+
   getEditorState = () => {
-    if(!this.editorState){
+    if(!this.editorState) {
       this.editorState = createEditorState(
         ContentState.createFromText(this.props.openedPost.description)
       )
     }
     return this.editorState
   }
-  editorState: EditorState = null;
+
   render() {
     if(!this.props.openedPost)
       return this.renderLoading();
+
     return (
-      <div>
-        <Paper className={css.header}>
-          <span className={css.date}>{this.props.openedPost.created_on}</span>
-          <h1 className={css.title}>{this.props.openedPost.title}</h1>
-          <span className={css.employer}>Employer</span>
-        </Paper>
-        <Paper className={css.post}>
+      <article>
+        <section className={css.container}>
+          <h1 className={css.mainTitle}>{this.props.openedPost.title}</h1>
+        </section>
+
+        <section className={css.container}>
+          <h2 className={css.title}>Описание вакансии</h2>
           <TextEditor editorState={this.getEditorState()}
                       onChange={null}
                       readOnly
           />
-        </Paper>
-      </div>
+        </section>
+      </article>
     );
   }
 };
