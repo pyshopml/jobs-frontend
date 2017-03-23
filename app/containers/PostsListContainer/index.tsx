@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import * as $ from 'jquery';
 
 import PostClass from '../../models/Post.class';
 import selectors from './selectors';
@@ -19,27 +18,8 @@ interface Props {
 interface State {};
 
 class PostsListContainer extends React.Component<Props, State> {
-  constructor(props) {
-    super(props);
-
-    this.loadMore = this.loadMore.bind(this);
-  }
-
   componentDidMount() {
     this.props.loadPosts();
-    $(window).bind('scroll', this.loadMore);
-  }
-
-  componentWillUnmount() {
-    $(window).unbind('scroll');
-  }
-
-  isBottom() {
-    return ($(window).scrollTop() === $(document).height() - $(window).height());
-  }
-
-  loadMore() {
-    if (this.isBottom()) this.props.loadMorePosts()
   }
 
   render() {
