@@ -1,33 +1,26 @@
-.post {
-  width: 100%;
-  padding: 16px 15px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+.container {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid gainsboro;
+
+  &:last-child {
+    border: none;
+  }
 }
 
 .title {
-  margin-bottom: 8px;
-  color: #07c;
-  font-size: 1.1em;
-  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 
   a {
-    color: #005494;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    color: #494949;
+    
   }
 }
 
 .description {
-  font-size: 0.9em;
-  margin-right: 20px;
-  line-height: 1.5em;
+  line-height: 1.2em;
 }
-
 
 .info{
   display: flex;

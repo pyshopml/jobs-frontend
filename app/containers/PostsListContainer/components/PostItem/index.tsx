@@ -16,11 +16,9 @@ class Post extends React.Component<Props, State> {
     const { post } = this.props;
 
     return (
-      <section className={css.post}>
+      <section className={css.container}>
         <h3 className={css.title}>
-          <Link to={`vacancies/${this.props.post.id}`}>
-            { post.title }
-          </Link>
+          <Link to={`vacancies/${post.id}`}>{ post.title }</Link>
         </h3>
         <span className={ css.description }>
           { post.description }

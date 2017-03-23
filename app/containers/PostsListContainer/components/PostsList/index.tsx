@@ -3,6 +3,8 @@ import * as React from 'react';
 import PostClass from '../../../../models/Post.class';
 import Post from '../PostItem';
 
+import * as css from './style.scss';
+
 interface Props {
   allPosts: Array<PostClass>
 };
@@ -17,7 +19,7 @@ class PostList extends React.Component<Props, State> {
 
   render() {
     return (
-      <section>
+      <section className={css.container}>
         { this.renderPosts() }
       </section>
     );
