@@ -9,6 +9,7 @@ $bg-color: #E5E3D9;
 .container {
   width: 960px;
   margin: 0 auto;
+  position: relative;
   display: flex;
   justify-content: space-between;
 }
@@ -16,6 +17,7 @@ $bg-color: #E5E3D9;
 .authControls {
   float: right;
   line-height: 43px;
+
 
   button:last-of-type {
     margin-left: 10px;

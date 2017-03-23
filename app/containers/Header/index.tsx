@@ -6,6 +6,7 @@ import Logo from './components/Logo';
 import selectors from './selectors';
 import { logoutUser } from '../App/actions';
 import { redirectToSignup } from './actions';
+import AuthBar from './components/AuthBar';
 
 import * as css from './style.scss';
 
@@ -15,10 +16,7 @@ interface Props {
   redirectToSignup: (path: string) => void;
 };
 
-interface State {};
-
-const style = {
-  margin: 12,
+interface State {
 };
 
 class Header extends React.Component<Props, State> {
@@ -40,12 +38,11 @@ class Header extends React.Component<Props, State> {
     );
   }
 
+
   userAuthBar() {
     return (
       <section className={css.authControls}>
-        <Button type="warning" size="xs" onClick={ this.props.logoutUser }>
-          Выйти
-        </Button>
+        <AuthBar />
       </section>
     );
   }
