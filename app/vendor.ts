@@ -14,3 +14,5 @@ import 'reselect';
 import 'ramda';
 import 'elemental';
 import 'react-addons-css-transition-group';
+import 'immutable';
+import 'redux-immutable';

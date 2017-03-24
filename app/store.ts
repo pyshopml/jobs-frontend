@@ -9,34 +9,19 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
+import * as Immutable from 'immutable';
 import rootReducer from './reducers';
-// import createLogger from 'redux-logger';
 
-/*
-const composeEnhancers  = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const logger = createLogger();
-
-const routing = routerMiddleware(browserHistory);
-
-export default function (initialState) {
-  return createStore(
-    rootReducer,
-    initialState,
-    composeEnhancers(applyMiddleware(routing, thunk, logger))
-  );
-}
-*/
-
-export function configureStore(history, initialState = {}) {
+// Since Store's state is represented now using immutable collection 
+// from Immutable.js its initial value should be Immutable collection
+export function configureStore(history, initialState = Immutable.Map()) {
 
   const composeEnhancers  = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  // const logger = createLogger();
 
   const enhancer = composeEnhancers(
     applyMiddleware(
       thunk,
       routerMiddleware(history),
-      // logger,
     )
   );
 
