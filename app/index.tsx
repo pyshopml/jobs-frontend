@@ -20,7 +20,9 @@ require('./tap.plugin');
 import './index.scss';
 
 const store = configureStore(hashHistory);
-const history = syncHistoryWithStore(hashHistory, store);
+const history = syncHistoryWithStore(hashHistory, store, {
+  selectLocationState: state => state.get('routing').toJS(),
+});
 const routes = createRoutes(store);
 
 const loadAuthState = () => {
