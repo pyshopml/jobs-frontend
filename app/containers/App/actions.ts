@@ -28,7 +28,8 @@ export const saveCredentials = (data: any): Action => ({
 
 
 const redirectUser = (dispatch, getState) => {
-  let { app: { intendedPath } } = getState();
+  let state = getState();
+  let intendedPath = state.get('app').get('intendedPath');
 
   if (isEmpty(intendedPath)) {
     dispatch(push('/'));

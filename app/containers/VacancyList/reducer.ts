@@ -1,3 +1,4 @@
+import { fromJS, Map } from 'immutable';
 import { pick } from 'ramda';
 import PostClass from '../../models/Post.class';
 import {
@@ -17,7 +18,7 @@ interface PostListState {
   pageSize: number;
 }
 
-const initialModel: PostListState = {
+const initialModel = fromJS({
   vacancies: new Array<PostClass>(),
   errorMessage: '',
   count: 0,
@@ -25,9 +26,9 @@ const initialModel: PostListState = {
   next: '',
   previous: '',
   pageSize: 20,
-};
+});
 
-export default (state = initialModel, action): PostListState => {
+export default (state = initialModel, action) => {
   switch (action.type) {
     case LOAD_POSTS:
       return state;
@@ -35,15 +36,12 @@ export default (state = initialModel, action): PostListState => {
     case LOAD_POSTS_SUCCEEDED:
       let posts = action.data.results.map(result => new PostClass(result));
 
-      return Object.assign(
-        {},
-        state,
-        pick(['count', 'next', 'previous', 'currentPage'], action.data),
-        { vacancies: posts }
-      );
+      return state
+        .set('vacancies', posts)
+        .merge(pick(['count', 'next', 'previous', 'currentPage'], action.data));
 
     case LOAD_FAILED:
-      return Object.assign({}, state, { errorMessage: action.errorMessage });
+      return state.set('errorMessage', action.errorMessage);
 
     default:
       return state;

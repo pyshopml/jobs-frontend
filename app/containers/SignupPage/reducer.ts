@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { Action } from '../../interfaces';
 import { SignupModel } from './interfaces';
 import {
@@ -6,24 +7,23 @@ import {
   SUBMIT_CREDENTIALS_FAILED,
 } from './constants';
 
-const initialState = {
+const initialState = fromJS({
   isLoading: false,
   message: '',
-};
+});
 
-export default (state = initialState, action: Action): SignupModel => {
+export default (state = initialState, action: Action)=> {
   switch(action.type) {
 
     case SUBMIT_CREDENTIALS:
-      return Object.assign({}, state, { isLoading: true });
-
+      return state.set('isLoading', true);
 
     case SUBMIT_CREDENTIALS_SUCCEEDED:
-      return Object.assign({}, state, { isLoading: false });
+      return state.set('isLoading', false);
 
 
     case SUBMIT_CREDENTIALS_FAILED:
-      return Object.assign({}, state, { isLoading: false, message: action.message });
+      return state.merge({ isLoading: false, message: action.message });
 
     default: 
       return state;

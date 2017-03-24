@@ -1,9 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.loginPage;
-const loginSubstate = state => state.app.isLoggedIn;
+const selectSubstate = state => state.get('loginPage');
 
 export default createSelector(
   selectSubstate,
-  (substate) => substate
+  (substate) => substate.toJS()
 );

@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import INotification from '../../interfaces/inotification';
 import {
   ADD_NOTIFICATION,
@@ -8,23 +9,19 @@ interface AlertState {
   notifications: Array<INotification>;
 }
 
-const initialModel: AlertState = {
+const initialModel = fromJS({
   notifications: new Array<INotification>(),
-};
+});
 
-export default (state = initialModel, action): AlertState => {
+export default (state = initialModel, action) => {
   switch(action.type) {
 
     case ADD_NOTIFICATION:
-      return Object.assign(
-        {},
-        state,
-        { notifications: [ ...state.notifications, action.notification ] });
+      let notifications = state.get('notifications').push(action.notification);
+      return state.set('notifications', notifications);
 
     case REMOVE_CURRENT_NOTIFICATION:
-      return Object.assign({}, state, {
-        notifications: state.notifications.slice(1)
-      });
+      return state.set('notifications', state.get('notifications').shift());
 
     default:
       return state;

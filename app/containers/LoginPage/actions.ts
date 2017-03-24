@@ -20,7 +20,7 @@ const loginSucceeded = (): Action => ({
   type: LOGIN_USER_SUCCEEDED,
 });
 
-const loginSubmitSucceeded = (data: AuthCredentials) => (dispatch, getState) => {
+const loginSubmitSucceeded = (data: AuthCredentials) => dispatch => {
   dispatch(loginSucceeded());
   dispatch(saveAuthCredentials(data));
 };
