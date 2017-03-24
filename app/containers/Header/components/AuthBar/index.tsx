@@ -6,6 +6,7 @@ import * as css from './style.scss';
 
 interface Props {
   logoutUser: () => void;
+  redirectTo: (path: string) => void;
 };
 
 interface State {
@@ -64,6 +65,10 @@ class AuthBar extends React.Component<Props, State> {
     this.props.logoutUser();
   }
 
+  newVacancyHandler = () => {
+    this.props.redirectTo('/vacancies/new');
+  }
+
   render() {
     return (
       <section>
@@ -86,6 +91,8 @@ class AuthBar extends React.Component<Props, State> {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
+            <MenuItem primaryText="Создать вакансию" style={ styles.menuItem } onClick={ this.newVacancyHandler } />
+            <Divider />
             <MenuItem primaryText="Ваш профиль" style={ styles.menuItem }/>
             <MenuItem primaryText="Панель управления" style={ styles.menuItem } />
             <Divider />

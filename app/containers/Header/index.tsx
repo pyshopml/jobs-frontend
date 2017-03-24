@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Logo from './components/Logo';
 import selectors from './selectors';
 import { logoutUser } from '../App/actions';
-import { redirectToSignup } from './actions';
+import { redirectTo } from './actions';
 import AuthBar from './components/AuthBar';
 
 import * as css from './style.scss';
@@ -13,7 +13,7 @@ import * as css from './style.scss';
 interface Props {
   isLoggedIn: boolean;
   logoutUser: () => void;
-  redirectToSignup: (path: string) => void;
+  redirectTo: (path: string) => void;
 };
 
 interface State {
@@ -22,7 +22,7 @@ interface State {
 class Header extends React.Component<Props, State> {
 
   signupClickHandler = (path: string) => {
-    this.props.redirectToSignup(path);
+    this.props.redirectTo(path);
   }
 
 	loginBar() {
@@ -65,7 +65,7 @@ const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
   logoutUser: () => dispatch(logoutUser()),
-  redirectToSignup: (path) => dispatch(redirectToSignup(path)),
+  redirectTo: (path) => dispatch(redirectTo(path)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
