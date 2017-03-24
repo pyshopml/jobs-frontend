@@ -66,6 +66,7 @@
   "devDependencies": {
     "@types/classnames": "0.0.32",
     "@types/draft-js": "^0.9.1",
+    "@types/immutable": "^3.8.7",
     "@types/jest": "^19.2.2",
     "@types/jquery": "^2.0.40",
     "@types/material-ui": "^0.16.51",
