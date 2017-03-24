@@ -5,7 +5,6 @@ import PostClass from '../../models/Post.class';
 import selectors from './selectors';
 import { loadPosts } from './actions';
 
-import AddButton from './components/AddPostButton';
 import Vacancies from './components/VacancyList';
 import Pagination from './components/Footer';
 
@@ -35,7 +34,6 @@ class VacancyList extends React.Component<Props, State> {
       <article>
         <Vacancies { ...this.props } />
         <Pagination {...this.props} changePage={ this.handlePageChange }  />
-        { this.props.isLoggedIn ? <AddButton/> : '' }
       </article>
     );
   }
