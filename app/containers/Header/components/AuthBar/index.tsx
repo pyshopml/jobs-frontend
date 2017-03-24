@@ -4,7 +4,9 @@ import { Avatar, Divider, FlatButton, Popover, Menu, MenuItem } from 'material-u
 
 import * as css from './style.scss';
 
-interface Props {};
+interface Props {
+  logoutUser: () => void;
+};
 
 interface State {
   open: boolean;
@@ -58,6 +60,10 @@ class AuthBar extends React.Component<Props, State> {
     });
   }
 
+  handleLogout = () => {
+    this.props.logoutUser();
+  }
+
   render() {
     return (
       <section>
@@ -83,7 +89,7 @@ class AuthBar extends React.Component<Props, State> {
             <MenuItem primaryText="Ваш профиль" style={ styles.menuItem }/>
             <MenuItem primaryText="Панель управления" style={ styles.menuItem } />
             <Divider />
-            <MenuItem primaryText="Выйти" style={ styles.menuItem } />
+            <MenuItem primaryText="Выйти" style={ styles.menuItem } onClick={ this.handleLogout } />
           </Menu>
         </Popover>
       </section>

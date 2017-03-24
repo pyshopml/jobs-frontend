@@ -42,7 +42,7 @@ class Header extends React.Component<Props, State> {
   userAuthBar() {
     return (
       <section className={css.authControls}>
-        <AuthBar />
+        <AuthBar {...this.props} />
       </section>
     );
   }
