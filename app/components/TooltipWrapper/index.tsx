@@ -12,7 +12,7 @@ interface Props{
   label: string;
   className?: string;
   style?: any;
-  horizontalPosition?: 'left' | 'right' | 'middle';
+  horizontalPosition?: 'left' | 'right';
   verticalPosition?: 'top' | 'bottom';
 }
 
