@@ -1,3 +1,3 @@
-export const toggleIcon: string;
+export const icon: string;
 export const active: string;
 export const disabled: string;
