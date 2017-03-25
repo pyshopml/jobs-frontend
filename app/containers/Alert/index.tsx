@@ -27,42 +27,43 @@ class Alert extends React.Component<Props, null> {
 
   notificationDuration = () => {
     let notification = this.getNotification();
-    return notification.duration;
+    return notification ? notification.duration : null;
   }
 
   notificationMessage = () => {
     let notification = this.getNotification();
-    return notification.message;
+    return notification ? notification.message : '';
   }
 
   actionClickHandler = () => {
     let notification = this.getNotification();
 
-    return () => {
+    return notification ? () => {
       notification.triggerAction();
       this.onSnackbarCloseClick();
-    }
+    } : null
   }
 
   actionLabel = () => {
-    let notification = this.getNotification()
-    return notification.label;
+    let notification = this.getNotification();
+    return notification ? notification.label : ''
   }
 
-  renderAlert() {
-    return (
-      <Snackbar open={ true }
+  isSnackbarOpen = () => {
+    if(this.getNotification())
+      return true
+    return false
+  }
+
+  render() {
+    return(
+      <Snackbar open={ this.isSnackbarOpen() }
                 action={ this.actionLabel() }
                 onActionTouchTap={ this.actionClickHandler() }
                 message={ this.notificationMessage() }
                 autoHideDuration={ this.notificationDuration() }
                 onRequestClose={ this.onSnackbarClose } />
-    );
-  }
-
-  render() {
-    let notification = this.getNotification();
-    return notification ? this.renderAlert() : <div />;
+    )
   }
 }
 
