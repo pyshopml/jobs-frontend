@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.passwordChange;
+const selectSubstate = state => state.get('passwordChange');
 
 const selectUid = (state, props) => props.params.uid;
 
@@ -10,5 +10,5 @@ export default createSelector(
   selectSubstate,
   selectUid,
   selectToken,
-  (substate, uid, token) => Object.assign(substate, { uid, token })
+  (substate, uid, token) => substate.merge({ uid, token }).toJS()
 );

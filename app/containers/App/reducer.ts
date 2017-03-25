@@ -7,6 +7,8 @@
 *
 * Nick Luparev nikita.luparev@gmail.com
 ------------------------------------------------------------------------------- */
+
+import { fromJS } from 'immutable';
 import { Action } from '../../interfaces';
 
 import {
@@ -26,40 +28,32 @@ interface AppState {
   intendedPath: string;
 }
 
-const initialModel = {
+const initialModel = fromJS({
   isLoggedIn: false,
   auth_token: '',
   username: '',
   email: '',
   isEmailConfirmed: false,
   intendedPath: '',
-};
+});
 
-export default (state:AppState = initialModel, action: Action): AppState => {
+export default (state = initialModel, action: Action) => {
   switch(action.type) {
 
     case SAVE_AUTH_CREDENTIALS:
-      return Object.assign(
-        {},
-        state,
-        { auth_token: action.data.auth_token, isLoggedIn: true }
-      );
+      return state.merge({ auth_token: action.data.auth_token, isLoggedIn: true });
 
     case SAVE_USER_CREDENTIALS:
-      return Object.assign(
-        {},
-        state,
-        { username: action.data.username, email: action.data.email }
-      );
+      return state.merge({ username: action.data.username, email: action.data.email });
 
     case LOGOUT_USER:
-      return Object.assign({}, state, { isLoggedIn: false, auth_token: '' });
+      return state.merge({ isLoggedIn: false, auth_token: '' });
 
     case SAVE_INTENDED_PATH:
-      return Object.assign({}, state, { intendedPath: action.data.path });
+      return state.set('intendedPath', action.data.path);
 
     case CLEAR_INTENDED_PATH:
-      return Object.assign({}, state, { intendedPath: '' });
+      return state.set('intendedPath', '');
 
     default:
       return state;

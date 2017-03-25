@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cookie from 'react-cookie'
-import { Route, IndexRedirect } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
 import Vacancies from './containers/VacancyList';
@@ -16,6 +16,8 @@ import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
 import { storeIntendedPath } from './containers/App/actions';
 
+import { push } from 'react-router-redux';
+
 export default (store) => {
 
   const saveIntendedPath = (path: string) => {
@@ -23,33 +25,30 @@ export default (store) => {
   }
 
   const isLogout = (nextState, replace) => {
-    const { app: { isLoggedIn } } = store.getState();
+    let state = store.getState();
+    let isLoggedIn = state.get('app').get('isLoggedIn');
+    
     if (isLoggedIn) {
-      replace({
-        pathname: '/',
-        state: { nextPathname: nextState.location.pathname },
-      });
+      store.dispatch(push('/'));
     }
   };
 
   const MatchWhenAuthed = (nextState, replace) => {
-
     const { routes } = nextState;
     let intendedPath = last(routes).path;
     saveIntendedPath(intendedPath);
 
-    const { app: { isLoggedIn } } = store.getState();
-    if (!isLoggedIn) {
-      replace({
-        pathname: '/login',
-        state: { nextPathname: nextState.location.pathname },
-      });
+    let state = store.getState();
+    let isLoggedIn = state.get('app').get('isLoggedIn');
+
+    if(!isLoggedIn) {
+      store.dispatch(push('/login'));
     }
   };
 
   return (
     <Route path="/" component={ App }>
-      <IndexRedirect to="/vacancies" />
+      <IndexRoute component={ Vacancies } />
       <Route path="vacancies" component={ Vacancies }/>
       <Route path="vacancies/new" component={ NewPost } onEnter={ MatchWhenAuthed } />
       <Route path="vacancies/:id" component={ PostDetail }/>

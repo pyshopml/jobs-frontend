@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import { Action } from '../../interfaces';
 import {
   ACTIVATE_ACCOUNT,
@@ -10,30 +11,22 @@ interface ActivateAccountState {
   isAccountActivated: boolean;
 }
 
-const initialState: ActivateAccountState = {
+const initialState = fromJS({
   isLoading: true,
   isAccountActivated: false,
-}
+});
 
-export default (state = initialState, action: Action): ActivateAccountState => {
+export default (state = initialState, action) => {
   switch(action.type) {
 
     case ACTIVATE_ACCOUNT:
       return state;
 
     case ACTIVATE_ACCOUNT_SUCCEEDED:
-      return Object.assign(
-        {},
-        state,
-        { isLoading: false, isAccountActivated: true }
-      );
+      return state.merge({ isLoading: false, isAccountActivated: true });
 
     case ACTIVATE_ACCOUNT_FAILED:
-      return Object.assign(
-        {},
-        state,
-        { isLoading: false }
-      );
+      return state.set('isLoading', false);
 
     case "@@router/LOCATION_CHANGE":
       return initialState;

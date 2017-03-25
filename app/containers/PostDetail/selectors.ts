@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-const selectSubstate = state => state.postDetail
+const selectSubstate = state => state.get('postDetail');
 
 export default createSelector(
   selectSubstate,
-  (substate) => substate
+  (substate) => substate.toJS()
 )

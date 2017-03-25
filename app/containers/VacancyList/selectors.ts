@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-const postsSelectors = state => state.posts;
-const loginSubstate = state => state.app.isLoggedIn;
+const postsSelectors = state => state.get('posts');
+const loginSubstate = state => state.get('app').get('isLoggedIn');
 
 export default createSelector(
   postsSelectors,
   loginSubstate,
-  (substate, isLoggedIn) => Object.assign(substate, { isLoggedIn })
+  (substate, isLoggedIn) => substate.set('isLoggedIn', isLoggedIn).toJS()
 );

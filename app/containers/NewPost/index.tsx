@@ -2,7 +2,6 @@ import * as React from 'react';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 
-
 import PostClass from '../../models/Post.class';
 import INewPost from '../../interfaces/inewpost';
 import NewPostForm from '../../components/NewPostForm';

@@ -5,8 +5,9 @@
 *
 * Nick Luparev nikita.luparev@gmail.com
 ------------------------------------------------------------------------------- */
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+
+import { combineReducers } from 'redux-immutable';
+import routerReducer from './routerReducer';
 import appReducer from './containers/App/reducer';
 import postsReducer from './containers/VacancyList/reducer';
 import newPostReducer from './containers/NewPost/reducer';
