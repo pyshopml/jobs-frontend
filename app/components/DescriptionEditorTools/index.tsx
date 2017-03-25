@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { EditorState } from 'draft-js';
+import { Card } from 'elemental';
 
 import InlineStylesBar from '../InlineStylesBar';
 import BlockStylesBar from '../BlockStylesBar';
@@ -21,24 +22,15 @@ class DescriptionEditorTools extends React.Component<Props, State>{
     return(
       <section className={ css.editorTools }>
         <section className={ css.stylesButtons }>
-
           <InlineStylesBar editorState={this.props.editorState}
-                           onToggle={ style => this.props.onToggleStyle(style, 'toggleInlineStyle') }
-                           style={ {marginRight: '20px'} } />
+                           onToggle={ style => this.props.onToggleStyle(style, 'toggleInlineStyle') }/>
 
           <BlockStylesBar editorState={this.props.editorState}
-                          onToggle={ style => this.props.onToggleStyle(style, 'toggleBlockType') }
-                          style={{marginRight: '20px'}}/>
+                          onToggle={ style => this.props.onToggleStyle(style, 'toggleBlockType') }/>
 
           <ToggleLinkButton editorState={this.props.editorState}
                             onToggle={this.props.onToggleLink}/>
         </section>
-
-        <DropdownStyles
-          editorState={this.props.editorState}
-          onToggle={ style => this.props.onToggleStyle(style, 'toggleBlockType') }
-        />
-
       </section>
     );
   }
