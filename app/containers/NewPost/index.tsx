@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Paper from 'material-ui/Paper';
+import { Card } from 'elemental';
 import { connect } from 'react-redux';
 
 
@@ -25,9 +25,12 @@ class NewPost extends React.Component<Props, State> {
   };
   render() {
     return (
-      <Paper className={css.newPost}>
+      <Card className={css.newPost}>
+        <h1 className={css.title}>
+          Новая вакансия
+        </h1>
         <NewPostForm onSubmit={this.onFormSubmit} { ...this.props } />
-      </Paper>
+      </Card>
     );
   }
 };
