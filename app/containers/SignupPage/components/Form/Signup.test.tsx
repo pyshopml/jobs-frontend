@@ -5,44 +5,67 @@ import * as expect from 'expect';
 import SignupForm from './index';
 
 describe('Signup form', () => {
-  let 
-    formWrapper, submitSpy, usernameInput,
-    emailInput, passwordInput, passwordConfirmationInput, form,
-    props = {
-      handleSubmit: data => console.log(data),
-      message: '',
-      isLoading: false,
-    };
 
-  beforeEach(() => {
+  describe('submits data', () => {
+    let
+      formWrapper,
+      submitSpy,
+      props = {
+        handleSubmit: data => console.log(data),
+        message: '',
+        isLoading: false,
+      };
+
     submitSpy = expect.spyOn(props, 'handleSubmit');
     formWrapper = mount(<SignupForm {...props} />);
 
-    usernameInput = formWrapper.find('input[name="username"]');
-    emailInput = formWrapper.find('input[name="email"]');
-    passwordInput = formWrapper.find('input[name="password"]');
-    passwordConfirmationInput = formWrapper.find('input[name="passwordConfirmation"]');
-    form = formWrapper.find('form');
+    let usernameInput = formWrapper.find('input[name="username"]');
+    let emailInput = formWrapper.find('input[name="email"]');
+    let passwordInput = formWrapper.find('input[name="password"]');
+    let passwordConfirmationInput = formWrapper.find('input[name="passwordConfirmation"]');
+
+    it('only if all fields are filled in', () => {
+      usernameInput.simulate('change', { target: { name: 'username', value: 'John Doe' } });
+      emailInput.simulate('change', { target: { name: 'email', value: 'usermail@gmail.com' } });
+      passwordInput.simulate('change', { target: { name: 'password', value: '123123' } });
+      passwordConfirmationInput.simulate('change', { name: 'passwordConfirmation', target: { value: '123123' } });
+
+      formWrapper.find('button').get(0).click();
+
+      expect(submitSpy).toHaveBeenCalled();
+    });
+
   });
 
-  xit('submits entered data if all fields filled in', () => {
-    usernameInput.simulate('change', { target: { value: 'John Doe' } });
-    emailInput.simulate('change', { target: { value: 'usermail@gmail.com' } });
-    passwordInput.simulate('change', { target: { value: '123123' } });
-    passwordConfirmationInput.simulate('change', { target: { value: '123123' } });
+  describe('does not submit', () => {
+    let
+      formWrapper,
+      submitSpy,
+      props = {
+        handleSubmit: data => console.log(data),
+        message: '',
+        isLoading: false,
+      };
 
-    formWrapper.find('button').simulate('click');
+    submitSpy = expect.spyOn(props, 'handleSubmit');
+    formWrapper = mount(<SignupForm {...props} />);
 
-    expect(submitSpy).toHaveBeenCalled();
+    let usernameInput = formWrapper.find('input[name="username"]');
+    let emailInput = formWrapper.find('input[name="email"]');
+    let passwordInput = formWrapper.find('input[name="password"]');
+    let passwordConfirmationInput = formWrapper.find('input[name="passwordConfirmation"]');
+
+
+    it('data if at least one field is empty', () => {
+      usernameInput.simulate('change', { target: { name: 'username', value: 'John Doe' } });
+      emailInput.simulate('change', { target: { name: 'email', value: 'usermail@gmail.com' } });
+      passwordInput.simulate('change', { target: { name: 'password', value: '123123' } });
+
+      formWrapper.find('button').get(0).click();
+
+      expect(submitSpy).toNotHaveBeenCalled();
+    });
+
   });
 
-  it('do not submit entered data if at least one field is empty', () => {
-    usernameInput.simulate('change', { target: { value: 'nikitos' }});
-    emailInput.simulate('change', { target: { value: 'nikita.luparev@gmail.com' }});
-    passwordInput.simulate('change', { target: { value: '123123' }});
-
-    formWrapper.find('button').simulate('click');
-
-    expect(submitSpy).toNotHaveBeenCalled();
-  });
 });
