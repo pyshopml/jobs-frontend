@@ -49,7 +49,7 @@ class TooltipWrapper extends React.Component<Props, State>{
       >
         <Tooltip label={this.props.label}
                  show={this.state.showTooltip}
-                 className={` ${this.props.className}`}
+                 className={ css.tooltip }
                  verticalPosition={this.props.verticalPosition}
                  horizontalPosition={this.props.horizontalPosition}
         />
