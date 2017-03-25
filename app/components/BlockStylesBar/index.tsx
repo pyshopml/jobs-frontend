@@ -34,8 +34,7 @@ class BlockStylesBar extends React.Component<Props, State>{
                             onToggle={this.props.onToggle}
                             size={type.iconSize}
                             label={type.label}
-                            key={index}
-                            style={{marginRight: '10px'}}/>
+                            key={index}/>
           )
         }
       </div>

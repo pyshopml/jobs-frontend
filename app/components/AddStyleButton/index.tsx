@@ -1,10 +1,9 @@
 import * as React from 'react';
 import * as FontAwesome from 'react-fontawesome';
-import ToggleIcon from '../ToggleIcon';
+import Icon from '../Icon'
 
 import TooltipWrapper from '../TooltipWrapper';
 
-import * as css from './style.scss';;
 
 interface Props{
   icon: string,
@@ -23,17 +22,8 @@ class AddStyleButton extends React.Component<Props, null>{
   };
   render(){
     return(
-      <TooltipWrapper label={this.props.label}
-                      style={this.props.style}
-      >
-        <ToggleIcon size={this.props.size}
-                    toggled={this.props.active}
-                    onMouseDown={this.onMouseDown}
-        >
-          <FontAwesome name={this.props.icon}
-                       className={css.icon}
-          />
-        </ToggleIcon>
+      <TooltipWrapper label={this.props.label} >
+        <Icon onMouseDown={this.onMouseDown} active={this.props.active} icon={this.props.icon}/>
       </TooltipWrapper>
     )
   }
