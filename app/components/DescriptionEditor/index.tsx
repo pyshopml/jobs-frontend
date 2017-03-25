@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { EditorState, RichUtils } from 'draft-js';
+import { EditorState, RichUtils, Modifier } from 'draft-js';
 import * as classNames from 'classnames';
 
 import TextEditor from '../TextEditor';
 import DescriptionEditorTools from '../DescriptionEditorTools';
 
-import * as css from './style.scss';;
+import * as css from './style.scss';
 
 interface Props{
   editorState: EditorState;
@@ -44,6 +44,23 @@ class DescriptionEditor extends React.Component<Props, State>{
       entityKey
     ))
   }
+
+  insertLink = (selection, linkText, entityKey) => {
+    const newEditorContent = Modifier.replaceText(
+      this.props.editorState.getCurrentContent(),
+      selection,
+      linkText,
+      null,
+      entityKey
+    );
+    const newEditorState = EditorState.push(
+      this.props.editorState,
+      newEditorContent,
+      'adjust-depth'
+    );
+
+    this.props.onChange(newEditorState);
+  }
   rootClassName = () => {
     return classNames({
       [css.descriptionEditor]: true,
@@ -53,7 +70,7 @@ class DescriptionEditor extends React.Component<Props, State>{
   render() {
     return(
       <section className={this.rootClassName()}>
-        <DescriptionEditorTools onToggleLink={this.onToggleLink}
+        <DescriptionEditorTools onToggleLink={this.insertLink}
                                 onToggleStyle={this.onToggleStyle}
                                 editorState={this.props.editorState}/>
         <section className={css.editor}>
@@ -63,12 +80,6 @@ class DescriptionEditor extends React.Component<Props, State>{
                       onFocus={() => this.setState({editorFocused: true})}
                       onBlur={() => this.setState({editorFocused: false})}/>
         </section>
-
-        <div className={css.footer}>
-          <hr className={css.line}/>
-          <hr className={css.lineBlue}/>
-        </div>
-
       </section>
     );
   }

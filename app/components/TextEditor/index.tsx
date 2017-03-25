@@ -71,7 +71,6 @@ class TextEditor extends React.Component<Props, State>{
                 onTab={this.onTab}
                 onFocus={ this.props.onFocus }
                 onBlur={ this.props.onBlur }
-                placeholder="Описание"
                 readOnly={ this.props.readOnly }
         />
       </section>

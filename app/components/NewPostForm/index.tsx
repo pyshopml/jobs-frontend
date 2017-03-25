@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { TextField, RaisedButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
+import { Button } from 'elemental';
 import { ContentState, EditorState} from 'draft-js';
+import { FormInput, FormField, Form } from 'elemental';
+
 import DescriptionEditor from '../DescriptionEditor';
 import INewPost from '../../interfaces/inewpost';
 
 import createEditorState from '../../tools/createEditorState';
 
-import * as css from './style.scss';;
+import * as css from './style.scss';
 
 interface Props {
   createPost(post: INewPost),
@@ -26,17 +29,9 @@ class NewPostForm extends React.Component<Props, State> {
       title: '',
       editorState: createEditorState()
     }
-
-    this.hanldeSubmit = this.hanldeSubmit.bind(this);
-    this.updateTitle = this.updateTitle.bind(this);
-  }
-  onChange = (editorState, callback?) => {
-    this.setState({
-      editorState
-    }, callback)
   }
 
-  hanldeSubmit(evt) {
+  handleSubmit = (evt) => {
     evt.preventDefault();
     const { editorState } = this.state;
     this.props.onSubmit({
@@ -47,8 +42,7 @@ class NewPostForm extends React.Component<Props, State> {
     })
   }
 
-  updateTitle(evt) {
-    const { name, value } = evt.target;
+  updateField = (name, value) => {
     this.setState({ [name]: value });
   }
   clearFields = () => {
@@ -59,35 +53,43 @@ class NewPostForm extends React.Component<Props, State> {
     );
     this.setState({ title: '', editorState });
   }
-  isButtonSubmitDisabled = () => {
+  isFieldsValid = () => {
     const isDescriptionEmpty = !this.state.editorState.getCurrentContent().hasText();
-    if( this.state.title.trim() == '' || isDescriptionEmpty) return true;
-    return false;
+    if( this.state.title.trim() == '' || isDescriptionEmpty) return false;
+    return true;
   }
   render() {
     const { title } = this.state;
 
     return(
-      <form action="">
-        <TextField hintText="Заголовок.."
-                   name="title"
-                   value={ title }
-                   fullWidth={ true }
-                   onChange={this.updateTitle}
-                   inputStyle={{padding: '0 10px'}}
-                   hintStyle={{left: '10px', transition: 'none'}} />
+      <Form>
+        <FormField label="Название вакансии">
+          <input name="title"
+                 className={css.textField}
+                 value={ title }
+                 onChange={(evt) => this.updateField(evt.target.name, evt.target.value)}/>
+        </FormField>
+        <FormField label="Описание">
+          <DescriptionEditor editorState={ this.state.editorState }
+                             onChange={
+                               (editorState) => this.updateField("editorState", editorState)
+                             }
+          />
+        </FormField>
 
-        <DescriptionEditor onChange={ this.onChange } editorState={ this.state.editorState }  />
-        
         <div className={ css.controls }>
-          <RaisedButton label="Очистить" onClick={this.clearFields}/>
-          <RaisedButton type="submit"
-                        label="Создать"
-                        primary={true}
-                        disabled={ this.isButtonSubmitDisabled() }
-                        onClick={ this.hanldeSubmit } />
+          <Button type="hollow-primary" onClick={this.clearFields}>
+            Очистить
+          </Button>
+          <Button type="primary"
+                  onClick={this.handleSubmit}
+                  disabled={!this.isFieldsValid()}
+                  submit
+          >
+            Создать
+          </Button>
         </div>
-      </form>
+      </Form>
     )
   }
 }

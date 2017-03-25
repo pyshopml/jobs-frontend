@@ -1,22 +1,21 @@
 import * as React from 'react';
-import * as FontAwesome from 'react-fontawesome';
-import ToggleIcon from '../ToggleIcon';
-import Popover from 'material-ui/Popover';
-import TextField from 'material-ui/TextField';
+import { FormInput, FormField, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'elemental';
 import { EditorState } from 'draft-js';
+import getSelectedText from '../../tools/getSelectedText'
 
+import Icon from '../Icon';
 import TooltipWrapper from '../TooltipWrapper';
 
-import * as css from './style.scss';;
 
 interface Props{
   editorState: any;
-  onToggle(editorState: EditorState, selection: any, entityKey: any);
+  onToggle(selection: any, linkText: string, entityKey: any);
   style?: any;
 };
 interface State{
-  showURLInput: boolean
-  urlValue: string;
+  showURLInput: boolean;
+  linkText: string;
+  linkUrl: string;
   anchorEl: any;
 };
 
@@ -26,131 +25,97 @@ class ToggleLinkButton extends React.Component<Props, State>{
     super(props);
     this.state = {
       showURLInput: false,
-      urlValue: '',
+      linkText: '',
+      linkUrl: '',
       anchorEl: null
     };
   }
-  refs: {
-    linkInput: any
+  updateFields = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
-  onURLChange = e => this.setState({urlValue: e.target.value.trim()});
-
   promptForLink = (e) => {
     e.preventDefault();
+    const contentState = this.props.editorState.getCurrentContent();
     const selection = this.props.editorState.getSelection();
-    if (!selection.isCollapsed()) {
-      const contentState = this.props.editorState.getCurrentContent();
-      const startKey = this.props.editorState.getSelection().getStartKey();
-      const startOffset = this.props.editorState.getSelection().getStartOffset();
-      const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey);
-      const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
-
-      let url = '';
-      if (linkKey) {
-        const linkInstance = contentState.getEntity(linkKey);
-        url = linkInstance.getData().url;
-      }
-      this.setState({
-        showURLInput: true,
-        anchorEl: e.currentTarget,
-        urlValue: url,
-      }, () => {
-        setTimeout(() => this.refs.linkInput.focus(), 0);
-      });
-    }
+    const selectedText = getSelectedText(contentState, selection);
+    this.setState({
+      showURLInput: true,
+      anchorEl: e.currentTarget,
+      linkText: selectedText
+    });
   }
-
+  closeLinkInput = () => {
+    this.setState({showURLInput: false})
+  }
   confirmLink = e => {
     e.preventDefault();
     const contentState = this.props.editorState.getCurrentContent();
     const contentStateWithEntity = contentState.createEntity(
       'LINK',
       'IMMUTABLE',
-      {url: this.state.urlValue}
+      {url: this.state.linkUrl}
     );
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
     const newEditorState = EditorState.set(
       this.props.editorState, { currentContent: contentStateWithEntity }
     );
     this.props.onToggle(
-      newEditorState,
       newEditorState.getSelection(),
+      this.state.linkText,
       entityKey
     )
     this.setState({
       showURLInput: false,
-      urlValue: '',
+      linkUrl: '',
+      linkText: ''
     });
   }
-
-  onLinkInputKeyDown = e => {
-    if (e.which === 13 && this.state.urlValue != '') { //Enter
-      this.confirmLink(e);
-    }
-    if (e.which === 27) { // Esc
-      this.closeLinkInput()
-    }
+  isLinkValid = () => {
+    if(!this.state.linkText || !this.state.linkUrl)
+      return false;
+    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return pattern.test(this.state.linkUrl);
   }
-  closeLinkInput = () => {
-    this.setState({showURLInput: false})
-  }
-  removeLink = e => {
-    e.preventDefault();
-    const selection = this.props.editorState.getSelection();
-    if (!selection.isCollapsed()) {
-      this.props.onToggle(
-        this.props.editorState,
-        selection,
-        null)
-    }
-  };
-  renderPopover = () => {
-    return(
-      <Popover
-        open={this.state.showURLInput}
-        anchorEl={this.state.anchorEl}
-        onRequestClose={ this.closeLinkInput }
-        anchorOrigin={{horizontal: 'right', vertical: 'center'}}
-        targetOrigin={{horizontal: 'left', vertical: 'center'}}
-        style={{padding: '0 15px'}}
-      >
-        <div style={{display: 'flex', alignItems: 'center'}}>
-          <TextField onKeyDown={this.onLinkInputKeyDown}
-                     name="link"
-                     onChange={this.onURLChange}
-                     value={this.state.urlValue}
-                     ref="linkInput"
-                     hintText="https://example.com"/>
-          <ToggleIcon onMouseDown={this.confirmLink}
-                      style={{marginLeft: '10px'}}
-                      toggled={false}
-                      disabled={this.isUrlEmpty()}>
-            <FontAwesome name="check"/>
-          </ToggleIcon>
-          <ToggleIcon onMouseDown={this.closeLinkInput}
-                      style={{marginLeft: '10px'}}
-                      toggled={false}>
-            <FontAwesome  name="close"/>
-          </ToggleIcon>
-        </div>
-      </Popover>
-    )
-  }
-  isUrlEmpty = () => this.state.urlValue.trim() == '';
-  isTextSelected = () => !this.props.editorState.getSelection().isCollapsed();
-  getTooltipLabel = () => this.isTextSelected() ? "Ссылка" : "Выделите текст, чтобы вставить ссылку"
-
+  renderModal = () => (
+    <Modal isOpen={this.state.showURLInput} onCancel={this.closeLinkInput} backdropClosesModal={true}>
+      <ModalHeader text="Вставить ссылку" showCloseButton onClose={this.closeLinkInput} />
+      <ModalBody>
+        <FormField label="Текст" htmlFor="linkText">
+          <FormInput name="linkText"
+                     autoFocus
+                     value={this.state.linkText}
+                     onChange={this.updateFields}/>
+        </FormField>
+        <FormField label="URL" htmlFor="linkUrl">
+          <FormInput name="linkUrl"
+                     value={this.state.linkUrl}
+                     placeholder="example.com"
+                     onChange={this.updateFields}/>
+        </FormField>
+      </ModalBody>
+      <ModalFooter>
+        <Button type="primary"
+                disabled={!this.isLinkValid()}
+                onClick={this.confirmLink}
+        >
+          Вставить
+        </Button>
+      </ModalFooter>
+    </Modal>
+  )
   render() {
     return (
-      <TooltipWrapper label={this.getTooltipLabel()}
-                      style={this.props.style}
-                      className={css.toggleLinkButton}>
-        <ToggleIcon onMouseDown={this.promptForLink}
-                    toggled={this.state.showURLInput}
-                    disabled={!this.isTextSelected()}>
-          <FontAwesome name="link"/>
-        </ToggleIcon>
-        {this.renderPopover()}
+      <TooltipWrapper label="Ссылка"
+                      style={this.props.style}>
+        <Icon icon="link" onMouseDown={this.promptForLink}/>
+        {this.renderModal()}
       </TooltipWrapper>
     );
   }

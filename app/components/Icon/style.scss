@@ -1,0 +1,19 @@
+.icon{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 13px;
+  cursor: pointer;
+  &:hover, &.active{
+    background-color: #00a0fa;
+    color: #fff
+  }
+  &.disabled{
+    background-color: #fff !important;
+    color: grey;
+    cursor: default;
+  }
+}

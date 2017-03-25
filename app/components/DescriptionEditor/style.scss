@@ -1,43 +1,16 @@
 $border-color: #e0e0e0;
 
 .description-editor{
-  padding-bottom: 5px;
-  margin-top: 10px;
-  border: 1px solid $border-color;
-  border-bottom: none;
   .editor{
-    padding: 0 10px;
-  }
-  &.focused{
-    .footer{
-      .line-blue{
-        transform: scaleX(1);
-      }
+    padding: 10px 10px;
+    background-color: #ebebeb;
+    a{
+      cursor: text;
     }
   }
-}
-
-.footer{
-  position: relative;
-
-  .line, .line-blue{
-    position: absolute;
-    top: -4px;
-    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-    width: 100%;
-    margin: 0;
-  }
-
-  .line{
-    border-width: medium medium 1px;
-    border-style: none none solid;
-    border-bottom: 1px solid $border-color;
-  }
-
-  .line-blue{
-    border-width: medium medium 2px;
-    border-style: none none solid;
-    transform: scaleX(0);
-    border-bottom: 2px solid rgb(0, 188, 212);
+  &.focused{
+    .editor{
+      background-color: #f3f3f3;
+    }
   }
 }
