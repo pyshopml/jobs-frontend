@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router';
 
 import * as css from './style.scss';
 
@@ -8,7 +9,9 @@ interface State{};
 class Logo extends React.Component<Props, State> {
   render() {
     return (
-      <h1 className={css.logo}>PyJobs</h1>
+      <h1 className={css.logo}>
+        <Link to="/">PyJobs</Link>
+      </h1>
     );
   }
 }
