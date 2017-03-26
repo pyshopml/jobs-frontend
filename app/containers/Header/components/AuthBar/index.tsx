@@ -67,6 +67,7 @@ class AuthBar extends React.Component<Props, State> {
 
   newVacancyHandler = () => {
     this.props.redirectTo('/vacancies/new');
+    this.handleRequestClose();
   }
 
   render() {
