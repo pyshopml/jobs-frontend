@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { Action } from '../../interfaces';
 import {
   PASSWORD_CHANGE,
@@ -28,7 +29,7 @@ export default (state = initialState, action: Action) => {
     case PASSWORD_CHANGE_FAILED:
       return state.merge({ isLoading: false, message: action.message });
 
-    case "@@router/LOCATION_CHANGE":
+    case LOCATION_CHANGE:
       return initialState;
 
     default:

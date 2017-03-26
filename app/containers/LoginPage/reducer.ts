@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { Action } from '../../interfaces';
 import {
   LOGIN_USER,
@@ -23,7 +24,7 @@ export default (state = initialState, action: Action) => {
     case LOGIN_USER_FAILED:
       return state.merge({ message: action.message, isLoading: false });
 
-    case "@@router/LOCATION_CHANGE":
+    case LOCATION_CHANGE:
       return initialState;
 
     default:

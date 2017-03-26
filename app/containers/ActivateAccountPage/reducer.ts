@@ -1,5 +1,6 @@
 import { fromJS } from 'immutable';
 import { Action } from '../../interfaces';
+import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   ACTIVATE_ACCOUNT,
   ACTIVATE_ACCOUNT_SUCCEEDED,
@@ -28,7 +29,7 @@ export default (state = initialState, action) => {
     case ACTIVATE_ACCOUNT_FAILED:
       return state.set('isLoading', false);
 
-    case "@@router/LOCATION_CHANGE":
+    case LOCATION_CHANGE:
       return initialState;
 
     default:
