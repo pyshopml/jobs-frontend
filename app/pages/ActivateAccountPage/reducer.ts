@@ -1,5 +1,4 @@
 import { fromJS } from 'immutable';
-import { Action } from '../../interfaces';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   ACTIVATE_ACCOUNT,

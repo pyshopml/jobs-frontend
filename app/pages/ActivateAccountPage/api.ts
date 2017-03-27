@@ -1,4 +1,3 @@
-
 const submitRequest = (data): Promise<Response> => {
   const options = {
     method: 'POST',

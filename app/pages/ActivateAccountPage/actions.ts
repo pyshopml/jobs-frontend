@@ -1,4 +1,4 @@
-import { Action } from '../../interfaces';
+import { Action } from 'interfaces';
 import { submitActionData } from './api';
 import {
   ACTIVATE_ACCOUNT,
