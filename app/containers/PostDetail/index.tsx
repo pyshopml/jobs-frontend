@@ -16,6 +16,7 @@ import * as css from './style.scss';
 interface Props {
   openedPost: PostClass;
   loadPost(id: number);
+  isLoading: boolean;
   params: {
     id: string
   }
@@ -51,7 +52,7 @@ class PostDetail extends React.Component<Props, State> {
   }
 
   render() {
-    if(!this.props.openedPost)
+    if(this.props.isLoading)
       return this.renderLoading();
 
     return (
