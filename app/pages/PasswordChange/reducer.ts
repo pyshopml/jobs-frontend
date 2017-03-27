@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { Action } from '../../interfaces';
+import { Action } from 'interfaces';
 import {
   PASSWORD_CHANGE,
   PASSWORD_CHANGE_SUCCEEDED,

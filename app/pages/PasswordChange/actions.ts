@@ -1,4 +1,4 @@
-import { Action } from '../../interfaces';
+import { Action } from 'interfaces';
 import { submitNewPassword } from './api';
 import {
   PASSWORD_CHANGE,

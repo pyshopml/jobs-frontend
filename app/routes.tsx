@@ -7,13 +7,13 @@ import NewPost from './containers/NewPost';
 import NotFound from './containers/NotFound';
 import LoginPage from './containers/LoginPage';
 import InfoPage from './containers/InfoPage';
-import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
 import Vacancies from './pages/Vacancies';
 import PostDetail from './pages/PostDetail';
 import SignupPage from './pages/SignupPage';
 import PasswordRestorePage from './pages/RestorePassword';
+import PasswordChangePage from './pages/PasswordChange';
 import { storeIntendedPath } from './containers/App/actions';
 
 import { push } from 'react-router-redux';
