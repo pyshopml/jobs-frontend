@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { Button } from 'elemental';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import Logo from './components/Logo';
 import selectors from './selectors';
-import { logoutUser } from '../App/actions';
+import { logoutUser } from '../../actions';
 import { redirectTo } from './actions';
 import AuthBar from './components/AuthBar';
 
