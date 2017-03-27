@@ -1,6 +1,6 @@
-import INotification from "../../interfaces/inotification";
-import { Action } from '../../interfaces/action';
-import { Notification } from '../../models/Notification';
+import { INotification } from "interfaces";
+import { Action } from 'interfaces';
+import { Notification } from 'models/Notification';
 import {
   ADD_NOTIFICATION,
   REMOVE_CURRENT_NOTIFICATION

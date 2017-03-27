@@ -1,8 +1,7 @@
 import * as React from 'react';
-import * as FontAwesome from 'react-fontawesome';
-import Icon from '../Icon'
+import Icon from 'components/Icon'
 
-import TooltipWrapper from '../TooltipWrapper';
+import TooltipWrapper from 'components/TooltipWrapper';
 
 
 interface Props{

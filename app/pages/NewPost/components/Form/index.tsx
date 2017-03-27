@@ -1,13 +1,12 @@
 import * as React from 'react';
-import { RaisedButton } from 'material-ui';
 import { Button } from 'elemental';
 import { ContentState, EditorState} from 'draft-js';
-import { FormInput, FormField, Form } from 'elemental';
+import { FormInput, FormField, Form as ElementalForm } from 'elemental';
 
 import DescriptionEditor from '../DescriptionEditor';
-import INewPost from '../../interfaces/inewpost';
+import { INewPost } from 'interfaces';
 
-import createEditorState from '../../tools/createEditorState';
+import createEditorState from 'tools/createEditorState';
 
 import * as css from './style.scss';
 
@@ -21,7 +20,7 @@ interface State {
   editorState: any,
 };
 
-class NewPostForm extends React.Component<Props, State> {
+class Form extends React.Component<Props, State> {
   constructor(props) {
     super(props)
 
@@ -62,7 +61,7 @@ class NewPostForm extends React.Component<Props, State> {
     const { title } = this.state;
 
     return(
-      <Form>
+      <ElementalForm>
         <FormField label="Название вакансии">
           <input name="title"
                  className={css.textField}
@@ -89,9 +88,9 @@ class NewPostForm extends React.Component<Props, State> {
             Создать
           </Button>
         </div>
-      </Form>
+      </ElementalForm>
     )
   }
 }
 
-export default NewPostForm;
+export default Form;

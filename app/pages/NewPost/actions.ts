@@ -1,11 +1,11 @@
 import { goBack } from 'react-router-redux';
-import INewPost from '../../interfaces/inewpost';
+import { INewPost } from 'interfaces';
 import { uploadPost } from './api';
 import selectors from './selectors';
 import { push } from 'react-router-redux';
-import { addNotification } from "../Alert/actions";
-import { Action } from '../../interfaces/action';
-import { SuccessNotification, WarningNotification } from '../../models/Notification';
+import { addNotification } from "containers/Alert/actions";
+import { Action } from 'interfaces';
+import { SuccessNotification, WarningNotification } from 'models/Notification';
 
 import {
   UPLOAD_POST,

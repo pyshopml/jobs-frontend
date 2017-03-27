@@ -2,7 +2,7 @@ import * as React from 'react';
 import { EditorState, RichUtils, Modifier, SelectionState } from 'draft-js';
 import * as classNames from 'classnames';
 
-import TextEditor from '../TextEditor';
+import TextEditor from 'components/TextEditor';
 import DescriptionEditorTools from '../DescriptionEditorTools';
 
 import * as css from './style.scss';

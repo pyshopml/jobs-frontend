@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { FormInput, FormField, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'elemental';
 import { EditorState, SelectionState } from 'draft-js';
-import getSelectedText from '../../tools/getSelectedText';
-import { urlValidation } from '../../tools/validation';
+import getSelectedText from 'tools/getSelectedText';
+import { urlValidation } from 'tools/validation';
 
-import Icon from '../Icon';
-import TooltipWrapper from '../TooltipWrapper';
+import Icon from 'components/Icon';
+import TooltipWrapper from 'components/TooltipWrapper';
 
 
 interface Props{

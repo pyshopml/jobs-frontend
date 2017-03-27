@@ -1,4 +1,4 @@
-import INewPost from '../../interfaces/inewpost';
+import { INewPost } from 'interfaces';
 
 function uploadPostToServer(post: INewPost, token: string) {
   const options = {

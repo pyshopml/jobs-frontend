@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import PostClass from '../../models/Post.class';
+import PostClass from 'models/Post.class';
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,

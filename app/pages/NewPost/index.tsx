@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Card } from 'elemental';
 import { connect } from 'react-redux';
 
-import PostClass from '../../models/Post.class';
-import INewPost from '../../interfaces/inewpost';
-import NewPostForm from '../../components/NewPostForm';
+import PostClass from 'models/Post.class';
+import { INewPost } from 'interfaces';
+import Form from './components/Form';
 import { createPost, handleCancel } from './actions';
 import selectors from './selectors';
 
@@ -28,7 +28,7 @@ class NewPost extends React.Component<Props, State> {
         <h1 className={css.title}>
           Новая вакансия
         </h1>
-        <NewPostForm onSubmit={this.onFormSubmit} { ...this.props } />
+        <Form onSubmit={this.onFormSubmit} { ...this.props } />
       </Card>
     );
   }

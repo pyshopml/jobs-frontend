@@ -1,10 +1,9 @@
 import * as React from 'react';
-import cookie from 'react-cookie'
 import { Route, IndexRoute } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
-import NewPost from './containers/NewPost';
 import Vacancies from './pages/Vacancies';
+import NewPost from './pages/NewPost';
 import PostDetail from './pages/PostDetail';
 import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';

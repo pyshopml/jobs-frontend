@@ -3,8 +3,8 @@ import Snackbar from 'material-ui/Snackbar';
 import { connect } from 'react-redux';
 import { addNotification, removeFirstNotification } from './actions';
 import selectors from './selectors';
-import INotification from "../../interfaces/inotification";
-import { Notification } from '../../models/Notification';
+import { INotification } from "interfaces";
+import { Notification } from 'models/Notification';
 
 interface Props {
   notifications: Notification[];
