@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { ContentState, EditorState } from 'draft-js';
-import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
 
-import createEditorState from '../../tools/createEditorState';
-import TextEditor from '../../components/TextEditor';
+import createEditorState from 'tools/createEditorState';
+import TextEditor from 'components/TextEditor';
 import { loadPost } from './actions';
-import PostClass from '../../models/Post.class'
+import PostClass from 'models/Post.class'
 
 import selectors from './selectors';
 

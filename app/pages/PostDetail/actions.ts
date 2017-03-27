@@ -1,4 +1,4 @@
-import { Action } from '../../interfaces/action';
+import { Action } from 'interfaces';
 import { replace } from 'react-router-redux'
 import { fetchPost } from './api';
 import {
