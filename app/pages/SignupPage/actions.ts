@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
-import { Action } from '../../interfaces';
+import { Action } from 'interfaces';
 import { SignupCredentials, UserCredentials } from './interfaces';
-import { SAVE_USER_CREDENTIALS } from '../App/constants';
+import { SAVE_USER_CREDENTIALS } from 'containers/App/constants';
 import { submitData } from './api';
 import {
   SUBMIT_CREDENTIALS,

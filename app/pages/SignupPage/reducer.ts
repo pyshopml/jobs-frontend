@@ -1,6 +1,5 @@
 import { fromJS } from 'immutable';
-import { Action } from '../../interfaces';
-import { SignupModel } from './interfaces';
+import { Action } from 'interfaces';
 import {
   SUBMIT_CREDENTIALS,
   SUBMIT_CREDENTIALS_SUCCEEDED,

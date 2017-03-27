@@ -14,10 +14,10 @@ import postDetail from './containers/PostDetail/reducer';
 import postsReducer from './pages/Vacancies/reducer';
 import alertReducer from './containers/Alert/reducer';
 import LoginPageReducer from './containers/LoginPage/reducer';
-import SignupPageReducer from './containers/SignupPage/reducer';
 import RestorePasswordPageReducer from './containers/RestorePasswordContainer/reducer';
 import PasswordChangePage from './containers/PasswordChangePage/reducer';
 import AccountActivationReducer from './containers/ActivateAccountPage/reducer';
+import SignupPageReducer from './pages/SignupPage/reducer';
 
 export default combineReducers({
   routing: routerReducer,
