@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { Action } from '../../interfaces';
+import { Action } from 'interfaces';
 import { submitData } from './api';
 import {
   PASSWORD_RESTORE,

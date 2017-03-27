@@ -8,12 +8,12 @@ import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
 import LoginPage from './containers/LoginPage';
 import InfoPage from './containers/InfoPage';
-import PasswordRestorePage from './containers/RestorePasswordContainer';
 import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
 import Vacancies from './pages/Vacancies';
 import SignupPage from './pages/SignupPage';
+import PasswordRestorePage from './pages/RestorePassword';
 import { storeIntendedPath } from './containers/App/actions';
 
 import { push } from 'react-router-redux';

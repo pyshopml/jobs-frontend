@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { Action } from '../../interfaces';
+import { Action } from 'interfaces';
 import {
   PASSWORD_RESTORE,
   PASSWORD_RESTORE_SUCCEEDED,
