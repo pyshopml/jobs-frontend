@@ -5,10 +5,23 @@ export interface IEvent {
   label?: string;
   action?: () => void;
 }
-
 export interface Action {
-  type: string
-  data?: any
-  message?: string
+  type: string;
+  errorMessage?: string;
+  data?: any;
+  message?: any;
 }
-
+export interface INewPost{
+  title: string;
+  description: any;
+  keywords: string[];
+}
+export interface INotification{
+  message: string;
+  type: MsgType;
+  hideDuration?: number;
+  action?: {
+    label: string,
+    onClick: () => void;
+  }
+}
