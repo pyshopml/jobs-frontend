@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EditorState, RichUtils, Modifier } from 'draft-js';
+import { EditorState, RichUtils, Modifier, SelectionState } from 'draft-js';
 import * as classNames from 'classnames';
 
 import TextEditor from '../TextEditor';
@@ -35,18 +35,8 @@ class DescriptionEditor extends React.Component<Props, State>{
       )
     );
   };
-
-  onToggleLink = (editorState, selection, entityKey) => {
-    setTimeout(this.refs.editor.focus, 0);
-    this.props.onChange(RichUtils.toggleLink(
-      editorState,
-      selection,
-      entityKey
-    ))
-  }
-
-  insertLink = (selection, linkText, entityKey) => {
-    const newEditorContent = Modifier.replaceText(
+  insertLink = (selection: SelectionState, linkText: string, entityKey) => {
+    const newContentState = Modifier.replaceText(
       this.props.editorState.getCurrentContent(),
       selection,
       linkText,
@@ -55,7 +45,7 @@ class DescriptionEditor extends React.Component<Props, State>{
     );
     const newEditorState = EditorState.push(
       this.props.editorState,
-      newEditorContent,
+      newContentState,
       'adjust-depth'
     );
 

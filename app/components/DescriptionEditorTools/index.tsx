@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EditorState } from 'draft-js';
+import { EditorState, SelectionState } from 'draft-js';
 import { Card } from 'elemental';
 
 import InlineStylesBar from '../InlineStylesBar';
@@ -12,7 +12,7 @@ import * as css from './style.scss';;
 interface Props{
   editorState: EditorState,
   onToggleStyle(style: any, type): any;
-  onToggleLink(editorState: EditorState, selection: any, entityKey: any);
+  onToggleLink(selection: SelectionState, linkText: string, entityKey: any);
 };
 
 interface State{};

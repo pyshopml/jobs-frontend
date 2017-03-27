@@ -1,6 +1,6 @@
 import { ContentState, EditorState, CompositeDecorator, ContentBlock } from 'draft-js';
 
-import DescriptionLink from '../components/DescriptionLink';
+import DescriptionLink from './components/DescriptionLink';
 
 function findLinkEntities(block: ContentBlock,
                           callback:(start: number, end: number) => void,
