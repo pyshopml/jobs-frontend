@@ -4,7 +4,6 @@ import { Route, IndexRoute } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
 import NewPost from './containers/NewPost';
-import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
 import Vacancies from './pages/Vacancies';
 import PostDetail from './pages/PostDetail';
@@ -14,6 +13,7 @@ import SignupPage from './pages/SignupPage';
 import InfoPage from './pages/InfoPage';
 import PasswordRestorePage from './pages/RestorePassword';
 import PasswordChangePage from './pages/PasswordChange';
+import ConfirmEmailPage from './pages/ConfirmEmailPage';
 import { storeIntendedPath } from './containers/App/actions';
 
 import { push } from 'react-router-redux';
