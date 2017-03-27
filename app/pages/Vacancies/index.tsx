@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import PostClass from '../../models/Post.class';
+import PostClass from 'models/Post.class';
 import selectors from './selectors';
 import { loadPosts } from './actions';
 
-import Vacancies from './components/VacancyList';
+import VacancyList from './components/VacancyList';
 import Pagination from './components/Footer';
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
 
 interface State {};
 
-class VacancyList extends React.Component<Props, State> {
+class Vacancies extends React.Component<Props, State> {
   componentDidMount() {
     this.props.loadPosts(1);
   }
@@ -32,7 +32,7 @@ class VacancyList extends React.Component<Props, State> {
   render() {
     return (
       <article>
-        <Vacancies { ...this.props } />
+        <VacancyList { ...this.props } />
         <Pagination {...this.props} changePage={ this.handlePageChange }  />
       </article>
     );
@@ -45,4 +45,4 @@ const mapDispatchToProps = dispatch => ({
   loadPosts: (pageNum: number) => dispatch(loadPosts(pageNum)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VacancyList);
+export default connect(mapStateToProps, mapDispatchToProps)(Vacancies);

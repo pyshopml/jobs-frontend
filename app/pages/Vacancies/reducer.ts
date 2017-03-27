@@ -1,6 +1,6 @@
-import { fromJS, Map } from 'immutable';
+import { fromJS } from 'immutable';
 import { pick } from 'ramda';
-import PostClass from '../../models/Post.class';
+import PostClass from 'models/Post.class';
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,

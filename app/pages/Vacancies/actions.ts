@@ -1,6 +1,5 @@
-import { Action } from '../../interfaces/action';
+import { Action } from 'interfaces';
 import { fetchPosts } from './api';
-import selectors from './selectors';
 
 import {
   LOAD_POSTS,

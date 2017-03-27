@@ -3,7 +3,6 @@ import cookie from 'react-cookie'
 import { Route, IndexRoute } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
-import Vacancies from './containers/VacancyList';
 import NewPost from './containers/NewPost';
 import PostDetail from './containers/PostDetail';
 import NotFound from './containers/NotFound';
@@ -14,6 +13,7 @@ import PasswordRestorePage from './containers/RestorePasswordContainer';
 import PasswordChangePage from './containers/PasswordChangePage';
 import ConfirmEmailPage from './containers/ConfirmEmailPage';
 import ActivateAccountPage from './containers/ActivateAccountPage';
+import Vacancies from './pages/Vacancies';
 import { storeIntendedPath } from './containers/App/actions';
 
 import { push } from 'react-router-redux';

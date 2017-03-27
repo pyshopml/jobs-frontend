@@ -9,9 +9,9 @@
 import { combineReducers } from 'redux-immutable';
 import routerReducer from './routerReducer';
 import appReducer from './containers/App/reducer';
-import postsReducer from './containers/VacancyList/reducer';
 import newPostReducer from './containers/NewPost/reducer';
 import postDetail from './containers/PostDetail/reducer';
+import postsReducer from './pages/Vacancies/reducer';
 import alertReducer from './containers/Alert/reducer';
 import LoginPageReducer from './containers/LoginPage/reducer';
 import SignupPageReducer from './containers/SignupPage/reducer';
