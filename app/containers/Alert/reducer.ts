@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import INotification from '../../interfaces/inotification';
+import { INotification } from 'interfaces';
 import {
   ADD_NOTIFICATION,
   REMOVE_CURRENT_NOTIFICATION

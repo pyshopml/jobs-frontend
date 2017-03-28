@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import Header from '../Header';
-import Alert from '../Alert';
+import Header from './components/Header';
+import Alert from 'containers/Alert';
 import { connect } from 'react-redux';
 import selectors from './selectors';
 import { restoreAuthState } from './actions';

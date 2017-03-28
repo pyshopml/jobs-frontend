@@ -9,15 +9,15 @@
 import { combineReducers } from 'redux-immutable';
 import routerReducer from './routerReducer';
 import appReducer from './containers/App/reducer';
-import postsReducer from './containers/VacancyList/reducer';
-import newPostReducer from './containers/NewPost/reducer';
-import postDetail from './containers/PostDetail/reducer';
+import postsReducer from './pages/Vacancies/reducer';
+import newPostReducer from './pages/NewPost/reducer';
+import postDetail from './pages/PostDetail/reducer';
 import alertReducer from './containers/Alert/reducer';
-import LoginPageReducer from './containers/LoginPage/reducer';
-import SignupPageReducer from './containers/SignupPage/reducer';
-import RestorePasswordPageReducer from './containers/RestorePasswordContainer/reducer';
-import PasswordChangePage from './containers/PasswordChangePage/reducer';
-import AccountActivationReducer from './containers/ActivateAccountPage/reducer';
+import LoginPageReducer from './pages/LoginPage/reducer';
+import SignupPageReducer from './pages/SignupPage/reducer';
+import RestorePasswordPageReducer from './pages/RestorePassword/reducer';
+import PasswordChangePage from './pages/PasswordChange/reducer';
+import AccountActivationReducer from './pages/ActivateAccountPage/reducer';
 
 export default combineReducers({
   routing: routerReducer,

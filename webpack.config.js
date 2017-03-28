@@ -54,13 +54,13 @@ var config = {
       },
       {
         test: /\.(css|scss)$/,
-        include: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components')],
+        include: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components'), path.join(APP_DIR, 'pages')],
         loader: 'style-loader!css-loader?modules&camelCase!postcss-loader!sass-loader',
       },
       {
         test: /\.(css|scss)$/,
         include: APP_DIR,
-        exclude: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components')],
+        exclude: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components'), path.join(APP_DIR, 'pages')],
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader', use: 'css-loader?sourceMap!postcss-loader!sass-loader'
         })
@@ -73,7 +73,7 @@ var config = {
     ]
   },
   resolve: {
-    modules: ["node_modules"],
+    modules: [APP_DIR, "node_modules"],
     extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
   },
 };
