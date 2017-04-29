@@ -1,0 +1,10 @@
+.root{
+  border: none;
+  height: 2.4em;
+  padding: 0 10px;
+  width: 100%;
+  background-color: #ebebeb;
+  &:focus{
+    background-color: #f3f3f3;
+  }
+}

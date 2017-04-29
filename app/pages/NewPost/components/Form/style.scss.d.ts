@@ -1,2 +1,2 @@
-export const textField: string;
+export const fieldRequired: string;
 export const controls: string;
