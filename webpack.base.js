@@ -1,6 +1,5 @@
 var webpack   = require('webpack');
 var path      = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
@@ -28,10 +27,10 @@ var config = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['main', 'vendor']
     }),
-    new HtmlWebpackPlugin({
-      template: APP_DIR + '/index.html',
-    }),
     new ExtractTextPlugin("styles.css"),
+    new webpack.ProvidePlugin({
+      config: 'config'
+    })
   ],
   module : {
     loaders : [

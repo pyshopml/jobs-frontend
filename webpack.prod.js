@@ -4,13 +4,13 @@ var HtmlWebpackPlugin = require("html-webpack-plugin");
 var UglifyJsPlugin = require('uglify-js-plugin');
 var merge = require('webpack-merge')
 
-var commonConfig = require('./webpack.config')
+var baseConfig = require('./webpack.base.js')
 
 var BUILD_DIR = path.join(__dirname, '/dist');
 var APP_DIR   = path.join(__dirname, '/app');
 
 
-var config = {
+var prodConfig = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -44,12 +44,11 @@ var config = {
       }
     })
   ],
+  resolve: {
+    alias: {
+      'config': path.resolve(__dirname, './config.prod')
+    }
+  },
 };
 
-module.exports = merge({
-  customizeArray: merge.unique(
-    'plugins',
-    ['HtmlWebpackPlugin'],
-    plugin => plugin.constructor && plugin.constructor.name
-  )
-})(config, commonConfig)
+module.exports = merge(prodConfig, baseConfig)
