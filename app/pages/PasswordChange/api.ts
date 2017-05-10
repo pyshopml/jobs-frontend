@@ -8,7 +8,7 @@ const submitRequest = (data): Promise<Response> => {
     body: JSON.stringify(data)
   };
 
-  return fetch('http://jobs.pyshop.ru/api/account/password/reset/confirm/', options);
+  return fetch(`${config.apiUrl}account/password/reset/confirm/`, options);
 }
 
 

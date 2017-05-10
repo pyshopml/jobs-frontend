@@ -8,7 +8,7 @@ const submitRequest = (email: string) => {
     body: JSON.stringify({ email })
   };
 
-  return fetch('http://jobs.pyshop.ru/api/account/password/reset/', options)
+  return fetch(`${config.apiUrl}account/password/reset/`, options)
 }
 
 export async function submitData(email: string, done, error: (msg: string) => void) {

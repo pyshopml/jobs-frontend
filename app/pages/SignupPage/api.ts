@@ -10,7 +10,7 @@ function submitDataToServer(data: SignupCredentials): Promise<Response> {
     body: JSON.stringify(data)
   };
 
-  return fetch('http://jobs.pyshop.ru/api/users/', options)
+  return fetch(`${config.apiUrl}users/`, options)
 }
 
 export async function submitData(data: SignupCredentials, done, error: (msg: string) => void): Promise<void> {
