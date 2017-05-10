@@ -8,7 +8,7 @@ const submitRequest = (data) => {
     body: JSON.stringify(data)
   };
 
-  return fetch('http://jobs.pyshop.ru/api/account/login/', options)
+  return fetch(`${config.apiUrl}account/login/`, options)
 }
 
 export async function submitData(credentials: any, done, error: (msg: string) => void) {

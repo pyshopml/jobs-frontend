@@ -8,7 +8,7 @@ const verifyTokenOnServer = (data): Promise<Response> => {
 		body: JSON.stringify(data),
 	};
 
-	return fetch('http://jobs.pyshop.ru/api/account/authtoken/validate/', options);
+	return fetch(`${config.apiUrl}account/authtoken/validate/`, options);
 };
 
 export async function verifyToken(auth_token: string, done): Promise<boolean> {

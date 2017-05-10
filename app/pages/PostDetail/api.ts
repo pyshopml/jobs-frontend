@@ -1,5 +1,5 @@
 function fetchPostFromServer(id: number) {
-  const url = `http://jobs.pyshop.ru/api/vacancies/${id}/`
+  const url = `${config.apiUrl}vacancies/${id}/`
   const options = {
     method: 'GET',
     headers: {

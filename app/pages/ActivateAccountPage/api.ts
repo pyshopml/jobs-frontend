@@ -8,7 +8,7 @@ const submitRequest = (data): Promise<Response> => {
     body: JSON.stringify(data)
   };
 
-  return fetch('http://jobs.pyshop.ru/api/account/activate/', options);
+  return fetch(`${config.apiUrl}account/activate/`, options);
 }
 
 export async function submitActionData(data: any, done, error: (msg: string) => void) {

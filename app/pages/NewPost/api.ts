@@ -11,7 +11,7 @@ function uploadPostToServer(post: INewPost, token: string) {
     body: JSON.stringify(post)
   };
 
-  return fetch('http://jobs.pyshop.ru/api/vacancies/', options)
+  return fetch(`${config.apiUrl}vacancies/`, options)
 }
 
 

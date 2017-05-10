@@ -12,7 +12,7 @@ function fetchPostsFromServer(url: string) {
 
 export async function fetchPosts(pageNum: number, done: (data) => any, error: (msg: string) => any) {
   try {
-    const url = `http://jobs.pyshop.ru/api/vacancies/?page=${pageNum}`;
+    const url = `${config.apiUrl}vacancies/?page=${pageNum}`;
     const res = await fetchPostsFromServer(url);
 
     if (res.ok) {
