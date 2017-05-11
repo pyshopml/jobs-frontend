@@ -15,8 +15,9 @@ import createEditorState from 'tools/createEditorState';
 import * as css from './style.scss';
 
 interface Props {
-  createPost(post: INewPost),
-  onSubmit(post: INewPost)
+  createPost(post: INewPost);
+  onSubmit(post: INewPost);
+  availableCategories: {title: string, id: number, parent: number}[];
 };
 
 interface State {
@@ -69,7 +70,6 @@ class Form extends React.Component<Props, State> {
       salary_min: +salary_min,
       keywords: this.parseKeywords(keywords),
     };
-    console.log(data);
     this.props.onSubmit(data)
   }
 
@@ -127,7 +127,7 @@ class Form extends React.Component<Props, State> {
       remote_work,
       keywords
     } } = this.state;
-
+    const { availableCategories } = this.props;
     return(
       <ElementalForm>
         <FormField>
@@ -170,9 +170,11 @@ class Form extends React.Component<Props, State> {
           <DropdownField value={ category }
                       placeholder="Выберете"
                       onChange={(option) => this.updateField('category', option.value)}
-                      options={[{label: 'category0', value: 0}, {label: 'category1', value: 1}]}/>
+                      options={availableCategories.map( (category) => (
+                        {label: category.title, value: category.id}
+                      ) )}
+          />
         </FormField>
-
         <FormRow>
           <FormField>
             <FormLabel>Страна</FormLabel>
