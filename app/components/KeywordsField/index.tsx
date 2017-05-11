@@ -45,9 +45,12 @@ class KeywordsField extends React.Component<Props, null>{
 
     return (
       keywords.map((item, index) => (
-        <FormField key={item.id}>
+        <FormField className={css.keywordsFormField} key={item.id}>
           <TextField value={ keywords[index].value }
-                     onChange={(evt) => this.updateKeywordValue(index, evt.target.value)}
+                     autocomplete={['angular', 'angular', 'angular', 'angular2', 'angular', 'angular', 'angular']}
+                     autocompleteLength={3}
+                     autoComplete="off"
+                     onChange={(value) => this.updateKeywordValue(index, value)}
                      className={css.keywordField}/>
           <a className={css.removeKeyword} href=""
              onClick={ (e) => { e.preventDefault(); this.removeKeyword(index) } }

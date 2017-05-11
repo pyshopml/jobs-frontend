@@ -1,4 +1,9 @@
 .root{
+  width: 100%;
+  position: relative;
+}
+
+.input{
   border: none;
   height: 2.4em;
   padding: 0 10px;
@@ -6,5 +11,25 @@
   background-color: #ebebeb;
   &:focus{
     background-color: #f3f3f3;
+  }
+}
+
+.autocomplete-wrap{
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  background-color: white;
+}
+
+.autocomplete-item{
+  width: 100%;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  background-color: #FBFBFB;
+  &:hover{
+    cursor: pointer;
+  }
+  &:active, &:hover{
+    background-color: #f9f9f9;
   }
 }

@@ -132,9 +132,8 @@ class Form extends React.Component<Props, State> {
       <ElementalForm>
         <FormField>
           <FormLabel className={css.fieldRequired}>Название вакансии</FormLabel>
-          <TextField name="title"
-                     value={ title }
-                     onChange={(evt) => this.updateField(evt.target.name, evt.target.value)}/>
+          <TextField value={ title }
+                     onChange={(value) => this.updateField('title', value)}/>
         </FormField>
         <FormField>
           <FormLabel className={css.fieldRequired}>Описание</FormLabel>
@@ -150,17 +149,15 @@ class Form extends React.Component<Props, State> {
           <FormRow>
             <FormField>
               <FormLabel>От</FormLabel>
-              <TextField name="salary_min"
-                         type="number"
+              <TextField type="number"
                          value={ salary_min }
-                         onChange={(evt) => this.updateField(evt.target.name, evt.target.value)}/>
+                         onChange={(value) => this.updateField('salary_min', value)}/>
             </FormField>
             <FormField>
               <FormLabel>До</FormLabel>
-              <TextField name="salary_max"
-                         type="number"
+              <TextField type="number"
                          value={ salary_max }
-                         onChange={(evt) => this.updateField(evt.target.name, evt.target.value)}/>
+                         onChange={(value) => this.updateField('salary_max', value)}/>
             </FormField>
           </FormRow>
         </FormField>
@@ -178,15 +175,13 @@ class Form extends React.Component<Props, State> {
         <FormRow>
           <FormField>
             <FormLabel>Страна</FormLabel>
-            <TextField name="country"
-                       value={ country }
-                       onChange={(evt) => this.updateLocationField(evt.target.name, evt.target.value)}/>
+            <TextField value={ country }
+                       onChange={(value) => this.updateLocationField('country', value)}/>
           </FormField>
           <FormField>
             <FormLabel>Город</FormLabel>
-            <TextField name="city"
-                       value={ city }
-                       onChange={(evt) => this.updateLocationField(evt.target.name, evt.target.value)}/>
+            <TextField value={ city }
+                       onChange={(value) => this.updateLocationField('city', value)}/>
           </FormField>
         </FormRow>
 
@@ -205,9 +200,8 @@ class Form extends React.Component<Props, State> {
         <FormField>
           <FormLabel>Удалённая работа</FormLabel>
           <Checkbox label="Рассматривается"
-                    name="remote_work"
                     checked={ remote_work }
-                    onChange={(evt) => this.updateField(evt.target.name, evt.target.checked)}/>
+                    onChange={(evt) => this.updateField('remote_work', evt.target.checked)}/>
         </FormField>
 
         <FormField>
