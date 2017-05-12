@@ -1,6 +1,6 @@
 import { goBack } from 'react-router-redux';
 import { INewPost } from 'interfaces';
-import { uploadPost, fetchCategories } from './api';
+import {uploadPost, fetchCategories, fetchKeywords} from './api';
 import selectors from './selectors';
 import { push } from 'react-router-redux';
 import { addNotification } from "containers/Alert/actions";
@@ -13,7 +13,10 @@ import {
   UPLOAD_POST_FAILURE,
   LOAD_CATEGORIES,
   LOAD_CATEGORIES_FAILED,
-  LOAD_CATEGORIES_SUCCEEDED
+  LOAD_CATEGORIES_SUCCEEDED,
+  LOAD_KEYWORDS_FAILED,
+  LOAD_KEYWORDS,
+  LOAD_KEYWORDS_SUCCEEDED
 } from './constants';
 
 const submitPost = (): Action => ({
@@ -77,6 +80,24 @@ export const loadCategories = () => dispatch => {
   fetchCategories(
     (data) => dispatch(loadingCategoriesSucceeded(data)),
     (msg : string) => dispatch(loadingCategoriesFailed(msg)),
+  );
+};
+
+const loadingKeywordsSucceeded = (data) : Action => ({
+  type: LOAD_KEYWORDS_SUCCEEDED,
+  data
+});
+
+const loadingKeywordsFailed = (errorMessage: string) : Action => ({
+  type: LOAD_KEYWORDS_FAILED,
+  errorMessage
+});
+
+export const loadKeywords = () => dispatch => {
+  dispatch({ type: LOAD_KEYWORDS });
+  fetchKeywords(
+    (data) => dispatch(loadingKeywordsSucceeded(data)),
+    (msg : string) => dispatch(loadingKeywordsFailed(msg)),
   );
 };
 

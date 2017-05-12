@@ -9,6 +9,7 @@ import * as css from './style.scss';
 interface Props{
   keywords: {id: number, value: string}[];
   onChange?: (keywords: {id: number, value: string}[]) => any;
+  possibleKeywords: string[];
   className?: string;
 }
 
@@ -41,13 +42,13 @@ class KeywordsField extends React.Component<Props, null>{
     }
   }
   renderKeywords = () => {
-    const { keywords } = this.props;
+    const { keywords, possibleKeywords } = this.props;
 
     return (
       keywords.map((item, index) => (
         <FormField className={css.keywordsFormField} key={item.id}>
           <TextField value={ keywords[index].value }
-                     autocomplete={['angular', 'angular', 'angular', 'angular2', 'angular', 'angular', 'angular']}
+                     autocomplete={possibleKeywords}
                      autocompleteLength={3}
                      autoComplete="off"
                      onChange={(value) => this.updateKeywordValue(index, value)}
@@ -67,12 +68,12 @@ class KeywordsField extends React.Component<Props, null>{
   render(){
     return (
       <div className={this.rootClass()}>
-        <a href="" className={css.addKeyword}
-           onClick={ (e) => { e.preventDefault(); this.addKeyword()} }
-        >Добавить</a>
         <div className={css.keywordsWrap}>
           {this.renderKeywords()}
         </div>
+        <a href="" className={css.addKeyword}
+           onClick={ (e) => { e.preventDefault(); this.addKeyword()} }
+        >Добавить</a>
       </div>
     )
   }

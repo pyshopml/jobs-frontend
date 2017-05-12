@@ -4,3 +4,6 @@ export const UPLOAD_POST_FAILURE = 'app/containers/NewPost/UPLOAD_POST_FAILURE';
 export const LOAD_CATEGORIES = 'app/containers/NewPost/LOAD_CATEGORIES';
 export const LOAD_CATEGORIES_SUCCEEDED = 'app/containers/NewPost/LOAD_CATEGORIES_SUCCEEDED';
 export const LOAD_CATEGORIES_FAILED = 'app/containers/NewPost/LOAD_CATEGORIES_FAILED';
+export const LOAD_KEYWORDS = 'app/containers/NewPost/LOAD_KEYWORDS';
+export const LOAD_KEYWORDS_SUCCEEDED = 'app/containers/NewPost/LOAD_KEYWORDS_SUCCEEDED';
+export const LOAD_KEYWORDS_FAILED = 'app/containers/NewPost/LOAD_KEYWORDS_FAILED';

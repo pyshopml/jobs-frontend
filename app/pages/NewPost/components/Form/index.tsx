@@ -18,6 +18,7 @@ interface Props {
   createPost(post: INewPost);
   onSubmit(post: INewPost);
   availableCategories: {title: string, id: number, parent: number}[];
+  possibleKeywords: string[];
 };
 
 interface State {
@@ -163,7 +164,7 @@ class Form extends React.Component<Props, State> {
         </FormField>
 
         <FormField>
-          <FormLabel>Категория</FormLabel>
+          <FormLabel className={css.fieldRequired}>Категория</FormLabel>
           <DropdownField value={ category }
                       placeholder="Выберете"
                       onChange={(option) => this.updateField('category', option.value)}
@@ -207,6 +208,7 @@ class Form extends React.Component<Props, State> {
         <FormField>
           <FormLabel>Ключевые слова</FormLabel>
           <KeywordsField keywords={keywords}
+                         possibleKeywords={this.props.possibleKeywords}
                          onChange={(keywords) => this.updateField('keywords', keywords)}/>
         </FormField>
 

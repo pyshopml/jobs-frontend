@@ -14,7 +14,6 @@ function uploadPostToServer(post: INewPost, token: string) {
   return fetch(`${config.apiUrl}vacancies/`, options)
 }
 
-
 function fetchCategoriesFromServer() {
   const options = {
     method: 'GET',
@@ -27,6 +26,18 @@ function fetchCategoriesFromServer() {
   return fetch(`${config.apiUrl}vacancies/categories/`, options)
 }
 
+function fetchKeywordsFromServer() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  };
+
+  return fetch(`${config.apiUrl}vacancies/tags/`, options)
+}
+
 export async function uploadPost(post: INewPost,
                                  token: string,
                                  done: (post) => any,
@@ -37,6 +48,22 @@ export async function uploadPost(post: INewPost,
       throw new Error(res.statusText);
     const createdPost = await res.json()
     done(createdPost);
+  } catch (e) {
+    error(e.message);
+  }
+}
+
+export async function fetchKeywords( done: (data) => any, error: (msg: string) => any) {
+  try {
+    const res = await fetchKeywordsFromServer();
+
+    if (res.ok) {
+      let data = await res.json();
+      done(data);
+    }
+
+    error(res.statusText);
+
   } catch (e) {
     error(e.message);
   }
