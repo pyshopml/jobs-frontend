@@ -18,7 +18,7 @@ class PostClass{
   readonly category: {
     title: string;
     id: number;
-  }
+  }[];
   private _created_on?: Date;
   private _modified_on?: Date;
   constructor(postData){
@@ -48,9 +48,9 @@ class PostClass{
   get salary_text(): string{
     const { salary_max, salary_min} = this;
 
-    if(salary_max && salary_min) return `От ${salary_min} До ${salary_max}`;
-    else if(salary_max) return `До ${salary_max}`;
-    else if(salary_min) return `От ${salary_min}`;
+    if(salary_max && salary_min) return `От ${salary_min} До ${salary_max} RUB`;
+    else if(salary_max) return `До ${salary_max} RUB`;
+    else if(salary_min) return `От ${salary_min} RUB`;
     else return null
   }
   get busyness_text(): string{

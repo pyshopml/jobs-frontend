@@ -3,6 +3,8 @@ export const title: string;
 export const description: string;
 export const keywords: string;
 export const keyword: string;
+export const categories: string;
+export const category: string;
 export const date: string;
 export const info: string;
 export const salary: string;

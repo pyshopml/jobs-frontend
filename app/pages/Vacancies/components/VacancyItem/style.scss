@@ -35,13 +35,14 @@
 }
 
 .location {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   &:last-child {
     margin-bottom: 0;
   }
 }
 
 .salary {
+  margin-top: 5px;
   font-weight: bold;
   color: #68c07b;
   &:last-child {
@@ -49,10 +50,28 @@
   }
 }
 .busyness {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-size: 0.9em;
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+.categories {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 5px;
+  font-size: 0.7em;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .category {
+    &:after{
+      content: '/';
+    }
+    &:last-child:after{
+      display: none;
+    }
   }
 }
 

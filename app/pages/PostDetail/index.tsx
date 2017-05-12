@@ -43,6 +43,13 @@ class PostDetail extends React.Component<Props, State> {
     return keywords.map((keyword, i) => <span key={i} className={vacancyItemCss.keyword}>{keyword}</span>)
   }
 
+  renderCategories = () => {
+    const { openedPost: {category} } = this.props;
+
+    return category.map((category, i) =>
+      <span key={i} className={vacancyItemCss.category}>{category.title}</span>).reverse()
+  }
+
   renderLoading(){
     return(
       <CircularProgress />
@@ -76,6 +83,7 @@ class PostDetail extends React.Component<Props, State> {
         <section className={`${css.header} ${css.container}`}>
           <div className={vacancyItemCss.info}>
             <h1 className={vacancyItemCss.title}>{title}</h1>
+            <div className={vacancyItemCss.categories}>{this.renderCategories()}</div>
             {keywords.length > 0 ? <div className={vacancyItemCss.keywords}>{this.renderKeywords()}</div> : null}
             {busyness_text ? <span className={vacancyItemCss.busyness}>{busyness_text}</span> : null}
             {location_text ? <span className={vacancyItemCss.location}>{location_text}</span> : null}

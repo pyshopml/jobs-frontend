@@ -17,6 +17,11 @@ class VacancyItem extends React.Component<Props, State> {
 
     return keywords.map((keyword, i) => <span key={i} className={css.keyword}>{keyword}</span>)
   }
+  renderCategories = () => {
+    const { vacancy: {category} } = this.props;
+
+    return category.map((category, i) => <span key={i} className={css.category}>{category.title}</span>).reverse()
+  }
   render() {
     const {
       id,
@@ -34,6 +39,7 @@ class VacancyItem extends React.Component<Props, State> {
           <h3 className={css.title}>
             <Link to={`vacancies/${id}`}>{ title }</Link>
           </h3>
+          <div className={css.categories}>{this.renderCategories()}</div>
           {keywords.length > 0 ? <div className={css.keywords}>{this.renderKeywords()}</div> : null}
           {busyness_text ? <span className={css.busyness}>{busyness_text}</span> : null}
           {location_text ? <span className={css.location}>{location_text}</span> : null}
