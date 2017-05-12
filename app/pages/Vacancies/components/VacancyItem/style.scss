@@ -1,50 +1,76 @@
 .container {
+  display: flex;
+  flex-flow: row nowrap;
   margin-bottom: 16px;
   padding-bottom: 16px;
   border-bottom: 1px solid gainsboro;
+  color: #999999;
 
   &:last-child {
+    margin-bottom: 0;
     border: none;
   }
+}
+
+.date {
+  color: #848d95;
+  font-size: 13px;
+}
+
+.info {
+  display: flex;
+  flex-grow: 1;
+  flex-flow: column nowrap;
 }
 
 .title {
   font-size: 1.2em;
   margin-bottom: 10px;
-
   a {
     color: #494949;
-    
+  }
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
-.description {
-  line-height: 1.2em;
+.location {
+  margin-bottom: 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.info{
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
+.salary {
+  font-weight: bold;
+  color: #68c07b;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.busyness {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 
-  .tags{
-    display: flex;
-    flex-flow: row wrap;
-    margin-top: 5px;
-    .tag{
-      padding: 4px 8px;
-      margin-right: 7px;
-      background-color: #87ceeb;
-      font-size: 0.8em;
-      color: #ffffff;
+.keywords {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 5px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .keyword {
+    font-size: 0.9em;
+    &:after{
+      content: '\2022';
+      margin: 0 10px;
+    }
+    &:last-child:after{
+      display: none;
     }
   }
-
-  .date{
-    color: #848d95;
-    font-size: 13px;
-  }
-
 }
-

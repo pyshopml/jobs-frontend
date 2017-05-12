@@ -11,6 +11,8 @@ import PostClass from 'models/Post.class'
 import selectors from './selectors';
 
 import * as css from './style.scss';
+import * as vacancyItemCss from "../Vacancies/components/VacancyItem/style.scss";
+
 
 interface Props {
   openedPost: PostClass;
@@ -35,6 +37,12 @@ class PostDetail extends React.Component<Props, State> {
       this.props.loadPost(+nextProps.params.id);
   }
 
+  renderKeywords = () => {
+    const { openedPost: {keywords} } = this.props;
+
+    return keywords.map((keyword, i) => <span key={i} className={vacancyItemCss.keyword}>{keyword}</span>)
+  }
+
   renderLoading(){
     return(
       <CircularProgress />
@@ -54,10 +62,26 @@ class PostDetail extends React.Component<Props, State> {
     if(this.props.isLoading)
       return this.renderLoading();
 
+    const {
+      title,
+      created_on,
+      salary_text,
+      keywords,
+      busyness_text,
+      location_text
+    } = this.props.openedPost;
+
     return (
       <article>
-        <section className={css.container}>
-          <h1 className={css.mainTitle}>{this.props.openedPost.title}</h1>
+        <section className={`${css.header} ${css.container}`}>
+          <div className={vacancyItemCss.info}>
+            <h1 className={vacancyItemCss.title}>{title}</h1>
+            {keywords.length > 0 ? <div className={vacancyItemCss.keywords}>{this.renderKeywords()}</div> : null}
+            {busyness_text ? <span className={vacancyItemCss.busyness}>{busyness_text}</span> : null}
+            {location_text ? <span className={vacancyItemCss.location}>{location_text}</span> : null}
+            {salary_text ? <span className={vacancyItemCss.salary}>{salary_text}</span> : null}
+          </div>
+          <span className={vacancyItemCss.date}>{created_on}</span>
         </section>
 
         <section className={css.container}>
