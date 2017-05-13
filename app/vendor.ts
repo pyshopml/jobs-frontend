@@ -16,3 +16,4 @@ import 'elemental';
 import 'react-addons-css-transition-group';
 import 'immutable';
 import 'redux-immutable';
+import 'react-select';

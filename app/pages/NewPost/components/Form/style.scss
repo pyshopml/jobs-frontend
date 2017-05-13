@@ -4,13 +4,9 @@
   justify-content: space-between;
   margin-top: 20px;
 }
-.text-field{
-  border: none;
-  height: 2.4em;
-  padding: 0 10px;
-  width: 100%;
-  background-color: #ebebeb;
-  &:focus{
-    background-color: #f3f3f3;
-  }
+.field-required:after{
+  content: " *";
+  font-weight: normal;
+  color: #ff5e1b;
+  font-size: 20px;
 }
