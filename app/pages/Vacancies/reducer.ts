@@ -2,21 +2,11 @@ import { fromJS } from 'immutable';
 import { pick } from 'ramda';
 import Vacancy from 'models/Vacancy';
 import {
-  LOAD_POSTS,
-  LOAD_POSTS_SUCCEEDED,
-  LOAD_FAILED,
+  LOAD_VACANCIES,
+  LOAD_VACANCIES_SUCCEEDED,
+  LOAD_VACANCIES_FAILED,
 } from './constants';
 
-
-interface PostListState {
-  vacancies: Array<Vacancy>;
-  errorMessage: string;
-  count: number;
-  currentPage: number;
-  next: string;
-  previous: string;
-  pageSize: number;
-}
 
 const initialModel = fromJS({
   vacancies: new Array<Vacancy>(),
@@ -30,17 +20,17 @@ const initialModel = fromJS({
 
 export default (state = initialModel, action) => {
   switch (action.type) {
-    case LOAD_POSTS:
+    case LOAD_VACANCIES:
       return state;
 
-    case LOAD_POSTS_SUCCEEDED:
-      let posts = action.data.results.map(result => new Vacancy(result));
+    case LOAD_VACANCIES_SUCCEEDED:
+      let vacancies = action.data.results.map(result => new Vacancy(result));
 
       return state
-        .set('vacancies', posts)
+        .set('vacancies', vacancies)
         .merge(pick(['count', 'next', 'previous', 'currentPage'], action.data));
 
-    case LOAD_FAILED:
+    case LOAD_VACANCIES_FAILED:
       return state.set('errorMessage', action.errorMessage);
 
     default:

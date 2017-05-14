@@ -9,26 +9,26 @@
 import { combineReducers } from 'redux-immutable';
 import routerReducer from './routerReducer';
 import appReducer from './containers/App/reducer';
-import postsReducer from './pages/Vacancies/reducer';
-import NewVacancyReducer from './pages/NewVacancy/reducer';
+import vacanciesReducer from './pages/Vacancies/reducer';
+import newVacancyReducer from './pages/NewVacancy/reducer';
 import postDetail from './pages/PostDetail/reducer';
 import alertReducer from './containers/Alert/reducer';
 import LoginPageReducer from './pages/LoginPage/reducer';
-import SignupPageReducer from './pages/SignupPage/reducer';
-import RestorePasswordPageReducer from './pages/RestorePassword/reducer';
-import PasswordChangePage from './pages/PasswordChange/reducer';
-import AccountActivationReducer from './pages/ActivateAccountPage/reducer';
+import signupPageReducer from './pages/SignupPage/reducer';
+import restorePasswordPageReducer from './pages/RestorePassword/reducer';
+import passwordChangePage from './pages/PasswordChange/reducer';
+import accountActivationReducer from './pages/ActivateAccountPage/reducer';
 
 export default combineReducers({
   routing: routerReducer,
   app: appReducer,
   postDetail: postDetail,
-  posts: postsReducer,
-  newVacancy: NewVacancyReducer,
+  vacancies: vacanciesReducer,
+  newVacancy: newVacancyReducer,
   alert: alertReducer,
   loginPage: LoginPageReducer,
-  signupPage: SignupPageReducer,
-  restorePassword: RestorePasswordPageReducer,
-  passwordChange: PasswordChangePage,
-  accountActivation: AccountActivationReducer,
+  signupPage: signupPageReducer,
+  restorePassword: restorePasswordPageReducer,
+  passwordChange: passwordChangePage,
+  accountActivation: accountActivationReducer,
 });

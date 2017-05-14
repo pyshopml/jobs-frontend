@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Vacancy from 'models/Vacancy';
 import selectors from './selectors';
-import { loadPosts } from './actions';
+import { loadVacancies } from './actions';
 
 import VacancyList from './components/VacancyList';
 import Pagination from './components/Footer';
@@ -11,7 +11,7 @@ import Pagination from './components/Footer';
 interface Props {
   vacancies: Vacancy[];
   isLoggedIn: boolean;
-  loadPosts(pageNum: number): void;
+  loadVacancies(pageNum: number): void;
   count: number;
   pageSize: number;
   currentPage: number;
@@ -21,12 +21,12 @@ interface State {};
 
 class Vacancies extends React.Component<Props, State> {
   componentDidMount() {
-    this.props.loadPosts(1);
+    this.props.loadVacancies(1);
   }
 
   handlePageChange = (pageNum: number) => {
     window.scrollTo(0, 0);
-    this.props.loadPosts(pageNum);
+    this.props.loadVacancies(pageNum);
   }
 
   render() {
@@ -42,7 +42,7 @@ class Vacancies extends React.Component<Props, State> {
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  loadPosts: (pageNum: number) => dispatch(loadPosts(pageNum)),
+  loadVacancies: (pageNum: number) => dispatch(loadVacancies(pageNum)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Vacancies);
