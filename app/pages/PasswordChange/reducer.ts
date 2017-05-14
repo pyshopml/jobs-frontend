@@ -1,23 +1,18 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import {
   PASSWORD_CHANGE,
   PASSWORD_CHANGE_SUCCEEDED,
   PASSWORD_CHANGE_FAILED,
 } from './constants';
 
-interface PasswordChangePage {
-  message: string;
-  isLoading: boolean;
-}
-
 const initialState = fromJS({
   message: '',
   isLoading: false,
 });
 
-export default (state = initialState, action: Action) => {
+export default (state = initialState, action: IAction) => {
   switch(action.type) {
 
     case PASSWORD_CHANGE:

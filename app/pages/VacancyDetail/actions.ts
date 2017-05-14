@@ -1,4 +1,4 @@
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { replace } from 'react-router-redux'
 import { fetchVacancy } from './api';
 import {
@@ -7,16 +7,16 @@ import {
   LOAD_VACANCY_FAILURE
 } from './constants';
 
-const loadingVacancy = (): Action => ({
+const loadingVacancy = (): IAction => ({
   type: LOAD_VACANCY,
 });
 
-const loadingVacancySucceeded = (vacancy): Action => ({
+const loadingVacancySucceeded = (vacancy): IAction => ({
   type: LOAD_VACANCY_SUCCEEDED,
   data: { vacancy }
 });
 
-const loadingVacancyFailed = (errorMessage: string): Action => ({
+const loadingVacancyFailed = (errorMessage: string): IAction => ({
   type: LOAD_VACANCY_FAILURE,
   errorMessage
 });

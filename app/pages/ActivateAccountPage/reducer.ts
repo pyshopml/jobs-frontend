@@ -6,11 +6,6 @@ import {
   ACTIVATE_ACCOUNT_FAILED,
 } from './constants';
 
-interface ActivateAccountState {
-  isLoading: boolean;
-  isAccountActivated: boolean;
-}
-
 const initialState = fromJS({
   isLoading: true,
   isAccountActivated: false,

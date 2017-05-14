@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import {
   PASSWORD_RESTORE,
   PASSWORD_RESTORE_SUCCEEDED,
@@ -7,17 +7,12 @@ import {
   CLEAR_STATE,
 } from './constants';
 
-interface RestorePassword {
-  message: string;
-  isLoading: boolean;
-}
-
 const initialState = fromJS({
   message: '',
   isLoading: false,
 });
 
-export default (state = initialState, action: Action) => {
+export default (state = initialState, action: IAction) => {
   switch(action.type) {
 
     case PASSWORD_RESTORE:

@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { submitData } from './api';
 import {
   PASSWORD_RESTORE,
@@ -8,20 +8,20 @@ import {
   CLEAR_STATE,
 } from './constants';
 
-const passwordRestore = (): Action => ({
+const passwordRestore = (): IAction => ({
   type: PASSWORD_RESTORE,
 });
 
-const passwordRestoreSucceeded = (): Action => ({
+const passwordRestoreSucceeded = (): IAction => ({
   type: PASSWORD_RESTORE_SUCCEEDED,
 });
 
-const passwordRestoreFailed = (message): Action => ({
+const passwordRestoreFailed = (message): IAction => ({
   type: PASSWORD_RESTORE_FAILED,
   message
 });
 
-const clearState = (): Action => ({
+const clearState = (): IAction => ({
   type: CLEAR_STATE,
 });
 

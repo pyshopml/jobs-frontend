@@ -12,12 +12,6 @@ import {
   LOAD_KEYWORDS_SUCCEEDED
 } from './constants';
 
-interface NewVacancyModel {
-  createdVacancy: Vacancy;
-  possibleKeywords: string[];
-  availableCategories: {title: string, id: number, parent: number}[];
-}
-
 const initialModel = fromJS({
   createdVacancy: null,
   availableCategories: [],

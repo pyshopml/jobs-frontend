@@ -6,7 +6,7 @@ import VacancyItem from '../VacancyItem';
 import * as css from './style.scss';
 
 interface Props {
-  vacancies: Array<Vacancy>
+  vacancies: Vacancy[]
 };
 
 interface State {};

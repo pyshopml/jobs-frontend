@@ -9,7 +9,7 @@ import {
 
 
 const initialModel = fromJS({
-  vacancies: new Array<Vacancy>(),
+  vacancies: [],
   errorMessage: '',
   count: 0,
   currentPage: 1,

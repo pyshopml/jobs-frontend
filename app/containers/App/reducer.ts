@@ -9,7 +9,7 @@
 ------------------------------------------------------------------------------- */
 
 import { fromJS } from 'immutable';
-import { Action } from '../../interfaces';
+import { IAction } from '../../interfaces';
 
 import {
   SAVE_AUTH_CREDENTIALS,
@@ -18,15 +18,6 @@ import {
   SAVE_INTENDED_PATH,
   CLEAR_INTENDED_PATH,
 } from './constants';
-
-interface AppState {
-  isLoggedIn: boolean;
-  auth_token: string;
-  username: string;
-  email: string;
-  isEmailConfirmed: boolean;
-  intendedPath: string;
-}
 
 const initialModel = fromJS({
   isLoggedIn: false,
@@ -37,7 +28,7 @@ const initialModel = fromJS({
   intendedPath: '',
 });
 
-export default (state = initialModel, action: Action) => {
+export default (state = initialModel, action: IAction) => {
   switch(action.type) {
 
     case SAVE_AUTH_CREDENTIALS:

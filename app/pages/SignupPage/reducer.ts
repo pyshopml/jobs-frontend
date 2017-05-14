@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import {
   SUBMIT_CREDENTIALS,
   SUBMIT_CREDENTIALS_SUCCEEDED,
@@ -11,7 +11,7 @@ const initialState = fromJS({
   message: '',
 });
 
-export default (state = initialState, action: Action)=> {
+export default (state = initialState, action: IAction)=> {
   switch(action.type) {
 
     case SUBMIT_CREDENTIALS:

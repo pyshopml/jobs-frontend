@@ -4,7 +4,7 @@ import {uploadVacancy, fetchCategories, fetchKeywords} from './api';
 import selectors from './selectors';
 import { push } from 'react-router-redux';
 import { addNotification } from "containers/Alert/actions";
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { SuccessNotification, WarningNotification } from 'models/Notification';
 
 import {
@@ -19,16 +19,16 @@ import {
   LOAD_KEYWORDS_SUCCEEDED
 } from './constants';
 
-const submitVacancy = (): Action => ({
+const submitVacancy = (): IAction => ({
   type: UPLOAD_VACANCY,
 });
 
-const submitVacancySucceeded = (createdVacancy): Action => ({
+const submitVacancySucceeded = (createdVacancy): IAction => ({
   type: UPLOAD_VACANCY_SUCCEEDED,
   data: { createdVacancy },
 });
 
-const submitVacancyFailed = (message: string): Action => ({
+const submitVacancyFailed = (message: string): IAction => ({
   type: UPLOAD_VACANCY_FAILURE,
   message
 });
@@ -65,12 +65,12 @@ export const createVacancy = (Vacancy: INewVacancy) => (dispatch, getState) => {
 }
 
 
-const loadingCategoriesSucceeded = (data) : Action => ({
+const loadingCategoriesSucceeded = (data) : IAction => ({
   type: LOAD_CATEGORIES_SUCCEEDED,
   data
 });
 
-const loadingCategoriesFailed = (errorMessage: string) : Action => ({
+const loadingCategoriesFailed = (errorMessage: string) : IAction => ({
   type: LOAD_CATEGORIES_FAILED,
   errorMessage
 });
@@ -83,12 +83,12 @@ export const loadCategories = () => dispatch => {
   );
 };
 
-const loadingKeywordsSucceeded = (data) : Action => ({
+const loadingKeywordsSucceeded = (data) : IAction => ({
   type: LOAD_KEYWORDS_SUCCEEDED,
   data
 });
 
-const loadingKeywordsFailed = (errorMessage: string) : Action => ({
+const loadingKeywordsFailed = (errorMessage: string) : IAction => ({
   type: LOAD_KEYWORDS_FAILED,
   errorMessage
 });

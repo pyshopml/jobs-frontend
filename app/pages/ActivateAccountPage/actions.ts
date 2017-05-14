@@ -1,4 +1,4 @@
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { submitActionData } from './api';
 import {
   ACTIVATE_ACCOUNT,
@@ -6,11 +6,11 @@ import {
   ACTIVATE_ACCOUNT_FAILED,
 } from './constants';
 
-const activateStarted = (): Action => ({
+const activateStarted = (): IAction => ({
   type: ACTIVATE_ACCOUNT,
 });
 
-const activateSucceeded = (): Action => ({
+const activateSucceeded = (): IAction => ({
   type: ACTIVATE_ACCOUNT_SUCCEEDED,
 });
 

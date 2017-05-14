@@ -1,4 +1,4 @@
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { fetchVacancies } from './api';
 
 import {
@@ -7,12 +7,12 @@ import {
   LOAD_VACANCIES_FAILED,
 } from './constants';
 
-const loadingSucceeded = (data) : Action => ({
+const loadingSucceeded = (data) : IAction => ({
   type: LOAD_VACANCIES_SUCCEEDED,
   data
 });
 
-const loadingFailed = (errorMessage: string) : Action => ({
+const loadingFailed = (errorMessage: string) : IAction => ({
   type: LOAD_VACANCIES_FAILED,
   errorMessage
 });

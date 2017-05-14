@@ -5,7 +5,7 @@ export interface IEvent {
   label?: string;
   action?: () => void;
 }
-export interface Action {
+export interface IAction {
   type: string;
   errorMessage?: string;
   data?: any;
