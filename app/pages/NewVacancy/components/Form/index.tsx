@@ -15,8 +15,8 @@ import createEditorState from 'tools/createEditorState';
 import * as css from './style.scss';
 
 interface Props {
-  createPost(post: INewVacancy);
-  onSubmit(post: INewVacancy);
+  createVacancy(vacancy: INewVacancy);
+  onSubmit(vacancy: INewVacancy);
   availableCategories: {title: string, id: number, parent: number}[];
   possibleKeywords: string[];
 };

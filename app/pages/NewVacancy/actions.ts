@@ -1,6 +1,6 @@
 import { goBack } from 'react-router-redux';
 import { INewVacancy } from 'interfaces';
-import {uploadPost, fetchCategories, fetchKeywords} from './api';
+import {uploadVacancy, fetchCategories, fetchKeywords} from './api';
 import selectors from './selectors';
 import { push } from 'react-router-redux';
 import { addNotification } from "containers/Alert/actions";
@@ -8,9 +8,9 @@ import { Action } from 'interfaces';
 import { SuccessNotification, WarningNotification } from 'models/Notification';
 
 import {
-  UPLOAD_POST,
-  UPLOAD_POST_SUCCEEDED,
-  UPLOAD_POST_FAILURE,
+  UPLOAD_VACANCY,
+  UPLOAD_VACANCY_SUCCEEDED,
+  UPLOAD_VACANCY_FAILURE,
   LOAD_CATEGORIES,
   LOAD_CATEGORIES_FAILED,
   LOAD_CATEGORIES_SUCCEEDED,
@@ -19,39 +19,39 @@ import {
   LOAD_KEYWORDS_SUCCEEDED
 } from './constants';
 
-const submitPost = (): Action => ({
-  type: UPLOAD_POST,
+const submitVacancy = (): Action => ({
+  type: UPLOAD_VACANCY,
 });
 
-const submitPostSucceeded = (createdPost): Action => ({
-  type: UPLOAD_POST_SUCCEEDED,
-  data: { createdPost },
+const submitVacancySucceeded = (createdVacancy): Action => ({
+  type: UPLOAD_VACANCY_SUCCEEDED,
+  data: { createdVacancy },
 });
 
-const submitPostFailed = (message: string): Action => ({
-  type: UPLOAD_POST_FAILURE,
+const submitVacancyFailed = (message: string): Action => ({
+  type: UPLOAD_VACANCY_FAILURE,
   message
 });
 
 
-export const createPost = (post: INewVacancy) => (dispatch, getState) => {
-  dispatch(submitPost());
+export const createVacancy = (Vacancy: INewVacancy) => (dispatch, getState) => {
+  dispatch(submitVacancy());
 
   const state = selectors(getState())
 
-  uploadPost(
-    post,
+  uploadVacancy(
+    Vacancy,
     state.auth_token,
-    (post: any) => {
+    (Vacancy: any) => {
 
       let notification = new SuccessNotification({
         message: 'Вакансия создана',
         label: 'Открыть',
-        action: () => dispatch(push(`/vacancies/${post.id}`)),
+        action: () => dispatch(push(`/vacancies/${Vacancy.id}`)),
        });
 
       dispatch(addNotification(notification));
-      dispatch(submitPostSucceeded(post))
+      dispatch(submitVacancySucceeded(Vacancy))
     },
     (msg: string) => {
       let notification = new WarningNotification({
@@ -59,7 +59,7 @@ export const createPost = (post: INewVacancy) => (dispatch, getState) => {
       });
 
       dispatch(addNotification(notification));
-      dispatch(submitPostFailed(msg))
+      dispatch(submitVacancyFailed(msg))
     },
   )
 }

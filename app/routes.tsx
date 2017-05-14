@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
 import Vacancies from './pages/Vacancies';
-import NewPost from './pages/NewPost';
+import NewVacancy from './pages/NewVacancy';
 import PostDetail from './pages/PostDetail';
 import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
@@ -49,7 +49,7 @@ export default (store) => {
     <Route path="/" component={ App }>
       <IndexRoute component={ Vacancies } />
       <Route path="vacancies" component={ Vacancies }/>
-      <Route path="vacancies/new" component={ NewPost } onEnter={ MatchWhenAuthed } />
+      <Route path="vacancies/new" component={ NewVacancy } onEnter={ MatchWhenAuthed } />
       <Route path="vacancies/:id" component={ PostDetail }/>
       <Route path="login" component={ LoginPage } onEnter={ isLogout } />
       <Route path="signup" component={ SignupPage } onEnter={ isLogout } />

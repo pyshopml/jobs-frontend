@@ -1,6 +1,6 @@
 import { INewVacancy } from 'interfaces';
 
-function uploadPostToServer(post: INewVacancy, token: string) {
+function uploadVacancyToServer(vacancy: INewVacancy, token: string) {
   const options = {
     method: 'POST',
     headers: {
@@ -8,7 +8,7 @@ function uploadPostToServer(post: INewVacancy, token: string) {
       'Content-Type': 'application/json',
       'Authorization': `Token ${token}`
     },
-    body: JSON.stringify(post)
+    body: JSON.stringify(vacancy)
   };
 
   return fetch(`${config.apiUrl}vacancies/`, options)
@@ -38,16 +38,16 @@ function fetchKeywordsFromServer() {
   return fetch(`${config.apiUrl}vacancies/tags/`, options)
 }
 
-export async function uploadPost(post: INewVacancy,
+export async function uploadVacancy(vacancy: INewVacancy,
                                  token: string,
-                                 done: (post) => any,
+                                 done: (vacancy) => any,
                                  error: (msg: string) => any) {
   try {
-    const res = await uploadPostToServer(post, token);
+    const res = await uploadVacancyToServer(vacancy, token);
     if (!res.ok)
       throw new Error(res.statusText);
-    const createdPost = await res.json()
-    done(createdPost);
+    const createdVacancy = await res.json()
+    done(createdVacancy);
   } catch (e) {
     error(e.message);
   }

@@ -1,9 +1,9 @@
 import { fromJS } from 'immutable';
 import Vacancy from 'models/Vacancy';
 import {
-  UPLOAD_POST,
-  UPLOAD_POST_SUCCEEDED,
-  UPLOAD_POST_FAILURE,
+  UPLOAD_VACANCY,
+  UPLOAD_VACANCY_SUCCEEDED,
+  UPLOAD_VACANCY_FAILURE,
   LOAD_CATEGORIES,
   LOAD_CATEGORIES_SUCCEEDED,
   LOAD_CATEGORIES_FAILED,
@@ -12,14 +12,14 @@ import {
   LOAD_KEYWORDS_SUCCEEDED
 } from './constants';
 
-interface NewPostModel {
-  createdPost: Vacancy;
+interface NewVacancyModel {
+  createdVacancy: Vacancy;
   possibleKeywords: string[];
   availableCategories: {title: string, id: number, parent: number}[];
 }
 
 const initialModel = fromJS({
-  createdPost: null,
+  createdVacancy: null,
   availableCategories: [],
   possibleKeywords: []
 });
@@ -27,12 +27,12 @@ const initialModel = fromJS({
 export default (state = initialModel, action) => {
   switch (action.type) {
 
-    case UPLOAD_POST:
+    case UPLOAD_VACANCY:
       return state;
 
-    case UPLOAD_POST_SUCCEEDED:
-      const createdPost = new Vacancy(action.data.createdPost);
-      return state.set('createdPost', createdPost);
+    case UPLOAD_VACANCY_SUCCEEDED:
+      const createdVacancy = new Vacancy(action.data.createdVacancy);
+      return state.set('createdVacancy', createdVacancy);
 
     case LOAD_CATEGORIES_SUCCEEDED:
       let categories = action.data.results;

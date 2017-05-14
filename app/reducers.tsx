@@ -10,7 +10,7 @@ import { combineReducers } from 'redux-immutable';
 import routerReducer from './routerReducer';
 import appReducer from './containers/App/reducer';
 import postsReducer from './pages/Vacancies/reducer';
-import newPostReducer from './pages/NewPost/reducer';
+import NewVacancyReducer from './pages/NewVacancy/reducer';
 import postDetail from './pages/PostDetail/reducer';
 import alertReducer from './containers/Alert/reducer';
 import LoginPageReducer from './pages/LoginPage/reducer';
@@ -24,7 +24,7 @@ export default combineReducers({
   app: appReducer,
   postDetail: postDetail,
   posts: postsReducer,
-  newPost: newPostReducer,
+  newVacancy: NewVacancyReducer,
   alert: alertReducer,
   loginPage: LoginPageReducer,
   signupPage: SignupPageReducer,

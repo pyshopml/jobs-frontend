@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import Vacancy from 'models/Vacancy';
 import { INewVacancy } from 'interfaces';
 import Form from './components/Form';
-import {createPost, handleCancel, loadCategories, loadKeywords} from './actions';
+import {createVacancy, handleCancel, loadCategories, loadKeywords} from './actions';
 import selectors from './selectors';
 
 import * as css from './style.scss';
 
 interface Props {
-  createdPost: Vacancy;
-  createPost(post: INewVacancy);
+  createdVacancy: Vacancy;
+  createVacancy(vacancy: INewVacancy);
   handleCancel();
   loadCategories(): void;
   loadKeywords(): void;
@@ -22,9 +22,9 @@ interface Props {
 
 interface State {};
 
-class NewPost extends React.Component<Props, State> {
-  onFormSubmit = (post: INewVacancy) => {
-    this.props.createPost(post)
+class NewVacancy extends React.Component<Props, State> {
+  onFormSubmit = (vacancy: INewVacancy) => {
+    this.props.createVacancy(vacancy)
   };
   componentDidMount() {
     this.props.loadCategories();
@@ -32,7 +32,7 @@ class NewPost extends React.Component<Props, State> {
   }
   render() {
     return (
-      <Card className={css.newPost}>
+      <Card className={css.newVacancy}>
         <h1 className={css.title}>
           Новая вакансия
         </h1>
@@ -45,10 +45,10 @@ class NewPost extends React.Component<Props, State> {
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  createPost: (post: INewVacancy) => dispatch(createPost(post)),
+  createVacancy: (vacancy: INewVacancy) => dispatch(createVacancy(vacancy)),
   handleCancel: () => dispatch(handleCancel()),
   loadCategories: () => dispatch(loadCategories()),
   loadKeywords: () => dispatch(loadKeywords())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
+export default connect(mapStateToProps, mapDispatchToProps)(NewVacancy);
