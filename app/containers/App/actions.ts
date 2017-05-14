@@ -1,7 +1,7 @@
 import * as cookie from 'react-cookie'
 import { push } from 'react-router-redux';
 import { isEmpty } from 'ramda';
-import { Action } from '../../interfaces';
+import { IAction } from '../../interfaces';
 import { verifyToken } from './api';
 import {
   SAVE_AUTH_CREDENTIALS,
@@ -21,7 +21,7 @@ const removeFromCookie = (key: string): void => cookie.remove(key);
 // ----- working with cookies -----
 
 
-export const saveCredentials = (data: any): Action => ({
+export const saveCredentials = (data: any): IAction => ({
   type: SAVE_AUTH_CREDENTIALS,
   data,
 });
@@ -46,7 +46,7 @@ export const saveAuthCredentials = (data: any) => (dispatch, getState) => {
   redirectUser(dispatch, getState);
 };
 
-const logout = (): Action => ({
+const logout = (): IAction => ({
   type: LOGOUT_USER
 });
 
@@ -70,11 +70,11 @@ export const restoreAuthState = () => dispatch => {
   }
 };
 
-export const storeIntendedPath = (path: string): Action => ({
+export const storeIntendedPath = (path: string): IAction => ({
   type: SAVE_INTENDED_PATH,
   data: { path },
 });
 
-export const clearIntendedPath = (): Action => ({
+export const clearIntendedPath = (): IAction => ({
   type: CLEAR_INTENDED_PATH,
 });

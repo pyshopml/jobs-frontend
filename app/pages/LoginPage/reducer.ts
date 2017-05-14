@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import {
   LOGIN_USER,
   LOGIN_USER_SUCCEEDED,
@@ -12,7 +12,7 @@ const initialState = fromJS({
   isLoading: false,
 });
 
-export default (state = initialState, action: Action) => {
+export default (state = initialState, action: IAction) => {
   switch(action.type) {
 
     case LOGIN_USER:

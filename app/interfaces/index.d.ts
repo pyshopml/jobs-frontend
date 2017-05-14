@@ -5,13 +5,13 @@ export interface IEvent {
   label?: string;
   action?: () => void;
 }
-export interface Action {
+export interface IAction {
   type: string;
   errorMessage?: string;
   data?: any;
   message?: any;
 }
-export interface INewPost{
+export interface INewVacancy{
   title: string,
   description: any,
   salary_min: number,

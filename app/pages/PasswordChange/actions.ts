@@ -1,4 +1,4 @@
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { submitNewPassword } from './api';
 import {
   PASSWORD_CHANGE,
@@ -6,15 +6,15 @@ import {
   PASSWORD_CHANGE_FAILED,
 } from './constants';
 
-const changeStarted = (): Action => ({
+const changeStarted = (): IAction => ({
   type: PASSWORD_CHANGE,
 });
 
-const changeSucceeded = (): Action => ({
+const changeSucceeded = (): IAction => ({
   type: PASSWORD_CHANGE_SUCCEEDED,
 });
 
-const changeFailed = (message: string): Action => ({
+const changeFailed = (message: string): IAction => ({
   type: PASSWORD_CHANGE_FAILED,
   message,
 });

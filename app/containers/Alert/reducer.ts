@@ -1,16 +1,11 @@
 import { fromJS } from 'immutable';
-import { INotification } from 'interfaces';
 import {
   ADD_NOTIFICATION,
   REMOVE_CURRENT_NOTIFICATION
 } from './constants';
 
-interface AlertState {
-  notifications: Array<INotification>;
-}
-
 const initialModel = fromJS({
-  notifications: new Array<INotification>(),
+  notifications: [],
 });
 
 export default (state = initialModel, action) => {

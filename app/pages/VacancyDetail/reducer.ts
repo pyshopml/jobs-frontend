@@ -1,27 +1,27 @@
 import { fromJS } from 'immutable';
-import PostClass from '../../models/Post.class';
+import Vacancy from 'models/Vacancy';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
-  LOAD_POST,
-  LOAD_POST_SUCCEEDED,
-  LOAD_POST_FAILURE
+  LOAD_VACANCY,
+  LOAD_VACANCY_SUCCEEDED,
+  LOAD_VACANCY_FAILURE
 } from './constants';
 
 const initialModel = fromJS({
-  openedPost: null,
+  openedVacancy: null,
   isLoading: true
 });
 
 export default (state = initialModel, action) => {
   switch (action.type) {
-    case LOAD_POST:
+    case LOAD_VACANCY:
       return state.set('isLoading', true);
       break;
-    case LOAD_POST_SUCCEEDED:
-      const post = new PostClass(action.data.post);
-      return state.merge({openedPost: post, isLoading: false});
+    case LOAD_VACANCY_SUCCEEDED:
+      const vacancy = new Vacancy(action.data.vacancy);
+      return state.merge({openedVacancy: vacancy, isLoading: false});
       break;
-    case LOAD_POST_FAILURE:
+    case LOAD_VACANCY_FAILURE:
       return state.set('isLoading', false);
       break;
     case LOCATION_CHANGE:

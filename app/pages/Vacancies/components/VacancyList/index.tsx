@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import PostClass from '../../../../models/Post.class';
+import Vacancy from 'models/Vacancy';
 import VacancyItem from '../VacancyItem';
 
 import * as css from './style.scss';
 
 interface Props {
-  vacancies: Array<PostClass>
+  vacancies: Vacancy[]
 };
 
 interface State {};

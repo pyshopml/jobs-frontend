@@ -1,6 +1,6 @@
 import formatDate from 'tools/formatDate';
 
-class PostClass{
+class Vacancy{
   readonly id: number;
   readonly url: string;
   readonly user: string;
@@ -21,21 +21,22 @@ class PostClass{
   }[];
   private _created_on?: Date;
   private _modified_on?: Date;
-  constructor(postData){
-    this.id = postData.id;
-    this.url = postData.url;
-    this.user = postData.user;
-    this.title = postData.title;
-    this.description = postData.description;
-    this.salary_min = postData.salary_min;
-    this.salary_max = postData.salary_max;
-    this.location = postData.location;
-    this.keywords = postData.keywords;
-    this.busyness = postData.busyness;
-    this.remote_work = postData.remote_work;
-    this.category = postData.category;
-    this._created_on = new Date(postData.created_on);
-    this._modified_on = new Date(postData.modified_on);
+
+  constructor(vacancyData){
+    this.id = vacancyData.id;
+    this.url = vacancyData.url;
+    this.user = vacancyData.user;
+    this.title = vacancyData.title;
+    this.description = vacancyData.description;
+    this.salary_min = vacancyData.salary_min;
+    this.salary_max = vacancyData.salary_max;
+    this.location = vacancyData.location;
+    this.keywords = vacancyData.keywords;
+    this.busyness = vacancyData.busyness;
+    this.remote_work = vacancyData.remote_work;
+    this.category = vacancyData.category;
+    this._created_on = new Date(vacancyData.created_on);
+    this._modified_on = new Date(vacancyData.modified_on);
   }
   get busyness_title(): string{
     switch(this.busyness){
@@ -76,4 +77,4 @@ class PostClass{
     return formatDate(this._modified_on)
   }
 }
-export default PostClass;
+export default Vacancy;

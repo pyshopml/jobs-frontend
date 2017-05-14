@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { Action } from 'interfaces';
+import { IAction } from 'interfaces';
 import { SignupCredentials, UserCredentials } from './interfaces';
 import { SAVE_USER_CREDENTIALS } from 'containers/App/constants';
 import { submitData } from './api';
@@ -9,15 +9,15 @@ import {
   SUBMIT_CREDENTIALS_FAILED,
 } from './constants';
 
-const signupUser = (): Action => ({
+const signupUser = (): IAction => ({
   type: SUBMIT_CREDENTIALS,
 });
 
-const signupSucceeded = (): Action => ({
+const signupSucceeded = (): IAction => ({
   type: SUBMIT_CREDENTIALS_SUCCEEDED,
 });
 
-const saveCredentials = (data: any): Action => ({
+const saveCredentials = (data: any): IAction => ({
   type: SAVE_USER_CREDENTIALS,
   data,
 });
@@ -28,7 +28,7 @@ const submitCredentialsSucceeded = (data: UserCredentials) => dispatch => {
   dispatch(push('/info_page'));
 };
 
-const submitCredentialsFailed = (message: string): Action => ({
+const submitCredentialsFailed = (message: string): IAction => ({
   type: SUBMIT_CREDENTIALS_FAILED,
   message,
 });
