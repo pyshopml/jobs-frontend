@@ -5,7 +5,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 import createEditorState from 'tools/createEditorState';
 import TextEditor from 'components/TextEditor';
-import { loadPost } from './actions';
+import { loadVacancy } from './actions';
 import Vacancy from 'models/Vacancy'
 
 import selectors from './selectors';
@@ -15,8 +15,8 @@ import * as vacancyItemCss from "../Vacancies/components/VacancyItem/style.scss"
 
 
 interface Props {
-  openedPost: Vacancy;
-  loadPost(id: number);
+  openedVacancy: Vacancy;
+  loadVacancy(id: number);
   isLoading: boolean;
   params: {
     id: string
@@ -25,26 +25,26 @@ interface Props {
 
 interface State {};
 
-class PostDetail extends React.Component<Props, State> {
+class VacancyDetail extends React.Component<Props, State> {
   editorState: EditorState = null;    
 
   componentDidMount(){
-    this.props.loadPost(+this.props.params.id);
+    this.props.loadVacancy(+this.props.params.id);
   }
 
   componentWillReceiveProps(nextProps){
     if(this.props.params.id != nextProps.params.id)
-      this.props.loadPost(+nextProps.params.id);
+      this.props.loadVacancy(+nextProps.params.id);
   }
 
   renderKeywords = () => {
-    const { openedPost: {keywords} } = this.props;
+    const { openedVacancy: {keywords} } = this.props;
 
     return keywords.map((keyword, i) => <span key={i} className={vacancyItemCss.keyword}>{keyword}</span>)
   }
 
   renderCategories = () => {
-    const { openedPost: {category} } = this.props;
+    const { openedVacancy: {category} } = this.props;
 
     return category.map((category, i) =>
       <span key={i} className={vacancyItemCss.category}>{category.title}</span>).reverse()
@@ -59,7 +59,7 @@ class PostDetail extends React.Component<Props, State> {
   getEditorState = () => {
     if(!this.editorState) {
       this.editorState = createEditorState(
-        ContentState.createFromText(this.props.openedPost.description)
+        ContentState.createFromText(this.props.openedVacancy.description)
       )
     }
     return this.editorState
@@ -76,7 +76,7 @@ class PostDetail extends React.Component<Props, State> {
       keywords,
       busyness_text,
       location_text
-    } = this.props.openedPost;
+    } = this.props.openedVacancy;
 
     return (
       <article>
@@ -107,7 +107,7 @@ class PostDetail extends React.Component<Props, State> {
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  loadPost: (id: number) => dispatch(loadPost(id))
+  loadVacancy: (id: number) => dispatch(loadVacancy(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(VacancyDetail);

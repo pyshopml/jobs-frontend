@@ -4,7 +4,7 @@ import { last } from 'ramda';
 import App from './containers/App';
 import Vacancies from './pages/Vacancies';
 import NewVacancy from './pages/NewVacancy';
-import PostDetail from './pages/PostDetail';
+import VacancyDetail from './pages/VacancyDetail';
 import NotFound from './pages/NotFound';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -50,7 +50,7 @@ export default (store) => {
       <IndexRoute component={ Vacancies } />
       <Route path="vacancies" component={ Vacancies }/>
       <Route path="vacancies/new" component={ NewVacancy } onEnter={ MatchWhenAuthed } />
-      <Route path="vacancies/:id" component={ PostDetail }/>
+      <Route path="vacancies/:id" component={ VacancyDetail }/>
       <Route path="login" component={ LoginPage } onEnter={ isLogout } />
       <Route path="signup" component={ SignupPage } onEnter={ isLogout } />
       <Route path="info_page" component={ InfoPage } onEnter={ isLogout } />

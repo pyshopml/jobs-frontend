@@ -11,7 +11,7 @@ import routerReducer from './routerReducer';
 import appReducer from './containers/App/reducer';
 import vacanciesReducer from './pages/Vacancies/reducer';
 import newVacancyReducer from './pages/NewVacancy/reducer';
-import postDetail from './pages/PostDetail/reducer';
+import vacancyDetail from './pages/VacancyDetail/reducer';
 import alertReducer from './containers/Alert/reducer';
 import LoginPageReducer from './pages/LoginPage/reducer';
 import signupPageReducer from './pages/SignupPage/reducer';
@@ -22,7 +22,7 @@ import accountActivationReducer from './pages/ActivateAccountPage/reducer';
 export default combineReducers({
   routing: routerReducer,
   app: appReducer,
-  postDetail: postDetail,
+  vacancyDetail: vacancyDetail,
   vacancies: vacanciesReducer,
   newVacancy: newVacancyReducer,
   alert: alertReducer,
