@@ -1,6 +1,6 @@
 import formatDate from 'tools/formatDate';
 
-class PostClass{
+class Vacancy{
   readonly id: number;
   readonly url: string;
   readonly user: string;
@@ -21,6 +21,7 @@ class PostClass{
   }[];
   private _created_on?: Date;
   private _modified_on?: Date;
+
   constructor(postData){
     this.id = postData.id;
     this.url = postData.url;
@@ -76,4 +77,4 @@ class PostClass{
     return formatDate(this._modified_on)
   }
 }
-export default PostClass;
+export default Vacancy;

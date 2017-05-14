@@ -1,5 +1,5 @@
 import { goBack } from 'react-router-redux';
-import { INewPost } from 'interfaces';
+import { INewVacancy } from 'interfaces';
 import {uploadPost, fetchCategories, fetchKeywords} from './api';
 import selectors from './selectors';
 import { push } from 'react-router-redux';
@@ -34,7 +34,7 @@ const submitPostFailed = (message: string): Action => ({
 });
 
 
-export const createPost = (post: INewPost) => (dispatch, getState) => {
+export const createPost = (post: INewVacancy) => (dispatch, getState) => {
   dispatch(submitPost());
 
   const state = selectors(getState())

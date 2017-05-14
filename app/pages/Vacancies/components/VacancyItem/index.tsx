@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import PostClass from '../../../../models/Post.class';
+import Vacancy from 'models/Vacancy';
 import { Link } from 'react-router';
 
 import * as css from './style.scss';
 
 interface Props {
-  vacancy: PostClass
+  vacancy: Vacancy
 };
 
 interface State {};

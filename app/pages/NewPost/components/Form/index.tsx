@@ -8,15 +8,15 @@ import KeywordsField from 'components/KeywordsField';
 import DropdownField from 'components/DropdownField';
 
 import DescriptionEditor from '../DescriptionEditor';
-import { INewPost } from 'interfaces';
+import { INewVacancy } from 'interfaces';
 
 import createEditorState from 'tools/createEditorState';
 
 import * as css from './style.scss';
 
 interface Props {
-  createPost(post: INewPost);
-  onSubmit(post: INewPost);
+  createPost(post: INewVacancy);
+  onSubmit(post: INewVacancy);
   availableCategories: {title: string, id: number, parent: number}[];
   possibleKeywords: string[];
 };

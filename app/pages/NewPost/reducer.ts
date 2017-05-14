@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import PostClass from 'models/Post.class';
+import Vacancy from 'models/Vacancy';
 import {
   UPLOAD_POST,
   UPLOAD_POST_SUCCEEDED,
@@ -13,7 +13,7 @@ import {
 } from './constants';
 
 interface NewPostModel {
-  createdPost: PostClass;
+  createdPost: Vacancy;
   possibleKeywords: string[];
   availableCategories: {title: string, id: number, parent: number}[];
 }
@@ -31,7 +31,7 @@ export default (state = initialModel, action) => {
       return state;
 
     case UPLOAD_POST_SUCCEEDED:
-      const createdPost = new PostClass(action.data.createdPost);
+      const createdPost = new Vacancy(action.data.createdPost);
       return state.set('createdPost', createdPost);
 
     case LOAD_CATEGORIES_SUCCEEDED:

@@ -11,7 +11,7 @@ export interface Action {
   data?: any;
   message?: any;
 }
-export interface INewPost{
+export interface INewVacancy{
   title: string,
   description: any,
   salary_min: number,

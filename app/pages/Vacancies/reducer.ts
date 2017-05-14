@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import { pick } from 'ramda';
-import PostClass from 'models/Post.class';
+import Vacancy from 'models/Vacancy';
 import {
   LOAD_POSTS,
   LOAD_POSTS_SUCCEEDED,
@@ -9,7 +9,7 @@ import {
 
 
 interface PostListState {
-  vacancies: Array<PostClass>;
+  vacancies: Array<Vacancy>;
   errorMessage: string;
   count: number;
   currentPage: number;
@@ -19,7 +19,7 @@ interface PostListState {
 }
 
 const initialModel = fromJS({
-  vacancies: new Array<PostClass>(),
+  vacancies: new Array<Vacancy>(),
   errorMessage: '',
   count: 0,
   currentPage: 1,
@@ -34,7 +34,7 @@ export default (state = initialModel, action) => {
       return state;
 
     case LOAD_POSTS_SUCCEEDED:
-      let posts = action.data.results.map(result => new PostClass(result));
+      let posts = action.data.results.map(result => new Vacancy(result));
 
       return state
         .set('vacancies', posts)

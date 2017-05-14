@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import PostClass from '../../models/Post.class';
+import Vacancy from 'models/Vacancy';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
   LOAD_POST,
@@ -18,7 +18,7 @@ export default (state = initialModel, action) => {
       return state.set('isLoading', true);
       break;
     case LOAD_POST_SUCCEEDED:
-      const post = new PostClass(action.data.post);
+      const post = new Vacancy(action.data.post);
       return state.merge({openedPost: post, isLoading: false});
       break;
     case LOAD_POST_FAILURE:

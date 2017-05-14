@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Card } from 'elemental';
 import { connect } from 'react-redux';
 
-import PostClass from 'models/Post.class';
-import { INewPost } from 'interfaces';
+import Vacancy from 'models/Vacancy';
+import { INewVacancy } from 'interfaces';
 import Form from './components/Form';
 import {createPost, handleCancel, loadCategories, loadKeywords} from './actions';
 import selectors from './selectors';
@@ -11,8 +11,8 @@ import selectors from './selectors';
 import * as css from './style.scss';
 
 interface Props {
-  createdPost: PostClass;
-  createPost(post: INewPost);
+  createdPost: Vacancy;
+  createPost(post: INewVacancy);
   handleCancel();
   loadCategories(): void;
   loadKeywords(): void;
@@ -23,7 +23,7 @@ interface Props {
 interface State {};
 
 class NewPost extends React.Component<Props, State> {
-  onFormSubmit = (post: INewPost) => {
+  onFormSubmit = (post: INewVacancy) => {
     this.props.createPost(post)
   };
   componentDidMount() {
@@ -45,7 +45,7 @@ class NewPost extends React.Component<Props, State> {
 const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
-  createPost: (post: INewPost) => dispatch(createPost(post)),
+  createPost: (post: INewVacancy) => dispatch(createPost(post)),
   handleCancel: () => dispatch(handleCancel()),
   loadCategories: () => dispatch(loadCategories()),
   loadKeywords: () => dispatch(loadKeywords())

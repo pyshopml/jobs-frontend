@@ -6,7 +6,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import createEditorState from 'tools/createEditorState';
 import TextEditor from 'components/TextEditor';
 import { loadPost } from './actions';
-import PostClass from 'models/Post.class'
+import Vacancy from 'models/Vacancy'
 
 import selectors from './selectors';
 
@@ -15,7 +15,7 @@ import * as vacancyItemCss from "../Vacancies/components/VacancyItem/style.scss"
 
 
 interface Props {
-  openedPost: PostClass;
+  openedPost: Vacancy;
   loadPost(id: number);
   isLoading: boolean;
   params: {

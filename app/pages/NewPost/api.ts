@@ -1,6 +1,6 @@
-import { INewPost } from 'interfaces';
+import { INewVacancy } from 'interfaces';
 
-function uploadPostToServer(post: INewPost, token: string) {
+function uploadPostToServer(post: INewVacancy, token: string) {
   const options = {
     method: 'POST',
     headers: {
@@ -38,7 +38,7 @@ function fetchKeywordsFromServer() {
   return fetch(`${config.apiUrl}vacancies/tags/`, options)
 }
 
-export async function uploadPost(post: INewPost,
+export async function uploadPost(post: INewVacancy,
                                  token: string,
                                  done: (post) => any,
                                  error: (msg: string) => any) {

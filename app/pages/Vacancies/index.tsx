@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import PostClass from 'models/Post.class';
+import Vacancy from 'models/Vacancy';
 import selectors from './selectors';
 import { loadPosts } from './actions';
 
@@ -9,7 +9,7 @@ import VacancyList from './components/VacancyList';
 import Pagination from './components/Footer';
 
 interface Props {
-  vacancies: PostClass[];
+  vacancies: Vacancy[];
   isLoggedIn: boolean;
   loadPosts(pageNum: number): void;
   count: number;
