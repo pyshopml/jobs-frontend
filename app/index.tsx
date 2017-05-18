@@ -32,9 +32,7 @@ const loadAuthState = () => {
 const Main = () => (
   <Provider store={store}>
     <MuiThemeProvider>
-      <Router history={history}>
-        {routes}
-      </Router>
+      <Router history={history} routes={routes}/>
     </MuiThemeProvider>
   </Provider>
 );

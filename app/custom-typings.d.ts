@@ -5,3 +5,6 @@ declare var process: any;
 declare var config: {
   apiUrl: string
 }
+declare var System: {
+  import(path: string): Promise<any>
+}
