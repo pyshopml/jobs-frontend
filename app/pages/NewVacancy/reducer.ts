@@ -3,19 +3,15 @@ import Vacancy from 'models/Vacancy';
 import {
   UPLOAD_VACANCY,
   UPLOAD_VACANCY_SUCCEEDED,
-  UPLOAD_VACANCY_FAILURE,
-  LOAD_CATEGORIES,
-  LOAD_CATEGORIES_SUCCEEDED,
-  LOAD_CATEGORIES_FAILED,
-  LOAD_KEYWORDS,
-  LOAD_KEYWORDS_FAILED,
-  LOAD_KEYWORDS_SUCCEEDED
+  LOAD_FIELDS_VALUES_SUCCEEDED
 } from './constants';
 
 const initialModel = fromJS({
   createdVacancy: null,
   availableCategories: [],
-  possibleKeywords: []
+  possibleKeywords: [],
+  possibleCities: [],
+  possibleCountries: [],
 });
 
 export default (state = initialModel, action) => {
@@ -28,13 +24,18 @@ export default (state = initialModel, action) => {
       const createdVacancy = new Vacancy(action.data.createdVacancy);
       return state.set('createdVacancy', createdVacancy);
 
-    case LOAD_CATEGORIES_SUCCEEDED:
-      let categories = action.data.results;
-      return state.set('availableCategories', categories);
+    case LOAD_FIELDS_VALUES_SUCCEEDED:
+      const {
+        categories: { result: categories },
+        cities: {result: cities},
+        countries: {result: countries},
+        keywords: {result: keywords},
+      } = action.data;
 
-    case LOAD_KEYWORDS_SUCCEEDED:
-      let possibleKeywords = action.data.results;
-      return state.set('possibleKeywords', possibleKeywords);
+      return state.set('availableCategories', categories)
+                  .set('possibleCities', cities)
+                  .set('possibleCountries', countries)
+                  .set('possibleKeywords', keywords);
 
     default:
       return state;

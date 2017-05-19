@@ -19,6 +19,8 @@ interface Props {
   onSubmit(vacancy: INewVacancy);
   availableCategories: {title: string, id: number, parent: number}[];
   possibleKeywords: string[];
+  possibleCities: string[];
+  possibleCountries: string[];
 };
 
 interface State {
@@ -126,9 +128,14 @@ class Form extends React.Component<Props, State> {
       category,
       busyness,
       remote_work,
-      keywords
+      keywords,
     } } = this.state;
-    const { availableCategories } = this.props;
+    const {
+      availableCategories,
+      possibleCities,
+      possibleCountries
+    } = this.props;
+
     return(
       <ElementalForm>
         <FormField>
@@ -177,11 +184,15 @@ class Form extends React.Component<Props, State> {
           <FormField>
             <FormLabel>Страна</FormLabel>
             <TextField value={ country }
+                       autocomplete={possibleCountries}
+                       autocompleteLength={3}
                        onChange={(value) => this.updateLocationField('country', value)}/>
           </FormField>
           <FormField>
             <FormLabel>Город</FormLabel>
             <TextField value={ city }
+                       autocomplete={possibleCities}
+                       autocompleteLength={3}
                        onChange={(value) => this.updateLocationField('city', value)}/>
           </FormField>
         </FormRow>

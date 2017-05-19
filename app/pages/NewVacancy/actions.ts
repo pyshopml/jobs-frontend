@@ -1,6 +1,5 @@
 import { goBack } from 'react-router-redux';
 import { INewVacancy } from 'interfaces';
-import {uploadVacancy, fetchCategories, fetchKeywords} from './api';
 import selectors from './selectors';
 import { push } from 'react-router-redux';
 import { addNotification } from "containers/Alert/actions";
@@ -8,15 +7,17 @@ import { IAction } from 'interfaces';
 import { SuccessNotification, WarningNotification } from 'models/Notification';
 
 import {
+  uploadVacancy,
+  fetchFieldsValues
+} from './api';
+
+import {
   UPLOAD_VACANCY,
   UPLOAD_VACANCY_SUCCEEDED,
   UPLOAD_VACANCY_FAILURE,
-  LOAD_CATEGORIES,
-  LOAD_CATEGORIES_FAILED,
-  LOAD_CATEGORIES_SUCCEEDED,
-  LOAD_KEYWORDS_FAILED,
-  LOAD_KEYWORDS,
-  LOAD_KEYWORDS_SUCCEEDED
+  LOAD_FIELDS_VALUES,
+  LOAD_FIELDS_VALUES_FAILED,
+  LOAD_FIELDS_VALUES_SUCCEEDED
 } from './constants';
 
 const submitVacancy = (): IAction => ({
@@ -64,41 +65,24 @@ export const createVacancy = (Vacancy: INewVacancy) => (dispatch, getState) => {
   )
 }
 
-
-const loadingCategoriesSucceeded = (data) : IAction => ({
-  type: LOAD_CATEGORIES_SUCCEEDED,
+const loadingFieldsValuesSucceeded = (data) : IAction => ({
+  type: LOAD_FIELDS_VALUES_SUCCEEDED,
   data
 });
 
-const loadingCategoriesFailed = (errorMessage: string) : IAction => ({
-  type: LOAD_CATEGORIES_FAILED,
+const loadingFieldsValuesFailed = (errorMessage: string) : IAction => ({
+  type: LOAD_FIELDS_VALUES_FAILED,
   errorMessage
 });
 
-export const loadCategories = () => dispatch => {
-  dispatch({ type: LOAD_CATEGORIES });
-  fetchCategories(
-    (data) => dispatch(loadingCategoriesSucceeded(data)),
-    (msg : string) => dispatch(loadingCategoriesFailed(msg)),
+export const loadFieldsValues = () => dispatch => {
+  dispatch({ type: LOAD_FIELDS_VALUES });
+  fetchFieldsValues(
+    (data) => dispatch(loadingFieldsValuesSucceeded(data)),
+    (msg : string) => dispatch(loadingFieldsValuesFailed(msg)),
   );
 };
 
-const loadingKeywordsSucceeded = (data) : IAction => ({
-  type: LOAD_KEYWORDS_SUCCEEDED,
-  data
-});
 
-const loadingKeywordsFailed = (errorMessage: string) : IAction => ({
-  type: LOAD_KEYWORDS_FAILED,
-  errorMessage
-});
-
-export const loadKeywords = () => dispatch => {
-  dispatch({ type: LOAD_KEYWORDS });
-  fetchKeywords(
-    (data) => dispatch(loadingKeywordsSucceeded(data)),
-    (msg : string) => dispatch(loadingKeywordsFailed(msg)),
-  );
-};
 
 export const handleCancel = () => dispatch => dispatch(goBack());
