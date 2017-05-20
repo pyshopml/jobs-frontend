@@ -38,6 +38,30 @@ function fetchKeywordsFromServer() {
   return fetch(`${config.apiUrl}vacancies/tags/`, options)
 }
 
+function fetchCitiesFromServer() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  };
+
+  return fetch(`${config.apiUrl}cities/`, options)
+}
+
+function fetchCountriesFromServer() {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  };
+
+  return fetch(`${config.apiUrl}countries/`, options)
+}
+
 export async function uploadVacancy(vacancy: INewVacancy,
                                  token: string,
                                  done: (vacancy) => any,
@@ -53,32 +77,25 @@ export async function uploadVacancy(vacancy: INewVacancy,
   }
 }
 
-export async function fetchKeywords( done: (data) => any, error: (msg: string) => any) {
+export async function fetchFieldsValues( done: (data) => any, error: (msg: string) => any) {
   try {
-    const res = await fetchKeywordsFromServer();
+    const fieldsValuesResponses: any = {};
+    const fieldsValues: any = {};
 
-    if (res.ok) {
-      let data = await res.json();
-      done(data);
+    fieldsValuesResponses.categories = await fetchCategoriesFromServer();
+    fieldsValuesResponses.cities = await fetchCitiesFromServer();
+    fieldsValuesResponses.countries = await fetchCountriesFromServer();
+    fieldsValuesResponses.keywords = await fetchKeywordsFromServer();
+
+    for(let key in fieldsValuesResponses){
+      if(fieldsValuesResponses.hasOwnProperty(key)){
+        const res = fieldsValuesResponses[key];
+        if(!res.ok) throw new Error(res.statusText);
+        fieldsValues[key] = await res.json();
+      }
     }
 
-    error(res.statusText);
-
-  } catch (e) {
-    error(e.message);
-  }
-}
-
-export async function fetchCategories( done: (data) => any, error: (msg: string) => any) {
-  try {
-    const res = await fetchCategoriesFromServer();
-
-    if (res.ok) {
-      let data = await res.json();
-      done(data);
-    }
-
-    error(res.statusText);
+    done(fieldsValues);
 
   } catch (e) {
     error(e.message);

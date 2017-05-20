@@ -5,8 +5,12 @@ import { connect } from 'react-redux';
 import Vacancy from 'models/Vacancy';
 import { INewVacancy } from 'interfaces';
 import Form from './components/Form';
-import {createVacancy, handleCancel, loadCategories, loadKeywords} from './actions';
 import selectors from './selectors';
+import {
+  createVacancy,
+  handleCancel,
+  loadFieldsValues
+} from './actions';
 
 import * as css from './style.scss';
 
@@ -14,10 +18,11 @@ interface Props {
   createdVacancy: Vacancy;
   createVacancy(vacancy: INewVacancy);
   handleCancel();
-  loadCategories(): void;
-  loadKeywords(): void;
+  loadFieldsValues(): void;
   availableCategories: {title: string, id: number, parent: number}[];
   possibleKeywords: string[];
+  possibleCities: string[];
+  possibleCountries: string[];
 };
 
 interface State {};
@@ -27,8 +32,7 @@ class NewVacancy extends React.Component<Props, State> {
     this.props.createVacancy(vacancy)
   };
   componentDidMount() {
-    this.props.loadCategories();
-    this.props.loadKeywords();
+    this.props.loadFieldsValues();
   }
   render() {
     return (
@@ -47,8 +51,7 @@ const mapStateToProps = state => selectors(state);
 const mapDispatchToProps = dispatch => ({
   createVacancy: (vacancy: INewVacancy) => dispatch(createVacancy(vacancy)),
   handleCancel: () => dispatch(handleCancel()),
-  loadCategories: () => dispatch(loadCategories()),
-  loadKeywords: () => dispatch(loadKeywords())
+  loadFieldsValues: () => dispatch(loadFieldsValues()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewVacancy);
