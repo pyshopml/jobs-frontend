@@ -25,17 +25,12 @@ export default (state = initialModel, action) => {
       return state.set('createdVacancy', createdVacancy);
 
     case LOAD_FIELDS_VALUES_SUCCEEDED:
-      const {
-        categories: { result: categories },
-        cities: {result: cities},
-        countries: {result: countries},
-        keywords: {result: keywords},
-      } = action.data;
+      const { data } = action;
 
-      return state.set('availableCategories', categories)
-                  .set('possibleCities', cities)
-                  .set('possibleCountries', countries)
-                  .set('possibleKeywords', keywords);
+      return state.set('availableCategories', data.categories.results)
+                  .set('possibleCities', data.cities.results)
+                  .set('possibleCountries', data.countries.results)
+                  .set('possibleKeywords', data.keywords.results);
 
     default:
       return state;

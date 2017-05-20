@@ -6,6 +6,7 @@ import { FormSelect, FormLabel, Checkbox, FormField, Form as ElementalForm, Form
 import TextField from 'components/TextField';
 import KeywordsField from 'components/KeywordsField';
 import DropdownField from 'components/DropdownField';
+import LocationField from '../LocationField';
 
 import DescriptionEditor from '../DescriptionEditor';
 import { INewVacancy } from 'interfaces';
@@ -183,17 +184,17 @@ class Form extends React.Component<Props, State> {
         <FormRow>
           <FormField>
             <FormLabel>Страна</FormLabel>
-            <TextField value={ country }
-                       autocomplete={possibleCountries}
-                       autocompleteLength={3}
-                       onChange={(value) => this.updateLocationField('country', value)}/>
+            <LocationField value={ country }
+                           locations={possibleCountries}
+                           autocompleteLength={3}
+                           onChange={(value) => this.updateLocationField('country', value)}/>
           </FormField>
           <FormField>
             <FormLabel>Город</FormLabel>
-            <TextField value={ city }
-                       autocomplete={possibleCities}
-                       autocompleteLength={3}
-                       onChange={(value) => this.updateLocationField('city', value)}/>
+            <LocationField value={ city }
+                           locations={possibleCities}
+                           autocompleteLength={3}
+                           onChange={(value) => this.updateLocationField('city', value)}/>
           </FormField>
         </FormRow>
 
