@@ -20,6 +20,7 @@ class VacancyItem extends React.Component<Props, State> {
   renderCategories = () => {
     const { vacancy: {category} } = this.props;
 
+    if(!category) return null;
     return category.map((category, i) => <span key={i} className={css.category}>{category.title}</span>).reverse()
   }
   render() {
