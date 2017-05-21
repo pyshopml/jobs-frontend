@@ -1,4 +1,5 @@
 import { INewVacancy } from 'interfaces';
+import  * as queryString from 'query-string';
 
 function uploadVacancyToServer(vacancy: INewVacancy, token: string) {
   const options = {
@@ -38,7 +39,7 @@ function fetchKeywordsFromServer() {
   return fetch(`${config.apiUrl}vacancies/tags/`, options)
 }
 
-function fetchCitiesFromServer() {
+function fetchCitiesFromServer(searchString: string) {
   const options = {
     method: 'GET',
     headers: {
@@ -46,11 +47,14 @@ function fetchCitiesFromServer() {
       'Content-Type': 'application/json',
     }
   };
+  const params = {
+    search: searchString
+  }
 
-  return fetch(`${config.apiUrl}cities/`, options)
+  return fetch(`${config.apiUrl}cities/?${queryString.stringify(params)}`, options)
 }
 
-function fetchCountriesFromServer() {
+function fetchCountriesFromServer(searchString: string) {
   const options = {
     method: 'GET',
     headers: {
@@ -58,8 +62,11 @@ function fetchCountriesFromServer() {
       'Content-Type': 'application/json',
     }
   };
+  const params = {
+    search: searchString
+  }
 
-  return fetch(`${config.apiUrl}countries/`, options)
+  return fetch(`${config.apiUrl}countries/?${queryString.stringify(params)}`, options)
 }
 
 export async function uploadVacancy(vacancy: INewVacancy,
@@ -77,14 +84,38 @@ export async function uploadVacancy(vacancy: INewVacancy,
   }
 }
 
+export async function fetchCities(searchString: string, done: (data) => any,
+                                  error: (msg: string) => any) {
+  try {
+    const res = await fetchCitiesFromServer(searchString);
+    if (!res.ok)
+      throw new Error(res.statusText);
+    const cities = await res.json();
+    done(cities);
+  } catch (e) {
+    error(e.message);
+  }
+}
+
+export async function fetchCountries(searchString: string, done: (data) => any,
+                                     error: (msg: string) => any) {
+  try {
+    const res = await fetchCountriesFromServer(searchString);
+    if (!res.ok)
+      throw new Error(res.statusText);
+    const countries = await res.json()
+    done(countries);
+  } catch (e) {
+    error(e.message);
+  }
+}
+
 export async function fetchFieldsValues( done: (data) => any, error: (msg: string) => any) {
   try {
     const fieldsValuesResponses: any = {};
     const fieldsValues: any = {};
 
     fieldsValuesResponses.categories = await fetchCategoriesFromServer();
-    fieldsValuesResponses.cities = await fetchCitiesFromServer();
-    fieldsValuesResponses.countries = await fetchCountriesFromServer();
     fieldsValuesResponses.keywords = await fetchKeywordsFromServer();
 
     for(let key in fieldsValuesResponses){

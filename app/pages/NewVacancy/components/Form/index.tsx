@@ -18,10 +18,12 @@ import * as css from './style.scss';
 interface Props {
   createVacancy(vacancy: INewVacancy);
   onSubmit(vacancy: INewVacancy);
+  loadCities(): void;
+  loadCountries(): void;
   availableCategories: {title: string, id: number, parent: number}[];
-  possibleKeywords: string[];
-  possibleCities: string[];
-  possibleCountries: string[];
+  autocompleteKeywords: string[];
+  autocompleteCities: string[];
+  autocompleteCountries: string[];
 };
 
 interface State {
@@ -133,8 +135,10 @@ class Form extends React.Component<Props, State> {
     } } = this.state;
     const {
       availableCategories,
-      possibleCities,
-      possibleCountries
+      autocompleteCities,
+      autocompleteCountries,
+      loadCities,
+      loadCountries
     } = this.props;
 
     return(
@@ -185,15 +189,19 @@ class Form extends React.Component<Props, State> {
           <FormField>
             <FormLabel>Страна</FormLabel>
             <LocationField value={ country }
-                           locations={possibleCountries}
+                           locations={autocompleteCountries}
+                           loadLocations={loadCountries}
                            autocompleteLength={3}
+                           autocompleteStartsWith={3}
                            onChange={(value) => this.updateLocationField('country', value)}/>
           </FormField>
           <FormField>
             <FormLabel>Город</FormLabel>
             <LocationField value={ city }
-                           locations={possibleCities}
+                           locations={autocompleteCities}
+                           loadLocations={loadCities}
                            autocompleteLength={3}
+                           autocompleteStartsWith={3}
                            onChange={(value) => this.updateLocationField('city', value)}/>
           </FormField>
         </FormRow>
@@ -220,7 +228,9 @@ class Form extends React.Component<Props, State> {
         <FormField>
           <FormLabel>Ключевые слова</FormLabel>
           <KeywordsField keywords={keywords}
-                         possibleKeywords={this.props.possibleKeywords}
+                         possibleKeywords={this.props.autocompleteKeywords}
+                         autocompleteStartsWith={3}
+                         autocompleteLength={3}
                          onChange={(keywords) => this.updateField('keywords', keywords)}/>
         </FormField>
 

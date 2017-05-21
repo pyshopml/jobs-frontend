@@ -8,32 +8,31 @@ import { SuccessNotification, WarningNotification } from 'models/Notification';
 
 import {
   uploadVacancy,
-  fetchFieldsValues
+  fetchFieldsValues,
+  fetchCities,
+  fetchCountries
 } from './api';
 
 import {
-  UPLOAD_VACANCY,
-  UPLOAD_VACANCY_SUCCEEDED,
-  UPLOAD_VACANCY_FAILURE,
-  LOAD_FIELDS_VALUES,
-  LOAD_FIELDS_VALUES_FAILED,
-  LOAD_FIELDS_VALUES_SUCCEEDED
+  UPLOAD_VACANCY, UPLOAD_VACANCY_SUCCEEDED, UPLOAD_VACANCY_FAILURE,
+  LOAD_FIELDS_VALUES, LOAD_FIELDS_VALUES_SUCCEEDED, LOAD_FIELDS_VALUES_FAILED,
+  LOAD_COUNTRIES, LOAD_COUNTRIES_SUCCEEDED, LOAD_COUNTRIES_FAILED,
+  LOAD_CITIES, LOAD_CITIES_SUCCEEDED, LOAD_CITIES_FAILED
 } from './constants';
+
+const actionSucceeded = (constant, data) => ({
+  type: constant,
+  data
+});
+
+const actionFailed = (constant, errMessage) => ({
+  type: constant,
+  errMessage
+});
 
 const submitVacancy = (): IAction => ({
   type: UPLOAD_VACANCY,
 });
-
-const submitVacancySucceeded = (createdVacancy): IAction => ({
-  type: UPLOAD_VACANCY_SUCCEEDED,
-  data: { createdVacancy },
-});
-
-const submitVacancyFailed = (message: string): IAction => ({
-  type: UPLOAD_VACANCY_FAILURE,
-  message
-});
-
 
 export const createVacancy = (Vacancy: INewVacancy) => (dispatch, getState) => {
   dispatch(submitVacancy());
@@ -52,7 +51,7 @@ export const createVacancy = (Vacancy: INewVacancy) => (dispatch, getState) => {
        });
 
       dispatch(addNotification(notification));
-      dispatch(submitVacancySucceeded(Vacancy))
+      dispatch(actionSucceeded(UPLOAD_VACANCY_SUCCEEDED, { createdVacancy: Vacancy }))
     },
     (msg: string) => {
       let notification = new WarningNotification({
@@ -60,26 +59,37 @@ export const createVacancy = (Vacancy: INewVacancy) => (dispatch, getState) => {
       });
 
       dispatch(addNotification(notification));
-      dispatch(submitVacancyFailed(msg))
+      dispatch(actionFailed(UPLOAD_VACANCY_FAILURE, msg))
     },
   )
 }
 
-const loadingFieldsValuesSucceeded = (data) : IAction => ({
-  type: LOAD_FIELDS_VALUES_SUCCEEDED,
-  data
-});
-
-const loadingFieldsValuesFailed = (errorMessage: string) : IAction => ({
-  type: LOAD_FIELDS_VALUES_FAILED,
-  errorMessage
-});
 
 export const loadFieldsValues = () => dispatch => {
   dispatch({ type: LOAD_FIELDS_VALUES });
   fetchFieldsValues(
-    (data) => dispatch(loadingFieldsValuesSucceeded(data)),
-    (msg : string) => dispatch(loadingFieldsValuesFailed(msg)),
+    (data) => dispatch(actionSucceeded(LOAD_FIELDS_VALUES_SUCCEEDED, data)),
+    (msg : string) => dispatch(actionFailed(LOAD_FIELDS_VALUES_FAILED, msg)),
+  );
+};
+
+
+export const loadCountries = (searchString) => dispatch => {
+  dispatch({ type: LOAD_COUNTRIES });
+  fetchCountries(
+    searchString,
+    (data) => dispatch(actionSucceeded(LOAD_COUNTRIES_SUCCEEDED, data)),
+    (msg : string) => dispatch(actionFailed(LOAD_COUNTRIES_FAILED, msg)),
+  );
+};
+
+
+export const loadCities = (searchString) => dispatch => {
+  dispatch({ type: LOAD_CITIES });
+  fetchCities(
+    searchString,
+    (data) => dispatch(actionSucceeded(LOAD_CITIES_SUCCEEDED, data)),
+    (msg : string) => dispatch(actionFailed(LOAD_CITIES_FAILED, msg)),
   );
 };
 

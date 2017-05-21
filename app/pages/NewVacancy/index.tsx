@@ -9,7 +9,7 @@ import selectors from './selectors';
 import {
   createVacancy,
   handleCancel,
-  loadFieldsValues
+  loadFieldsValues, loadCities, loadCountries
 } from './actions';
 
 import * as css from './style.scss';
@@ -19,10 +19,12 @@ interface Props {
   createVacancy(vacancy: INewVacancy);
   handleCancel();
   loadFieldsValues(): void;
+  loadCities(): void;
+  loadCountries(): void;
   availableCategories: {title: string, id: number, parent: number}[];
-  possibleKeywords: string[];
-  possibleCities: string[];
-  possibleCountries: string[];
+  autocompleteKeywords: string[];
+  autocompleteCities: string[];
+  autocompleteCountries: string[];
 };
 
 interface State {};
@@ -52,6 +54,8 @@ const mapDispatchToProps = dispatch => ({
   createVacancy: (vacancy: INewVacancy) => dispatch(createVacancy(vacancy)),
   handleCancel: () => dispatch(handleCancel()),
   loadFieldsValues: () => dispatch(loadFieldsValues()),
+  loadCities: (searchString) => dispatch(loadCities(searchString)),
+  loadCountries: (searchString) => dispatch(loadCountries(searchString))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewVacancy);

@@ -11,6 +11,8 @@ interface Props{
   onChange?: (keywords: {id: number, value: string}[]) => any;
   possibleKeywords: string[];
   className?: string;
+  autocompleteLength: number;
+  autocompleteStartsWith: number;
 }
 
 class KeywordsField extends React.Component<Props, null>{
@@ -42,15 +44,18 @@ class KeywordsField extends React.Component<Props, null>{
     }
   }
   renderKeywords = () => {
-    const { keywords, possibleKeywords } = this.props;
+    const {
+      keywords, possibleKeywords,
+      autocompleteLength, autocompleteStartsWith
+    } = this.props;
 
     return (
       keywords.map((item, index) => (
         <FormField className={css.keywordsFormField} key={item.id}>
           <TextField value={ keywords[index].value }
                      autocomplete={possibleKeywords}
-                     autocompleteLength={3}
-                     autoComplete="off"
+                     autocompleteLength={autocompleteLength}
+                     autocompleteStartsWith={autocompleteStartsWith}
                      onChange={(value) => this.updateKeywordValue(index, value)}
                      className={css.keywordField}/>
           <a className={css.removeKeyword} href=""
