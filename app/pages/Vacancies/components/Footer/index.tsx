@@ -19,16 +19,18 @@ class Footer extends React.Component<Props, State> {
   }
 
   render() {
-    return (
-      <Pagination
-        className={css.container}
-        currentPage={this.props.currentPage}
-        onPageSelect={this.handlePageSelect}
-        pageSize={this.props.pageSize}
-        total={this.props.count}
-        limit={10}
+    if( this.props.count/ this.props.pageSize > 1){ //If at least one page exist
+      return (
+        <Pagination
+          className={css.container}
+          currentPage={this.props.currentPage}
+          onPageSelect={this.handlePageSelect}
+          pageSize={this.props.pageSize}
+          total={this.props.count}
+          limit={10}
         />
-    );
+      );
+    } else return null;
   }
 }
 
