@@ -4,12 +4,14 @@ import Vacancy from 'models/Vacancy';
 import {
   LOAD_VACANCIES,
   LOAD_VACANCIES_SUCCEEDED,
-  LOAD_VACANCIES_FAILED,
+  LOAD_VACANCIES_FAILED, UPDATE_SEARCH_STRING,
 } from './constants';
 
 
 const initialModel = fromJS({
   vacancies: [],
+  isLoading: true,
+  searchString: '',
   errorMessage: '',
   count: 0,
   currentPage: 1,
@@ -20,18 +22,24 @@ const initialModel = fromJS({
 
 export default (state = initialModel, action) => {
   switch (action.type) {
+
     case LOAD_VACANCIES:
-      return state;
+      return state.set('isLoading', true);
 
     case LOAD_VACANCIES_SUCCEEDED:
       let vacancies = action.data.results.map(result => new Vacancy(result));
 
       return state
         .set('vacancies', vacancies)
+        .set('isLoading', false)
         .merge(pick(['count', 'next', 'previous', 'currentPage'], action.data));
 
+    case UPDATE_SEARCH_STRING:
+      return state.set('searchString', action.data);
+
     case LOAD_VACANCIES_FAILED:
-      return state.set('errorMessage', action.errorMessage);
+      return state.set('errorMessage', action.errorMessage)
+                  .set('isLoading', false);
 
     default:
       return state;

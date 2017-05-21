@@ -14,7 +14,8 @@ interface State {};
 class VacancyList extends React.Component<Props, State> {
 
   renderVacancies() {
-    return this.props.vacancies.map(item => 
+    if(this.props.vacancies.length == 0) return "Ничего не найдено";
+    return this.props.vacancies.map(item =>
       <VacancyItem key={item.id} vacancy={item} />);
   }
 
