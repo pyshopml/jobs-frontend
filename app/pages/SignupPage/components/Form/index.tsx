@@ -6,6 +6,7 @@ import { Spinner } from 'elemental';
 import { SignupCredentials } from '../../interfaces';
 
 import * as css from './style.scss';
+import { validateEmail, validatePasswords, validateUsername } from './validation';
 
 interface Props {
   handleSubmit(data: SignupCredentials): void;
@@ -51,24 +52,18 @@ class SignuPage extends React.Component<Props, State> {
   handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if(this.isDataValid()) {
+    if(this.areFieldsValid()) {
       this.props.handleSubmit(this.state);
       this.clearState();
     }
   }
 
-  arePasswordsEqual = () => {
-    const { password, passwordConfirmation } = this.state;
-    return password === passwordConfirmation;
-  }
+  areFieldsValid = () => {
+    const { email, username, password, passwordConfirmation } = this.state;
 
-  areFieldsFilled = () => {
-    const { username, email, password } = this.state;
-    return !(isEmpty(username) || isEmpty(email) || isEmpty(password));
-  }
-
-  isDataValid = () => {
-    return (this.areFieldsFilled() && this.arePasswordsEqual());
+    return validateEmail(email)
+        && validateUsername(username)
+        && validatePasswords(password, passwordConfirmation)
   }
 
   isErrorMsgAvailable = () => {
@@ -132,8 +127,8 @@ class SignuPage extends React.Component<Props, State> {
 
             <button 
               type="submit"
-              className={classNames(css.button, { [css.buttonDisabled]: !this.isDataValid() })} 
-              disabled={ !this.isDataValid() }>
+              className={classNames(css.button, { [css.buttonDisabled]: !this.areFieldsValid() })}
+              disabled={ !this.areFieldsValid() }>
                 { this.props.isLoading ? <Spinner size="sm" type="inverted" /> : 'Зарегистрироваться' }
             </button>
           </form>

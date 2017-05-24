@@ -17,3 +17,4 @@ import 'react-addons-css-transition-group';
 import 'immutable';
 import 'redux-immutable';
 import 'react-select';
+import 'valid.js';

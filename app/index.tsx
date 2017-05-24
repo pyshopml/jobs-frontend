@@ -15,7 +15,7 @@ import { configureStore } from './store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { restoreAuthState } from './containers/App/actions';
 
-require('./tap.plugin');
+import './tap.plugin';
 
 import './index.scss';
 

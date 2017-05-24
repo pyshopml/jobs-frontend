@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormInput, FormField, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'elemental';
 import { EditorState, SelectionState } from 'draft-js';
 import getSelectedText from 'tools/getSelectedText';
-import { urlValidation } from 'tools/validation';
+import { validateLinkText, validateLinkUrl } from './validation';
 
 import Icon from 'components/Icon';
 import TooltipWrapper from 'components/TooltipWrapper';
@@ -70,9 +70,9 @@ class ToggleLinkButton extends React.Component<Props, State>{
     });
   }
   isLinkValid = () => {
-    if(!this.state.linkText || !this.state.linkUrl)
-      return false;
-    return urlValidation(this.state.linkUrl)
+    const { linkText, linkUrl } = this.state;
+
+    return validateLinkText(linkText) && validateLinkUrl(linkUrl)
   };
   renderModal = () => (
     <Modal isOpen={this.state.showURLInput} onCancel={this.closeLinkInput} backdropClosesModal={true}>

@@ -7,13 +7,17 @@ import TextField from 'components/TextField';
 import KeywordsField from 'components/KeywordsField';
 import DropdownField from 'components/DropdownField';
 import LocationField from '../LocationField';
-
 import DescriptionEditor from '../DescriptionEditor';
 import { INewVacancy } from 'interfaces';
 
 import createEditorState from 'tools/createEditorState';
 
 import * as css from './style.scss';
+import {
+  validateTitle,
+  validateDescription,
+  validateCategory
+} from './validation';
 
 interface Props {
   createVacancy(vacancy: INewVacancy);
@@ -110,9 +114,14 @@ class Form extends React.Component<Props, State> {
       description
     } });
   }
-  isFieldsValid = () => {
-    return true;
-  }
+  areFieldsValid = () => {
+    const {title, description, category} = this.state.fields;
+
+    return validateTitle(title) &&
+           validateCategory(category) &&
+           validateDescription( description.getCurrentContent().getPlainText() );
+
+  };
 
   parseKeywords = (keywords: {value: string, id: number}[]): string[] => {
     const result = [];
@@ -240,7 +249,7 @@ class Form extends React.Component<Props, State> {
           </Button>
           <Button type="primary"
                   onClick={this.handleSubmit}
-                  disabled={!this.isFieldsValid()}
+                  disabled={!this.areFieldsValid()}
                   submit
           >
             Создать

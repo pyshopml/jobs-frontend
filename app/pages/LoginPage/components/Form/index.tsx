@@ -6,6 +6,7 @@ import { Spinner } from 'elemental';
 import { LoginCredentials } from '../../interfaces';
 
 import * as css from './style.scss';
+import { validateEmail, validatePassword } from './validation';
 
 interface Props {
   handleSubmit: (data: LoginCredentials) => void;
@@ -30,6 +31,7 @@ class LoginPage extends React.Component<Props, State> {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
+    if(!this.areFieldsValid()) return;
     this.props.handleSubmit(this.state);
   }
 
@@ -40,9 +42,10 @@ class LoginPage extends React.Component<Props, State> {
     });
   }
 
-  isDataValid = () => {
+  areFieldsValid = () => {
     const { email, password } = this.state;
-    return !(isEmpty(email) || isEmpty(password));
+
+    return validateEmail(email) && validatePassword(password)
   }
 
   render() {
@@ -76,8 +79,8 @@ class LoginPage extends React.Component<Props, State> {
 
             <button 
               type="submit"
-              className={ classNames(css.button, { [css.buttonDisabled]: !this.isDataValid() }) }
-              disabled={ !this.isDataValid() }>
+              className={ classNames(css.button, { [css.buttonDisabled]: !this.areFieldsValid() }) }
+              disabled={ !this.areFieldsValid() }>
               { this.props.isLoading ? <Spinner size="sm" type="inverted" /> : 'Вход' }
             </button>
 
