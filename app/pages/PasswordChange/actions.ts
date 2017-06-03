@@ -1,5 +1,5 @@
 import { IAction } from 'interfaces';
-import { submitNewPassword } from './api';
+import apiSubmitNewPassword from 'api/users/password/reset';
 import {
   PASSWORD_CHANGE,
   PASSWORD_CHANGE_SUCCEEDED,
@@ -21,9 +21,7 @@ const changeFailed = (message: string): IAction => ({
 
 export const changePassword = (data: any) => dispatch => {
   dispatch(changeStarted());
-  submitNewPassword(
-    data,
-    () => dispatch(changeSucceeded()),
-    (msg: string) => dispatch(changeFailed(msg)),
-  );
+  apiSubmitNewPassword(data)
+    .then( () => dispatch(changeSucceeded()) )
+    .catch( (msg: string) => dispatch(changeFailed(msg)) )
 }

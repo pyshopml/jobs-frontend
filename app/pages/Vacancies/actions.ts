@@ -1,5 +1,5 @@
 import { IAction } from 'interfaces';
-import { fetchVacancies } from './api';
+import apiSearchAllVacancies from 'api/vacancies/searchAll';
 
 import {
   LOAD_VACANCIES, LOAD_VACANCIES_SUCCEEDED, LOAD_VACANCIES_FAILED,
@@ -18,11 +18,9 @@ const loadingFailed = (errorMessage: string) : IAction => ({
 
 export const loadVacancies = (page: number, search?: string) => dispatch => {
   dispatch({ type: LOAD_VACANCIES });
-  fetchVacancies(
-    {page, search},
-    (data) => dispatch(loadingSucceeded(Object.assign(data, { currentPage: page }))),
-    (msg : string) => dispatch(loadingFailed(msg)),
-  );
+  apiSearchAllVacancies(page)
+    .then( (data) => dispatch(loadingSucceeded(Object.assign(data, { currentPage: page }))) )
+    .catch( (msg : string) => dispatch(loadingFailed(msg)) )
 };
 
 export const updateSearchString = (searchString: string) : IAction => ({

@@ -1,6 +1,6 @@
 import { IAction } from 'interfaces';
 import { saveAuthCredentials } from 'containers/App/actions';
-import { submitData } from './api';
+import apiLoginUser from 'api/users/login';
 import {
   LOGIN_USER,
   LOGIN_USER_SUCCEEDED,
@@ -31,9 +31,7 @@ const loginSubmitFailed = (message: string): IAction => ({
 
 export const loginUser = (credentials: any) => dispatch => {
   dispatch(loginSubmit());
-  submitData(
-    credentials,
-    data => dispatch(loginSubmitSucceeded(data)),
-    (msg: string) => dispatch(loginSubmitFailed(msg))
-  );
+  apiLoginUser(credentials)
+    .then( data => dispatch(loginSubmitSucceeded(data)) )
+    .catch( (msg: string) => dispatch(loginSubmitFailed(msg)) )
 };

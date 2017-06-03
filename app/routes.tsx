@@ -23,6 +23,10 @@ export default (store) => {
     store.dispatch(storeIntendedPath(path));
   }
 
+  const replaceWithNotFound = (nextState, replace) => {
+    replace('404')
+  };
+
   const isLogout = (nextState, replace) => {
     let state = store.getState();
     let isLoggedIn = state.get('app').get('isLoggedIn');
@@ -59,7 +63,7 @@ export default (store) => {
       <Route path="/account/:uid/password-reset/:token/" component={ PasswordChangePage } onEnter={ isLogout } />
       <Route path="/account/:uid/activate/:token/" component={ ActivateAccountPage } onEnter={ isLogout } />
       <Route path="404" component={ NotFound }/>
-      <Route path="*" component={ NotFound }/>
+      <Route path="*" onEnter={ replaceWithNotFound }/>
     </Route>
   );
 };

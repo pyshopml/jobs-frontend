@@ -2,7 +2,7 @@ import * as cookie from 'react-cookie'
 import { push } from 'react-router-redux';
 import { isEmpty } from 'ramda';
 import { IAction } from '../../interfaces';
-import { verifyToken } from './api';
+import apiVerifyToken from 'api/token/validate';
 import {
   SAVE_AUTH_CREDENTIALS,
   SAVE_INTENDED_PATH,
@@ -63,10 +63,8 @@ export const restoreAuthState = () => dispatch => {
   let auth_token = readFromCookie(TOKEN);
 
   if (auth_token) {
-    verifyToken(
-      auth_token,
-      () => dispatch(saveAuthCredentials({ auth_token }))
-    );
+    apiVerifyToken(auth_token)
+      .then( () => dispatch(saveAuthCredentials({ auth_token })) )
   }
 };
 

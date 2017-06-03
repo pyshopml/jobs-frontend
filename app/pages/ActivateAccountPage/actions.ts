@@ -1,5 +1,5 @@
 import { IAction } from 'interfaces';
-import { submitActionData } from './api';
+import apiActivateUser from 'api/users/activate';
 import {
   ACTIVATE_ACCOUNT,
   ACTIVATE_ACCOUNT_SUCCEEDED,
@@ -20,10 +20,8 @@ const activateFailed = (message: string) => ({
 });
 
 export const activateAccount = (data: any) => dispatch => {
-  dispatch(activateStarted())
-  submitActionData(
-    data,
-    () => dispatch(activateSucceeded()),
-    (msg: string) => dispatch(activateFailed(msg)),
-  );
+  dispatch(activateStarted());
+  apiActivateUser(data)
+    .then( () => dispatch(activateSucceeded()) )
+    .catch( (msg: string) => dispatch(activateFailed(msg)) )
 }

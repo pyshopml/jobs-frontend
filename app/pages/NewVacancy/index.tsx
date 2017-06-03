@@ -8,8 +8,7 @@ import Form from './components/Form';
 import selectors from './selectors';
 import {
   createVacancy,
-  handleCancel,
-  loadFieldsValues, loadCities, loadCountries
+  loadCategories, loadKeywords, loadCities, loadCountries
 } from './actions';
 
 import * as css from './style.scss';
@@ -17,8 +16,8 @@ import * as css from './style.scss';
 interface Props {
   createdVacancy: Vacancy;
   createVacancy(vacancy: INewVacancy);
-  handleCancel();
-  loadFieldsValues(): void;
+  loadKeywords(): void;
+  loadCategories(): void;
   loadCities(): void;
   loadCountries(): void;
   availableCategories: {title: string, id: number, parent: number}[];
@@ -34,7 +33,8 @@ class NewVacancy extends React.Component<Props, State> {
     this.props.createVacancy(vacancy)
   };
   componentDidMount() {
-    this.props.loadFieldsValues();
+    this.props.loadCategories();
+    this.props.loadKeywords();
   }
   render() {
     return (
@@ -52,8 +52,8 @@ const mapStateToProps = state => selectors(state);
 
 const mapDispatchToProps = dispatch => ({
   createVacancy: (vacancy: INewVacancy) => dispatch(createVacancy(vacancy)),
-  handleCancel: () => dispatch(handleCancel()),
-  loadFieldsValues: () => dispatch(loadFieldsValues()),
+  loadCategories: (searchString) => dispatch(loadCategories()),
+  loadKeywords: (searchString) => dispatch(loadKeywords()),
   loadCities: (searchString) => dispatch(loadCities(searchString)),
   loadCountries: (searchString) => dispatch(loadCountries(searchString))
 });

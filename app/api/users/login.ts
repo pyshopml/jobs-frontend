@@ -1,4 +1,4 @@
-const submitRequest = (data) => {
+const sendRequest = (data) => {
   const options = {
     method: 'POST',
     headers: {
@@ -11,19 +11,15 @@ const submitRequest = (data) => {
   return fetch(`${config.apiUrl}account/login/`, options)
 }
 
-export async function submitData(credentials: any, done, error: (msg: string) => void) {
+export default async function loginUser(credentials: any) {
   try {
-    const res = await submitRequest(credentials);
+    const res = await sendRequest(credentials);
     const data = await res.json();
 
-    if (res.ok) {
-      done(data);
-      return;
-    } else {
-      error(data.non_field_errors[0])
-    }
-
+    if(!res.ok)
+      throw new Error(data.non_field_errors[0]);
+    return data;
   } catch (e) {
-    error(e.message);
+    return Promise.reject(e.message);
   }
 }

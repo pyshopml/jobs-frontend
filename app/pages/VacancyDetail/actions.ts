@@ -1,6 +1,6 @@
 import { IAction } from 'interfaces';
 import { replace } from 'react-router-redux'
-import { fetchVacancy } from './api';
+import apiGetOneVacancy from 'api/vacancies/getOne';
 import {
   LOAD_VACANCY,
   LOAD_VACANCY_SUCCEEDED,
@@ -24,10 +24,10 @@ const loadingVacancyFailed = (errorMessage: string): IAction => ({
 export const loadVacancy = (id: number) =>
   (dispatch) => {
     dispatch(loadingVacancy());
-    fetchVacancy(
-      id,
-      (vacancy) => dispatch(loadingVacancySucceeded(vacancy)),
-      (msg) => dispatch(loadingVacancyFailed(msg)),
-      () => dispatch(replace('/404'))
-    )
+    apiGetOneVacancy(id)
+      .then( (vacancy) => dispatch(loadingVacancySucceeded(vacancy)) )
+      .catch( (msg) => {
+        if(msg == 'Not found') dispatch(replace('/404'))
+        else dispatch(loadingVacancyFailed(msg))
+      } )
   };

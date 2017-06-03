@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import { IAction } from 'interfaces';
-import { submitData } from './api';
+import apiRestorePassword from 'api/users/password/restore';
 import {
   PASSWORD_RESTORE,
   PASSWORD_RESTORE_SUCCEEDED,
@@ -27,11 +27,9 @@ const clearState = (): IAction => ({
 
 export const submitEmail = (email: string) => dispatch => {
   dispatch({ type: PASSWORD_RESTORE });
-  submitData(
-    email,
-    () => dispatch(passwordRestoreSucceeded()),
-    (msg: string) => dispatch(passwordRestoreFailed(msg)),
-  );
+  apiRestorePassword(email)
+    .then( () => dispatch(passwordRestoreSucceeded()) )
+    .catch( (msg: string) => dispatch(passwordRestoreFailed(msg)) )
 }
 
 export const goBackHandler = () => dispatch => {

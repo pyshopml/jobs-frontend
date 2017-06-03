@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 import { IAction } from 'interfaces';
 import { SignupCredentials, UserCredentials } from './interfaces';
 import { SAVE_USER_CREDENTIALS } from 'containers/App/constants';
-import { submitData } from './api';
+import apiSignup from 'api/users/signup';
 import {
   SUBMIT_CREDENTIALS,
   SUBMIT_CREDENTIALS_SUCCEEDED,
@@ -35,9 +35,7 @@ const submitCredentialsFailed = (message: string): IAction => ({
 
 export const submitUserCredentials = (data: SignupCredentials) => dispatch => {
   dispatch(signupUser());
-  submitData(
-    data,
-    (data: any) => dispatch(submitCredentialsSucceeded(data)),
-    (msg: string) => dispatch(submitCredentialsFailed(msg)),
-  );
+  apiSignup(data)
+    .then( (data: any) => dispatch(submitCredentialsSucceeded(data)) )
+    .catch( (msg: string) => dispatch(submitCredentialsFailed(msg)) )
 }

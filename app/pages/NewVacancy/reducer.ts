@@ -3,9 +3,10 @@ import Vacancy from 'models/Vacancy';
 import {
   UPLOAD_VACANCY,
   UPLOAD_VACANCY_SUCCEEDED,
-  LOAD_FIELDS_VALUES_SUCCEEDED,
   LOAD_CITIES_SUCCEEDED,
-  LOAD_COUNTRIES_SUCCEEDED
+  LOAD_COUNTRIES_SUCCEEDED,
+  LOAD_CATEGORIES_SUCCEEDED,
+  LOAD_KEYWORDS_SUCCEEDED
 } from './constants';
 
 const initialModel = fromJS({
@@ -32,11 +33,11 @@ export default (state = initialModel, action) => {
     case LOAD_COUNTRIES_SUCCEEDED:
       return state.set('autocompleteCountries', action.data.results);
 
-    case LOAD_FIELDS_VALUES_SUCCEEDED:
-      const { data } = action;
+    case LOAD_KEYWORDS_SUCCEEDED:
+      return state.set('autocompleteKeywords', action.data.results);
 
-      return state.set('availableCategories', data.categories.results)
-                  .set('autocompleteKeywords', data.keywords.results);
+    case LOAD_CATEGORIES_SUCCEEDED:
+      return state.set('availableCategories', action.data.results);
 
     default:
       return state;

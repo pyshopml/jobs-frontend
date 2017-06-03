@@ -1,4 +1,4 @@
-const submitRequest = (email: string) => {
+const sendRequest = (email: string) => {
   const options = {
     method: 'POST',
     headers: {
@@ -11,17 +11,15 @@ const submitRequest = (email: string) => {
   return fetch(`${config.apiUrl}account/password/reset/`, options)
 }
 
-export async function submitData(email: string, done, error: (msg: string) => void) {
+export default async function restorePassword(email: string) {
   try {
-    const res = await submitRequest(email);
+    const res = await sendRequest(email);
 
-    if (res.ok) {
-      done();
-      return;
-    }
+    if (!res.ok)
+      throw new Error(res.statusText);
 
-    error(res.statusText);
+    return await res.json()
   } catch (e) {
-    error(e.message);
+    return Promise.reject(e.message)
   }
 }
