@@ -1,69 +1,105 @@
 import * as React from 'react';
-import { Route, IndexRoute } from 'react-router';
 import { last } from 'ramda';
 import App from './containers/App';
-import Vacancies from './pages/Vacancies';
-import NewVacancy from './pages/NewVacancy';
-import VacancyDetail from './pages/VacancyDetail';
-import NotFound from './pages/NotFound';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
-import InfoPage from './pages/InfoPage';
-import PasswordRestorePage from './pages/RestorePassword';
-import PasswordChangePage from './pages/PasswordChange';
-import ConfirmEmailPage from './pages/ConfirmEmailPage';
-import ActivateAccountPage from './pages/ActivateAccountPage';
+import { injectAsyncReducer } from './store';
 import { storeIntendedPath } from './containers/App/actions';
 
-import { push } from 'react-router-redux';
+import vacanciesRoute from 'pages/Vacancies/route';
+import vacancyDetailRoute from 'pages/VacancyDetail/route';
+import newVacancyRoute from 'pages/NewVacancy/route';
 
-export default (store) => {
+import loginPageRoute from 'pages/LoginPage/route';
+import signupPageRoute from 'pages/SignupPage/route';
+import infoPageRoute from 'pages/InfoPage/route';
+import restorePasswordRoute from 'pages/RestorePassword/route';
+import confirmEmailPage from 'pages/ConfirmEmailPage/route';
+import activateAccountPageRoute from 'pages/ActivateAccountPage/route';
+import passwordChangeRoute from 'pages/PasswordChange/route';
 
-  const saveIntendedPath = (path: string) => {
-    store.dispatch(storeIntendedPath(path));
-  }
+import notFoundRoute from 'pages/NotFound/route';
 
-  const replaceWithNotFound = (nextState, replace) => {
-    replace('404')
-  };
 
-  const isLogout = (nextState, replace) => {
-    let state = store.getState();
-    let isLoggedIn = state.get('app').get('isLoggedIn');
-    
-    if (isLoggedIn) {
-      store.dispatch(push('/'));
-    }
-  };
+function saveIntendedPath(path: string, store){
+  store.dispatch(storeIntendedPath(path));
+}
 
-  const MatchWhenAuthed = (nextState, replace) => {
+export function replaceWithNotFound(nextState, replace) {
+  replace('404')
+};
+
+export function matchWhenAuthed(store){
+  return function(nextState, replace) {
     const { routes } = nextState;
     let intendedPath = last(routes).path;
-    saveIntendedPath(intendedPath);
+    saveIntendedPath(intendedPath, store);
 
     let state = store.getState();
     let isLoggedIn = state.get('app').get('isLoggedIn');
 
     if(!isLoggedIn) {
-      store.dispatch(push('/login'));
+      replace('/login');
     }
   };
+}
 
-  return (
-    <Route path="/" component={ App }>
-      <IndexRoute component={ Vacancies } />
-      <Route path="vacancies" component={ Vacancies }/>
-      <Route path="vacancies/new" component={ NewVacancy } onEnter={ MatchWhenAuthed } />
-      <Route path="vacancies/:id" component={ VacancyDetail }/>
-      <Route path="login" component={ LoginPage } onEnter={ isLogout } />
-      <Route path="signup" component={ SignupPage } onEnter={ isLogout } />
-      <Route path="info_page" component={ InfoPage } onEnter={ isLogout } />
-      <Route path="restore_password" component={ PasswordRestorePage } onEnter={ isLogout } />
-      <Route path="/confirm_email" component={ ConfirmEmailPage } onEnter={ isLogout } />
-      <Route path="/account/:uid/password-reset/:token/" component={ PasswordChangePage } onEnter={ isLogout } />
-      <Route path="/account/:uid/activate/:token/" component={ ActivateAccountPage } onEnter={ isLogout } />
-      <Route path="404" component={ NotFound }/>
-      <Route path="*" onEnter={ replaceWithNotFound }/>
-    </Route>
-  );
+export function matchWhenNotAuthed(store){
+  return function(nextState, replace) {
+    let state = store.getState();
+    let isLoggedIn = state.get('app').get('isLoggedIn');
+
+    if (isLoggedIn) {
+      replace('/');
+    }
+  };
+}
+
+
+export default (store) => {
+  const vacanciesRoutes = [
+    vacanciesRoute(store),
+    vacancyDetailRoute(store),
+    newVacancyRoute(store)
+  ];
+
+  const authRoutes = [
+    loginPageRoute(store),
+    signupPageRoute(store),
+    infoPageRoute(store),
+    restorePasswordRoute(store),
+    confirmEmailPage(store),
+    activateAccountPageRoute(store),
+    activateAccountPageRoute(store),
+    passwordChangeRoute(store)
+  ];
+
+  const miscRoutes = [
+    notFoundRoute(store),
+    {
+      path: '*',
+      onEnter: replaceWithNotFound
+    }
+  ];
+
+  const indexRoute = {
+      getComponent:(location, cb) => {
+        Promise.all([
+          System.import('./pages/Vacancies'),
+          System.import('./pages/Vacancies/reducer')
+        ]).then(([component, reducer]) => {
+          injectAsyncReducer(store, 'vacancies', reducer.default);
+          cb(null, component.default);
+        })
+      }
+  };
+
+  return [
+    {
+      path: '/',
+      getComponent: (location, cb) => {
+        cb(null, App)
+      },
+      indexRoute: indexRoute,
+      childRoutes: [].concat(vacanciesRoutes, authRoutes, miscRoutes)
+    }
+  ]
 };
