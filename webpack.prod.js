@@ -7,7 +7,7 @@ var merge = require('webpack-merge')
 var baseConfig = require('./webpack.base.js')
 
 var BUILD_DIR = path.join(__dirname, '/dist');
-var APP_DIR   = path.join(__dirname, '/app');
+var SRC_DIR   = path.join(__dirname, '/src');
 
 
 var prodConfig = {
@@ -18,7 +18,7 @@ var prodConfig = {
       }
     }),
     new HtmlWebpackPlugin({
-      template: APP_DIR + '/index.html',
+      template: SRC_DIR + '/index.html',
       excludeChunks: ['whm']
     }),
     new UglifyJsPlugin({

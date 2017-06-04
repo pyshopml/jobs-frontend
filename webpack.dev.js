@@ -6,12 +6,12 @@ var path      = require('path');
 var baseConfig = require('./webpack.base');
 
 var BUILD_DIR = path.join(__dirname, '/dist');
-var APP_DIR   = path.join(__dirname, '/app');
+var SRC_DIR   = path.join(__dirname, '/src');
 
 var devConfig = {
   plugins: [
     new HtmlWebpackPlugin({
-      template: APP_DIR + '/index.html',
+      template: SRC_DIR + '/index.html',
     }),
     new webpack.DefinePlugin({
       'process.env': {

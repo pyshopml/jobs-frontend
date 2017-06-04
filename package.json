@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "'moikrug' clone that will beat it eventually.",
   "scripts": {
-    "tcm": "tcm -c -p app/**/*.*css",
+    "tcm": "tcm -c -p src/**/*.*css",
     "build": "webpack  --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
     "start": "node dev-server.js",
-    "lint": "./node_modules/eslint/bin/eslint.js ./app",
+    "lint": "./node_modules/eslint/bin/eslint.js ./src",
     "test": "jest"
   },
   "jest": {

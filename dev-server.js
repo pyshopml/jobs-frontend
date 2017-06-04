@@ -8,7 +8,7 @@ var config = require('./webpack.dev.js')
 
 var compiler = webpack(config)
 
-var APP_DIR = path.join(__dirname, 'app');
+var SRC_DIR = path.join(__dirname, 'src');
 var DIST_DIR = path.join(__dirname, 'dist');
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {

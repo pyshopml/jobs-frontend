@@ -4,14 +4,14 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
 var BUILD_DIR = path.join(__dirname, '/dist');
-var APP_DIR   = path.join(__dirname, '/app');
+var SRC_DIR   = path.join(__dirname, '/src');
 
 
 var config = {
   entry : {
     whm: 'webpack-hot-middleware/client',
-    main: APP_DIR +'/index.tsx',
-    vendor: APP_DIR + '/vendor.ts'
+    main: SRC_DIR +'/index.tsx',
+    vendor: SRC_DIR + '/vendor.ts'
   },
   output : {
     path : BUILD_DIR,
@@ -40,7 +40,7 @@ var config = {
           /(node_modules|dist|tests)/,
             path.resolve(__dirname, '*.test.tsx'),
         ],
-        include : APP_DIR,
+        include : SRC_DIR,
         loader : 'babel-loader'
       },
       {
@@ -53,13 +53,13 @@ var config = {
       },
       {
         test: /\.(css|scss)$/,
-        include: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components'), path.join(APP_DIR, 'pages')],
+        include: [path.join(SRC_DIR, 'containers'), path.join(SRC_DIR, 'components'), path.join(SRC_DIR, 'pages')],
         loader: 'style-loader!css-loader?modules&camelCase!postcss-loader!sass-loader',
       },
       {
         test: /\.(css|scss)$/,
-        include: APP_DIR,
-        exclude: [path.join(APP_DIR, 'containers'), path.join(APP_DIR, 'components'), path.join(APP_DIR, 'pages')],
+        include: SRC_DIR,
+        exclude: [path.join(SRC_DIR, 'containers'), path.join(SRC_DIR, 'components'), path.join(SRC_DIR, 'pages')],
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader', use: 'css-loader?sourceMap!postcss-loader!sass-loader'
         })
@@ -72,7 +72,7 @@ var config = {
     ]
   },
   resolve: {
-    modules: [APP_DIR, "node_modules"],
+    modules: [SRC_DIR, "node_modules"],
     extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
   },
 };
