@@ -7,6 +7,6 @@ export default (store) => ({
       cb(null, InfoPage.default)
     })
   },
-  onEnter: matchWhenNotAuthed
+  onEnter: matchWhenNotAuthed(store)
 })
 

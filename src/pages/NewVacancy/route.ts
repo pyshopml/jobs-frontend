@@ -12,6 +12,6 @@ export default (store) => ({
       cb(null, component.default);
     })
   },
-  onEnter: matchWhenAuthed
+  onEnter: matchWhenAuthed(store)
 })
 

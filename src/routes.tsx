@@ -57,8 +57,8 @@ export function matchWhenNotAuthed(store){
 export default (store) => {
   const vacanciesRoutes = [
     vacanciesRoute(store),
+    newVacancyRoute(store),
     vacancyDetailRoute(store),
-    newVacancyRoute(store)
   ];
 
   const authRoutes = [

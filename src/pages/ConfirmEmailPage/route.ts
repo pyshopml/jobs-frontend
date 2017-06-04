@@ -7,6 +7,6 @@ export default (store) => ({
       cb(null, ConfirmEmailPage.default)
     })
   },
-  onEnter: matchWhenNotAuthed
+  onEnter: matchWhenNotAuthed(store)
 })
 
