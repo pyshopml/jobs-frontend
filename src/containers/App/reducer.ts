@@ -1,15 +1,4 @@
-/* ------------------------------------------------------------------------------
-* AppReducer
-*
-* The reducer takes care of our data. 
-* Using actions, we can change our application state.
-* To add a new action, add it to the switch statement in the reducer function.
-*
-* Nick Luparev nikita.luparev@gmail.com
-------------------------------------------------------------------------------- */
-
 import { fromJS } from 'immutable';
-import { IAction } from '../../interfaces';
 
 import {
   SAVE_AUTH_CREDENTIALS,
@@ -28,7 +17,7 @@ const initialModel = fromJS({
   intendedPath: '',
 });
 
-export default (state = initialModel, action: IAction) => {
+export default (state = initialModel, action) => {
   switch(action.type) {
 
     case SAVE_AUTH_CREDENTIALS:

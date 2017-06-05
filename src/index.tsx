@@ -1,10 +1,3 @@
-/* ------------------------------------------------------------------------------
-* index.js
-*
-* Root React component for application
-*
-* Nick Luparev nikita.luparev@gmail.com
-------------------------------------------------------------------------------- */
 import * as React from 'react';
 import { render } from 'react-dom';
 import { Router, hashHistory } from 'react-router';

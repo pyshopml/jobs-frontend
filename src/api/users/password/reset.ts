@@ -18,8 +18,6 @@ export default async function resetPassword(data: any) {
 
     if(!res.ok)
       throw new Error('Предоставленные данные неверны.');
-
-    return await res.json();
   } catch (e) {
     return Promise.reject(e.message);
   }

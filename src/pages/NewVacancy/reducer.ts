@@ -1,12 +1,12 @@
 import { fromJS } from 'immutable';
 import Vacancy from 'models/Vacancy';
 import {
-  UPLOAD_VACANCY,
-  UPLOAD_VACANCY_SUCCEEDED,
-  LOAD_CITIES_SUCCEEDED,
-  LOAD_COUNTRIES_SUCCEEDED,
-  LOAD_CATEGORIES_SUCCEEDED,
-  LOAD_KEYWORDS_SUCCEEDED
+  UPLOAD_VACANCY_FULFILLED,
+  UPLOAD_VACANCY_PENDING,
+  LOAD_CITIES_FULFILLED,
+  LOAD_COUNTRIES_FULFILLED,
+  LOAD_CATEGORIES_FULFILLED,
+  LOAD_KEYWORDS_FULFILLED
 } from './constants';
 
 const initialModel = fromJS({
@@ -20,24 +20,24 @@ const initialModel = fromJS({
 export default (state = initialModel, action) => {
   switch (action.type) {
 
-    case UPLOAD_VACANCY:
+    case UPLOAD_VACANCY_PENDING:
       return state;
 
-    case UPLOAD_VACANCY_SUCCEEDED:
-      const createdVacancy = new Vacancy(action.data.createdVacancy);
+    case UPLOAD_VACANCY_FULFILLED:
+      const createdVacancy = new Vacancy(action.payload.createdVacancy);
       return state.set('createdVacancy', createdVacancy);
 
-    case LOAD_CITIES_SUCCEEDED:
-      return state.set('autocompleteCities', action.data.results);
+    case LOAD_CITIES_FULFILLED:
+      return state.set('autocompleteCities', action.payload.results);
 
-    case LOAD_COUNTRIES_SUCCEEDED:
-      return state.set('autocompleteCountries', action.data.results);
+    case LOAD_COUNTRIES_FULFILLED:
+      return state.set('autocompleteCountries', action.payload.results);
 
-    case LOAD_KEYWORDS_SUCCEEDED:
-      return state.set('autocompleteKeywords', action.data.results);
+    case LOAD_KEYWORDS_FULFILLED:
+      return state.set('autocompleteKeywords', action.payload.results);
 
-    case LOAD_CATEGORIES_SUCCEEDED:
-      return state.set('availableCategories', action.data.results);
+    case LOAD_CATEGORIES_FULFILLED:
+      return state.set('availableCategories', action.payload.results);
 
     default:
       return state;

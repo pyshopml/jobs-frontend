@@ -2,9 +2,8 @@ import { fromJS } from 'immutable';
 import { pick } from 'ramda';
 import Vacancy from 'models/Vacancy';
 import {
-  LOAD_VACANCIES,
-  LOAD_VACANCIES_SUCCEEDED,
-  LOAD_VACANCIES_FAILED, UPDATE_SEARCH_STRING,
+  LOAD_VACANCIES_PENDING, LOAD_VACANCIES_FULFILLED, LOAD_VACANCIES_REJECTED,
+  UPDATE_SEARCH_STRING,
 } from './constants';
 
 
@@ -21,24 +20,26 @@ const initialModel = fromJS({
 });
 
 export default (state = initialModel, action) => {
+
   switch (action.type) {
 
-    case LOAD_VACANCIES:
+    case LOAD_VACANCIES_PENDING:
       return state.set('isLoading', true);
 
-    case LOAD_VACANCIES_SUCCEEDED:
-      let vacancies = action.data.results.map(result => new Vacancy(result));
+    case LOAD_VACANCIES_FULFILLED:
+      let vacancies = action.payload.results.map(result => new Vacancy(result));
 
       return state
         .set('vacancies', vacancies)
         .set('isLoading', false)
-        .merge(pick(['count', 'next', 'previous', 'currentPage'], action.data));
+        .set('currentPage', action.meta.currentPage)
+        .merge(pick(['count', 'next', 'previous'], action.payload));
 
     case UPDATE_SEARCH_STRING:
       return state.set('searchString', action.data);
 
-    case LOAD_VACANCIES_FAILED:
-      return state.set('errorMessage', action.errorMessage)
+    case LOAD_VACANCIES_REJECTED:
+      return state.set('errorMessage', action.payload)
                   .set('isLoading', false);
 
     default:

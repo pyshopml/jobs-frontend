@@ -1,9 +1,9 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import {
-  ACTIVATE_ACCOUNT,
-  ACTIVATE_ACCOUNT_SUCCEEDED,
-  ACTIVATE_ACCOUNT_FAILED,
+  ACTIVATE_ACCOUNT_PENDING,
+  ACTIVATE_ACCOUNT_REJECTED,
+  ACTIVATE_ACCOUNT_FULFILLED,
 } from './constants';
 
 const initialState = fromJS({
@@ -14,13 +14,13 @@ const initialState = fromJS({
 export default (state = initialState, action) => {
   switch(action.type) {
 
-    case ACTIVATE_ACCOUNT:
+    case ACTIVATE_ACCOUNT_PENDING:
       return state;
 
-    case ACTIVATE_ACCOUNT_SUCCEEDED:
+    case ACTIVATE_ACCOUNT_FULFILLED:
       return state.merge({ isLoading: false, isAccountActivated: true });
 
-    case ACTIVATE_ACCOUNT_FAILED:
+    case ACTIVATE_ACCOUNT_REJECTED:
       return state.set('isLoading', false);
 
     case LOCATION_CHANGE:

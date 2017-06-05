@@ -15,10 +15,11 @@ export default async function restorePassword(email: string) {
   try {
     const res = await sendRequest(email);
 
-    if (!res.ok)
-      throw new Error(res.statusText);
+    if (!res.ok){
+      const data = await res.json();
+      throw new Error(data.email[0]);
+    }
 
-    return await res.json()
   } catch (e) {
     return Promise.reject(e.message)
   }

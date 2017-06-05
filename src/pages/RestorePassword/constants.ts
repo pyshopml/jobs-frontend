@@ -1,4 +1,6 @@
-export const PASSWORD_RESTORE = '/app/containers/RestorePasswordContainer/PASSWORD_RESTORE';
-export const PASSWORD_RESTORE_SUCCEEDED = '/app/containers/RestorePasswordContainer/PASSWORD_RESTORE_SUCCEEDED';
-export const PASSWORD_RESTORE_FAILED = '/app/containers/RestorePasswordContainer/PASSWORD_RESTORE_FAILED';
-export const CLEAR_STATE = '/app/containers/RestorePasswordContainer/CLEAR_STATE';
+export const PASSWORD_RESTORE = '/src/containers/RestorePasswordContainer/PASSWORD_RESTORE';
+export const PASSWORD_RESTORE_PENDING = `${PASSWORD_RESTORE}_PENDING`;
+export const PASSWORD_RESTORE_REJECTED = `${PASSWORD_RESTORE}_REJECTED`;
+export const PASSWORD_RESTORE_FULFILLED = `${PASSWORD_RESTORE}_FULFILLED`;
+
+export const CLEAR_STATE = '/src/containers/RestorePasswordContainer/CLEAR_STATE';

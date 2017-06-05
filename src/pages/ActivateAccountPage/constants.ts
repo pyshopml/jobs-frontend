@@ -1,3 +1,4 @@
-export const ACTIVATE_ACCOUNT = '/app/containers/ActivateAccountPage/ACTIVATE_ACCOUNT';
-export const ACTIVATE_ACCOUNT_SUCCEEDED = '/app/containers/ActivateAccountPage/ACTIVATE_ACCOUNT_SUCCEEDED';
-export const ACTIVATE_ACCOUNT_FAILED = '/app/containers/ActivateAccountPage/ACTIVATE_ACCOUNT_FAILED';
+export const ACTIVATE_ACCOUNT = '/src/containers/ActivateAccountPage/ACTIVATE_ACCOUNT';
+export const ACTIVATE_ACCOUNT_FULFILLED = `${ACTIVATE_ACCOUNT}_FULFILLED`;
+export const ACTIVATE_ACCOUNT_REJECTED  = `${ACTIVATE_ACCOUNT}_REJECTED`;
+export const ACTIVATE_ACCOUNT_PENDING  = `${ACTIVATE_ACCOUNT}_PENDING`;

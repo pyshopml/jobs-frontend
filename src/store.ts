@@ -1,14 +1,7 @@
-/* ------------------------------------------------------------------------------
-* store.js
-*
-* store's configuration file
-*
-* Nick Luparev nikita.luparev@gmail.com
-------------------------------------------------------------------------------- */
-
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Reducer } from 'redux';
 import thunk from 'redux-thunk';
+import promiseMiddleware from 'redux-promise-middleware';
 import { routerMiddleware } from 'react-router-redux';
 import * as Immutable from 'immutable';
 import createReducer from './reducers';
@@ -23,6 +16,7 @@ export function configureStore(history, initialState = Immutable.Map()) {
     applyMiddleware(
       thunk,
       routerMiddleware(history),
+      promiseMiddleware()
     )
   );
 

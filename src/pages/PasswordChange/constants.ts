@@ -1,3 +1,4 @@
-export const PASSWORD_CHANGE = '/app/containers/PasswordChangePage/PASSWORD_CHANGE';
-export const PASSWORD_CHANGE_SUCCEEDED = '/app/containers/PasswordChangePage/PASSWORD_CHANGE_SUCCEEDED';
-export const PASSWORD_CHANGE_FAILED = '/app/containers/PasswordChangePage/PASSWORD_CHANGE_FAILED';
+export const PASSWORD_CHANGE = '/src/containers/PasswordChangePage/PASSWORD_CHANGE';
+export const PASSWORD_CHANGE_FULFILLED = `${PASSWORD_CHANGE}_FULFILLED`;
+export const PASSWORD_CHANGE_REJECTED = `${PASSWORD_CHANGE}_REJECTED`;
+export const PASSWORD_CHANGE_PENDING = `${PASSWORD_CHANGE}_PENDING`;

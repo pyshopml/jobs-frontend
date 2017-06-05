@@ -1,10 +1,9 @@
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { IAction } from 'interfaces';
 import {
-  LOGIN_USER,
-  LOGIN_USER_SUCCEEDED,
-  LOGIN_USER_FAILED,
+  LOGIN_USER_PENDING,
+  LOGIN_USER_FULFILLED,
+  LOGIN_USER_REJECTED,
 } from './constants';
 
 const initialState = fromJS({
@@ -12,17 +11,17 @@ const initialState = fromJS({
   isLoading: false,
 });
 
-export default (state = initialState, action: IAction) => {
+export default (state = initialState, action) => {
   switch(action.type) {
 
-    case LOGIN_USER:
+    case LOGIN_USER_PENDING:
       return state.set('isLoading', true);
 
-    case LOGIN_USER_SUCCEEDED:
+    case LOGIN_USER_FULFILLED:
       return state.merge({ message: '', isLoading: false });
 
-    case LOGIN_USER_FAILED:
-      return state.merge({ message: action.message, isLoading: false });
+    case LOGIN_USER_REJECTED:
+      return state.merge({ message: action.payload, isLoading: false });
 
     case LOCATION_CHANGE:
       return initialState;

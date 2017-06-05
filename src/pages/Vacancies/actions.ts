@@ -1,27 +1,15 @@
 import { IAction } from 'interfaces';
 import apiSearchAllVacancies from 'api/vacancies/searchAll';
 
-import {
-  LOAD_VACANCIES, LOAD_VACANCIES_SUCCEEDED, LOAD_VACANCIES_FAILED,
-  UPDATE_SEARCH_STRING,
-} from './constants';
+import { LOAD_VACANCIES, UPDATE_SEARCH_STRING } from './constants';
 
-const loadingSucceeded = (data) : IAction => ({
-  type: LOAD_VACANCIES_SUCCEEDED,
-  data
+export const  loadVacancies = (page: number, search?: string) => ({
+  meta: {
+    currentPage: page
+  },
+  type: LOAD_VACANCIES,
+  payload: apiSearchAllVacancies(page, search)
 });
-
-const loadingFailed = (errorMessage: string) : IAction => ({
-  type: LOAD_VACANCIES_FAILED,
-  errorMessage
-});
-
-export const loadVacancies = (page: number, search?: string) => dispatch => {
-  dispatch({ type: LOAD_VACANCIES });
-  apiSearchAllVacancies(page)
-    .then( (data) => dispatch(loadingSucceeded(Object.assign(data, { currentPage: page }))) )
-    .catch( (msg : string) => dispatch(loadingFailed(msg)) )
-};
 
 export const updateSearchString = (searchString: string) : IAction => ({
   type: UPDATE_SEARCH_STRING,

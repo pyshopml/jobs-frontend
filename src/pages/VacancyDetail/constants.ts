@@ -1,3 +1,5 @@
-export const LOAD_VACANCY = 'app/containers/VacancyDetail/LOAD_VACANCY';
-export const LOAD_VACANCY_SUCCEEDED = 'app/containers/VacancyDetail/LOAD_VACANCY_SUCCEEDED';
-export const LOAD_VACANCY_FAILURE = 'app/containers/VacancyDetail/LOAD_VACANCY_FAILURE';
+export const LOAD_VACANCY = 'src/containers/VacancyDetail/LOAD_VACANCY';
+export const LOAD_VACANCY_FULFILLED = `${LOAD_VACANCY}_FULFILLED`;
+export const LOAD_VACANCY_REJECTED = `${LOAD_VACANCY}_REJECTED`;
+export const LOAD_VACANCY_PENDING = `${LOAD_VACANCY}_PENDING`;
+
