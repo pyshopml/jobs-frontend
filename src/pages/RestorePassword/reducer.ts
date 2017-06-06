@@ -1,5 +1,4 @@
 import { fromJS } from 'immutable';
-import { IAction } from 'interfaces';
 import {
   PASSWORD_RESTORE_PENDING,
   PASSWORD_RESTORE_FULFILLED,

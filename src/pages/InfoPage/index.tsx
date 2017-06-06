@@ -7,17 +7,19 @@ import * as css from './style.scss';
 
 interface Props {
   email: string;
+  location: any
 };
 
 interface State {};
 
 class InfoPageContainer extends React.Component<Props, State> {
   render() {
+    const {email} = this.props.location.state
     return (
       <section className={css.container}>
         <section className={css.form}>
           <h2 className={css.title}>Подтвердите регистрацию</h2>
-          <p className={css.text}>По адресу <span className={css.email}>{this.props.email}</span> вам выслано письмо со ссылкой: перейдите по ней,
+          <p className={css.text}>По адресу <span className={css.email}>{email}</span> вам выслано письмо со ссылкой: перейдите по ней,
             чтобы подтвердить свою почту и завершить регистрацию.</p>
 
           <p className={css.text}>Если вы не видите письма во входящих, проверьте папку со спамом,

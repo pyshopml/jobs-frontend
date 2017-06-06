@@ -3,24 +3,20 @@ import { render } from 'react-dom';
 import { Router, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import createRoutes from './routes';
 import { configureStore } from './store';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { restoreAuthState } from './containers/App/actions';
 
 import './tap.plugin';
 
 import './index.scss';
 
-const store = configureStore(hashHistory);
+export const store = configureStore(hashHistory);
 const history = syncHistoryWithStore(hashHistory, store, {
   selectLocationState: state => state.get('routing').toJS(),
 });
 const routes = createRoutes(store);
-
-const loadAuthState = () => {
-  store.dispatch(restoreAuthState());
-}
 
 const Main = () => (
   <Provider store={store}>
@@ -31,7 +27,6 @@ const Main = () => (
 );
 
 render(<Main />, document.getElementById('main'));
-loadAuthState();
 
 if(module.hot) {
   module.hot.accept();

@@ -5,11 +5,8 @@ export interface IEvent {
   label?: string;
   action?: () => void;
 }
-export interface IAction {
-  type: string;
-  errorMessage?: string;
-  data?: any;
-  message?: any;
+export interface IUser {
+  auth_token: string
 }
 export interface INewVacancy{
   title: string,

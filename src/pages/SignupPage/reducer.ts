@@ -1,8 +1,8 @@
 import { fromJS } from 'immutable';
 import {
-  SUBMIT_CREDENTIALS_PENDING,
-  SUBMIT_CREDENTIALS_FULFILLED,
-  SUBMIT_CREDENTIALS_REJECTED,
+  SIGNUP_USER_PENDING,
+  SIGNUP_USER_FULFILLED,
+  SIGNUP_USER_REJECTED,
 } from './constants';
 
 const initialState = fromJS({
@@ -13,13 +13,13 @@ const initialState = fromJS({
 export default (state = initialState, action)=> {
   switch(action.type) {
 
-    case SUBMIT_CREDENTIALS_PENDING:
+    case SIGNUP_USER_PENDING:
       return state.set('isLoading', true);
 
-    case SUBMIT_CREDENTIALS_FULFILLED:
+    case SIGNUP_USER_FULFILLED:
       return state.set('isLoading', false);
 
-    case SUBMIT_CREDENTIALS_REJECTED:
+    case SIGNUP_USER_REJECTED:
       return state.merge({ isLoading: false, message: action.payload });
 
     default: 

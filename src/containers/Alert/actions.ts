@@ -1,5 +1,3 @@
-import { INotification } from "interfaces";
-import { IAction } from 'interfaces';
 import { Notification } from 'models/Notification';
 import {
   ADD_NOTIFICATION,
@@ -11,7 +9,7 @@ const formNotification = (notification: Notification) => ({
   notification,
 });
 
-const clearFirstNotification = (): IAction => ({
+const clearFirstNotification = () => ({
   type: REMOVE_CURRENT_NOTIFICATION
 });
 

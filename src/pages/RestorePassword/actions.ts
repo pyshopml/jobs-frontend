@@ -1,12 +1,11 @@
 import { push } from 'react-router-redux';
-import { IAction } from 'interfaces';
 import apiRestorePassword from 'api/users/password/restore';
 import {
   PASSWORD_RESTORE,
   CLEAR_STATE,
 } from './constants';
 
-const clearState = (): IAction => ({
+const clearState = () => ({
   type: CLEAR_STATE,
 });
 

@@ -1,4 +1,3 @@
-import { IAction } from 'interfaces';
 import apiSearchAllVacancies from 'api/vacancies/searchAll';
 
 import { LOAD_VACANCIES, UPDATE_SEARCH_STRING } from './constants';
@@ -11,7 +10,7 @@ export const  loadVacancies = (page: number, search?: string) => ({
   payload: apiSearchAllVacancies(page, search)
 });
 
-export const updateSearchString = (searchString: string) : IAction => ({
+export const updateSearchString = (searchString: string) => ({
   type: UPDATE_SEARCH_STRING,
   data: searchString
 });

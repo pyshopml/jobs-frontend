@@ -249,7 +249,7 @@ class Form extends React.Component<Props, State> {
           </Button>
           <Button type="primary"
                   onClick={this.handleSubmit}
-                  disabled={false}
+                  disabled={!this.areFieldsValid()}
                   submit
           >
             Создать
